@@ -338,9 +338,10 @@ git 會告訴你需不需要 add ，哪些 modify 了。
   - 看看版本運作  
   <figure class="video_container">
     <video controls="true" allowfullscreen="true" poster="">
-    <source src="https://zxbleg.ch.files.1drv.com/y4pkzvhn1h7ZuS5j0vNxDkzGaM-oHG7DxjPInp-KNn7m89w_1hrhVr57OMoHxNDfn-nPvk8Q4rpT8cWgQlN6bkPFMXGXmEnZCFvOotKL9zNhSSlmtbEH-qgfxuZL00dDOgpeKf6E1FEX5Y2qidEcQJrfOjf405CSAc10XLgIM_wLICilUblq_IQsISmfUD-mr3wqd15AhTv2MiNaspONR3snvkGGJHdPC0mI5jWHaYclJE/checkoutOrder.webm?psid=1" type="video/webm">
+    <source src="https://zxbleg.ch.files.1drv.com/y4pkzvhn1h7ZuS5j0vNxDkzGaM-oHG7DxjPInp-KNn7m89w_1hrhVr57OMoHxNDfn-nPvk8Q4rpT8cWgQlN6bkPFMXGXmEnZCFvOotKL9zNhSSlmtbEH-qgfxuZL00dDOgpeKf6E1FEX5Y2qidEcQJrfOjf405CSAc10XLgIM_wLICilUblq_IQsISmfUD-mr3wqd15AhTv2MiNaspONR3snvkGGJHdPC0mI5jWHaYclJE/checkoutOrder.webm?psid=1" type="video/mp4">
     </video>
   </figure> 
+  
   
   是不是很奇異~  
   到這邊就可以知道 git 有多好用了:D
