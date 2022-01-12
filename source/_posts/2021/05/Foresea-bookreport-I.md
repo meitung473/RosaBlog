@@ -1,9 +1,9 @@
 ---
-title: Foresea畢業專題(I) ─《綜合資源分享》
+title: ⟬ 紀錄 ⟭ Foresea畢業專題(I) ─《綜合資源分享》
 tags:
   - 畢業專題
 categories:
-  - 心得分享
+  - bookreport
 author: Rosa Hong
 date: 2021-05-18 14:09:24
 ---

@@ -1,10 +1,10 @@
 ---
-title: HEXO 一起來做部落格(I)
+title: ⟬ 紀錄 ⟭ HEXO 一起來做部落格(I)
 tags:
   - Hexo
   - 部落格
 categories:
-  - 網頁
+  - Blog
 author: Rosa Hong
 description: 一邊建置Blog，一邊紀錄。 ─ Day01
 date: 2021-07-16 14:02:24

@@ -1,8 +1,8 @@
 ---
-title: 'Unity UI Navigation ─ [尋找不見的按鈕]'
+title: ⟬ 紀錄 ⟭ Unity UI Navigation ─ [尋找不見的按鈕]
 tags:
+  - Unity
   - UI
-  - Fungus
   - Event System
 categories:
   - Unity

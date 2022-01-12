@@ -1,9 +1,9 @@
 ---
-title: Foresea畢業專題(II) ─《菜雞在Unity裡的漫長旅程》
+title: ⟬ 紀錄 ⟭ Foresea畢業專題(II) ─《菜雞在Unity裡的漫長旅程》
 tags:
   - 畢業專題
 categories:
-  - 心得分享
+  - bookreport
 author: Rosa Hong
 date: 2021-05-24 14:58:08
 ---

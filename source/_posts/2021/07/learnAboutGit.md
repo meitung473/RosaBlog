@@ -1,10 +1,10 @@
 ---
-title: 初探 Git
+title: ⟬ 筆記 ⟭ 初探 Git
 tags:
   - Git
-  - 指令
+  - CommandLine
 categories:
-  - 程式基礎
+  - program
 author: Rosa Hong
 date: 2021-07-30 21:22:26
 ---

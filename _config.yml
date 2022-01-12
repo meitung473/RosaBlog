@@ -7,10 +7,10 @@ language: zh-TW
 timezone: 
 url: https://meitung473.github.io/RosaBlog/
 root: /RosaBlog/
-permalink: ':title/'
+permalink: ':category/:title/'
 permalink_defaults: null
 pretty_urls:
-  trailing_index: true
+  trailing_index: false
   trailing_html: false
 source_dir: source
 public_dir: public
@@ -22,7 +22,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: ':lang'
 skip_render: null
-new_post_name: ':title.md'
+new_post_name: ':year/:month/:title.md'
 default_layout: post
 titlecase: false
 external_link:
@@ -54,11 +54,9 @@ index_generator:
 
 default_category: uncategorized
 category_map:
-  心得分享: Daily
-  網頁: Webtech
-  遊戲: Gametech
 tag_map:
   Hexo: Hexo
+
 meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss

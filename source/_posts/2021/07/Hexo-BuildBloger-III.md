@@ -1,10 +1,10 @@
 ---
-title: HEXO 一起來做部落格(III)
+title: ⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)
 tags:
   - Hexo
   - 部落格
 categories:
-  - 網頁
+  - Blog
 author: Rosa Hong
 date: 2021-07-18 20:51:58  
 description: 一邊建置Blog，一邊紀錄。 ─ Day03

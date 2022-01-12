@@ -1,9 +1,9 @@
 ---
-title: 初級入門必學的CommandLine
+title: ⟬ 筆記 ⟭ 初級入門必學的CommandLine
 tags:
-  - 指令
+  - CommandLine
 categories:
-  - 程式基礎
+  - program
 author: Rosa Hong
 date: 2021-07-27 19:30:57
 ---
