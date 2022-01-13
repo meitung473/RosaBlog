@@ -1,181 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</title>
-    <url>/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宣告提升 (Hoisting) 在 JavaScript 中不得不知<br>究竟 JavaScript 搞了什麼鬼<br>導致你認為的值不是那個值捏 !<br>其實這跟 JavaScript 如何運作也有關係<br>不過先從最簡單的概念開始吧 ! :O</p>
-<h2 id="何謂宣告提升？"><a href="#何謂宣告提升？" class="headerlink" title="何謂宣告提升？"></a>何謂宣告提升？</h2><p>其實我覺得很抽象<br>如果單看程式碼會不知道哪裡被提升<br>以及怎麼被提升？  </p>
-<p>所謂的提升<br>其實是 JavaScript 底層運作的機制<br>必須了解執行環境 (Execution Content) 跟 作用域 (Scope)<br>再根據作用域鏈 (Scope Chain) 來看的<br>不過關於這些東西慢慢地來說<br>可以先透過幾個例子來了解宣告提升    </p>
-<h3 id="變數的宣告提升"><a href="#變數的宣告提升" class="headerlink" title="變數的宣告提升"></a>變數的宣告提升</h3><p>這邊暫不討論 ES6 中的 <code>let</code> 與 <code>const</code><br>以 ES5 的宣告變數 <code>var</code> 為例</p>
-<p>基礎題</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看成 : </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-a <span class="token operator">=</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>JavaScript 幫我們在最上層補上了一個定義變數 a<br>又因為 JavaScript 是一行行往下讀<br>所以當執行到 console.log(a)<br>a 是定義了但沒有值<br>所以是 <code>undefined</code>  </p>
-<p>那有宣告跟沒宣告的差別？  </p>
-<p>這樣什麼都沒有就會出錯</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> a is not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>所以通常變數的宣告會在最上面<br>除了版面不會太凌亂以外<br>也是避免說忘記宣告<br>尤其是在 function 裡頭  </p>
-<h3 id="常見問題"><a href="#常見問題" class="headerlink" title="常見問題"></a>常見問題</h3><p>function 裡的變數如果未宣告會如何？<br>可以看下面的例子  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	a <span class="token operator">=</span> <span class="token number">30</span>
-<span class="token punctuation">&#125;</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>起初我以為 a 會是 <code>is not defined</code><br>或是 <code>undefined</code><br>但是 test 執行實先把變數 a 給提升<br>並在函式內把 a 賦值 30<br>也就是這個 a 提升已經到 global 了   </p>
-<blockquote>
-<p>在 function 裡都沒有宣告<br>但有賦值，就會在 global 的地方宣告該變數<br>並且 <code>根據 Scope Chain</code> 往上找<br>不過一般來說不會建議沒有宣告就賦值。</p>
-</blockquote>
-<h3 id="function-的宣告提升"><a href="#function-的宣告提升" class="headerlink" title="function 的宣告提升"></a><code>function</code> 的宣告提升</h3><p>除了變數的提升<br>其實還有 function 也會提升  </p>
-<p>函式陳述式</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>		
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一般來說要 <strong>使用之前要先宣告</strong><br>但 function 可以先使用再宣告<br>因為會宣告提升    </p>
-<p>可以看成把 <code>function</code> 放到呼叫之前<br>其他程式語言是沒這樣的<br>在 JavaScript 想呼叫隨時都可以呼叫 👌<br>我是覺得很奇妙<br>但一方面覺得這樣的設計在版面上可以更易讀   </p>
-<p>函式表達式  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>透過表達式宣告一個變數將 function 存起來<br>這邊的 function 是一個沒有名字的匿名函式<br>一般來說會這樣執行  </p>
-<p>如果是宣告變數把函式存起來<br>提早先呼叫函式</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> test is not a <span class="token keyword">function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>咦！不是 function 隨 call 隨用嗎？<br>如果是函式表達式可以把整個分為兩塊  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> test<span class="token punctuation">;</span>
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>也就是宣告 test 再賦值<br>由此可知宣告提升並不會連賦值都一起提升  </p>
-<p>再來看看有參數的函式呢？</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我知道！是 <code>undefined</code><br>因為 a 會做宣告提升<br>可以看成這樣 </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> a<span class="token punctuation">;</span> <span class="token comment">//undefined</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-    a <span class="token operator">=</span> <span class="token number">1</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>果結不對，其實是 <code>1</code><br>這個 1 並不是來自函式的 <code>a=1</code><br>而是參數的 <code>1</code><br>由此可以知道函式裡有參數的話<br>其實參數也會做宣告提升    </p>
-<p>至於提升的順序為何？<br>如何提升？<br>後面會再提到 :D</p>
-<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
-<li><code>var</code> 會做宣告提升  </li>
-<li><code>函式陳述式</code> 會做宣告提升  </li>
-<li><code>函式表達式</code> 是屬於賦值 (等號右邊)，不會做宣告提升  </li>
-</ol>
-<p>這篇了解哪些會做宣告提升<br>並且賦值的值並不會一起提升<br>下一篇要更了解比較的順序以及宣告提升的好處？    </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</title>
-    <url>/RosaBlog/Frontend/JavaScript/JavaScript_typeof/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>typeof 是檢查類別的好幫手<br>一學才知道 typeof 只是小小咖<br>甚至在 stackoverflow 上有這麼一道題目  </p>
-<p><a href="https://stackoverflow.com/questions/48270127/can-a-1-a-2-a-3-ever-evaluate-to-true">Can (a== 1 &amp;&amp; a ==2 &amp;&amp; a==3) ever evaluate to true?</a>  </p>
-<p>這怎麼可能，<code>1==2==3</code> !?<br>先了解資料型態，再來了解這怎麼實現! </p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>typeof 可以知道值的型態</p>
-<p>在 <code>Object</code>、<code>Array</code>、<code>Date</code> 以及  <strong><code>null</code></strong><br>都是 <code>Object</code><br><code>null</code> 是唯一的特例，下面會再提到  </p>
-<p><img data-src="https://dsm01pap006files.storage.live.com/y4mGp4At_MjbSIvnrU9AEgFCzvUmROBsIV5v1tGQaDaJY9tAVO1bZcprgUpUOG9btna_AAvZABPjZsB6FFu0hfNETi8bKXOole-CacnFbpoEsUE68p4L8pBfY_r0ptOJloSxkvkTjf6OAJsQ-O7HsfCfLUyxel4VPf35BpS5ZgsEhmrvZo3-fw9IwrOHeoFaey9?width=625&height=390&cropmode=none" alt="typeof各類型"></p>
-<ul>
-<li>如何真的判斷是 <strong>真</strong> 陣列 ?<br>Array 會被算在 Object 範疇裡<br>想要知道真的陣列物件可以使用<br><strong><code>Array.isArray(value)</code></strong>  </li>
-</ul>
-<p>或者更精確的判別類型<br><code>Object.prototype.toString.call(value)</code><br>prototype 是 JavaScript 很重要的屬性<br>是實作的一種基底<br><code>toString</code> 會把印出物件的屬性轉為字串</p>
-<h3 id="null-眾人皆知的漏洞"><a href="#null-眾人皆知的漏洞" class="headerlink" title="null 眾人皆知的漏洞"></a>null 眾人皆知的漏洞</h3><ul>
-<li><strong>null</strong> 為什麼是 object ?<br>  是 javascript 程式設計上的錯誤<br>  底層實作的 <code>type tag</code> object 是 00<br>  但是 <code>null</code> 也是指向 0<br>  所以 <code>null</code> 也會被判別為 object<br>  是廣為人知的 bug  </li>
-</ul>
-<p>ECMAScript 原本要改規則<br><code>typeof null===null</code><br>但是被拒絕掉了 OAO  </p>
-<h3 id="更確切一點的型態"><a href="#更確切一點的型態" class="headerlink" title="更確切一點的型態"></a>更確切一點的型態</h3><p><code>Object.prototype.toString.call(value)</code><br>不管是哪種型態，都可以更正確的被判斷<br><img data-src="https://dsm01pap006files.storage.live.com/y4mmkfwiKEgP7WgOuN5z81LDBLH4oukWL2ubilP96ARJyClsALcHwh_PvT7MPCtpr0_7dJdQqrI828TQkxB_PfjkIpYpPT3vtTXQ1wUyiGkYK0-cc3NO7nMuB8BTVjtV-kVkboovg7L3y0yIwoTaC95RrR_Bx9LgK-8N1bcq-fciqoSNozQVeSaJ7z3xgt67CIC?width=772&height=395&cropmode=none" alt="toString各類型"></p>
-<h3 id="避免出錯的-undefined"><a href="#避免出錯的-undefined" class="headerlink" title="避免出錯的 undefined"></a>避免出錯的 undefined</h3><p>JavaScript 是單線程(非同步)的語言<br>也就是程式會一行行往下執行<br>但如果要印出沒有定義的變數<br>必定會錯誤</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> error <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>但如果 typeof 某個定義的變數<br>會是 undefined</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a<span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>離奇的是用 var 也是 <code>undefined</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">var</span> a
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因為 var 會做宣告提升</p>
-<ul>
-<li>宣告提升  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//var a;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result<span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-  系統會幫你補上未定義的變數<br>  但還是不會賦值</li>
-</ul>
-<hr>
-<p>避免變數沒有定義的情況下出現錯誤<br>可以用 <code>typeof</code> 檢測  </p>
-<blockquote>
-<p>記住 typeof 回傳的值類別是 <strong>字串</strong><br>所以後面要是對比字串</p>
-</blockquote>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a <span class="token operator">!==</span><span class="token string">'undefined'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-	<span class="token comment">//dosomething...</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>錯誤寫法<br>會報錯，因為 a 沒有宣告  </p>
-<pre><code class="javascript">    if(a !== undefined)&#123;
-        console.log(a)
-        //dosomething...
-    &#125;
-</code></pre>
-<hr>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ol>
-<li><code>typeof</code> 回傳的類型是字串</li>
-<li><code>typeof null</code> 會回傳值會是 <code>object</code>  </li>
-<li><code>Object.prototype.toString.call()</code> 可以取得較正確的資料型態，包含 <code>null</code> 也會傳 <code>null</code>  </li>
-</ol>
-<p>原來如此，typeof 並不是萬能的<br>在查找 <code>Object.prototype.toString</code> 過程中<br>也認識到不同類型進行比較時<br>會轉型同類別再比較<br>Object type 的轉型會經過兩種規則  </p>
-<ol>
-<li>valueOf</li>
-<li>toString</li>
-</ol>
-<p>之後要再深入研究這兩種的差別<br>以及各類別的比較規則!  </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>⟬ 紀錄 ⟭ Foresea畢業專題(I) ─《綜合資源分享》</title>
     <url>/RosaBlog/bookreport/Foresea-bookreport-I/</url>
     <content><![CDATA[<p><code>[此篇為舊文，從Notion搬運過來，撰寫日期為05/18/21]</code>  </p>
@@ -237,7 +62,7 @@ result<span class="token operator">:</span> <span class="token keyword">undefine
 <li>如果有一堆黃色驚嘆號，是正常的</li>
 <li>按開始無反應，可能是 <code>Tag</code> 或是<code>layer</code> 設定跑掉，導致程式找不到。請自行創建 layer 與 tag 替換上。  </li>
 </ol>
-<p>🤙可以詢問我， Email :  <a href="mailto:&#121;&#x61;&#x6e;&#115;&#x68;&#x61;&#x6e;&#x68;&#x6f;&#110;&#103;&#x32;&#x33;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#x61;&#x6e;&#115;&#x68;&#x61;&#x6e;&#x68;&#x6f;&#110;&#103;&#x32;&#x33;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>  </p>
+<p>🤙可以詢問我， Email :  <a href="mailto:&#121;&#97;&#110;&#115;&#x68;&#x61;&#x6e;&#104;&#111;&#110;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#121;&#97;&#110;&#115;&#x68;&#x61;&#x6e;&#104;&#111;&#110;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;</a>  </p>
 <blockquote>
 <p>📄 <strong><a href="https://1drv.ms/u/s!AtRw0OR0iI_KjYJrOgYRJWs_90BckQ">Download</a></strong>  </p>
 </blockquote>
@@ -386,6 +211,222 @@ node <span class="token operator">-</span>v<span aria-hidden="true" class="line-
 </ul>
 <p>燈愣!<br>沒想到成功了，可以在VS裡盡情的打了<br>我想我開啟的方式可能有些錯誤啦…<br>繞了不少路，這次就當教訓吧  </p>
 <p>明天就架完成吧!<br>這篇寫得有點急有點亂，會在進行統整在新的部落格中哦!</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>部落格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)</title>
+    <url>/RosaBlog/Blog/Hexo-BuildBloger-III/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>呼!建置的差不多了<br>原本要總結研究 Hexo 三天的成果<br>寫成比較順暢的建構過程<br>結果一弄又更新好多東西…<br>一樣先來補齊概念吧!<br>月底再來一個大總結&gt;&lt;    </p>
+<hr>
+<h2 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h2><pre><code>+Blogger 
+|- .github
+|- .vscode
+|- .node_modules  
+|- .scaffolds
+    |- draft.md
+    |- page.md
+    |- post.md
+|- .source
+    |- _drafts
+    |- _posts
+    |- 其他頁面(略)
+|- .themes
+    |- next
+        |- (略)
+        |- languages
+        |- layout
+        |- (略)
+|- _config.next.yml
+|- _config.yml
+|- package.json
++  
+</code></pre>
+<p>這邊我僅有挑我有用到的幾個  </p>
+<blockquote>
+<p> 最外層  </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.node_modules</td>
+<td>npm原始設定(不常用)</td>
+</tr>
+<tr>
+<td>.scaffolds</td>
+<td>文章狀態模板 (可以修訂統一模板)</td>
+</tr>
+<tr>
+<td>.public</td>
+<td>發布自動後生成的資料夾 (不用動)</td>
+</tr>
+<tr>
+<td>.source</td>
+<td>部落格編輯(文字都在這編輯)</td>
+</tr>
+<tr>
+<td>.themes</td>
+<td>編輯主題樣式(相關 css )</td>
+</tr>
+<tr>
+<td>._config.next.yml</td>
+<td>next 安裝設定檔，多是插件</td>
+</tr>
+<tr>
+<td>._config.yml</td>
+<td>hexo 安裝設定檔</td>
+</tr>
+<tr>
+<td>.package.json</td>
+<td>專案的設定檔，會寫安裝什麼東西(基本上不用動)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<blockquote>
+<p>. scaffolds</p>
+</blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>_drafts</td>
+<td>草稿模板</td>
+</tr>
+<tr>
+<td>page .md</td>
+<td>頁面模板</td>
+</tr>
+<tr>
+<td>post .md</td>
+<td>文章模板</td>
+</tr>
+</tbody></table>
+<ul>
+<li>指令快速記!   <pre><code class="cmd">hexo new draft 文章名稱  //建立一篇草稿  
+hexo new post 文章名稱  //建立一篇新文章  
+hexo new page 頁面名稱 //建立一篇新頁面，同時source 會建立新的資料夾  
+hexo publish 版面 檔案名稱 // 發布(草稿)  
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>. source</p>
+</blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>_drafts</td>
+<td>草稿會在這</td>
+</tr>
+<tr>
+<td>_posts</td>
+<td>發布的貼文都會在這</td>
+</tr>
+<tr>
+<td>其他頁面資料夾</td>
+<td>像是About、tags、categroies..</td>
+</tr>
+</tbody></table>
+<p>因為一開始沒有About等等的基礎頁面，自己要新增  </p>
+<pre><code class="cmd">  hexo new page About  
+  hexo new page tags 
+  hexo new page categroies 
+</code></pre>
+<p>然後新頁面新增 <code>type</code> 來做頁面記號<br><img data-src="https://chi01pap001files.storage.live.com/y4mUs5S3stfFRMyDXC2wenjxmYnUyrrWZLN195KoJDuBNbjDIUXcIHbvzGlPGiUiyTgjwNaoLwYAM6i881mLxbBrFsfqBSUm0CSwtIWpIcZ8psQgmom42pugcn98p5OsSHq8t7JU1GKO7NotQ-nqR1teCP-h9lS_J3AZkoZWgJ-o7187LBZXhCtg7x2BWH8ou9t?width=865&height=303&cropmode=none" alt="categroies_type"><br>這頁是分類，跟設定檔的地方對應哦! 頁面 - 路徑<br><img data-src="https://chi01pap001files.storage.live.com/y4mSHJlXGuxGrOywWFqkyu391Exl7Z_yJrwNUwZTN56tV5LPXobIEudNoPFKamiALfWJe9NbCEJmdI2PLekXQ5b67LgUGmQurJ8LEta7IHg3crrFvX8YfLeVZ-zTllPrB9b88o6RngYO2tbAoyjmtBFF1Fq5YxN-BnGO1Q-4DaX4Lt8H4X_apXvACFiKuR515oO?width=715&height=1510&cropmode=none" alt="路徑">  </p>
+<blockquote>
+<blockquote>
+<p>. themes - .next (依照主題去分資料夾)  </p>
+</blockquote>
+</blockquote>
+<p>如果 theme 沒有跑出 next 的資料夾，可以用git 的方式 clone 一下<br><u><a href="https://github.com/theme-next/hexo-theme-next">官方教學 底加</a></u>  </p>
+<pre><code class="cmd">    git clone https://github.com/theme-next/hexo-theme-next themes/next  
+</code></pre>
+<p>之後我就GG了，因為 NEXT 主題更新蠻快的，導致一些語法或函式沒統一更新到，最近的是8.0版<br>網路上layout檔是 <code>.swig</code> ，我的是<code>.njk</code><br>我問號了起來，不過還好語法上差不了多少<br>但在 <code>hexo g</code> 會報錯，主要是<code>load</code>的函式要更新用法 </p>
+<p>會顯示 <code>yml.safeload</code> 用法過時，必須改成 <code>yml.load</code><br>最快速的方法就是  </p>
+<pre><code class="js">1. 專案的搜尋欄打 safeload  
+2. 找到 `vendors.js` 
+3. 尋找 `yml.safeload`
+4. const dependencies = yaml.safeLoad(vendorsFile); //這行改成下面這個
+5. const dependencies = yaml.load(vendorsFile);
+</code></pre>
+<p>這樣就能重構，在 <code>hexo s</code> 一下看看是不是有跑出頁面<br>當然嫌麻煩還可以裝指定版本<br><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md">官方教學</a>    </p>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>languages</td>
+<td>語言對應字</td>
+</tr>
+<tr>
+<td>layout</td>
+<td>調整看到的版面 基底</td>
+</tr>
+<tr>
+<td>source</td>
+<td>一些css js image 設定在這(跟外層的source不一樣)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>theme 中的 source 主要掌管 next 主題的樣式而已 </li>
+<li>外層的 source 是 hexo 架構的編輯地方<br>兩者有差哦!  </li>
+</ul>
+<h3 id="語言設定"><a href="#語言設定" class="headerlink" title="語言設定"></a>語言設定</h3><p>languages 預設原本是 <code>en</code>，從 <code>_config_yml</code> 就可以更改語系<br><img data-src="https://chi01pap001files.storage.live.com/y4mGt3P_ahV1z8j1pRbpVUp8wSl6nBkqs_kpfNhZB32cMMkamaJhe70pZkqoosmLUiVaElphRPcWkvde5dQfOYASoAYIJbirgBTXzcpY8xkx7ARrrtFFRjvMQarZpJv2ANNm-XSosQEGoq0d6s9n9kv55XqPeEOrHtWGChQkJAL-o4AMO-xc_Z-p5a2MWic6Gow?width=1223&height=410&cropmode=none" alt="lang-setting">  </p>
+<p>當然網頁可以寫成多國語，待研究XDD，可以的話想寫成英文<br>有些翻譯過來的文字可能不太喜歡，或是想 自訂義<br>就可以到 theme 字料夾中的 languages 找 zh-TW<br>把想要的文字替代上去哦!<br><img data-src="https://chi01pap001files.storage.live.com/y4ma1tCvNxVMoUCdcaPYcIjlNvLRelGj3E1tbBnrI3EAXwnLvIoNp4JrjYMC7GYuWjeVhYRVFf6f0sNhPWNlDqWsTsGS8HvaqjBDyLj49cWpdfBJ9Bl0GiCJOfmCwBAxlbVdIawagjcA9XlFdu2B43oKb_6ZveVwqdQsVsKjjtjd9zUQRkYqJIBu7AIpFGaQKnd?width=1004&height=1512&cropmode=none" alt="lang-word">  </p>
+<h3 id="版面設定"><a href="#版面設定" class="headerlink" title="版面設定"></a>版面設定</h3><p>layout 有很多頁面設定，包含第三方外掛都可以設定外觀等等的<br>當然也有 css或js 可以設定，在 source 資料夾裡，基本的換色、背景圖片都可以自訂。  </p>
+<hr>
+<h2 id="調整樣式-amp-外觀"><a href="#調整樣式-amp-外觀" class="headerlink" title="調整樣式&amp;外觀"></a>調整樣式&amp;外觀</h2><p>next 的 <code>config.yml</code> 可以開啟 comment 的功能<br>因為我裝了disqus留言版，結果發現 next 主題在tags、categroies等等頁面都是套 post 的板<br>也就是 post 每一則下方有留言區是正常的<br>但誰會在<code>標籤</code>跟<code>分類</code>或是<code>關於我</code> 底下讓人留言啦!  </p>
+<p>就要修改 <code>theme &gt; next &gt; layout &gt; _layout.njk</code><br>其實可以發現 page 的版面 都用同一個 layout<br>所以在 <code>new page</code> 或<code>new post</code> 下方都會有comment(如果妳有打開的話)  </p>
+<p>打開 <code>_layout.njk</code>，找到下面這行 </p>
+<pre><code>  &#123;% include '_partials/comments.njk' %&#125;
+</code></pre>
+<p>來把它加上if-else條件，判斷哪一頁加入comment<br>改成 : </p>
+<pre><code class="js">&#123;% set page_type = page.type === 'tags' or page.type === 'categories' %&#125;
+&lt;div style=&quot;&#123;%if page_type %&#125; visibility:hidden; height:0px;&#123;% endif %&#125;&quot;&gt;
+&#123;% include '_partials/comments.njk' %&#125;  
+</code></pre>
+<p>原本我是看這篇<a href="https://hsiangfeng.github.io/hexo/20190516/2710757554/">文章教學</a><br>結果不行，因為版本問題，layout檔再也不是<code>.swig</code><br>還好語法上還能通，只有平常在寫得 <code>||</code> 要改成 <code>or</code>   </p>
+<hr>
+<h2 id="好用的寫文插件"><a href="#好用的寫文插件" class="headerlink" title="好用的寫文插件"></a>好用的寫文插件</h2><p>上一篇有提到 hexo 有的後台頁面<br>哦~我的天，markdown 雖然能馬上看見效果<br>但實際版面跟輸出後的差異蠻多的<br>後來我還是在 VS 上做編輯了<br>當然是來安裝個插件XD  </p>
+<ol>
+<li>VS 的插件商店搜尋 <code>Markdown Preview Enhanced</code></li>
+<li>安裝</li>
+<li>新增一個 post 看看 <code>hexo new post a123</code></li>
+<li>開啟檔案對著它按右鍵，選 <code>Reopen Editor with ...</code><br><img data-src="https://chi01pap001files.storage.live.com/y4m5e44Li2JyNG7g5TuAltJILiqeBueOK15DFGll5OZ4uHTS58Bu68ngUQGhBM_987DVWt6su774wdyt-a-BiUKqHX0W9AC1ohAq2SoRQRPnZBSqs-T4-xq8aQCr4Zc48fQWmdmhOYZJ_t9SIJbtk8GUHPxwB5cqSpBiWpbVmYtnbZp2Epk5FhS_pFPi9yikSaA?width=2736&height=1824&cropmode=none" alt="圖示"> </li>
+<li>上面會跳出選擇器，選<code>markdown preview</code>  </li>
+<li>在點這個開啟內分頁<br><img data-src="https://chi01pap001files.storage.live.com/y4mD3vUlN6kw2OxydnmAU1ZhFwb8pUd-ya_RTwIDBiggyqM-HXup_763uqZsG3yDfqWMcjYw2GStohPK4f88s0gSmDTD8yK5vvJVV2gO2cat_AzjyjpL_m4XutuM6hXy4AmQq1cjGdYQZkGEDo161pc8Ir8UZhMMlx4ZSdMyNLyRmRp98rCHT1QNNQIXq9-Y2S1?width=1423&height=401&cropmode=none" alt="內分頁">    </li>
+<li>在開一次原檔案在分頁中，就可以準備來編輯囉!</li>
+</ol>
+<p>燈愣! 就變這樣，邊寫可以邊看到效果 :happy:<br><img data-src="https://chi01pap001files.storage.live.com/y4mRvRQYFuUfq-zmPn2p99ZdGCFN6dBqQaGcm4gMBtYN-O6M9Oz01zGE_OL_KFQ3aG14pD7aiNcIAFH4JOi61XP8uoGLyxx5Jo0Ux7VLu8umfff5TIp1v-P7lriTZcDEOGO39yKM195CeZwH6ApqOLjfWRZ2zskQSp8ZOUZRT6qM5k6DS_UOMGa8hze41xI1iKh?width=2600&height=1615&cropmode=none" alt="寫文好幫手">  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>網站建置的差不多了<br>短時間應該沒有要再美化<br>要多努力寫文章<br>markdown 還在學習中…</p>
+<p>經過三日連發<br>這類實作文章應該就沒有每天產了<br>改成2-3天發布一篇<br>不然感覺每天都再搭特快車<br>再抓一下什麼樣的寫法才好吸收  </p>
+<p>最近有看到一種寫文章的方式<br>是時候來增強寫作技巧  XD  </p>
 ]]></content>
       <categories>
         <category>Blog</category>
@@ -798,222 +839,6 @@ cat 123.txt &#x2F;&#x2F; 查看一下印出 <span aria-hidden="true" class="line
       </tags>
   </entry>
   <entry>
-    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)</title>
-    <url>/RosaBlog/Blog/Hexo-BuildBloger-III/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>呼!建置的差不多了<br>原本要總結研究 Hexo 三天的成果<br>寫成比較順暢的建構過程<br>結果一弄又更新好多東西…<br>一樣先來補齊概念吧!<br>月底再來一個大總結&gt;&lt;    </p>
-<hr>
-<h2 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h2><pre><code>+Blogger 
-|- .github
-|- .vscode
-|- .node_modules  
-|- .scaffolds
-    |- draft.md
-    |- page.md
-    |- post.md
-|- .source
-    |- _drafts
-    |- _posts
-    |- 其他頁面(略)
-|- .themes
-    |- next
-        |- (略)
-        |- languages
-        |- layout
-        |- (略)
-|- _config.next.yml
-|- _config.yml
-|- package.json
-+  
-</code></pre>
-<p>這邊我僅有挑我有用到的幾個  </p>
-<blockquote>
-<p> 最外層  </p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>.node_modules</td>
-<td>npm原始設定(不常用)</td>
-</tr>
-<tr>
-<td>.scaffolds</td>
-<td>文章狀態模板 (可以修訂統一模板)</td>
-</tr>
-<tr>
-<td>.public</td>
-<td>發布自動後生成的資料夾 (不用動)</td>
-</tr>
-<tr>
-<td>.source</td>
-<td>部落格編輯(文字都在這編輯)</td>
-</tr>
-<tr>
-<td>.themes</td>
-<td>編輯主題樣式(相關 css )</td>
-</tr>
-<tr>
-<td>._config.next.yml</td>
-<td>next 安裝設定檔，多是插件</td>
-</tr>
-<tr>
-<td>._config.yml</td>
-<td>hexo 安裝設定檔</td>
-</tr>
-<tr>
-<td>.package.json</td>
-<td>專案的設定檔，會寫安裝什麼東西(基本上不用動)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<blockquote>
-<p>. scaffolds</p>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>_drafts</td>
-<td>草稿模板</td>
-</tr>
-<tr>
-<td>page .md</td>
-<td>頁面模板</td>
-</tr>
-<tr>
-<td>post .md</td>
-<td>文章模板</td>
-</tr>
-</tbody></table>
-<ul>
-<li>指令快速記!   <pre><code class="cmd">hexo new draft 文章名稱  //建立一篇草稿  
-hexo new post 文章名稱  //建立一篇新文章  
-hexo new page 頁面名稱 //建立一篇新頁面，同時source 會建立新的資料夾  
-hexo publish 版面 檔案名稱 // 發布(草稿)  
-</code></pre>
-</li>
-</ul>
-<blockquote>
-<blockquote>
-<p>. source</p>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>_drafts</td>
-<td>草稿會在這</td>
-</tr>
-<tr>
-<td>_posts</td>
-<td>發布的貼文都會在這</td>
-</tr>
-<tr>
-<td>其他頁面資料夾</td>
-<td>像是About、tags、categroies..</td>
-</tr>
-</tbody></table>
-<p>因為一開始沒有About等等的基礎頁面，自己要新增  </p>
-<pre><code class="cmd">  hexo new page About  
-  hexo new page tags 
-  hexo new page categroies 
-</code></pre>
-<p>然後新頁面新增 <code>type</code> 來做頁面記號<br><img data-src="https://chi01pap001files.storage.live.com/y4mUs5S3stfFRMyDXC2wenjxmYnUyrrWZLN195KoJDuBNbjDIUXcIHbvzGlPGiUiyTgjwNaoLwYAM6i881mLxbBrFsfqBSUm0CSwtIWpIcZ8psQgmom42pugcn98p5OsSHq8t7JU1GKO7NotQ-nqR1teCP-h9lS_J3AZkoZWgJ-o7187LBZXhCtg7x2BWH8ou9t?width=865&height=303&cropmode=none" alt="categroies_type"><br>這頁是分類，跟設定檔的地方對應哦! 頁面 - 路徑<br><img data-src="https://chi01pap001files.storage.live.com/y4mSHJlXGuxGrOywWFqkyu391Exl7Z_yJrwNUwZTN56tV5LPXobIEudNoPFKamiALfWJe9NbCEJmdI2PLekXQ5b67LgUGmQurJ8LEta7IHg3crrFvX8YfLeVZ-zTllPrB9b88o6RngYO2tbAoyjmtBFF1Fq5YxN-BnGO1Q-4DaX4Lt8H4X_apXvACFiKuR515oO?width=715&height=1510&cropmode=none" alt="路徑">  </p>
-<blockquote>
-<blockquote>
-<p>. themes - .next (依照主題去分資料夾)  </p>
-</blockquote>
-</blockquote>
-<p>如果 theme 沒有跑出 next 的資料夾，可以用git 的方式 clone 一下<br><u><a href="https://github.com/theme-next/hexo-theme-next">官方教學 底加</a></u>  </p>
-<pre><code class="cmd">    git clone https://github.com/theme-next/hexo-theme-next themes/next  
-</code></pre>
-<p>之後我就GG了，因為 NEXT 主題更新蠻快的，導致一些語法或函式沒統一更新到，最近的是8.0版<br>網路上layout檔是 <code>.swig</code> ，我的是<code>.njk</code><br>我問號了起來，不過還好語法上差不了多少<br>但在 <code>hexo g</code> 會報錯，主要是<code>load</code>的函式要更新用法 </p>
-<p>會顯示 <code>yml.safeload</code> 用法過時，必須改成 <code>yml.load</code><br>最快速的方法就是  </p>
-<pre><code class="js">1. 專案的搜尋欄打 safeload  
-2. 找到 `vendors.js` 
-3. 尋找 `yml.safeload`
-4. const dependencies = yaml.safeLoad(vendorsFile); //這行改成下面這個
-5. const dependencies = yaml.load(vendorsFile);
-</code></pre>
-<p>這樣就能重構，在 <code>hexo s</code> 一下看看是不是有跑出頁面<br>當然嫌麻煩還可以裝指定版本<br><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md">官方教學</a>    </p>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>languages</td>
-<td>語言對應字</td>
-</tr>
-<tr>
-<td>layout</td>
-<td>調整看到的版面 基底</td>
-</tr>
-<tr>
-<td>source</td>
-<td>一些css js image 設定在這(跟外層的source不一樣)</td>
-</tr>
-</tbody></table>
-<ul>
-<li>theme 中的 source 主要掌管 next 主題的樣式而已 </li>
-<li>外層的 source 是 hexo 架構的編輯地方<br>兩者有差哦!  </li>
-</ul>
-<h3 id="語言設定"><a href="#語言設定" class="headerlink" title="語言設定"></a>語言設定</h3><p>languages 預設原本是 <code>en</code>，從 <code>_config_yml</code> 就可以更改語系<br><img data-src="https://chi01pap001files.storage.live.com/y4mGt3P_ahV1z8j1pRbpVUp8wSl6nBkqs_kpfNhZB32cMMkamaJhe70pZkqoosmLUiVaElphRPcWkvde5dQfOYASoAYIJbirgBTXzcpY8xkx7ARrrtFFRjvMQarZpJv2ANNm-XSosQEGoq0d6s9n9kv55XqPeEOrHtWGChQkJAL-o4AMO-xc_Z-p5a2MWic6Gow?width=1223&height=410&cropmode=none" alt="lang-setting">  </p>
-<p>當然網頁可以寫成多國語，待研究XDD，可以的話想寫成英文<br>有些翻譯過來的文字可能不太喜歡，或是想 自訂義<br>就可以到 theme 字料夾中的 languages 找 zh-TW<br>把想要的文字替代上去哦!<br><img data-src="https://chi01pap001files.storage.live.com/y4ma1tCvNxVMoUCdcaPYcIjlNvLRelGj3E1tbBnrI3EAXwnLvIoNp4JrjYMC7GYuWjeVhYRVFf6f0sNhPWNlDqWsTsGS8HvaqjBDyLj49cWpdfBJ9Bl0GiCJOfmCwBAxlbVdIawagjcA9XlFdu2B43oKb_6ZveVwqdQsVsKjjtjd9zUQRkYqJIBu7AIpFGaQKnd?width=1004&height=1512&cropmode=none" alt="lang-word">  </p>
-<h3 id="版面設定"><a href="#版面設定" class="headerlink" title="版面設定"></a>版面設定</h3><p>layout 有很多頁面設定，包含第三方外掛都可以設定外觀等等的<br>當然也有 css或js 可以設定，在 source 資料夾裡，基本的換色、背景圖片都可以自訂。  </p>
-<hr>
-<h2 id="調整樣式-amp-外觀"><a href="#調整樣式-amp-外觀" class="headerlink" title="調整樣式&amp;外觀"></a>調整樣式&amp;外觀</h2><p>next 的 <code>config.yml</code> 可以開啟 comment 的功能<br>因為我裝了disqus留言版，結果發現 next 主題在tags、categroies等等頁面都是套 post 的板<br>也就是 post 每一則下方有留言區是正常的<br>但誰會在<code>標籤</code>跟<code>分類</code>或是<code>關於我</code> 底下讓人留言啦!  </p>
-<p>就要修改 <code>theme &gt; next &gt; layout &gt; _layout.njk</code><br>其實可以發現 page 的版面 都用同一個 layout<br>所以在 <code>new page</code> 或<code>new post</code> 下方都會有comment(如果妳有打開的話)  </p>
-<p>打開 <code>_layout.njk</code>，找到下面這行 </p>
-<pre><code>  &#123;% include '_partials/comments.njk' %&#125;
-</code></pre>
-<p>來把它加上if-else條件，判斷哪一頁加入comment<br>改成 : </p>
-<pre><code class="js">&#123;% set page_type = page.type === 'tags' or page.type === 'categories' %&#125;
-&lt;div style=&quot;&#123;%if page_type %&#125; visibility:hidden; height:0px;&#123;% endif %&#125;&quot;&gt;
-&#123;% include '_partials/comments.njk' %&#125;  
-</code></pre>
-<p>原本我是看這篇<a href="https://hsiangfeng.github.io/hexo/20190516/2710757554/">文章教學</a><br>結果不行，因為版本問題，layout檔再也不是<code>.swig</code><br>還好語法上還能通，只有平常在寫得 <code>||</code> 要改成 <code>or</code>   </p>
-<hr>
-<h2 id="好用的寫文插件"><a href="#好用的寫文插件" class="headerlink" title="好用的寫文插件"></a>好用的寫文插件</h2><p>上一篇有提到 hexo 有的後台頁面<br>哦~我的天，markdown 雖然能馬上看見效果<br>但實際版面跟輸出後的差異蠻多的<br>後來我還是在 VS 上做編輯了<br>當然是來安裝個插件XD  </p>
-<ol>
-<li>VS 的插件商店搜尋 <code>Markdown Preview Enhanced</code></li>
-<li>安裝</li>
-<li>新增一個 post 看看 <code>hexo new post a123</code></li>
-<li>開啟檔案對著它按右鍵，選 <code>Reopen Editor with ...</code><br><img data-src="https://chi01pap001files.storage.live.com/y4m5e44Li2JyNG7g5TuAltJILiqeBueOK15DFGll5OZ4uHTS58Bu68ngUQGhBM_987DVWt6su774wdyt-a-BiUKqHX0W9AC1ohAq2SoRQRPnZBSqs-T4-xq8aQCr4Zc48fQWmdmhOYZJ_t9SIJbtk8GUHPxwB5cqSpBiWpbVmYtnbZp2Epk5FhS_pFPi9yikSaA?width=2736&height=1824&cropmode=none" alt="圖示"> </li>
-<li>上面會跳出選擇器，選<code>markdown preview</code>  </li>
-<li>在點這個開啟內分頁<br><img data-src="https://chi01pap001files.storage.live.com/y4mD3vUlN6kw2OxydnmAU1ZhFwb8pUd-ya_RTwIDBiggyqM-HXup_763uqZsG3yDfqWMcjYw2GStohPK4f88s0gSmDTD8yK5vvJVV2gO2cat_AzjyjpL_m4XutuM6hXy4AmQq1cjGdYQZkGEDo161pc8Ir8UZhMMlx4ZSdMyNLyRmRp98rCHT1QNNQIXq9-Y2S1?width=1423&height=401&cropmode=none" alt="內分頁">    </li>
-<li>在開一次原檔案在分頁中，就可以準備來編輯囉!</li>
-</ol>
-<p>燈愣! 就變這樣，邊寫可以邊看到效果 :happy:<br><img data-src="https://chi01pap001files.storage.live.com/y4mRvRQYFuUfq-zmPn2p99ZdGCFN6dBqQaGcm4gMBtYN-O6M9Oz01zGE_OL_KFQ3aG14pD7aiNcIAFH4JOi61XP8uoGLyxx5Jo0Ux7VLu8umfff5TIp1v-P7lriTZcDEOGO39yKM195CeZwH6ApqOLjfWRZ2zskQSp8ZOUZRT6qM5k6DS_UOMGa8hze41xI1iKh?width=2600&height=1615&cropmode=none" alt="寫文好幫手">  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>網站建置的差不多了<br>短時間應該沒有要再美化<br>要多努力寫文章<br>markdown 還在學習中…</p>
-<p>經過三日連發<br>這類實作文章應該就沒有每天產了<br>改成2-3天發布一篇<br>不然感覺每天都再搭特快車<br>再抓一下什麼樣的寫法才好吸收  </p>
-<p>最近有看到一種寫文章的方式<br>是時候來增強寫作技巧  XD  </p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>部落格</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>⟬ 紀錄 ⟭ Unity UI Navigation ─ [尋找不見的按鈕]</title>
     <url>/RosaBlog/Unity/Navgation/</url>
     <content><![CDATA[<p><img data-src="https://i.imgur.com/Vz6RmrN.png">  </p>
@@ -1095,166 +920,6 @@ hexo publish 版面 檔案名稱 // 發布(草稿)
         <tag>Unity</tag>
         <tag>UI</tag>
         <tag>Event System</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ CSS 選擇器</title>
-    <url>/RosaBlog/Frontend/CSS/CSS-Selector/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>複習常見用法與了解選擇器權重的問題   </p>
-<span id="more"></span>  
-<h2 id="條件使用"><a href="#條件使用" class="headerlink" title="條件使用"></a>條件使用</h2><p>舉 class 的例子<br>選擇器還有 <code>Universal(*) 、pseudo-classes(偽類別)、id、tag(標籤)</code>等等的選擇器<br>除了 <strong>id</strong> 外基本都以此類推。</p>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 省略 Html 架構--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token comment">&lt;!-- 範例 4 開始 --></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 1 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 2 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 3 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 4 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>item<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>來套上CSS   </p>
-<ol>
-<li>同時符合條件才套用</li>
-</ol>
-<ul>
-<li><code>.A.item</code> : 連續的，並無空格<blockquote>
-<p>是 A 又有 item 的才會被選，其他 A 不套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="2">
-<li>父層以下的所有叫 OO <strong>都</strong>  套用 </li>
-</ol>
-<ul>
-<li><code>.wrapper .A</code> : 中間空一格<blockquote>
-<p>這邊通通有 class <code>A</code> 的都會被套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="3">
-<li> 父層的下一層要叫 OO 才套用</li>
-</ol>
-<ul>
-<li><code>.wrapper&gt;.A</code> : 下一層的 A 都會套用    <blockquote>
-<p>box 裡面的 A 是屬於 下下層，因此不套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="4">
-<li> 同一層的旁邊叫 OO 的才套用  </li>
-</ol>
-<ul>
-<li><code>.B+.C</code> : 兩個都同一層  <blockquote>
-<p>只有 B-2 旁邊的 <code>C-3</code> 會套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="5">
-<li> 同一層的右邊只要叫 OO 的都套用</li>
-</ol>
-<ul>
-<li><code>.B~.C</code> : 兩個都同一層 <blockquote>
-<p> B-2 旁邊的 <code>C-3</code> 與 <code>C-4</code> 皆會套用  </p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p><a href="https://codepen.io/shan473/pen/BaRMyrz">練習</a>  </p>
-</blockquote>
-<h4 id="快速複習"><a href="#快速複習" class="headerlink" title="快速複習"></a>快速複習</h4><table>
-<thead>
-<tr>
-<th align="center">符號</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&gt;</td>
-<td>下一層</td>
-</tr>
-<tr>
-<td align="center">+</td>
-<td>同一層的旁邊一個</td>
-</tr>
-<tr>
-<td align="center">~</td>
-<td>同一層的旁邊所有的</td>
-</tr>
-</tbody></table>
-<h2 id="常用的選擇器"><a href="#常用的選擇器" class="headerlink" title="常用的選擇器"></a>常用的選擇器</h2><ul>
-<li>pseudo-classes (偽類別)<br>  以 <code>:</code> 表示<ul>
-<li>關於動作的 (Dynamic)<br>  像是 <code>:hover</code>、<code>:active</code> … 等等    以往在開發時可能都要實際操作再看效果<br>  在 Dev tool 中可以手動直接控制<br>  瀏覽器顯示 style 有個 <code>:hov</code><br>  <img data-src="https://chi01pap001files.storage.live.com/y4mXniSc9YQknILFFtKip8TAQ82En47NCTww_UljZH2WPpwqvQD9hnkcwXYNUQu4BrLI_6xTabbid29wewJsyt3Kj522mgEJaTDHjoN0PzHXFUSvUP8ZTj3OBzQEs91uitM5P80iFV083PpDcTt6BzOsT4yaDtMYgcVgBNAKvX0bnj3LL0-BoayHXrZxslbKj8r?width=660&height=236&cropmode=none">  </li>
-<li>選擇器<br>  <code>:nth-child(n)</code> : 選擇子層的第 n 個<br>  <code>:first-child</code>  :  指第一個<br>  <code>:first-child</code>  :  指最後一個    快速一點  <ol>
-<li><code>:nth-child(odd)</code> : 只選奇數位</li>
-<li><code>:nth-child(even)</code> : 只選偶數位</li>
-<li><code>:nth-child(an+b)</code> : 等差選  </li>
-</ol>
-<blockquote>
-<p>nth-child 是從後面解讀<br>例 : .wrapper .A:nth-child(3)<br>XX層的第 n 個元素是 OO 再動作</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>參考資料<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/Pseudo-classes">虛擬類別 - CSS | MDN (mozilla.org)</a></p>
-</blockquote>
-<ul>
-<li>pseudo-elements (偽元素)<br>  以 <code>::</code> 表示<br>  最常用的是 <code>::before</code> 跟 <code>::after</code><br>  使用上可以用 <strong>共同想加入的東西</strong><br>  例如 金錢符號    <iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/OJmdPvN?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-See the Pen <a href="https://codepen.io/shan473/pen/OJmdPvN">
-</a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
-on <a href="https://codepen.io">CodePen</a>.
-</iframe>  
-  
-  這樣只要改 ::before 的內容就可以統一修改      </li>
-</ul>
-<blockquote>
-<p>content 一定要有，沒有內容也可以空的</p>
-</blockquote>
-<p>*<code>content : attr( class or tag )</code><br>可以抓到 html 的資料 </p>
-<blockquote>
-<p>參考資料<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/content">content - CSS（层叠样式表） | MDN (mozilla.org)</a></p>
-</blockquote>
-<h2 id="選擇器權重"><a href="#選擇器權重" class="headerlink" title="選擇器權重"></a>選擇器權重</h2><p>常常會因為套用很多 CSS 而眼花撩亂<br>誰被套用了 ? 誰套了又沒效果了 ?<br>透過權重就能清楚知道</p>
-<ul>
-<li>把握基本原則<blockquote>
-<p><strong>id &gt; class &gt; tag</strong><br>越詳細越先套用<br>重複寫到一樣的，以後面的為重</p>
-</blockquote>
-</li>
-</ul>
-<p>網路上會以 <code>100 : 10 : 1</code>  來說明比重<br>但我更喜歡 Huli 大講的 <code>0,0,0</code> 越前面的越重<br>誰佔的比較前面就吃那個樣式   </p>
-<p>假如都使用 class 那第二個就是看 <code>數量</code><br>數字並不會十進位  </p>
-<p>有神人測試過 256 個 class 可以超過 id<br>不過應該不會有人會寫到這麼多 class …<br>應該是測試極限用而已  </p>
-<blockquote>
-<p>參考資料<br><a href="https://juejin.cn/post/6844903608199151630">你对CSS权重真的足够了解吗？ (juejin.cn)</a></p>
-</blockquote>
-<h3 id="進階原則"><a href="#進階原則" class="headerlink" title="進階原則"></a>進階原則</h3><p>也就是 <code>!important</code> 與 <code>inline style</code> </p>
-<ol>
-<li>inline style : 寫在 html 同一行元素裡的 style   <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>!important<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">.class&#123;
-	background:red !important;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-綜合排一下<blockquote>
-<p>!important &gt; inline style &gt; id &gt; class &gt; tag  </p>
-</blockquote>
-</li>
-</ol>
-<p>看成 <code>0 , 0 , 0 , 0 , 0</code><br>越後面樣式越容易被覆蓋</p>
-<p>因此套上 <code>!important</code> 是奧義<br>並不會很常使用<br>不然其他寫的都沒意義了   </p>
-<p>最常使用的是 class 而非 id</p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以前使用 CSS 重點在其他設定<br>老是一直層層疊上去<br>透過整理可以更清楚知道選擇器的權重<br>與選擇器正確的使用  </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -1343,197 +1008,6 @@ b <span class="token operator">=</span> <span class="token number">1</span>
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ HTML 基本語法</title>
-    <url>/RosaBlog/Frontend/HTML/HTML-Tags/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>這邊紀錄常用標籤與標籤用處<br>標籤基本都成雙成對<br>本篇主要複習跟稍微解析實際網頁的應用部分  </p>
-<span id="more"></span>
-
-<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- !DOCTYPE HTML :告訴瀏覽器這是標準的 html 格式--></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">HTML</span><span class="token punctuation">></span></span> 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-	<span class="token comment">&lt;!-- head : 網頁資本資訊--></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-		(1) title : 網站標題
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>網站標題<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-		(2) charset : 編碼
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-	<span class="token comment">&lt;!--body : 主要呈現的地方--></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-		(1) div : 分組，會換行 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> 
-		(2) span : 分組，不會換行
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> 
-		(3) img : 圖片 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>放source<span class="token punctuation">"</span></span> 
-			 <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>滑鼠 Hover 顯示文字<span class="token punctuation">"</span></span>
-			 <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>圖片跑不出來的替代文字<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-		(4) 清單  
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span> : 沒有排序的清單，只會出現 dot
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span> : 有排序的清單 (order)，會顯示數字
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span> : 項目
-		
-		(5) pre : 保留完整格式 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
-		說明 : 在 html 空多少格都會只有呈現一格
-		加入 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span> 後，html長相都會被「照實呈現」
-		
-		(6) br : 換行 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-		
-		(7) 表格
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
-			(7-1) 表格標題 (header)
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
-			說明 : 可以放在首列，標題字會變粗體
-			-----
-			(7-2) 列(row)
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
-				(7-3) 子項
-				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
-		
-		(8) 錨點 
-		(8-1) 連外部網絡
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>連結網址<span class="token punctuation">"</span></span> 
-		   <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">新分頁開啟</span>
-		   				   <span class="token attr-name">不加的話預設是直接打開</span>
-		<span class="token punctuation">></span></span>
-		(8-2) 連內部段落
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#段落ID<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		說明 : 使用 id 來進行連結
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>&lt;!DOCTYPE HTML&gt;</code> 通常可加可不加<br>不加偶爾會出 Bug ，所以還是加一下。</li>
-</ul>
-<h3 id="實用型"><a href="#實用型" class="headerlink" title="實用型"></a>實用型</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html">1. iframe  : 嵌入網站。
-說明:通常會看到嵌入 yt 影片、網頁內容等等。
-實際上很多網站會擋，以防資訊被偷竊。
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>來源網址<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
-
-2. form : 表單
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
-	2-1. input : 輸入 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>輸入類型<span class="token punctuation">"</span></span> 
-		   <span class="token attr-name">vaule</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>被輸入的值可以先預設<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>input</span><span class="token punctuation">></span></span>
-	type 常見有 : 
-           text、password、email、radio、
-           checkbox、date
-	有作用的按鈕 :
-	    submit (送出)
-	注意 : submit 類型的 vaule 是指按鈕文字
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>input 更多類型往這邊<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTML/Element/input">超文本標記語言 | MDN (mozilla.org)</a>  </p>
-</blockquote>
-<p>範例</p>
-<ul>
-<li><strong>radio</strong> 單選  </li>
-</ul>
-<iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/bGWOrWB?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/shan473/pen/bGWOrWB">
-  </a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
-
-<ol>
-<li><code>type</code>  : 設定種類</li>
-<li><code>name</code> :  把選項群組。<br>使用單選時，要確定哪個是同一種單選<br>如果沒有 <strong>name</strong> 就沒用哦</li>
-<li><code>label</code> : 可以把內容也變的跟同個 id 有一樣的效果。<br>如果沒有 label 可以發現 <strong>使用者體驗較差</strong><br>每次點擊必須精準落在圈圈內<br>加上之後，讓 label 裡的字串點擊也可以勾選<br>以便來 <strong>提升使用者的體驗</strong></li>
-</ol>
-<blockquote>
-<p>關於 vaule 的範例<br><a href="https://matthung0807.blogspot.com/2019/08/html-input-value.html">菜鳥工程師 肉豬: HTML value屬性</a>  </p>
-</blockquote>
-<h3 id="語意化標籤"><a href="#語意化標籤" class="headerlink" title="語意化標籤"></a>語意化標籤</h3><p>英文 <em>Semantic Elements</em></p>
-<p>綜觀所有東西確實可以使用 <code>div</code> 來包裹<br>但在閱讀上其實不太方便<br>尤其網頁在爬蟲時，要讓機器方便閱讀<br>因此才有語意化標籤來輔助<br>如果是人，在閱讀上也來的更清楚快速</p>
-<blockquote>
-<p>更多的可以參照 W3 說明<br>(<a href="https://www.w3schools.com/html/html5_semantic_elements.asp">HTML Semantic Elements (w3schools.com)</a>)  </p>
-</blockquote>
-<p>提到給機器看，很大一部分跟 SEO (search engine optimization) 也有關連<br>比起看 <code>div</code> 猜意思，不如直接跟他說這是什麼區塊 </p>
-<p>這邊舉幾個是常見的  </p>
-<ol>
-<li><code>&lt;main&gt;</code> : 放主要內容的</li>
-<li><code>&lt;nav&gt;</code> : 導覽列</li>
-<li><code>&lt;footer&gt;</code> : 網頁底部資訊</li>
-<li><code>&lt;section&gt;</code> : 區塊資訊</li>
-</ol>
-<p>總之，功能跟 <code>div</code> 包裹沒差別，差在更容易識別。</p>
-<h3 id="跳脫標籤"><a href="#跳脫標籤" class="headerlink" title="跳脫標籤"></a>跳脫標籤</h3><p>有些特殊字元並沒辦法在 html 中呈現<br>當你打 想顯示 &lt;div&gt; ，怎麼打就是看不見<br>例如 <code>div</code> 前面跟後面的 <code>&lt; &gt;</code> 這個標籤<br>替代符號可以用以下幾個  </p>
-<table>
-<thead>
-<tr>
-<th>符號</th>
-<th>替代使用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&amp;</td>
-<td>&amp;amp;</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>&amp;lt;</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>&amp;gt;</td>
-</tr>
-</tbody></table>
-<p>範例 : *markdown 語法也會吃 html<br> <pre>            &lt;div&gt;</pre><br> 實際上長這樣 <strong>&amp;lt;div&amp;gt;</strong></p>
-<h3 id="SEO-相關東西"><a href="#SEO-相關東西" class="headerlink" title="SEO 相關東西"></a>SEO 相關東西</h3><p>這邊我覺得蠻有趣的，所以也記錄一下      </p>
-<p>搜尋一打，為什麼有些網站名列前茅?<br>SEO 要做得好，其實跟 meta tag 脫不了關係<br>因為這部份真的很 <strong>深深深深</strong><br>有些公司是有一個專門團隊在管理這部分的<br>僅列出稍微知道的一部分  </p>
-<h4 id="SEO是給機器看的"><a href="#SEO是給機器看的" class="headerlink" title="SEO是給機器看的"></a>SEO是給機器看的</h4><p>也就是為什麼有語意化標籤的產生<br>除了內容標籤之外<br>又必須在網頁設定告訴機器哪些事?    </p>
-<p>常見的有這幾個<br>以 <a href="https://www.walkerland.com.tw/article/view/186797">這個網站</a> 為例<br>按出 devtool 打開 head 就可以看見<br>記得 head 裡面的東西是 <strong>網頁的資本資訊</strong><br><img data-src="https://chi01pap001files.storage.live.com/y4mJy12jCWqUv8I3m2vELwKn21a1DPZjMIadHGCUzAOxa4X6RW-HfYkEBrWU1KomtH6K40CNew2xpfnfk64KV51Gek1qn-XTbvyr7E65IcIgyyGjosLV9kyNCsyyjQk-1NUgZanO06xoRqbydtD3pRl7nrxCyJC0QUm5UeTudmF47vINqUkYQWoAnzv0wybtQRM?width=660&height=462&cropmode=none"></p>
-<p>這邊都是指在搜尋引擎相關的資訊 </p>
-<ol>
-<li> <code>keywords</code> : 關鍵字</li>
-<li> <code>description</code>  : 網頁敘述。這蠻重要的，寫得好容易被排的前面</li>
-<li> <code>title</code> : 網頁的標題。搏人眼球的標題容易點進來</li>
-<li> <code>property</code> : 屬性。這邊通常會給 <code>社群媒體</code> 相關設定用</li>
-</ol>
-<h5 id="property"><a href="#property" class="headerlink" title="property"></a><strong>property</strong></h5><ol>
-<li><p><code>og</code> : Open Graph protocol。最常用的是 FB 。<br>裡面可以設定在 FB 分享時出現的 <code>圖片、標題、敘述</code><br>詳細可以到 偵錯工具看<br>子屬性分別有對應的功能</p>
-<blockquote>
-<p><a href="https://developers.facebook.com/tools/debug/?locale=zh_TW">分享偵錯工具 - Facebook for Developers</a></p>
-</blockquote>
-</li>
-<li><p><code>app_id</code> : 有些網站具有 app ，會挑出訊息告訴使用者可以下載來獲得更加體驗之類的。</p>
-</li>
-</ol>
-<h5 id="JSON-LD"><a href="#JSON-LD" class="headerlink" title="JSON-LD"></a><strong>JSON-LD</strong></h5><p>這個是給 google 引擎看的<br>是在搜尋後呈現的東西<br>一樣同個網站，Umm不太好找<br>主要有找到這個標籤<br><img data-src="https://chi01pap001files.storage.live.com/y4myYnkBblETyqypt00tVvRJJCVVClV3ueNCz4wZmj6vFMd_cwhAPAFQJLmtm8-TsF-CxnhijUI_n6HF80TxRos9HOO3yWE1n96TzqWQbECYmjCGlLlXiIFfSZJe8FERdC9C8NrXgp9NLSxp8tY1B_3oEaNLMJPQ_I7YEbuNWcJMF1Px7RyrLfK5IpGyQsN-I2E?width=660&height=146&cropmode=none"></p>
-<blockquote>
-<p>詳細參考這篇文章有提到各式種類呈現<br><a href="https://z3388638.medium.com/%E4%BD%BF%E7%94%A8-json-ld-%E8%99%95%E7%90%86-seo-%E4%B8%A6%E8%AE%93-google-%E9%87%9D%E5%B0%8D%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F%E7%B6%B2%E7%AB%99%E5%81%9A%E7%8D%A8%E7%89%B9%E7%9A%84%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E5%91%88%E7%8F%BE-9c74783c017a">使用 JSON-LD 處理 SEO，並讓 Google 針對不同形式網站做獨特的搜尋結果呈現 | by YY | Medium</a></p>
-</blockquote>
-<p>google 的開發者頁面就有提到這部分</p>
-<blockquote>
-<p><a href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=zh-tw">瞭解結構化資料的運作方式 | Google 搜尋中心  |  Google Developers</a></p>
-</blockquote>
-<p>關於 JSON-LD</p>
-<blockquote>
-<p><a href="https://json-ld.org/">JSON-LD - JSON for Linking Data</a></p>
-</blockquote>
-<h5 id="robot-txt"><a href="#robot-txt" class="headerlink" title="robot.txt"></a><strong>robot.txt</strong></h5><p>這個檔案是給爬蟲看的<br>裡面也明確規範告訴爬蟲<br>哪些不要看、哪些給你看</p>
-<blockquote>
-<p>參考資料<br><a href="https://zh.wikipedia.org/wiki/Robots.txt">robots.txt - 維基百科，自由的百科全書 (wikipedia.org)</a>  </p>
-</blockquote>
-<h5 id="sitemap-xml"><a href="#sitemap-xml" class="headerlink" title="sitemap.xml"></a><strong>sitemap.xml</strong></h5><p>也就是網站地圖<br>更快速幫助機器讀懂網站架構<br>通常也會規範在 robot.txt 裡</p>
-<blockquote>
-<p>參考資料<br><a href="https://ranking.works/%E6%8A%80%E8%A1%93SEO/sitemap">【Sitemap SEO教學篇】Sitemap是什麼？一次掌握Sitemap網站地圖製作與提交流程！ | Ranking SEO</a></p>
-</blockquote>
-<h3 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h3><p>主要是紀錄 html 的架構說明<br>SEO 的部分只是蜻蜓點水<br>以後有興趣再往深處寫  </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>HTML</category>
-      </categories>
-      <tags>
-        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1762,6 +1236,357 @@ b <span class="token operator">=</span> <span class="token number">1</span>
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 筆記 ⟭ HTML 基本語法</title>
+    <url>/RosaBlog/Frontend/HTML/HTML-Tags/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>這邊紀錄常用標籤與標籤用處<br>標籤基本都成雙成對<br>本篇主要複習跟稍微解析實際網頁的應用部分  </p>
+<span id="more"></span>
+
+<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- !DOCTYPE HTML :告訴瀏覽器這是標準的 html 格式--></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">HTML</span><span class="token punctuation">></span></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- head : 網頁資本資訊--></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+		(1) title : 網站標題
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>網站標題<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+		(2) charset : 編碼
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!--body : 主要呈現的地方--></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+		(1) div : 分組，會換行 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> 
+		(2) span : 分組，不會換行
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> 
+		(3) img : 圖片 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>放source<span class="token punctuation">"</span></span> 
+			 <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>滑鼠 Hover 顯示文字<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>圖片跑不出來的替代文字<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+		(4) 清單  
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span> : 沒有排序的清單，只會出現 dot
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span> : 有排序的清單 (order)，會顯示數字
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span> : 項目
+		
+		(5) pre : 保留完整格式 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
+		說明 : 在 html 空多少格都會只有呈現一格
+		加入 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span> 後，html長相都會被「照實呈現」
+		
+		(6) br : 換行 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+		
+		(7) 表格
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+			(7-1) 表格標題 (header)
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			說明 : 可以放在首列，標題字會變粗體
+			-----
+			(7-2) 列(row)
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				(7-3) 子項
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+		
+		(8) 錨點 
+		(8-1) 連外部網絡
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>連結網址<span class="token punctuation">"</span></span> 
+		   <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">新分頁開啟</span>
+		   				   <span class="token attr-name">不加的話預設是直接打開</span>
+		<span class="token punctuation">></span></span>
+		(8-2) 連內部段落
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#段落ID<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		說明 : 使用 id 來進行連結
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>&lt;!DOCTYPE HTML&gt;</code> 通常可加可不加<br>不加偶爾會出 Bug ，所以還是加一下。</li>
+</ul>
+<h3 id="實用型"><a href="#實用型" class="headerlink" title="實用型"></a>實用型</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html">1. iframe  : 嵌入網站。
+說明:通常會看到嵌入 yt 影片、網頁內容等等。
+實際上很多網站會擋，以防資訊被偷竊。
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>來源網址<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
+
+2. form : 表單
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+	2-1. input : 輸入 
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>輸入類型<span class="token punctuation">"</span></span> 
+		   <span class="token attr-name">vaule</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>被輸入的值可以先預設<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>input</span><span class="token punctuation">></span></span>
+	type 常見有 : 
+           text、password、email、radio、
+           checkbox、date
+	有作用的按鈕 :
+	    submit (送出)
+	注意 : submit 類型的 vaule 是指按鈕文字
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>input 更多類型往這邊<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTML/Element/input">超文本標記語言 | MDN (mozilla.org)</a>  </p>
+</blockquote>
+<p>範例</p>
+<ul>
+<li><strong>radio</strong> 單選  </li>
+</ul>
+<iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/bGWOrWB?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/shan473/pen/bGWOrWB">
+  </a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<ol>
+<li><code>type</code>  : 設定種類</li>
+<li><code>name</code> :  把選項群組。<br>使用單選時，要確定哪個是同一種單選<br>如果沒有 <strong>name</strong> 就沒用哦</li>
+<li><code>label</code> : 可以把內容也變的跟同個 id 有一樣的效果。<br>如果沒有 label 可以發現 <strong>使用者體驗較差</strong><br>每次點擊必須精準落在圈圈內<br>加上之後，讓 label 裡的字串點擊也可以勾選<br>以便來 <strong>提升使用者的體驗</strong></li>
+</ol>
+<blockquote>
+<p>關於 vaule 的範例<br><a href="https://matthung0807.blogspot.com/2019/08/html-input-value.html">菜鳥工程師 肉豬: HTML value屬性</a>  </p>
+</blockquote>
+<h3 id="語意化標籤"><a href="#語意化標籤" class="headerlink" title="語意化標籤"></a>語意化標籤</h3><p>英文 <em>Semantic Elements</em></p>
+<p>綜觀所有東西確實可以使用 <code>div</code> 來包裹<br>但在閱讀上其實不太方便<br>尤其網頁在爬蟲時，要讓機器方便閱讀<br>因此才有語意化標籤來輔助<br>如果是人，在閱讀上也來的更清楚快速</p>
+<blockquote>
+<p>更多的可以參照 W3 說明<br>(<a href="https://www.w3schools.com/html/html5_semantic_elements.asp">HTML Semantic Elements (w3schools.com)</a>)  </p>
+</blockquote>
+<p>提到給機器看，很大一部分跟 SEO (search engine optimization) 也有關連<br>比起看 <code>div</code> 猜意思，不如直接跟他說這是什麼區塊 </p>
+<p>這邊舉幾個是常見的  </p>
+<ol>
+<li><code>&lt;main&gt;</code> : 放主要內容的</li>
+<li><code>&lt;nav&gt;</code> : 導覽列</li>
+<li><code>&lt;footer&gt;</code> : 網頁底部資訊</li>
+<li><code>&lt;section&gt;</code> : 區塊資訊</li>
+</ol>
+<p>總之，功能跟 <code>div</code> 包裹沒差別，差在更容易識別。</p>
+<h3 id="跳脫標籤"><a href="#跳脫標籤" class="headerlink" title="跳脫標籤"></a>跳脫標籤</h3><p>有些特殊字元並沒辦法在 html 中呈現<br>當你打 想顯示 &lt;div&gt; ，怎麼打就是看不見<br>例如 <code>div</code> 前面跟後面的 <code>&lt; &gt;</code> 這個標籤<br>替代符號可以用以下幾個  </p>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>替代使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>&amp;amp;</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>&amp;lt;</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>&amp;gt;</td>
+</tr>
+</tbody></table>
+<p>範例 : *markdown 語法也會吃 html<br> <pre>            &lt;div&gt;</pre><br> 實際上長這樣 <strong>&amp;lt;div&amp;gt;</strong></p>
+<h3 id="SEO-相關東西"><a href="#SEO-相關東西" class="headerlink" title="SEO 相關東西"></a>SEO 相關東西</h3><p>這邊我覺得蠻有趣的，所以也記錄一下      </p>
+<p>搜尋一打，為什麼有些網站名列前茅?<br>SEO 要做得好，其實跟 meta tag 脫不了關係<br>因為這部份真的很 <strong>深深深深</strong><br>有些公司是有一個專門團隊在管理這部分的<br>僅列出稍微知道的一部分  </p>
+<h4 id="SEO是給機器看的"><a href="#SEO是給機器看的" class="headerlink" title="SEO是給機器看的"></a>SEO是給機器看的</h4><p>也就是為什麼有語意化標籤的產生<br>除了內容標籤之外<br>又必須在網頁設定告訴機器哪些事?    </p>
+<p>常見的有這幾個<br>以 <a href="https://www.walkerland.com.tw/article/view/186797">這個網站</a> 為例<br>按出 devtool 打開 head 就可以看見<br>記得 head 裡面的東西是 <strong>網頁的資本資訊</strong><br><img data-src="https://chi01pap001files.storage.live.com/y4mJy12jCWqUv8I3m2vELwKn21a1DPZjMIadHGCUzAOxa4X6RW-HfYkEBrWU1KomtH6K40CNew2xpfnfk64KV51Gek1qn-XTbvyr7E65IcIgyyGjosLV9kyNCsyyjQk-1NUgZanO06xoRqbydtD3pRl7nrxCyJC0QUm5UeTudmF47vINqUkYQWoAnzv0wybtQRM?width=660&height=462&cropmode=none"></p>
+<p>這邊都是指在搜尋引擎相關的資訊 </p>
+<ol>
+<li> <code>keywords</code> : 關鍵字</li>
+<li> <code>description</code>  : 網頁敘述。這蠻重要的，寫得好容易被排的前面</li>
+<li> <code>title</code> : 網頁的標題。搏人眼球的標題容易點進來</li>
+<li> <code>property</code> : 屬性。這邊通常會給 <code>社群媒體</code> 相關設定用</li>
+</ol>
+<h5 id="property"><a href="#property" class="headerlink" title="property"></a><strong>property</strong></h5><ol>
+<li><p><code>og</code> : Open Graph protocol。最常用的是 FB 。<br>裡面可以設定在 FB 分享時出現的 <code>圖片、標題、敘述</code><br>詳細可以到 偵錯工具看<br>子屬性分別有對應的功能</p>
+<blockquote>
+<p><a href="https://developers.facebook.com/tools/debug/?locale=zh_TW">分享偵錯工具 - Facebook for Developers</a></p>
+</blockquote>
+</li>
+<li><p><code>app_id</code> : 有些網站具有 app ，會挑出訊息告訴使用者可以下載來獲得更加體驗之類的。</p>
+</li>
+</ol>
+<h5 id="JSON-LD"><a href="#JSON-LD" class="headerlink" title="JSON-LD"></a><strong>JSON-LD</strong></h5><p>這個是給 google 引擎看的<br>是在搜尋後呈現的東西<br>一樣同個網站，Umm不太好找<br>主要有找到這個標籤<br><img data-src="https://chi01pap001files.storage.live.com/y4myYnkBblETyqypt00tVvRJJCVVClV3ueNCz4wZmj6vFMd_cwhAPAFQJLmtm8-TsF-CxnhijUI_n6HF80TxRos9HOO3yWE1n96TzqWQbECYmjCGlLlXiIFfSZJe8FERdC9C8NrXgp9NLSxp8tY1B_3oEaNLMJPQ_I7YEbuNWcJMF1Px7RyrLfK5IpGyQsN-I2E?width=660&height=146&cropmode=none"></p>
+<blockquote>
+<p>詳細參考這篇文章有提到各式種類呈現<br><a href="https://z3388638.medium.com/%E4%BD%BF%E7%94%A8-json-ld-%E8%99%95%E7%90%86-seo-%E4%B8%A6%E8%AE%93-google-%E9%87%9D%E5%B0%8D%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F%E7%B6%B2%E7%AB%99%E5%81%9A%E7%8D%A8%E7%89%B9%E7%9A%84%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E5%91%88%E7%8F%BE-9c74783c017a">使用 JSON-LD 處理 SEO，並讓 Google 針對不同形式網站做獨特的搜尋結果呈現 | by YY | Medium</a></p>
+</blockquote>
+<p>google 的開發者頁面就有提到這部分</p>
+<blockquote>
+<p><a href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=zh-tw">瞭解結構化資料的運作方式 | Google 搜尋中心  |  Google Developers</a></p>
+</blockquote>
+<p>關於 JSON-LD</p>
+<blockquote>
+<p><a href="https://json-ld.org/">JSON-LD - JSON for Linking Data</a></p>
+</blockquote>
+<h5 id="robot-txt"><a href="#robot-txt" class="headerlink" title="robot.txt"></a><strong>robot.txt</strong></h5><p>這個檔案是給爬蟲看的<br>裡面也明確規範告訴爬蟲<br>哪些不要看、哪些給你看</p>
+<blockquote>
+<p>參考資料<br><a href="https://zh.wikipedia.org/wiki/Robots.txt">robots.txt - 維基百科，自由的百科全書 (wikipedia.org)</a>  </p>
+</blockquote>
+<h5 id="sitemap-xml"><a href="#sitemap-xml" class="headerlink" title="sitemap.xml"></a><strong>sitemap.xml</strong></h5><p>也就是網站地圖<br>更快速幫助機器讀懂網站架構<br>通常也會規範在 robot.txt 裡</p>
+<blockquote>
+<p>參考資料<br><a href="https://ranking.works/%E6%8A%80%E8%A1%93SEO/sitemap">【Sitemap SEO教學篇】Sitemap是什麼？一次掌握Sitemap網站地圖製作與提交流程！ | Ranking SEO</a></p>
+</blockquote>
+<h3 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h3><p>主要是紀錄 html 的架構說明<br>SEO 的部分只是蜻蜓點水<br>以後有興趣再往深處寫  </p>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 筆記 ⟭ CSS 選擇器</title>
+    <url>/RosaBlog/Frontend/CSS/CSS-Selector/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>複習常見用法與了解選擇器權重的問題   </p>
+<span id="more"></span>  
+<h2 id="條件使用"><a href="#條件使用" class="headerlink" title="條件使用"></a>條件使用</h2><p>舉 class 的例子<br>選擇器還有 <code>Universal(*) 、pseudo-classes(偽類別)、id、tag(標籤)</code>等等的選擇器<br>除了 <strong>id</strong> 外基本都以此類推。</p>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 省略 Html 架構--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		<span class="token comment">&lt;!-- 範例 4 開始 --></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 1 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 2 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 3 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 4 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>item<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>來套上CSS   </p>
+<ol>
+<li>同時符合條件才套用</li>
+</ol>
+<ul>
+<li><code>.A.item</code> : 連續的，並無空格<blockquote>
+<p>是 A 又有 item 的才會被選，其他 A 不套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="2">
+<li>父層以下的所有叫 OO <strong>都</strong>  套用 </li>
+</ol>
+<ul>
+<li><code>.wrapper .A</code> : 中間空一格<blockquote>
+<p>這邊通通有 class <code>A</code> 的都會被套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li> 父層的下一層要叫 OO 才套用</li>
+</ol>
+<ul>
+<li><code>.wrapper&gt;.A</code> : 下一層的 A 都會套用    <blockquote>
+<p>box 裡面的 A 是屬於 下下層，因此不套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="4">
+<li> 同一層的旁邊叫 OO 的才套用  </li>
+</ol>
+<ul>
+<li><code>.B+.C</code> : 兩個都同一層  <blockquote>
+<p>只有 B-2 旁邊的 <code>C-3</code> 會套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="5">
+<li> 同一層的右邊只要叫 OO 的都套用</li>
+</ol>
+<ul>
+<li><code>.B~.C</code> : 兩個都同一層 <blockquote>
+<p> B-2 旁邊的 <code>C-3</code> 與 <code>C-4</code> 皆會套用  </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://codepen.io/shan473/pen/BaRMyrz">練習</a>  </p>
+</blockquote>
+<h4 id="快速複習"><a href="#快速複習" class="headerlink" title="快速複習"></a>快速複習</h4><table>
+<thead>
+<tr>
+<th align="center">符號</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&gt;</td>
+<td>下一層</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td>同一層的旁邊一個</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td>同一層的旁邊所有的</td>
+</tr>
+</tbody></table>
+<h2 id="常用的選擇器"><a href="#常用的選擇器" class="headerlink" title="常用的選擇器"></a>常用的選擇器</h2><ul>
+<li>pseudo-classes (偽類別)<br>  以 <code>:</code> 表示<ul>
+<li>關於動作的 (Dynamic)<br>  像是 <code>:hover</code>、<code>:active</code> … 等等    以往在開發時可能都要實際操作再看效果<br>  在 Dev tool 中可以手動直接控制<br>  瀏覽器顯示 style 有個 <code>:hov</code><br>  <img data-src="https://chi01pap001files.storage.live.com/y4mXniSc9YQknILFFtKip8TAQ82En47NCTww_UljZH2WPpwqvQD9hnkcwXYNUQu4BrLI_6xTabbid29wewJsyt3Kj522mgEJaTDHjoN0PzHXFUSvUP8ZTj3OBzQEs91uitM5P80iFV083PpDcTt6BzOsT4yaDtMYgcVgBNAKvX0bnj3LL0-BoayHXrZxslbKj8r?width=660&height=236&cropmode=none">  </li>
+<li>選擇器<br>  <code>:nth-child(n)</code> : 選擇子層的第 n 個<br>  <code>:first-child</code>  :  指第一個<br>  <code>:first-child</code>  :  指最後一個    快速一點  <ol>
+<li><code>:nth-child(odd)</code> : 只選奇數位</li>
+<li><code>:nth-child(even)</code> : 只選偶數位</li>
+<li><code>:nth-child(an+b)</code> : 等差選  </li>
+</ol>
+<blockquote>
+<p>nth-child 是從後面解讀<br>例 : .wrapper .A:nth-child(3)<br>XX層的第 n 個元素是 OO 再動作</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>參考資料<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/Pseudo-classes">虛擬類別 - CSS | MDN (mozilla.org)</a></p>
+</blockquote>
+<ul>
+<li>pseudo-elements (偽元素)<br>  以 <code>::</code> 表示<br>  最常用的是 <code>::before</code> 跟 <code>::after</code><br>  使用上可以用 <strong>共同想加入的東西</strong><br>  例如 金錢符號    <iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/OJmdPvN?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+See the Pen <a href="https://codepen.io/shan473/pen/OJmdPvN">
+</a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
+on <a href="https://codepen.io">CodePen</a>.
+</iframe>  
+  
+  這樣只要改 ::before 的內容就可以統一修改      </li>
+</ul>
+<blockquote>
+<p>content 一定要有，沒有內容也可以空的</p>
+</blockquote>
+<p>*<code>content : attr( class or tag )</code><br>可以抓到 html 的資料 </p>
+<blockquote>
+<p>參考資料<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/content">content - CSS（层叠样式表） | MDN (mozilla.org)</a></p>
+</blockquote>
+<h2 id="選擇器權重"><a href="#選擇器權重" class="headerlink" title="選擇器權重"></a>選擇器權重</h2><p>常常會因為套用很多 CSS 而眼花撩亂<br>誰被套用了 ? 誰套了又沒效果了 ?<br>透過權重就能清楚知道</p>
+<ul>
+<li>把握基本原則<blockquote>
+<p><strong>id &gt; class &gt; tag</strong><br>越詳細越先套用<br>重複寫到一樣的，以後面的為重</p>
+</blockquote>
+</li>
+</ul>
+<p>網路上會以 <code>100 : 10 : 1</code>  來說明比重<br>但我更喜歡 Huli 大講的 <code>0,0,0</code> 越前面的越重<br>誰佔的比較前面就吃那個樣式   </p>
+<p>假如都使用 class 那第二個就是看 <code>數量</code><br>數字並不會十進位  </p>
+<p>有神人測試過 256 個 class 可以超過 id<br>不過應該不會有人會寫到這麼多 class …<br>應該是測試極限用而已  </p>
+<blockquote>
+<p>參考資料<br><a href="https://juejin.cn/post/6844903608199151630">你对CSS权重真的足够了解吗？ (juejin.cn)</a></p>
+</blockquote>
+<h3 id="進階原則"><a href="#進階原則" class="headerlink" title="進階原則"></a>進階原則</h3><p>也就是 <code>!important</code> 與 <code>inline style</code> </p>
+<ol>
+<li>inline style : 寫在 html 同一行元素裡的 style   <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>!important<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">.class&#123;
+	background:red !important;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+綜合排一下<blockquote>
+<p>!important &gt; inline style &gt; id &gt; class &gt; tag  </p>
+</blockquote>
+</li>
+</ol>
+<p>看成 <code>0 , 0 , 0 , 0 , 0</code><br>越後面樣式越容易被覆蓋</p>
+<p>因此套上 <code>!important</code> 是奧義<br>並不會很常使用<br>不然其他寫的都沒意義了   </p>
+<p>最常使用的是 class 而非 id</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以前使用 CSS 重點在其他設定<br>老是一直層層疊上去<br>透過整理可以更清楚知道選擇器的權重<br>與選擇器正確的使用  </p>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -2378,263 +2203,184 @@ scoop <span class="token function">install</span> twitch-cli<span aria-hidden="t
       </tags>
   </entry>
   <entry>
-    <title>⟬ 紀錄 ⟭ Foresea畢業專題(III)─《Finalfinal.docx》</title>
-    <url>/RosaBlog/bookreport/Foresea-bookreport-III/</url>
-    <content><![CDATA[<h2 id="閱讀前注意"><a href="#閱讀前注意" class="headerlink" title="閱讀前注意"></a>閱讀前注意</h2><p>文長慎入，純心得，就當作看一個很長的故事吧。<br>我的文筆也沒有很好，若看不下去請自行左上角離開<br>其中個人主觀意識較重，若不喜勿入<br>如果你只想知道校外展我遇到了什麼事，可以到<strong>開花時刻</strong>這個快速連結<br>6/6 是表定的畢業典禮日期，疫情打亂了所有秩序😵，一年前誰能想到如此情況呢?<br>在家寫寫最後一篇廢文，這篇是大學的最後一篇。  </p>
-<span id="more"></span>  
-
-<h2 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h2><p>將分享我從 <strong>找組員 ⇒ 專題期間 ⇒ 專題結束後 ⇒ 校外展覽</strong> 的心路歷程。  </p>
-<h3 id="播下美好的理想種子"><a href="#播下美好的理想種子" class="headerlink" title="播下美好的理想種子"></a>播下美好的理想種子</h3><p>團隊合作理想上是件美好的事，實際上是非常要命的。<br>除了有共同的目標，後續的團隊經營更是關鍵，相信大家都有體會過。<br>畢業專題，就是個魔王大挑戰。一年下來，情誼不是更加牢固，就是散掉👿   </p>
+    <title>⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</title>
+    <url>/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宣告提升 (Hoisting) 在 JavaScript 中不得不知<br>究竟 JavaScript 搞了什麼鬼<br>導致你認為的值不是那個值捏 !<br>其實這跟 JavaScript 如何運作也有關係<br>不過先從最簡單的概念開始吧 ! :O</p>
+<h2 id="何謂宣告提升？"><a href="#何謂宣告提升？" class="headerlink" title="何謂宣告提升？"></a>何謂宣告提升？</h2><p>其實我覺得很抽象<br>如果單看程式碼會不知道哪裡被提升<br>以及怎麼被提升？  </p>
+<p>所謂的提升<br>其實是 JavaScript 底層運作的機制<br>必須了解執行環境 (Execution Content) 跟 作用域 (Scope)<br>再根據作用域鏈 (Scope Chain) 來看的<br>不過關於這些東西慢慢地來說<br>可以先透過幾個例子來了解宣告提升    </p>
+<h3 id="變數的宣告提升"><a href="#變數的宣告提升" class="headerlink" title="變數的宣告提升"></a>變數的宣告提升</h3><p>這邊暫不討論 ES6 中的 <code>let</code> 與 <code>const</code><br>以 ES5 的宣告變數 <code>var</code> 為例</p>
+<p>基礎題</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看成 : </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a 
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+a <span class="token operator">=</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>JavaScript 幫我們在最上層補上了一個定義變數 a<br>又因為 JavaScript 是一行行往下讀<br>所以當執行到 console.log(a)<br>a 是定義了但沒有值<br>所以是 <code>undefined</code>  </p>
+<p>那有宣告跟沒宣告的差別？  </p>
+<p>這樣什麼都沒有就會出錯</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> a is not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>所以通常變數的宣告會在最上面<br>除了版面不會太凌亂以外<br>也是避免說忘記宣告<br>尤其是在 function 裡頭  </p>
+<h3 id="常見問題"><a href="#常見問題" class="headerlink" title="常見問題"></a>常見問題</h3><p>function 裡的變數如果未宣告會如何？<br>可以看下面的例子  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	a <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>起初我以為 a 會是 <code>is not defined</code><br>或是 <code>undefined</code><br>但是 test 執行實先把變數 a 給提升<br>並在函式內把 a 賦值 30<br>也就是這個 a 提升已經到 global 了   </p>
 <blockquote>
-<p>還有 <strong>專案管理</strong> 請好好學</p>
+<p>在 function 裡都沒有宣告<br>但有賦值，就會在 global 的地方宣告該變數<br>並且 <code>根據 Scope Chain</code> 往上找<br>不過一般來說不會建議沒有宣告就賦值。</p>
 </blockquote>
-<h4 id="落地生根的地方"><a href="#落地生根的地方" class="headerlink" title="落地生根的地方"></a>落地生根的地方</h4><p>說到分組，我想大家<code>**&quot;預設&quot;**</code>應該是自己的好朋友，這是最正常不過的答案了<br>不管能力、共識默契，都無須重新培養，是最佳的選擇。<br>而我，眾所皆知是個邊緣人🤪，預設是 null (空值)，只有兩條路 被撿 跟 自己找。  </p>
-<h4 id="栽種的實力"><a href="#栽種的實力" class="headerlink" title="栽種的實力"></a>栽種的實力</h4><p>我認知自己的能力是普通且算平均的，在遊戲程式、網頁、動畫這些方面還堪用<br>加上當時想法只有 <strong>我想做一個互動作品</strong>。<br>起初我有向一些人談論過我的想法，但從未正式談論”成組”這件事。<br>因為一開始我在消極被動等待，等待有人撿我🥺<br>但最終…沒人撿😵，所以我自己成組去尋找人了。  </p>
-<blockquote>
-<p><strong>題外</strong> | 有時候我會好奇，大家會怎麼選擇…  </p>
-</blockquote>
+<h3 id="function-的宣告提升"><a href="#function-的宣告提升" class="headerlink" title="function 的宣告提升"></a><code>function</code> 的宣告提升</h3><p>除了變數的提升<br>其實還有 function 也會提升  </p>
+<p>函式陳述式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>		
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一般來說要 <strong>使用之前要先宣告</strong><br>但 function 可以先使用再宣告<br>因為會宣告提升    </p>
+<p>可以看成把 <code>function</code> 放到呼叫之前<br>其他程式語言是沒這樣的<br>在 JavaScript 想呼叫隨時都可以呼叫 👌<br>我是覺得很奇妙<br>但一方面覺得這樣的設計在版面上可以更易讀   </p>
+<p>函式表達式  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>透過表達式宣告一個變數將 function 存起來<br>這邊的 function 是一個沒有名字的匿名函式<br>一般來說會這樣執行  </p>
+<p>如果是宣告變數把函式存起來<br>提早先呼叫函式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> test is not a <span class="token keyword">function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>咦！不是 function 隨 call 隨用嗎？<br>如果是函式表達式可以把整個分為兩塊  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> test<span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也就是宣告 test 再賦值<br>由此可知宣告提升並不會連賦值都一起提升  </p>
+<p>再來看看有參數的函式呢？</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我知道！是 <code>undefined</code><br>因為 a 會做宣告提升<br>可以看成這樣 </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a<span class="token punctuation">;</span> <span class="token comment">//undefined</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>果結不對，其實是 <code>1</code><br>這個 1 並不是來自函式的 <code>a=1</code><br>而是參數的 <code>1</code><br>由此可以知道函式裡有參數的話<br>其實參數也會做宣告提升    </p>
+<p>至於提升的順序為何？<br>如何提升？<br>後面會再提到 :D</p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
+<li><code>var</code> 會做宣告提升  </li>
+<li><code>函式陳述式</code> 會做宣告提升  </li>
+<li><code>函式表達式</code> 是屬於賦值 (等號右邊)，不會做宣告提升  </li>
+</ol>
+<p>這篇了解哪些會做宣告提升<br>並且知道賦值的值並不會一起提升  </p>
+<p>下一篇要更了解比較的順序以及宣告提升的好處？    </p>
+<hr>
+<p>參考:</p>
 <ul>
-<li>🙉 現是蔡逼八，左看有潛力<del>但戰力還不穩</del>  </li>
-<li>🕵️‍♂️現有點實力與戰力<del>但是會吃老本</del><br>考量的中間因素有很多，例如 專案時程、個人特質、團隊性質等等，並沒有一個正確答案。  </li>
+<li><a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting">我知道你懂 hoisting，可是你了解到多深？</a></li>
 </ul>
-<h4 id="鋪上土壤"><a href="#鋪上土壤" class="headerlink" title="鋪上土壤"></a><strong>鋪上土壤</strong></h4><p>慶幸的是，在升大三的暑假結束時，我順利找到3位組員。<br>當時不少人對我找的人有點疑惑，連組員們各自也不例外，都覺得很奇妙。  </p>
-<blockquote>
-<p>為什麼會找她呢 ? 而不是…  </p>
-</blockquote>
-<p>這三位確實是沒什麼合作過，4人也完全沒有在同一組過<br>如果問我當時在想什麼，可能是被附身了吧。  </p>
-<ul>
-<li>沒啦 ! 我當然是有跟3位好好說清楚找他們的原因。<br>我的專案所需的職位，分別是 <ul>
-<li>遊戲程式</li>
-<li>網頁</li>
-<li>美術</li>
-<li>動畫  </li>
-</ul>
-</li>
-</ul>
-<p>企劃則是所有人共寫，找人的標準來自上面的<strong>題外話</strong></p>
-<ul>
-<li>潛力者*2 + 戰力者*2  </li>
-</ul>
-<p>當然我是潛力者🥴，程式菜逼八。<br>綜合起來，需要在各方面是有互補的。<br>目標一致，但各自思考的面相是非常獨立的<br>不會太常出現<code>毫無理由</code>或<code>附和通過意見</code>的問題。  </p>
-<p>實際上到成組這期間，我等待回覆是非常煎熬。<br>當時最大的困難，是讓<strong>兩兩好友</strong>拆在不同組這個問題。  </p>
-<p>無時不刻，讓我覺得自己像卡通裡的個反派🕵️<br>如我上面所說的，普遍的<strong>預設值</strong>是好朋友。我並不是刻意將其拆散，單純是找符合我需求的<br>在邀請第一個人的時候，我意識到這個問題，並去詢問多個局外人，有的人說 :  </p>
-<blockquote>
-<p>「很不道德，你應該找兩個人討論，找一個這麼做是在破壞人家的友誼」<br>「為什麼兩個都不找進來 ? 問題不就解決了 ?」  </p>
-</blockquote>
-<p>也有人說 : </p>
-<blockquote>
-<p>「即使是朋友，目標也可能各自不同，選擇是個人自由，沒什麼問題」  </p>
-</blockquote>
-<p>中間，我不斷地告訴其中兩位，希望各自可以跟好朋友談談，要拒絕我也沒關係。<br>這個問題，在理想跟愧疚之間，糾結我整個暑假🥴。  </p>
-<h4 id="種子驚喜包"><a href="#種子驚喜包" class="headerlink" title="種子驚喜包"></a>種子驚喜包</h4><p>壞事是這樣的全新團隊需要磨合的點更多，只能祈禱這樣的組合一路順利。<br>好事是這裡將 從0共同成長，0偏頗、0規則，可塑性更高(我不確定是不是這樣講)<br>傳統來說就是新活力新氣象🥴<br>我想這3位都應該有預設心理:  </p>
-<blockquote>
-<p>投資一定有風險，<strong>團隊組成有凱也有雷</strong>，組成前應詳閱公開說明書。  </p>
-</blockquote>
-<p>很抱歉，我沒有給3位詳閱說明書的機會，不過非常謝謝她們答應當時的我<br>票選出主題、決定好指導老師，大家抱著美好的理想起步了<br>不過卻也是另一個噩夢的正式開始…  </p>
-<blockquote>
-<h5 id="分組題外話-綜觀大學生涯"><a href="#分組題外話-綜觀大學生涯" class="headerlink" title="分組題外話 | 綜觀大學生涯"></a><strong>分組題外話 | 綜觀大學生涯</strong></h5></blockquote>
-<p>坦白講，每次組隊就像是在玩踩地雷，但我踩得蠻歡樂的<br>不過記住同時<strong>自己對別人也是顆地雷</strong>。<br>每一堂的團體作業，我的組員組成都不會一樣。<br><del>如果不喜歡驚喜，建議不要這樣。</del><br>大學團體作業很多，可以跟朋友、跟能力強的、跟混分的等等，但先取決於自己的角色定位<br>四年裡，我加入過許多不同的團體組合裡，很好玩也很刺激<br>不談”合作愉不愉快”，跟平時不同群的人交流，讓我知道更多不同面向需要思考。<br>如果還有團體作業，我蠻建議跳脫平時的組，不過後果請自行負責。  </p>
-<h3 id="發育不良的樹"><a href="#發育不良的樹" class="headerlink" title="發育不良的樹"></a>發育不良的樹</h3><blockquote>
-<p><strong>理想很美滿，現實很骨感。</strong></p>
-</blockquote>
-<p>樹苗的成長，沒人保證能長得又大又直<br>專案的時程，沒人有十足把握在準確的時間完成😭</p>
-<h4 id="陸上颱風警報"><a href="#陸上颱風警報" class="headerlink" title="陸上颱風警報"></a>陸上颱風警報</h4><p>除了專題外，同時還有畢業展覽的事務正在進行。<br>我與組內的另一位組員分別擔任總、副召，要讓工作跟專題達平衡非常困難 😵<br>展覽籌備前期有很長時間都在討論與規劃，更棘手的是事務涉及多個組。<br>溝通與合作在磨合期是相當花費時間的。<br>若有重大事件，幾乎是要將我的專題停擺，先將另一邊止血。<br>這樣的問題，發生不少次，但也沒辦法，該解決就需要解決。<br>但每次專題一停擺，我很想跟專題組員切腹謝罪去了  </p>
-<h4 id="瘦弱的樹苗"><a href="#瘦弱的樹苗" class="headerlink" title="瘦弱的樹苗"></a><strong>瘦弱的樹苗</strong></h4><p>在升大四的暑假，我就已經陸續在寫遊戲中的程式<br>組內的大家也如火如荼的進行各自的進度。<br>偶爾會與指導教授定期的專案進度討論，但每每到這個環節，我很緊張也很尷尬。<br>因為我總是 是那個 <code>進度沒有達標</code> ，而且會說「<strong>相信我會完成</strong>」的人。<br>(什麼熱血笨蛋啦!)<br>說這句話的同時，我想讓大家安心，另外也是在為自己打氣，雖然聽起來很唬爛。  </p>
-<blockquote>
-<p>結果是什麼呢?  </p>
-</blockquote>
-<p>當然是我成了投資中最大的風險，成了團隊之雷，更成了一個打臉自己的人😰  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKsiKYyPeJlzwV7CX1cucK-W1yrWxB7UMDdHDDRZ1YUtZ4HVTwKmHqplY8i1LM4m-9jWGwMSJO8A-XZvQowN4_RitKSKr4D6sUklWxjrpStu0ymf0kn31zDMszPG5XJIQUjkx9hwR6-tJdUGqZmjZAZH-af_d3QALcqKdlENtWz44OYMugCHgCwDamgAVDaGz?width=256&height=256&cropmode=none"> </p>
-</center>   
-
-<p>當看到其他組員拿出一堆的進度，而我有時候因為程式問題卡住很長一段時間<br>大家不斷地在成長，只有我還在原地。我心裡開始迷惘，不知所措。<br>因為程式會寫就是會寫，按下執行就知道了，跑不出來就是寫的人的問題。<br>無疑地，當時超級菜雞般的程式能力，是完全無法支撐起整個專案。<br>即使我學習再學習，練習再練習，常常還是跑出令人絕望的 Error 與 BUG。 </p>
-<center>  
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mQV5G4B0IOVO5ESIMw1byLnoLNxteeWCaJpbfiH1hHi7iDWytdwQYwbyABQ2PXAWiEVgqJ80W68t8faBQDfnovvsaEMli2KKblFrMKmXVdC4rOykE9L3wG-TbgtKga_ZUweHjd7g8DpnqRfHcjXX83f4shg4axqWnYSc4B-2vw2cz82eoKUqmWGC0MisIoka8?width=256&height=174&cropmode=none"> </p>
-</center> 
-大家非常包容，知道我身兼畢展總召與擔任程式的部分比較繁重，都說沒關係  
-老實說，到最後我已經不知道大家是真的相信我，還是被我逼到不得不相信我了。  
-不論如何，專案時程不能變成無底洞，所以我告訴自己，一刻都不能怠惰。  
-至此，我開始跟日出報到:D...。  
-
-<h4 id="不間斷的夏秋季颱風"><a href="#不間斷的夏秋季颱風" class="headerlink" title="不間斷的夏秋季颱風"></a><strong>不間斷的夏秋季颱風</strong></h4><p>之前聽做專題的學長姊都說好幾天會做到日出。<br>我思考了一下🥴，Umm…年輕人，我還行啦👍<br>第一次做到看日出，我心想 :<br>「真感動，我認真到日出，程式修好就順了吧，日出再見了」  </p>
-<blockquote>
-<p><strong>沒想到，這一再見，真的每天再見面。</strong></p>
-</blockquote>
-<p>製作專題的當年9至12月，我每天都在看日出，少說也有3.5個月<br>日夜顛倒加上畢展總總事務，心理與生理狀況都開始亮起了紅燈。<br>我的焦慮值<strong>MAX</strong> ! 躁鬱值<strong>MAX</strong> ! 體重<strong>MAX</strong> !<br>生理期直接Bang不見🎉 !<br>經歷幾次的狂風暴雨，盆栽倒了，而我也被吹倒了🥀</p>
-<h4 id="長歪的樹"><a href="#長歪的樹" class="headerlink" title="長歪的樹"></a><strong>長歪的樹</strong></h4><blockquote>
-<p><strong>早上八點，晚安</strong>🌑<strong>；早上十一點，早安</strong>⛅</p>
-</blockquote>
-<p>不僅是專題的程式的問題，畢展的事同時也讓人心煩。<br>日復一日的熬夜，我開始對專題變得有點消極。<br>會對組員說 :<br>「<strong>我們可以提出概念性的東西，做出一兩關就好，不一定要完全做完…blabla</strong>」<br>到了專案進度討論，大家會告訴我，先去完成其他的關卡比較重要，小東西之後再細修<br>很不巧，A關卡與B關卡中間機制需要連動。當我完成A，再去完成B，換成A有問題了  </p>
-<p>◢▆▅▄▃ 崩╰(〒皿〒)╯潰 ▃▄▅▆◣  </p>
-<p>寫不出來，崩潰挾帶氣憤，我就會說「不然你來寫啊 !」<br><del>阿…容我回到過去揍自己一拳</del><br>氣憤中更多的是對自己做不到目標而感到失望。<br>最不幸的大概是家裡的娃娃們，全變成我的出氣筒，橫屍遍野。<br>早期對專題懷抱的熱情，已經被消磨成灰了。  </p>
-<h3 id="滿地枯葉"><a href="#滿地枯葉" class="headerlink" title="滿地枯葉"></a>滿地枯葉</h3><p>ˍ(:з」∠) 我…想…躺著休息</p>
-<h4 id="用力吸收水分的根"><a href="#用力吸收水分的根" class="headerlink" title="用力吸收水分的根"></a><strong>用力吸收水分的根</strong></h4><p>專題總共有4次報告，我一共上台3場。<br>最後2場，都是前一天熬滿夜把程式硬是弄出來，勉強弄好3-4關(但我們一共有6個關卡哦🥴)<br>組員們在報告前10分鐘，都還在幫忙我弄報告的大大小小事，非常感激不離不棄😭<br>因為遊戲進度是掌握在我手上，其他人是不太好說明遊戲新產出的部分<br>所以我報告是最適合的，我知道我才能把這邊的進度好好說明。<br>我想最緊張的不是我，而是指導教授跟組員們，每次都是在現場打開驚喜包🎁  </p>
-<center> 
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mMZgrK4sHXixsgQLTeCBVabRw0CPchkWizOj7WWxq8hivFiGPteNC2fxfW-aEwaNQRsJpNZ_3jTnNrvpZNDEpPrU4xQRYmNtUID4Y33HzwB_ERuYEA_RV7f9Z7xmA4wN7cCQQykhpTXWMXU-ad9tHCJzHY4Zv0rvX0mY3FbsjTkpwAsEJGtRSUs0E_oVPTjJv?width=256&height=145&cropmode=none">  </p>
-</center> 
-
-<ul>
-<li>大家心臟有沒有越變越大顆呢?  </li>
-</ul>
-<p>報告的結果，想當然爾，非常之差💩。<br>有一場，回想起來我都覺得很尷尬，因為沒有獲得什麼新回饋。<br>都是之前提過的，「美術很棒」、「網頁很棒」。<br>當下我在想我的部份是 <strong><code>無藥可救</code></strong> 了? 還是 <strong><code>出乎意料</code></strong> 呢?<br>不管怎樣，我知道我搞砸了。<br>無聲的回饋，間接說明我努力的還不夠。<br>最後一場更是慘不忍睹😢，因為遊戲沒有做完，僅有4關的試玩的影片片段。<br>組內成品還好還有網頁跟動畫。  </p>
-<center>   
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m0Uxbx4G-Qpga3ZmbeaieLwy7-KWgS1l-MkPwVvICU2jdhRXq8vuWpHkHRPg29sHCKulQ0Vcd8Pv4aI1wc9ryicXDknqIKfMGUa2BdRJIW5lS-PURXmhp0KTGLAryvaLWU-BWd_sdZeBX60cGbjnKBpnt7tUz65KkyaA00OM8n5DTQNC6bM-lDhTIsxucS7FQ?width=256&height=256&cropmode=none">  </p>
-</center>   
-
-<ul>
-<li>當時被問到我是回答 :<br>黑丟，還沒做完 🙈 ，瞬間冷場。  </li>
-</ul>
-<h4 id="溺死的根"><a href="#溺死的根" class="headerlink" title="溺死的根"></a><strong>溺死的根</strong></h4><blockquote>
-<p><strong>努力≠有結果</strong></p>
-</blockquote>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKcfCrbkRMCaopIkNsDbQIgg1Y4-ezX4RFUSL8PRkmzz18gtPLsYpxpI5RRizytEQIuJFHEkGxfY2q_lInJdVmNvpJtlNPZW945yANIIg3PSRhqodcgqONnhsdSwrBTFvaEh2eFhXZz3VzPrjWjiDOljlKrhdOEQQ8dg5untwmPzQLLsqFGaNVfLAlcvNmnSA?width=660&height=440&cropmode=none"></p>
-<ul>
-<li>學習經驗曲線 </li>
-</ul>
-<p>大家都懂這個曲線，學習最難的，就是一開始陡~~~到攀不過的顛坡。<br>投入大量的時間與努力，獲得的成果卻是不如預期。<br>從我寫程式開始，毫無意外也遇到這個問題。<br>越寫不是越有成就，而是失望。  </p>
-<p>每天熬夜讀文件、看教學、反覆修修改改，執行後卻還是出BUG。<br>順利的話，1天可以寫出一關。遇到問題時，都可能要修到1個禮拜，甚至更久。<br>隨著時間，坐在電腦前已經不知道自己在做什麼了，會覺得這有什麼意義呢?<br>期間我推掉很多的社交活動，窩在家學習、學習、還是學習。  </p>
-<p>以前開電腦，很開心。現在開電腦，我只會想砸壞電腦。<br>一開機，我會問自己還要繼續嗎 ? 隨時放手，就一路爛也沒人能奈何了我💩  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mpRtrZKORO9rXvUtd4tm5-jhN5j27y0fiZAbcWEnbwsTKbGTNh2x16j3cKHajzxBTbvgtdZJlmClfnS0s8EjZJFXAebjHx0QnIxB48IlSgtecYllYxC9e0Kmi3obDdeEFRcMi2YHJXg6QMq5SaODO5i2VDIcigQDG-zASVtanwEvgEfgrtvlR5LHRETy5wo9L?width=256&height=256&cropmode=none">   </p>
-</center>
-
-<p>大家也爛 d(`･∀･)b  </p>
-<blockquote>
-<p><strong>要，當然要繼續。責任心告訴我不能就這樣。</strong>  </p>
-</blockquote>
-<p>堅持這樣的心情，一路到校內展，讓我做出第一版的  Foresea<br>不過是歪七扭八的Foresea<br>如果你在校內展玩到，我跟你說聲抱歉，你玩到一個非常失敗的遊戲。<br>當時的Foresea是一個跑不順，機制上一堆bug，架構鬆散的作品。  </p>
-<ul>
-<li><p><strong>關於Foresea ver1.0</strong><br>  美術、動畫、網站這些產出可以說相當的好。  </p>
-<p>  我會覺得校內展Foresea遊戲失敗的原因，<br>  在於我的能力沒辦法完好地展現企劃中的玩法與流程<br>  在11月的時候，我就做不下去了  </p>
-<p>  因為心裡始終無法認同自己做出來的作品<br>  更覺得自己浪費了這些美術圖，組員辛苦畫出來，而我沒有能力去展現出來。      </p>
-</li>
-</ul>
-<h4 id="軟爛的泥土"><a href="#軟爛的泥土" class="headerlink" title="軟爛的泥土"></a><strong>軟爛的泥土</strong></h4><p>因某些因素，當時有討論到<strong>要不要將專題報告延長兩周</strong>左右<br>但我知道再怎麼延，我還是無法完好地呈現出來<br>加上我的精神上非常抗拒，我想把報告結束、展覽結束，結束長久下來的熬夜。<br>當最後一場報告結束，  </p>
-<blockquote>
-<p><strong>「結束了，成品怎樣也沒關係吧?」<br>「即使有BUG，或瑕疵，再修也不會有什麼改變」</strong>  </p>
-</blockquote>
-<p>這些想法不斷湧現<br>但結果是我又一路從報告結束修到校內展，至少讓展覽可以順利展出幾關的原型。<br>校內展覽結束，本是專題的終點。<br>但對我來說，卻只是中繼點。    </p>
-<h3 id="新芽"><a href="#新芽" class="headerlink" title="新芽"></a>新芽</h3><p>一個新開始，不難；中斷的重新開始，更難。  </p>
-<h4 id="殘枝"><a href="#殘枝" class="headerlink" title="殘枝"></a><strong>殘枝</strong></h4><p>五月初是校外展，四月中旬是競賽報名截止，代表我必須在這之前將作品完成。<br>另外，我還有展覽總召的身分，越快到展日，這段期間是也是不能閒的🤯。<br>這幾個月，我每天都會打開電腦，開啟Unity，接著跑去躺在床上，看著娃娃，對自己說 :    </p>
-<blockquote>
-<p><strong>你這廢物，去工作，快去電腦前坐好</strong>  </p>
-</blockquote>
-<p>這是我每天的例行公事，我不是對自己喊加油、喊要堅持下去<br>我也不是斗M，沒有喜歡被罵的癖好。<br>一番精神喊話後，我會把Unity關掉，開啟Youtube開始看迷因，讓自己開心點。<br>我知道自己腦袋亂糟糟的，沒有動力做下去，也不知道從哪裡下手。  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4menHF2FwISc3qcsoKFfru0O3K4WnXG2sKH7YQf3DlgWHz7e7vX9SKqmkEnHWGlCtag_KgxWQlTRtH2XnB1jvSzoS4Ok0sdQW0MRaT45C72HUxmz8glJtmb0gRNeJaaRAMDnZli5MFocePYBkPNCmz6ZmaF6TB4i3h7oceMwtn5LqHfmaSOX9An81-M3Kwf80y?width=371&height=660&cropmode=none">  </p>
-</center>
-
-<center>Indeed. ┐(´д`)┌ 阿還真的就打出來了。</center>
-  
-
-<p>3月，這個模式還是繼續，只是對自己說的話更狠了。<br>期間我不只看大量的迷因，之前訂閱很多程式教學跟遊戲開發者的頻道，我也看了不少<br>偶爾看完，靈感一來就會重新釐清思緒，將遊戲的內容文件重新整理、修改<br>卡住了，又返回到床上，說一樣的話，再滾回到電腦前執行例行公事  </p>
-<h4 id="養分"><a href="#養分" class="headerlink" title="養分"></a><strong>養分</strong></h4><p>吸收新的知識，我的程式能力有逐漸成長，實際上到3月我還沒正式修改到遊戲的程式<br>大多是開新檔案練習。  </p>
-<p>準備的差不多後，我下定決心把遊戲中的程式碼全都砍了<br>就是把遊戲互動的部份全都歸零。這時候離競賽截止點還有一個月半。<br>我知道風險很高，況且我沒有多大的把握能做完，但我知道我必須做。  </p>
-<p>如果你還記得上一篇分享提到的<strong>程式耦合問題</strong>，我正是要解決這個問題<br>否則這個作品還是會中途運作崩潰、遊玩不順利，總總都會影響遊玩體驗。<br>更別說展覽3天，每天8小時。除了基本求能運作外，更要兼顧穩定。</p>
-<h4 id="重新發芽"><a href="#重新發芽" class="headerlink" title="重新發芽"></a><strong>重新發芽</strong></h4><p>一天天的特殊精神喊話，老實說也不是沒用處。<br>越喊會對自己的能力很氣憤，氣憤到很不甘心，不想只有這樣結束😠。<br>帶著這份不甘心，我每天瘋狂打著鍵盤，從早打到晚  </p>
-<p>因為住在家裡，要照顧好家裡的大小事，所以天天見日出的模式是不行的<br>4月初，我把原本的進度補回。(這麼快速的原因，回想一下學習經驗曲線)<br>因為要上繳競賽成品，一邊請組員幫我試玩，當然還是少不了很多的Bug。<br>平時學習的反饋在我製作上的錯誤，是越來越少，程式運作也變更流暢  </p>
-<h4 id="豪雨後的蟲災"><a href="#豪雨後的蟲災" class="headerlink" title="豪雨後的蟲災"></a><strong>豪雨後的蟲災</strong></h4><p>離繳件剩兩個禮拜，這時候，不幸的事情發生了。<br>在家準備晚飯，接到一通家人出車禍的電話，雖然沒有大礙，我依然失落了好幾天。<br>低落的心情，也影響我在製作上的速度，但我的手還是沒有停止。  </p>
-<p>直到繳件當日傍晚，剩餘一個關卡的BUG還沒修完，其餘的都能正常運作，<del>正當我以為。</del><br>我稍微放心地收拾書包，從圖書館騎車回家，趕緊洗完澡完成剩下的部分。<br>除了主程式外，還有企畫書，我事先有準備好文件，剩下一些急忙委託組員協力完成<br>晚上十點組員試玩到有出現嚴重的BUG，我不斷地測試，但始終想不到問題。    </p>
-<blockquote>
-<p>可怕的BUG，在第一關出現了。  </p>
-</blockquote>
-<p>總不能剛開始玩就出現BUG吧 !!!<br>我拋棄維修另一個關卡，瘋狂般的不斷測試與修改第一關的BUG<br>幾經測試都行不通，我開始崩潰了，發給組員 : <strong>我好想放棄</strong> 的訊息  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4myqNuZwO1Lkh-WrEskpxQv17jgiR4x_fseebiLuEFCoZXz_2mkLLVm0F24iRaZiIyQyFzcyX6TB9MeN9Bv2Zd-9E8Y5Vi6wd0ehxgB0ZbLnj4RRaVBsQthX_pimMOTACjvdd9IaxvMYdUuwFASPwAA1LWwJ4BpCFkt3mopbP3DDhd7d8TF9X-ORT7kTny-JyJ?width=256&height=144&cropmode=none"><br>WTF  </p>
-</center>
-
-<p>後來冷靜了一會，終於把該死的BUG解決了。<br>其實Foresea這時依然不是完整的，我還是將它打包繳件去了<br>其中放視企畫書有一項可說明<code>未完成的部分</code>我詳實填上。<br>組內的其他作品都已經登陸完成，只剩遊戲的部分。  </p>
-<h4 id="雨後陽光"><a href="#雨後陽光" class="headerlink" title="雨後陽光"></a><strong>雨後陽光</strong></h4><p>最後一天，晚上十一點五十五分，最後一步了，我將企畫書上傳，始終無法成功<br>原因是官方的伺服器被塞爆了，最後一刻，全台各地的同學也正拼命地上傳。 </p>
-<p>五十八分，還是<strong>失敗</strong>。<br>五十九分，依然是<strong>失敗</strong>。<br>整點十二點，<strong>失敗</strong>。  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKkIyZW8L8QaxhJSAjyR3MCYMR6YOK9vVc7n-ynHVNkNmhG3QHv01S3hEWWvux-r1RmoOXRvuFprp0HNqeo5HH9i-LJmuPSlzH-ikDLolCXkWF4ExQ0a6dBdi4zqY28mkZeZWm5EwAsY4JUQk_7YsAeB4shfxGQ5cp9ST-Esl-w46aoICsoY8hkCDDuuvgxZe?width=600&height=338&cropmode=none"></p>
-<center>絕望ing</center>  
-
-<p>我跟組員告訴這壞消息，遊戲組的項目是沒有參加了，我非常抱歉。<br>同時我也不放棄的將瀏覽器切到上一頁<br>反覆重試繼續上傳<br>直到十二點零五分  </p>
-<blockquote>
-<p>???? ，我發現上傳%數還會動  </p>
-</blockquote>
-<p>沒多久，上傳成功。<br>我急忙按送出，看見欄位狀態是完成的。  </p>
-<p>以為我累壞眼花了，我又反反覆覆刷新頁面20次，看到狀態依舊是完成。<br>我告訴組員，好像…報成功了。<br>關上電腦，我安心的吃起晚餐。<br>這一餐即使冷掉，還是很美味😌   </p>
-<h3 id="往更高處"><a href="#往更高處" class="headerlink" title="往更高處"></a><strong>往更高處</strong></h3><p>樹枝不會乖乖挺直往上生長，<br>可能躺得長、坐者長、趴著長，還是<del>八仙…</del><br>總之，一切就是出乎意料的發生。  </p>
-<h4 id="特級肥料"><a href="#特級肥料" class="headerlink" title="特級肥料"></a><strong>特級肥料</strong></h4><p>很匆忙又不完整的狀態下，我知道得獎或入圍機率很低<br>但我還是沒有停止修改Foresea。<br>繳件讓我獲得短暫的休息，隔天起床我還是跟往常一樣，嘎啦嘎拉地打著鍵盤<br>把握在展覽前完成Foresea，包含一些細節上的優化。  </p>
-<p>四月底，組員第一時間貼出我們入圍消息，我不敢置信，<del>因為我被暴雷了</del>。<br>完全出乎我意料之外，網頁入圍就很棒了，我不敢相信的是遊戲竟然也入圍。  </p>
-<p>開心了幾小時，我又回到電腦面前繼續修改。<br>這個消息把修BUG到快沒電的我，換上新的強勁電池，滿電開始運作。  </p>
-<h3 id="開花時刻"><a href="#開花時刻" class="headerlink" title="開花時刻"></a><strong>開花時刻</strong></h3><p>展覽前3日，扛著行李到高雄，準備展前布置。<br>白天到展場幫忙，傍晚我馬上回到旅館，打開電腦又敲起鍵盤<br>一敲又是到早上六點，八點又趕到會場布置。  </p>
-<p>直至展覽前一天，我還是沒睡，除了修遊戲之外，也在準備來客導覽的內容。<br>完成主程式輸出後，把預備用的電腦充飽電，等待著明天上戰場。  </p>
-<p>展覽第一天，我的電腦中邪了。<del>絕對不是毒。</del><br>前一天檢查還好好的電腦，早上拔掉充電線重新檢查檔案<br>電腦開機卻不斷進入藍屏，修復作業也無用，眼看都要八點了<br>我緊急叫上組員的預備機，才解決這件事。展覽前組內就有準備2-3台電腦  </p>
-<p>好消息是<br>我以為要幫服役5年的電腦舉辦喪禮了，經過CPR(重灌作業)起死回生了🥴  </p>
-<p>God，能讓我稍微輕鬆一些嗎OTZ。  </p>
-<p>第一天，首發導覽是我，為了提神，灌了咖啡就上陣了<br>展覽這段期間，遇見很多有趣的人，像是 </p>
-<ul>
-<li>👨‍🎓同樣是學生，會交流製作心得與校際之間的差別等等</li>
-<li>👨‍💻遇到開發者，會給予很有用的回饋建議，解惑我的問題</li>
-<li>👾遇到遊戲論壇廠商，提供後續成品的發展建議</li>
-</ul>
-<blockquote>
-<h4 id="關於學生"><a href="#關於學生" class="headerlink" title="關於學生"></a><strong>關於學生</strong></h4></blockquote>
-<p>遇到科系性質很像的學校，像是中教大的數位<br>非常活潑的跑來交流，說著我們系的教程是他們的基底😆<br>互相吐槽著學習遇到的好笑的事<br>後來還來個校際外交，邀請對方去的攤位做客XDD。<br>也有遇到很多厭世大學生，看著看著就會開始談心的也很多😆  </p>
-<p>既然是性質很像，不免去逛逛，交流一下。<br>中教大的作品目標導向非常明確，通常是專注在某種議題上去發想<br>成品也蠻完整的，種類也很多，有桌遊、電腦遊戲、網頁、平面等等<br>結合議題延伸的成品，讓內容很充實。<br>如果未來有什麼聯展，我覺得也是不錯的經驗。  </p>
-<blockquote>
-<h4 id="關於開發者"><a href="#關於開發者" class="headerlink" title="關於開發者"></a><strong>關於開發者</strong></h4></blockquote>
-<p>當時被問到 : </p>
-<ul>
-<li>製作這個專題對你的意義是什麼 ? 遇到最困難的是什麼 ?</li>
-<li>作品往後的發展你們是怎麼想的 ?</li>
-<li>議題只是為專題而生? 還是有什麼企圖心 ?</li>
-</ul>
-<p>我知道可以很滑溜的說，會將作品提供給某某單位做教學使用、更新成手機板供大眾用等等的<br>但我卻誠實地說 : </p>
-<p><strong>「對，專題一結束，這個作品也走向終點了。」</strong></p>
-<p>因為我也想知道 <strong>同屆學生裡之間的差別</strong> 到底在哪。  </p>
-<blockquote>
-<p>講解得很詳細，專題也很完整，但就是少了 <strong>商業化</strong> 的思考</p>
-</blockquote>
-<p>對方舉例了很多他自己怎麼將作品商業化的例子，<br>像是 推出季更DLC 、找網紅推廣試玩等等<br>這邊比較像是行銷面，開發方面就不細講了，比較吃團隊創意😵。  </p>
-<p>後來我才知道 他也是個學生同時也是個開發者。<br>但不難看出，在各展覽競賽獲獎的作品，行銷面確實也做得不錯，<br>甚至很早就覺得 <strong>這一定會得獎</strong>  </p>
-<p>很快的一天就結束了，展覽過程中也少不了BUG的存在😵<br>導覽時幾乎都被我搞笑地呼攏過去。整體來說導覽很好玩，甚至我都忘了我沒睡這件事。 </p>
-<p>這幾天嗑了很多的咖啡因，都是處在完全亢奮的狀態<br>其中一天我意識到我快不行了，於是就休息了一下。<br><del>就跟著跑去唱卡拉OK桑一下，主要讓自己的精神緩緩😵</del><br>每天回到旅館後，第一件事就是坐在床上修起BUG。<br>沒錯，又熬到天荒地老。<br>在展覽最後一天，修到剩下不影響運作的小BUG🥳  </p>
-<h3 id="高處"><a href="#高處" class="headerlink" title="高處"></a><strong>高處</strong></h3><p>最後一天，因為有入圍，下午就前往頒獎典禮看開獎。<br>如果你是未來想創業、想獲得獎項、獲得廠商青睞，我非常建議你去看頒獎典禮，是自由參加  </p>
-<p>頒獎時，會請不同領域的專家以及公司創始人來頒獎<br>同時也會講解 <strong>評比的方向、目前市場所需、以及他們最想要看見的(現今作品欠缺的是什麼)</strong><br>不少獎項是有從缺的，代表當屆是沒有到水準的，但就是會有那一兩個脫穎而出無疑是金獎的  </p>
-<p>這裡，會聽到 <strong>自己跟別人有多大的差別OTZ</strong>，不會只有是校系問題，有很多小校系也是有得獎<br>總之大家都是有機會的，取決於 <strong>你是不是有做到那些面向。</strong>  </p>
-<p>評審最常講到<strong>商業化</strong>這件事，以<a href="https://gnn.gamer.com.tw/detail.php?sn=214633"><strong>遊戲組金獎</strong></a>為例好了<br>劈頭說 <strong>這直接可以賣了</strong>，除了完整度很高，架構穩，Idea也是不可少的，更重要的是發展性<br>這類型的遊戲性高，往後更新的方向是非常廣的。  </p>
-<p>當然，不同類型有他獨特的地方，我想教育遊戲也是有自己的一片天，看要怎麼發展而已。<br>有興趣的話可以查查看歷屆獲獎作品。  </p>
-<p>這天，我覺得自己的能力很弱，看著頒獎，比不上這些優秀的同學，我很失落<br>但我也知道自己欠缺了什麼，之後會更加地努力💪。<br>三天的展覽，跟著回程搭的末班車一同結束了。  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>完整看完的人給你拍拍手👏👏👏<br>雖然沒有100%將時間投入製作，因為同時3-4月我在考駕照，還有準備5月初的多益<del>(職場預備用)</del><br>製作Foresea幾乎占滿我大學最後一年的生活，不過幸好我活過來了。<br>還好駕照過了，可惜英文最後近乎裸考上陣，考了個不是很滿意的分數，應該夠用啦🥴。<br>但我還是不會後悔啦。  </p>
-<p>沒有這些歷程，就不會有第二篇的程式分享文<br>更不會有雙入圍或校外評分獲獎那些結果。<br>最主要的還是組員們非常可靠，才有這些成就👍，危難時都能立即神救援。  </p>
-<p>雖然很多時刻，我只能跟別人說</p>
-<blockquote>
-<p><strong>抱歉，我真的笑不出來</strong>  </p>
-</blockquote>
-<p>很多心情，並沒有告訴組員、朋友、甚至是父母<br>我不太想讓人去跟著操心，這些 <strong>需要從自己改變的事</strong>。<br>這不是好方法，我知道😕，但這就是我。<br>有人告訴我，這種什麼都沒講的人很容易出事<br>放心啦我還在貼 memes 代表我沒事0v0b  </p>
-<p>曾經有人問我為什麼所有事情都要拼命做到100分 ? 有些事情根本不值得。 </p>
-<blockquote>
-<p><strong>是啊。我也很想知道到底是什麼驅使我這麼做。</strong></p>
-</blockquote>
-<p>有些一看，就知道我拼命的結果不會是滿意的，但我還是會做。<br>像是繪畫這件事，並不是我的專長，我曾熬夜花好幾天去完成一個作業<br>結果理所當然還是比設計強項的同學差個十萬八千里<br>但如果不做，我就不會知道自己極限到哪裡，也看不清楚自己。  </p>
-<p>還記得某堂課有抽彩虹卡，我抽到  </p>
-<blockquote>
-<p> <strong>「I am Me,and I am okay.」</strong>  </p>
-</blockquote>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mdzIhAuXcAQuWuA69j7sXX5tId3C6_zCrp6xIZ8bwjmO423wbh6Sz5b3wrPDifwBIRIScg0_O61AXgf5TRJLBIIG0GpL3nH1xCK3Ng3awd1jnGLyvEWolPX8uhGaWK1NLmjNxuByu7AvEKEQRG9EJoq2aVWD3OixoT7oLPhBLq7_eIxRA9yxMNuMo4riMW1X0?width=256&height=172&cropmode=none">  </p>
-</center>
-
-<p>網路上的圖，我的忘記收在哪了<br>但我一直記得這句話<br>現在再看到真是一言難盡。 </p>
-<p>分享這些事，希望你也別遇到同樣的問題<br>要是遇到時也別氣餒，至少還有我這個<strong>廢出新高度</strong>的極端例子<br>讓你不會那麼快放棄🥴<br>好的，各位，掰掰了~ (´◓Д◔`)  </p>
 ]]></content>
       <categories>
-        <category>bookreport</category>
+        <category>Frontend</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>畢業專題</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</title>
+    <url>/RosaBlog/Frontend/JavaScript/JavaScript_typeof/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>typeof 是檢查類別的好幫手<br>一學才知道 typeof 只是小小咖<br>甚至在 stackoverflow 上有這麼一道題目  </p>
+<p><a href="https://stackoverflow.com/questions/48270127/can-a-1-a-2-a-3-ever-evaluate-to-true">Can (a== 1 &amp;&amp; a ==2 &amp;&amp; a==3) ever evaluate to true?</a>  </p>
+<p>這怎麼可能，<code>1==2==3</code> !?<br>先了解資料型態，再來了解這怎麼實現! </p>
+<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>typeof 可以知道值的型態</p>
+<p>在 <code>Object</code>、<code>Array</code>、<code>Date</code> 以及  <strong><code>null</code></strong><br>都是 <code>Object</code><br><code>null</code> 是唯一的特例，下面會再提到  </p>
+<p><img data-src="https://dsm01pap006files.storage.live.com/y4mGp4At_MjbSIvnrU9AEgFCzvUmROBsIV5v1tGQaDaJY9tAVO1bZcprgUpUOG9btna_AAvZABPjZsB6FFu0hfNETi8bKXOole-CacnFbpoEsUE68p4L8pBfY_r0ptOJloSxkvkTjf6OAJsQ-O7HsfCfLUyxel4VPf35BpS5ZgsEhmrvZo3-fw9IwrOHeoFaey9?width=625&height=390&cropmode=none" alt="typeof各類型"></p>
+<ul>
+<li>如何真的判斷是 <strong>真</strong> 陣列 ?<br>Array 會被算在 Object 範疇裡<br>想要知道真的陣列物件可以使用<br><strong><code>Array.isArray(value)</code></strong>  </li>
+</ul>
+<p>或者更精確的判別類型<br><code>Object.prototype.toString.call(value)</code><br>prototype 是 JavaScript 很重要的屬性<br>是實作的一種基底<br><code>toString</code> 會把印出物件的屬性轉為字串</p>
+<h3 id="null-眾人皆知的漏洞"><a href="#null-眾人皆知的漏洞" class="headerlink" title="null 眾人皆知的漏洞"></a>null 眾人皆知的漏洞</h3><ul>
+<li><strong>null</strong> 為什麼是 object ?<br>  是 javascript 程式設計上的錯誤<br>  底層實作的 <code>type tag</code> object 是 00<br>  但是 <code>null</code> 也是指向 0<br>  所以 <code>null</code> 也會被判別為 object<br>  是廣為人知的 bug  </li>
+</ul>
+<p>ECMAScript 原本要改規則<br><code>typeof null===null</code><br>但是被拒絕掉了 OAO  </p>
+<h3 id="更確切一點的型態"><a href="#更確切一點的型態" class="headerlink" title="更確切一點的型態"></a>更確切一點的型態</h3><p><code>Object.prototype.toString.call(value)</code><br>不管是哪種型態，都可以更正確的被判斷<br><img data-src="https://dsm01pap006files.storage.live.com/y4mmkfwiKEgP7WgOuN5z81LDBLH4oukWL2ubilP96ARJyClsALcHwh_PvT7MPCtpr0_7dJdQqrI828TQkxB_PfjkIpYpPT3vtTXQ1wUyiGkYK0-cc3NO7nMuB8BTVjtV-kVkboovg7L3y0yIwoTaC95RrR_Bx9LgK-8N1bcq-fciqoSNozQVeSaJ7z3xgt67CIC?width=772&height=395&cropmode=none" alt="toString各類型"></p>
+<h3 id="避免出錯的-undefined"><a href="#避免出錯的-undefined" class="headerlink" title="避免出錯的 undefined"></a>避免出錯的 undefined</h3><p>JavaScript 是單線程(非同步)的語言<br>也就是程式會一行行往下執行<br>但如果要印出沒有定義的變數<br>必定會錯誤</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> error <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>但如果 typeof 某個定義的變數<br>會是 undefined</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a<span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>離奇的是用 var 也是 <code>undefined</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">var</span> a
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因為 var 會做宣告提升</p>
+<ul>
+<li>宣告提升  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//var a;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result<span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  系統會幫你補上未定義的變數<br>  但還是不會賦值</li>
+</ul>
+<hr>
+<p>避免變數沒有定義的情況下出現錯誤<br>可以用 <code>typeof</code> 檢測  </p>
+<blockquote>
+<p>記住 typeof 回傳的值類別是 <strong>字串</strong><br>所以後面要是對比字串</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a <span class="token operator">!==</span><span class="token string">'undefined'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+	<span class="token comment">//dosomething...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>錯誤寫法<br>會報錯，因為 a 沒有宣告  </p>
+<pre><code class="javascript">    if(a !== undefined)&#123;
+        console.log(a)
+        //dosomething...
+    &#125;
+</code></pre>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ol>
+<li><code>typeof</code> 回傳的類型是字串</li>
+<li><code>typeof null</code> 會回傳值會是 <code>object</code>  </li>
+<li><code>Object.prototype.toString.call()</code> 可以取得較正確的資料型態，包含 <code>null</code> 也會傳 <code>null</code>  </li>
+</ol>
+<p>原來如此，typeof 並不是萬能的<br>在查找 <code>Object.prototype.toString</code> 過程中<br>也認識到不同類型進行比較時<br>會轉型同類別再比較<br>Object type 的轉型會經過兩種規則  </p>
+<ol>
+<li>valueOf</li>
+<li>toString</li>
+</ol>
+<p>之後要再深入研究這兩種的差別<br>以及各類別的比較規則!  </p>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -3087,6 +2833,266 @@ scoop <span class="token function">install</span> twitch-cli<span aria-hidden="t
 <p>題外  </p>
 </blockquote>
 <p>還記得我大二的時候，一位大四學長來分享VR的製作技術<br>隨後我問起他怎麼學的，那麼厲害<br>他淡淡地回答 : <code>**時間到你就會了**</code><br><del>大四的我，是悟出那句話了</del>  </p>
+]]></content>
+      <categories>
+        <category>bookreport</category>
+      </categories>
+      <tags>
+        <tag>畢業專題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ Foresea畢業專題(III)─《Finalfinal.docx》</title>
+    <url>/RosaBlog/bookreport/Foresea-bookreport-III/</url>
+    <content><![CDATA[<h2 id="閱讀前注意"><a href="#閱讀前注意" class="headerlink" title="閱讀前注意"></a>閱讀前注意</h2><p>文長慎入，純心得，就當作看一個很長的故事吧。<br>我的文筆也沒有很好，若看不下去請自行左上角離開<br>其中個人主觀意識較重，若不喜勿入<br>如果你只想知道校外展我遇到了什麼事，可以到<strong>開花時刻</strong>這個快速連結<br>6/6 是表定的畢業典禮日期，疫情打亂了所有秩序😵，一年前誰能想到如此情況呢?<br>在家寫寫最後一篇廢文，這篇是大學的最後一篇。  </p>
+<span id="more"></span>  
+
+<h2 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h2><p>將分享我從 <strong>找組員 ⇒ 專題期間 ⇒ 專題結束後 ⇒ 校外展覽</strong> 的心路歷程。  </p>
+<h3 id="播下美好的理想種子"><a href="#播下美好的理想種子" class="headerlink" title="播下美好的理想種子"></a>播下美好的理想種子</h3><p>團隊合作理想上是件美好的事，實際上是非常要命的。<br>除了有共同的目標，後續的團隊經營更是關鍵，相信大家都有體會過。<br>畢業專題，就是個魔王大挑戰。一年下來，情誼不是更加牢固，就是散掉👿   </p>
+<blockquote>
+<p>還有 <strong>專案管理</strong> 請好好學</p>
+</blockquote>
+<h4 id="落地生根的地方"><a href="#落地生根的地方" class="headerlink" title="落地生根的地方"></a>落地生根的地方</h4><p>說到分組，我想大家<code>**&quot;預設&quot;**</code>應該是自己的好朋友，這是最正常不過的答案了<br>不管能力、共識默契，都無須重新培養，是最佳的選擇。<br>而我，眾所皆知是個邊緣人🤪，預設是 null (空值)，只有兩條路 被撿 跟 自己找。  </p>
+<h4 id="栽種的實力"><a href="#栽種的實力" class="headerlink" title="栽種的實力"></a>栽種的實力</h4><p>我認知自己的能力是普通且算平均的，在遊戲程式、網頁、動畫這些方面還堪用<br>加上當時想法只有 <strong>我想做一個互動作品</strong>。<br>起初我有向一些人談論過我的想法，但從未正式談論”成組”這件事。<br>因為一開始我在消極被動等待，等待有人撿我🥺<br>但最終…沒人撿😵，所以我自己成組去尋找人了。  </p>
+<blockquote>
+<p><strong>題外</strong> | 有時候我會好奇，大家會怎麼選擇…  </p>
+</blockquote>
+<ul>
+<li>🙉 現是蔡逼八，左看有潛力<del>但戰力還不穩</del>  </li>
+<li>🕵️‍♂️現有點實力與戰力<del>但是會吃老本</del><br>考量的中間因素有很多，例如 專案時程、個人特質、團隊性質等等，並沒有一個正確答案。  </li>
+</ul>
+<h4 id="鋪上土壤"><a href="#鋪上土壤" class="headerlink" title="鋪上土壤"></a><strong>鋪上土壤</strong></h4><p>慶幸的是，在升大三的暑假結束時，我順利找到3位組員。<br>當時不少人對我找的人有點疑惑，連組員們各自也不例外，都覺得很奇妙。  </p>
+<blockquote>
+<p>為什麼會找她呢 ? 而不是…  </p>
+</blockquote>
+<p>這三位確實是沒什麼合作過，4人也完全沒有在同一組過<br>如果問我當時在想什麼，可能是被附身了吧。  </p>
+<ul>
+<li>沒啦 ! 我當然是有跟3位好好說清楚找他們的原因。<br>我的專案所需的職位，分別是 <ul>
+<li>遊戲程式</li>
+<li>網頁</li>
+<li>美術</li>
+<li>動畫  </li>
+</ul>
+</li>
+</ul>
+<p>企劃則是所有人共寫，找人的標準來自上面的<strong>題外話</strong></p>
+<ul>
+<li>潛力者*2 + 戰力者*2  </li>
+</ul>
+<p>當然我是潛力者🥴，程式菜逼八。<br>綜合起來，需要在各方面是有互補的。<br>目標一致，但各自思考的面相是非常獨立的<br>不會太常出現<code>毫無理由</code>或<code>附和通過意見</code>的問題。  </p>
+<p>實際上到成組這期間，我等待回覆是非常煎熬。<br>當時最大的困難，是讓<strong>兩兩好友</strong>拆在不同組這個問題。  </p>
+<p>無時不刻，讓我覺得自己像卡通裡的個反派🕵️<br>如我上面所說的，普遍的<strong>預設值</strong>是好朋友。我並不是刻意將其拆散，單純是找符合我需求的<br>在邀請第一個人的時候，我意識到這個問題，並去詢問多個局外人，有的人說 :  </p>
+<blockquote>
+<p>「很不道德，你應該找兩個人討論，找一個這麼做是在破壞人家的友誼」<br>「為什麼兩個都不找進來 ? 問題不就解決了 ?」  </p>
+</blockquote>
+<p>也有人說 : </p>
+<blockquote>
+<p>「即使是朋友，目標也可能各自不同，選擇是個人自由，沒什麼問題」  </p>
+</blockquote>
+<p>中間，我不斷地告訴其中兩位，希望各自可以跟好朋友談談，要拒絕我也沒關係。<br>這個問題，在理想跟愧疚之間，糾結我整個暑假🥴。  </p>
+<h4 id="種子驚喜包"><a href="#種子驚喜包" class="headerlink" title="種子驚喜包"></a>種子驚喜包</h4><p>壞事是這樣的全新團隊需要磨合的點更多，只能祈禱這樣的組合一路順利。<br>好事是這裡將 從0共同成長，0偏頗、0規則，可塑性更高(我不確定是不是這樣講)<br>傳統來說就是新活力新氣象🥴<br>我想這3位都應該有預設心理:  </p>
+<blockquote>
+<p>投資一定有風險，<strong>團隊組成有凱也有雷</strong>，組成前應詳閱公開說明書。  </p>
+</blockquote>
+<p>很抱歉，我沒有給3位詳閱說明書的機會，不過非常謝謝她們答應當時的我<br>票選出主題、決定好指導老師，大家抱著美好的理想起步了<br>不過卻也是另一個噩夢的正式開始…  </p>
+<blockquote>
+<h5 id="分組題外話-綜觀大學生涯"><a href="#分組題外話-綜觀大學生涯" class="headerlink" title="分組題外話 | 綜觀大學生涯"></a><strong>分組題外話 | 綜觀大學生涯</strong></h5></blockquote>
+<p>坦白講，每次組隊就像是在玩踩地雷，但我踩得蠻歡樂的<br>不過記住同時<strong>自己對別人也是顆地雷</strong>。<br>每一堂的團體作業，我的組員組成都不會一樣。<br><del>如果不喜歡驚喜，建議不要這樣。</del><br>大學團體作業很多，可以跟朋友、跟能力強的、跟混分的等等，但先取決於自己的角色定位<br>四年裡，我加入過許多不同的團體組合裡，很好玩也很刺激<br>不談”合作愉不愉快”，跟平時不同群的人交流，讓我知道更多不同面向需要思考。<br>如果還有團體作業，我蠻建議跳脫平時的組，不過後果請自行負責。  </p>
+<h3 id="發育不良的樹"><a href="#發育不良的樹" class="headerlink" title="發育不良的樹"></a>發育不良的樹</h3><blockquote>
+<p><strong>理想很美滿，現實很骨感。</strong></p>
+</blockquote>
+<p>樹苗的成長，沒人保證能長得又大又直<br>專案的時程，沒人有十足把握在準確的時間完成😭</p>
+<h4 id="陸上颱風警報"><a href="#陸上颱風警報" class="headerlink" title="陸上颱風警報"></a>陸上颱風警報</h4><p>除了專題外，同時還有畢業展覽的事務正在進行。<br>我與組內的另一位組員分別擔任總、副召，要讓工作跟專題達平衡非常困難 😵<br>展覽籌備前期有很長時間都在討論與規劃，更棘手的是事務涉及多個組。<br>溝通與合作在磨合期是相當花費時間的。<br>若有重大事件，幾乎是要將我的專題停擺，先將另一邊止血。<br>這樣的問題，發生不少次，但也沒辦法，該解決就需要解決。<br>但每次專題一停擺，我很想跟專題組員切腹謝罪去了  </p>
+<h4 id="瘦弱的樹苗"><a href="#瘦弱的樹苗" class="headerlink" title="瘦弱的樹苗"></a><strong>瘦弱的樹苗</strong></h4><p>在升大四的暑假，我就已經陸續在寫遊戲中的程式<br>組內的大家也如火如荼的進行各自的進度。<br>偶爾會與指導教授定期的專案進度討論，但每每到這個環節，我很緊張也很尷尬。<br>因為我總是 是那個 <code>進度沒有達標</code> ，而且會說「<strong>相信我會完成</strong>」的人。<br>(什麼熱血笨蛋啦!)<br>說這句話的同時，我想讓大家安心，另外也是在為自己打氣，雖然聽起來很唬爛。  </p>
+<blockquote>
+<p>結果是什麼呢?  </p>
+</blockquote>
+<p>當然是我成了投資中最大的風險，成了團隊之雷，更成了一個打臉自己的人😰  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKsiKYyPeJlzwV7CX1cucK-W1yrWxB7UMDdHDDRZ1YUtZ4HVTwKmHqplY8i1LM4m-9jWGwMSJO8A-XZvQowN4_RitKSKr4D6sUklWxjrpStu0ymf0kn31zDMszPG5XJIQUjkx9hwR6-tJdUGqZmjZAZH-af_d3QALcqKdlENtWz44OYMugCHgCwDamgAVDaGz?width=256&height=256&cropmode=none"> </p>
+</center>   
+
+<p>當看到其他組員拿出一堆的進度，而我有時候因為程式問題卡住很長一段時間<br>大家不斷地在成長，只有我還在原地。我心裡開始迷惘，不知所措。<br>因為程式會寫就是會寫，按下執行就知道了，跑不出來就是寫的人的問題。<br>無疑地，當時超級菜雞般的程式能力，是完全無法支撐起整個專案。<br>即使我學習再學習，練習再練習，常常還是跑出令人絕望的 Error 與 BUG。 </p>
+<center>  
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mQV5G4B0IOVO5ESIMw1byLnoLNxteeWCaJpbfiH1hHi7iDWytdwQYwbyABQ2PXAWiEVgqJ80W68t8faBQDfnovvsaEMli2KKblFrMKmXVdC4rOykE9L3wG-TbgtKga_ZUweHjd7g8DpnqRfHcjXX83f4shg4axqWnYSc4B-2vw2cz82eoKUqmWGC0MisIoka8?width=256&height=174&cropmode=none"> </p>
+</center> 
+大家非常包容，知道我身兼畢展總召與擔任程式的部分比較繁重，都說沒關係  
+老實說，到最後我已經不知道大家是真的相信我，還是被我逼到不得不相信我了。  
+不論如何，專案時程不能變成無底洞，所以我告訴自己，一刻都不能怠惰。  
+至此，我開始跟日出報到:D...。  
+
+<h4 id="不間斷的夏秋季颱風"><a href="#不間斷的夏秋季颱風" class="headerlink" title="不間斷的夏秋季颱風"></a><strong>不間斷的夏秋季颱風</strong></h4><p>之前聽做專題的學長姊都說好幾天會做到日出。<br>我思考了一下🥴，Umm…年輕人，我還行啦👍<br>第一次做到看日出，我心想 :<br>「真感動，我認真到日出，程式修好就順了吧，日出再見了」  </p>
+<blockquote>
+<p><strong>沒想到，這一再見，真的每天再見面。</strong></p>
+</blockquote>
+<p>製作專題的當年9至12月，我每天都在看日出，少說也有3.5個月<br>日夜顛倒加上畢展總總事務，心理與生理狀況都開始亮起了紅燈。<br>我的焦慮值<strong>MAX</strong> ! 躁鬱值<strong>MAX</strong> ! 體重<strong>MAX</strong> !<br>生理期直接Bang不見🎉 !<br>經歷幾次的狂風暴雨，盆栽倒了，而我也被吹倒了🥀</p>
+<h4 id="長歪的樹"><a href="#長歪的樹" class="headerlink" title="長歪的樹"></a><strong>長歪的樹</strong></h4><blockquote>
+<p><strong>早上八點，晚安</strong>🌑<strong>；早上十一點，早安</strong>⛅</p>
+</blockquote>
+<p>不僅是專題的程式的問題，畢展的事同時也讓人心煩。<br>日復一日的熬夜，我開始對專題變得有點消極。<br>會對組員說 :<br>「<strong>我們可以提出概念性的東西，做出一兩關就好，不一定要完全做完…blabla</strong>」<br>到了專案進度討論，大家會告訴我，先去完成其他的關卡比較重要，小東西之後再細修<br>很不巧，A關卡與B關卡中間機制需要連動。當我完成A，再去完成B，換成A有問題了  </p>
+<p>◢▆▅▄▃ 崩╰(〒皿〒)╯潰 ▃▄▅▆◣  </p>
+<p>寫不出來，崩潰挾帶氣憤，我就會說「不然你來寫啊 !」<br><del>阿…容我回到過去揍自己一拳</del><br>氣憤中更多的是對自己做不到目標而感到失望。<br>最不幸的大概是家裡的娃娃們，全變成我的出氣筒，橫屍遍野。<br>早期對專題懷抱的熱情，已經被消磨成灰了。  </p>
+<h3 id="滿地枯葉"><a href="#滿地枯葉" class="headerlink" title="滿地枯葉"></a>滿地枯葉</h3><p>ˍ(:з」∠) 我…想…躺著休息</p>
+<h4 id="用力吸收水分的根"><a href="#用力吸收水分的根" class="headerlink" title="用力吸收水分的根"></a><strong>用力吸收水分的根</strong></h4><p>專題總共有4次報告，我一共上台3場。<br>最後2場，都是前一天熬滿夜把程式硬是弄出來，勉強弄好3-4關(但我們一共有6個關卡哦🥴)<br>組員們在報告前10分鐘，都還在幫忙我弄報告的大大小小事，非常感激不離不棄😭<br>因為遊戲進度是掌握在我手上，其他人是不太好說明遊戲新產出的部分<br>所以我報告是最適合的，我知道我才能把這邊的進度好好說明。<br>我想最緊張的不是我，而是指導教授跟組員們，每次都是在現場打開驚喜包🎁  </p>
+<center> 
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mMZgrK4sHXixsgQLTeCBVabRw0CPchkWizOj7WWxq8hivFiGPteNC2fxfW-aEwaNQRsJpNZ_3jTnNrvpZNDEpPrU4xQRYmNtUID4Y33HzwB_ERuYEA_RV7f9Z7xmA4wN7cCQQykhpTXWMXU-ad9tHCJzHY4Zv0rvX0mY3FbsjTkpwAsEJGtRSUs0E_oVPTjJv?width=256&height=145&cropmode=none">  </p>
+</center> 
+
+<ul>
+<li>大家心臟有沒有越變越大顆呢?  </li>
+</ul>
+<p>報告的結果，想當然爾，非常之差💩。<br>有一場，回想起來我都覺得很尷尬，因為沒有獲得什麼新回饋。<br>都是之前提過的，「美術很棒」、「網頁很棒」。<br>當下我在想我的部份是 <strong><code>無藥可救</code></strong> 了? 還是 <strong><code>出乎意料</code></strong> 呢?<br>不管怎樣，我知道我搞砸了。<br>無聲的回饋，間接說明我努力的還不夠。<br>最後一場更是慘不忍睹😢，因為遊戲沒有做完，僅有4關的試玩的影片片段。<br>組內成品還好還有網頁跟動畫。  </p>
+<center>   
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m0Uxbx4G-Qpga3ZmbeaieLwy7-KWgS1l-MkPwVvICU2jdhRXq8vuWpHkHRPg29sHCKulQ0Vcd8Pv4aI1wc9ryicXDknqIKfMGUa2BdRJIW5lS-PURXmhp0KTGLAryvaLWU-BWd_sdZeBX60cGbjnKBpnt7tUz65KkyaA00OM8n5DTQNC6bM-lDhTIsxucS7FQ?width=256&height=256&cropmode=none">  </p>
+</center>   
+
+<ul>
+<li>當時被問到我是回答 :<br>黑丟，還沒做完 🙈 ，瞬間冷場。  </li>
+</ul>
+<h4 id="溺死的根"><a href="#溺死的根" class="headerlink" title="溺死的根"></a><strong>溺死的根</strong></h4><blockquote>
+<p><strong>努力≠有結果</strong></p>
+</blockquote>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKcfCrbkRMCaopIkNsDbQIgg1Y4-ezX4RFUSL8PRkmzz18gtPLsYpxpI5RRizytEQIuJFHEkGxfY2q_lInJdVmNvpJtlNPZW945yANIIg3PSRhqodcgqONnhsdSwrBTFvaEh2eFhXZz3VzPrjWjiDOljlKrhdOEQQ8dg5untwmPzQLLsqFGaNVfLAlcvNmnSA?width=660&height=440&cropmode=none"></p>
+<ul>
+<li>學習經驗曲線 </li>
+</ul>
+<p>大家都懂這個曲線，學習最難的，就是一開始陡~~~到攀不過的顛坡。<br>投入大量的時間與努力，獲得的成果卻是不如預期。<br>從我寫程式開始，毫無意外也遇到這個問題。<br>越寫不是越有成就，而是失望。  </p>
+<p>每天熬夜讀文件、看教學、反覆修修改改，執行後卻還是出BUG。<br>順利的話，1天可以寫出一關。遇到問題時，都可能要修到1個禮拜，甚至更久。<br>隨著時間，坐在電腦前已經不知道自己在做什麼了，會覺得這有什麼意義呢?<br>期間我推掉很多的社交活動，窩在家學習、學習、還是學習。  </p>
+<p>以前開電腦，很開心。現在開電腦，我只會想砸壞電腦。<br>一開機，我會問自己還要繼續嗎 ? 隨時放手，就一路爛也沒人能奈何了我💩  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mpRtrZKORO9rXvUtd4tm5-jhN5j27y0fiZAbcWEnbwsTKbGTNh2x16j3cKHajzxBTbvgtdZJlmClfnS0s8EjZJFXAebjHx0QnIxB48IlSgtecYllYxC9e0Kmi3obDdeEFRcMi2YHJXg6QMq5SaODO5i2VDIcigQDG-zASVtanwEvgEfgrtvlR5LHRETy5wo9L?width=256&height=256&cropmode=none">   </p>
+</center>
+
+<p>大家也爛 d(`･∀･)b  </p>
+<blockquote>
+<p><strong>要，當然要繼續。責任心告訴我不能就這樣。</strong>  </p>
+</blockquote>
+<p>堅持這樣的心情，一路到校內展，讓我做出第一版的  Foresea<br>不過是歪七扭八的Foresea<br>如果你在校內展玩到，我跟你說聲抱歉，你玩到一個非常失敗的遊戲。<br>當時的Foresea是一個跑不順，機制上一堆bug，架構鬆散的作品。  </p>
+<ul>
+<li><p><strong>關於Foresea ver1.0</strong><br>  美術、動畫、網站這些產出可以說相當的好。  </p>
+<p>  我會覺得校內展Foresea遊戲失敗的原因，<br>  在於我的能力沒辦法完好地展現企劃中的玩法與流程<br>  在11月的時候，我就做不下去了  </p>
+<p>  因為心裡始終無法認同自己做出來的作品<br>  更覺得自己浪費了這些美術圖，組員辛苦畫出來，而我沒有能力去展現出來。      </p>
+</li>
+</ul>
+<h4 id="軟爛的泥土"><a href="#軟爛的泥土" class="headerlink" title="軟爛的泥土"></a><strong>軟爛的泥土</strong></h4><p>因某些因素，當時有討論到<strong>要不要將專題報告延長兩周</strong>左右<br>但我知道再怎麼延，我還是無法完好地呈現出來<br>加上我的精神上非常抗拒，我想把報告結束、展覽結束，結束長久下來的熬夜。<br>當最後一場報告結束，  </p>
+<blockquote>
+<p><strong>「結束了，成品怎樣也沒關係吧?」<br>「即使有BUG，或瑕疵，再修也不會有什麼改變」</strong>  </p>
+</blockquote>
+<p>這些想法不斷湧現<br>但結果是我又一路從報告結束修到校內展，至少讓展覽可以順利展出幾關的原型。<br>校內展覽結束，本是專題的終點。<br>但對我來說，卻只是中繼點。    </p>
+<h3 id="新芽"><a href="#新芽" class="headerlink" title="新芽"></a>新芽</h3><p>一個新開始，不難；中斷的重新開始，更難。  </p>
+<h4 id="殘枝"><a href="#殘枝" class="headerlink" title="殘枝"></a><strong>殘枝</strong></h4><p>五月初是校外展，四月中旬是競賽報名截止，代表我必須在這之前將作品完成。<br>另外，我還有展覽總召的身分，越快到展日，這段期間是也是不能閒的🤯。<br>這幾個月，我每天都會打開電腦，開啟Unity，接著跑去躺在床上，看著娃娃，對自己說 :    </p>
+<blockquote>
+<p><strong>你這廢物，去工作，快去電腦前坐好</strong>  </p>
+</blockquote>
+<p>這是我每天的例行公事，我不是對自己喊加油、喊要堅持下去<br>我也不是斗M，沒有喜歡被罵的癖好。<br>一番精神喊話後，我會把Unity關掉，開啟Youtube開始看迷因，讓自己開心點。<br>我知道自己腦袋亂糟糟的，沒有動力做下去，也不知道從哪裡下手。  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4menHF2FwISc3qcsoKFfru0O3K4WnXG2sKH7YQf3DlgWHz7e7vX9SKqmkEnHWGlCtag_KgxWQlTRtH2XnB1jvSzoS4Ok0sdQW0MRaT45C72HUxmz8glJtmb0gRNeJaaRAMDnZli5MFocePYBkPNCmz6ZmaF6TB4i3h7oceMwtn5LqHfmaSOX9An81-M3Kwf80y?width=371&height=660&cropmode=none">  </p>
+</center>
+
+<center>Indeed. ┐(´д`)┌ 阿還真的就打出來了。</center>
+  
+
+<p>3月，這個模式還是繼續，只是對自己說的話更狠了。<br>期間我不只看大量的迷因，之前訂閱很多程式教學跟遊戲開發者的頻道，我也看了不少<br>偶爾看完，靈感一來就會重新釐清思緒，將遊戲的內容文件重新整理、修改<br>卡住了，又返回到床上，說一樣的話，再滾回到電腦前執行例行公事  </p>
+<h4 id="養分"><a href="#養分" class="headerlink" title="養分"></a><strong>養分</strong></h4><p>吸收新的知識，我的程式能力有逐漸成長，實際上到3月我還沒正式修改到遊戲的程式<br>大多是開新檔案練習。  </p>
+<p>準備的差不多後，我下定決心把遊戲中的程式碼全都砍了<br>就是把遊戲互動的部份全都歸零。這時候離競賽截止點還有一個月半。<br>我知道風險很高，況且我沒有多大的把握能做完，但我知道我必須做。  </p>
+<p>如果你還記得上一篇分享提到的<strong>程式耦合問題</strong>，我正是要解決這個問題<br>否則這個作品還是會中途運作崩潰、遊玩不順利，總總都會影響遊玩體驗。<br>更別說展覽3天，每天8小時。除了基本求能運作外，更要兼顧穩定。</p>
+<h4 id="重新發芽"><a href="#重新發芽" class="headerlink" title="重新發芽"></a><strong>重新發芽</strong></h4><p>一天天的特殊精神喊話，老實說也不是沒用處。<br>越喊會對自己的能力很氣憤，氣憤到很不甘心，不想只有這樣結束😠。<br>帶著這份不甘心，我每天瘋狂打著鍵盤，從早打到晚  </p>
+<p>因為住在家裡，要照顧好家裡的大小事，所以天天見日出的模式是不行的<br>4月初，我把原本的進度補回。(這麼快速的原因，回想一下學習經驗曲線)<br>因為要上繳競賽成品，一邊請組員幫我試玩，當然還是少不了很多的Bug。<br>平時學習的反饋在我製作上的錯誤，是越來越少，程式運作也變更流暢  </p>
+<h4 id="豪雨後的蟲災"><a href="#豪雨後的蟲災" class="headerlink" title="豪雨後的蟲災"></a><strong>豪雨後的蟲災</strong></h4><p>離繳件剩兩個禮拜，這時候，不幸的事情發生了。<br>在家準備晚飯，接到一通家人出車禍的電話，雖然沒有大礙，我依然失落了好幾天。<br>低落的心情，也影響我在製作上的速度，但我的手還是沒有停止。  </p>
+<p>直到繳件當日傍晚，剩餘一個關卡的BUG還沒修完，其餘的都能正常運作，<del>正當我以為。</del><br>我稍微放心地收拾書包，從圖書館騎車回家，趕緊洗完澡完成剩下的部分。<br>除了主程式外，還有企畫書，我事先有準備好文件，剩下一些急忙委託組員協力完成<br>晚上十點組員試玩到有出現嚴重的BUG，我不斷地測試，但始終想不到問題。    </p>
+<blockquote>
+<p>可怕的BUG，在第一關出現了。  </p>
+</blockquote>
+<p>總不能剛開始玩就出現BUG吧 !!!<br>我拋棄維修另一個關卡，瘋狂般的不斷測試與修改第一關的BUG<br>幾經測試都行不通，我開始崩潰了，發給組員 : <strong>我好想放棄</strong> 的訊息  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4myqNuZwO1Lkh-WrEskpxQv17jgiR4x_fseebiLuEFCoZXz_2mkLLVm0F24iRaZiIyQyFzcyX6TB9MeN9Bv2Zd-9E8Y5Vi6wd0ehxgB0ZbLnj4RRaVBsQthX_pimMOTACjvdd9IaxvMYdUuwFASPwAA1LWwJ4BpCFkt3mopbP3DDhd7d8TF9X-ORT7kTny-JyJ?width=256&height=144&cropmode=none"><br>WTF  </p>
+</center>
+
+<p>後來冷靜了一會，終於把該死的BUG解決了。<br>其實Foresea這時依然不是完整的，我還是將它打包繳件去了<br>其中放視企畫書有一項可說明<code>未完成的部分</code>我詳實填上。<br>組內的其他作品都已經登陸完成，只剩遊戲的部分。  </p>
+<h4 id="雨後陽光"><a href="#雨後陽光" class="headerlink" title="雨後陽光"></a><strong>雨後陽光</strong></h4><p>最後一天，晚上十一點五十五分，最後一步了，我將企畫書上傳，始終無法成功<br>原因是官方的伺服器被塞爆了，最後一刻，全台各地的同學也正拼命地上傳。 </p>
+<p>五十八分，還是<strong>失敗</strong>。<br>五十九分，依然是<strong>失敗</strong>。<br>整點十二點，<strong>失敗</strong>。  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKkIyZW8L8QaxhJSAjyR3MCYMR6YOK9vVc7n-ynHVNkNmhG3QHv01S3hEWWvux-r1RmoOXRvuFprp0HNqeo5HH9i-LJmuPSlzH-ikDLolCXkWF4ExQ0a6dBdi4zqY28mkZeZWm5EwAsY4JUQk_7YsAeB4shfxGQ5cp9ST-Esl-w46aoICsoY8hkCDDuuvgxZe?width=600&height=338&cropmode=none"></p>
+<center>絕望ing</center>  
+
+<p>我跟組員告訴這壞消息，遊戲組的項目是沒有參加了，我非常抱歉。<br>同時我也不放棄的將瀏覽器切到上一頁<br>反覆重試繼續上傳<br>直到十二點零五分  </p>
+<blockquote>
+<p>???? ，我發現上傳%數還會動  </p>
+</blockquote>
+<p>沒多久，上傳成功。<br>我急忙按送出，看見欄位狀態是完成的。  </p>
+<p>以為我累壞眼花了，我又反反覆覆刷新頁面20次，看到狀態依舊是完成。<br>我告訴組員，好像…報成功了。<br>關上電腦，我安心的吃起晚餐。<br>這一餐即使冷掉，還是很美味😌   </p>
+<h3 id="往更高處"><a href="#往更高處" class="headerlink" title="往更高處"></a><strong>往更高處</strong></h3><p>樹枝不會乖乖挺直往上生長，<br>可能躺得長、坐者長、趴著長，還是<del>八仙…</del><br>總之，一切就是出乎意料的發生。  </p>
+<h4 id="特級肥料"><a href="#特級肥料" class="headerlink" title="特級肥料"></a><strong>特級肥料</strong></h4><p>很匆忙又不完整的狀態下，我知道得獎或入圍機率很低<br>但我還是沒有停止修改Foresea。<br>繳件讓我獲得短暫的休息，隔天起床我還是跟往常一樣，嘎啦嘎拉地打著鍵盤<br>把握在展覽前完成Foresea，包含一些細節上的優化。  </p>
+<p>四月底，組員第一時間貼出我們入圍消息，我不敢置信，<del>因為我被暴雷了</del>。<br>完全出乎我意料之外，網頁入圍就很棒了，我不敢相信的是遊戲竟然也入圍。  </p>
+<p>開心了幾小時，我又回到電腦面前繼續修改。<br>這個消息把修BUG到快沒電的我，換上新的強勁電池，滿電開始運作。  </p>
+<h3 id="開花時刻"><a href="#開花時刻" class="headerlink" title="開花時刻"></a><strong>開花時刻</strong></h3><p>展覽前3日，扛著行李到高雄，準備展前布置。<br>白天到展場幫忙，傍晚我馬上回到旅館，打開電腦又敲起鍵盤<br>一敲又是到早上六點，八點又趕到會場布置。  </p>
+<p>直至展覽前一天，我還是沒睡，除了修遊戲之外，也在準備來客導覽的內容。<br>完成主程式輸出後，把預備用的電腦充飽電，等待著明天上戰場。  </p>
+<p>展覽第一天，我的電腦中邪了。<del>絕對不是毒。</del><br>前一天檢查還好好的電腦，早上拔掉充電線重新檢查檔案<br>電腦開機卻不斷進入藍屏，修復作業也無用，眼看都要八點了<br>我緊急叫上組員的預備機，才解決這件事。展覽前組內就有準備2-3台電腦  </p>
+<p>好消息是<br>我以為要幫服役5年的電腦舉辦喪禮了，經過CPR(重灌作業)起死回生了🥴  </p>
+<p>God，能讓我稍微輕鬆一些嗎OTZ。  </p>
+<p>第一天，首發導覽是我，為了提神，灌了咖啡就上陣了<br>展覽這段期間，遇見很多有趣的人，像是 </p>
+<ul>
+<li>👨‍🎓同樣是學生，會交流製作心得與校際之間的差別等等</li>
+<li>👨‍💻遇到開發者，會給予很有用的回饋建議，解惑我的問題</li>
+<li>👾遇到遊戲論壇廠商，提供後續成品的發展建議</li>
+</ul>
+<blockquote>
+<h4 id="關於學生"><a href="#關於學生" class="headerlink" title="關於學生"></a><strong>關於學生</strong></h4></blockquote>
+<p>遇到科系性質很像的學校，像是中教大的數位<br>非常活潑的跑來交流，說著我們系的教程是他們的基底😆<br>互相吐槽著學習遇到的好笑的事<br>後來還來個校際外交，邀請對方去的攤位做客XDD。<br>也有遇到很多厭世大學生，看著看著就會開始談心的也很多😆  </p>
+<p>既然是性質很像，不免去逛逛，交流一下。<br>中教大的作品目標導向非常明確，通常是專注在某種議題上去發想<br>成品也蠻完整的，種類也很多，有桌遊、電腦遊戲、網頁、平面等等<br>結合議題延伸的成品，讓內容很充實。<br>如果未來有什麼聯展，我覺得也是不錯的經驗。  </p>
+<blockquote>
+<h4 id="關於開發者"><a href="#關於開發者" class="headerlink" title="關於開發者"></a><strong>關於開發者</strong></h4></blockquote>
+<p>當時被問到 : </p>
+<ul>
+<li>製作這個專題對你的意義是什麼 ? 遇到最困難的是什麼 ?</li>
+<li>作品往後的發展你們是怎麼想的 ?</li>
+<li>議題只是為專題而生? 還是有什麼企圖心 ?</li>
+</ul>
+<p>我知道可以很滑溜的說，會將作品提供給某某單位做教學使用、更新成手機板供大眾用等等的<br>但我卻誠實地說 : </p>
+<p><strong>「對，專題一結束，這個作品也走向終點了。」</strong></p>
+<p>因為我也想知道 <strong>同屆學生裡之間的差別</strong> 到底在哪。  </p>
+<blockquote>
+<p>講解得很詳細，專題也很完整，但就是少了 <strong>商業化</strong> 的思考</p>
+</blockquote>
+<p>對方舉例了很多他自己怎麼將作品商業化的例子，<br>像是 推出季更DLC 、找網紅推廣試玩等等<br>這邊比較像是行銷面，開發方面就不細講了，比較吃團隊創意😵。  </p>
+<p>後來我才知道 他也是個學生同時也是個開發者。<br>但不難看出，在各展覽競賽獲獎的作品，行銷面確實也做得不錯，<br>甚至很早就覺得 <strong>這一定會得獎</strong>  </p>
+<p>很快的一天就結束了，展覽過程中也少不了BUG的存在😵<br>導覽時幾乎都被我搞笑地呼攏過去。整體來說導覽很好玩，甚至我都忘了我沒睡這件事。 </p>
+<p>這幾天嗑了很多的咖啡因，都是處在完全亢奮的狀態<br>其中一天我意識到我快不行了，於是就休息了一下。<br><del>就跟著跑去唱卡拉OK桑一下，主要讓自己的精神緩緩😵</del><br>每天回到旅館後，第一件事就是坐在床上修起BUG。<br>沒錯，又熬到天荒地老。<br>在展覽最後一天，修到剩下不影響運作的小BUG🥳  </p>
+<h3 id="高處"><a href="#高處" class="headerlink" title="高處"></a><strong>高處</strong></h3><p>最後一天，因為有入圍，下午就前往頒獎典禮看開獎。<br>如果你是未來想創業、想獲得獎項、獲得廠商青睞，我非常建議你去看頒獎典禮，是自由參加  </p>
+<p>頒獎時，會請不同領域的專家以及公司創始人來頒獎<br>同時也會講解 <strong>評比的方向、目前市場所需、以及他們最想要看見的(現今作品欠缺的是什麼)</strong><br>不少獎項是有從缺的，代表當屆是沒有到水準的，但就是會有那一兩個脫穎而出無疑是金獎的  </p>
+<p>這裡，會聽到 <strong>自己跟別人有多大的差別OTZ</strong>，不會只有是校系問題，有很多小校系也是有得獎<br>總之大家都是有機會的，取決於 <strong>你是不是有做到那些面向。</strong>  </p>
+<p>評審最常講到<strong>商業化</strong>這件事，以<a href="https://gnn.gamer.com.tw/detail.php?sn=214633"><strong>遊戲組金獎</strong></a>為例好了<br>劈頭說 <strong>這直接可以賣了</strong>，除了完整度很高，架構穩，Idea也是不可少的，更重要的是發展性<br>這類型的遊戲性高，往後更新的方向是非常廣的。  </p>
+<p>當然，不同類型有他獨特的地方，我想教育遊戲也是有自己的一片天，看要怎麼發展而已。<br>有興趣的話可以查查看歷屆獲獎作品。  </p>
+<p>這天，我覺得自己的能力很弱，看著頒獎，比不上這些優秀的同學，我很失落<br>但我也知道自己欠缺了什麼，之後會更加地努力💪。<br>三天的展覽，跟著回程搭的末班車一同結束了。  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>完整看完的人給你拍拍手👏👏👏<br>雖然沒有100%將時間投入製作，因為同時3-4月我在考駕照，還有準備5月初的多益<del>(職場預備用)</del><br>製作Foresea幾乎占滿我大學最後一年的生活，不過幸好我活過來了。<br>還好駕照過了，可惜英文最後近乎裸考上陣，考了個不是很滿意的分數，應該夠用啦🥴。<br>但我還是不會後悔啦。  </p>
+<p>沒有這些歷程，就不會有第二篇的程式分享文<br>更不會有雙入圍或校外評分獲獎那些結果。<br>最主要的還是組員們非常可靠，才有這些成就👍，危難時都能立即神救援。  </p>
+<p>雖然很多時刻，我只能跟別人說</p>
+<blockquote>
+<p><strong>抱歉，我真的笑不出來</strong>  </p>
+</blockquote>
+<p>很多心情，並沒有告訴組員、朋友、甚至是父母<br>我不太想讓人去跟著操心，這些 <strong>需要從自己改變的事</strong>。<br>這不是好方法，我知道😕，但這就是我。<br>有人告訴我，這種什麼都沒講的人很容易出事<br>放心啦我還在貼 memes 代表我沒事0v0b  </p>
+<p>曾經有人問我為什麼所有事情都要拼命做到100分 ? 有些事情根本不值得。 </p>
+<blockquote>
+<p><strong>是啊。我也很想知道到底是什麼驅使我這麼做。</strong></p>
+</blockquote>
+<p>有些一看，就知道我拼命的結果不會是滿意的，但我還是會做。<br>像是繪畫這件事，並不是我的專長，我曾熬夜花好幾天去完成一個作業<br>結果理所當然還是比設計強項的同學差個十萬八千里<br>但如果不做，我就不會知道自己極限到哪裡，也看不清楚自己。  </p>
+<p>還記得某堂課有抽彩虹卡，我抽到  </p>
+<blockquote>
+<p> <strong>「I am Me,and I am okay.」</strong>  </p>
+</blockquote>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mdzIhAuXcAQuWuA69j7sXX5tId3C6_zCrp6xIZ8bwjmO423wbh6Sz5b3wrPDifwBIRIScg0_O61AXgf5TRJLBIIG0GpL3nH1xCK3Ng3awd1jnGLyvEWolPX8uhGaWK1NLmjNxuByu7AvEKEQRG9EJoq2aVWD3OixoT7oLPhBLq7_eIxRA9yxMNuMo4riMW1X0?width=256&height=172&cropmode=none">  </p>
+</center>
+
+<p>網路上的圖，我的忘記收在哪了<br>但我一直記得這句話<br>現在再看到真是一言難盡。 </p>
+<p>分享這些事，希望你也別遇到同樣的問題<br>要是遇到時也別氣餒，至少還有我這個<strong>廢出新高度</strong>的極端例子<br>讓你不會那麼快放棄🥴<br>好的，各位，掰掰了~ (´◓Д◔`)  </p>
 ]]></content>
       <categories>
         <category>bookreport</category>
