@@ -31,7 +31,7 @@
 <meta property="og:description" content="從簡單例子看何謂宣告提升">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-13T13:43:50.000Z">
-<meta property="article:modified_time" content="2022-01-13T13:49:16.653Z">
+<meta property="article:modified_time" content="2022-01-13T13:52:13.216Z">
 <meta property="article:author" content="Rosa Hong">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -383,7 +383,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">&#125;</span>
 <span class="token operator">--</span><span class="token operator">-</span>
 result <span class="token operator">:</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>起初我以為 a 會是 <code>is not defined</code><br>或是 <code>undefined</code><br>但是 test 執行實先把變數 a 給提升<br>並在函式內把 a 賦值 30<br>也就是這個 a 提升已經到 global 了   </p>
+<p>起初我以為 a 會是 <code>is not defined</code><br>或是 <code>undefined</code><br>但是 test 執行時先把變數 a 給提升<br>並在函式內把 a 賦值 30<br>也就是這個 a 提升已經到 global 了   </p>
 <blockquote>
 <p>在 function 裡都沒有宣告<br>但有賦值，就會在 global 的地方宣告該變數<br>並且 <code>根據 Scope Chain</code> 往上找<br>不過一般來說不會建議沒有宣告就賦值。</p>
 </blockquote>
@@ -418,7 +418,7 @@ result <span class="token operator">:</span> test is not a <span class="token ke
 <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>也就是宣告 test 再賦值<br>由此可知宣告提升並不會連賦值都一起提升  </p>
+<p>也就是先宣告 test 再賦值<br>由此可知宣告提升並不會連賦值都一起提升  </p>
 <p>再來看看有參數的函式呢？</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
