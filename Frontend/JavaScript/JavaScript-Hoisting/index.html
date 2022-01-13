@@ -23,24 +23,21 @@
     var CONFIG = {"hostname":"meitung473.github.io","root":"/RosaBlog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"Pisces | Gemini":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"buttons","active":true,"storage":true,"lazyload":true,"nav":{"disqus":{"text":"留言區","order":-1}},"Available values":"disqus"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="用來判斷型態的 typeof">
+  <meta name="description" content="從簡單例子看何謂宣告提升">
 <meta property="og:type" content="article">
-<meta property="og:title" content="⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof">
-<meta property="og:url" content="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript_typeof/">
+<meta property="og:title" content="⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為">
+<meta property="og:url" content="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">
 <meta property="og:site_name" content="健忘雜記">
-<meta property="og:description" content="用來判斷型態的 typeof">
+<meta property="og:description" content="從簡單例子看何謂宣告提升">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://dsm01pap006files.storage.live.com/y4mGp4At_MjbSIvnrU9AEgFCzvUmROBsIV5v1tGQaDaJY9tAVO1bZcprgUpUOG9btna_AAvZABPjZsB6FFu0hfNETi8bKXOole-CacnFbpoEsUE68p4L8pBfY_r0ptOJloSxkvkTjf6OAJsQ-O7HsfCfLUyxel4VPf35BpS5ZgsEhmrvZo3-fw9IwrOHeoFaey9?width=625&height=390&cropmode=none">
-<meta property="og:image" content="https://dsm01pap006files.storage.live.com/y4mmkfwiKEgP7WgOuN5z81LDBLH4oukWL2ubilP96ARJyClsALcHwh_PvT7MPCtpr0_7dJdQqrI828TQkxB_PfjkIpYpPT3vtTXQ1wUyiGkYK0-cc3NO7nMuB8BTVjtV-kVkboovg7L3y0yIwoTaC95RrR_Bx9LgK-8N1bcq-fciqoSNozQVeSaJ7z3xgt67CIC?width=772&height=395&cropmode=none">
-<meta property="article:published_time" content="2022-01-12T12:19:58.000Z">
-<meta property="article:modified_time" content="2022-01-13T12:21:14.317Z">
+<meta property="article:published_time" content="2022-01-13T13:43:50.000Z">
+<meta property="article:modified_time" content="2022-01-13T13:43:50.767Z">
 <meta property="article:author" content="Rosa Hong">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dsm01pap006files.storage.live.com/y4mGp4At_MjbSIvnrU9AEgFCzvUmROBsIV5v1tGQaDaJY9tAVO1bZcprgUpUOG9btna_AAvZABPjZsB6FFu0hfNETi8bKXOole-CacnFbpoEsUE68p4L8pBfY_r0ptOJloSxkvkTjf6OAJsQ-O7HsfCfLUyxel4VPf35BpS5ZgsEhmrvZo3-fw9IwrOHeoFaey9?width=625&height=390&cropmode=none">
 
 
-<link rel="canonical" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript_typeof/">
+<link rel="canonical" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">
 
 
 <script class="page-configurations">
@@ -53,7 +50,7 @@
   };
 </script>
 
-  <title>⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof | 健忘雜記</title>
+  <title>⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為 | 健忘雜記</title>
   
 
 
@@ -214,7 +211,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typeof"><span class="nav-number">2.</span> <span class="nav-text">typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null-%E7%9C%BE%E4%BA%BA%E7%9A%86%E7%9F%A5%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.1.</span> <span class="nav-text">null 眾人皆知的漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E7%A2%BA%E5%88%87%E4%B8%80%E9%BB%9E%E7%9A%84%E5%9E%8B%E6%85%8B"><span class="nav-number">2.2.</span> <span class="nav-text">更確切一點的型態</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%87%BA%E9%8C%AF%E7%9A%84-undefined"><span class="nav-number">2.3.</span> <span class="nav-text">避免出錯的 undefined</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">總結</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E8%AC%82%E5%AE%A3%E5%91%8A%E6%8F%90%E5%8D%87%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">何謂宣告提升？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E7%9A%84%E5%AE%A3%E5%91%8A%E6%8F%90%E5%8D%87"><span class="nav-number">2.1.</span> <span class="nav-text">變數的宣告提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">常見問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-%E7%9A%84%E5%AE%A3%E5%91%8A%E6%8F%90%E5%8D%87"><span class="nav-number">2.3.</span> <span class="nav-text">function 的宣告提升</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">小結</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -288,7 +285,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript_typeof/">
+    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
@@ -304,7 +301,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof
+          ⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為
         </h1>
 
         <div class="post-meta-container">
@@ -315,7 +312,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-01-12 20:19:58" itemprop="dateCreated datePublished" datetime="2022-01-12T20:19:58+08:00">2022-01-12</time>
+      <time title="創建時間：2022-01-13 21:43:50" itemprop="dateCreated datePublished" datetime="2022-01-13T21:43:50+08:00">2022-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -339,18 +336,18 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">文章字數：</span>
-      <span>1.3k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="所需閱讀時間">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-      <span>1 分鐘</span>
+      <span>2 分鐘</span>
     </span>
 </div>
 
-            <div class="post-description">用來判斷型態的 typeof</div>
+            <div class="post-description">從簡單例子看何謂宣告提升</div>
         </div>
       </header>
 
@@ -358,72 +355,91 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>typeof 是檢查類別的好幫手<br>一學才知道 typeof 只是小小咖<br>甚至在 stackoverflow 上有這麼一道題目  </p>
-<p><a href="https://stackoverflow.com/questions/48270127/can-a-1-a-2-a-3-ever-evaluate-to-true">Can (a== 1 &amp;&amp; a ==2 &amp;&amp; a==3) ever evaluate to true?</a>  </p>
-<p>這怎麼可能，<code>1==2==3</code> !?<br>先了解資料型態，再來了解這怎麼實現! </p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>typeof 可以知道值的型態</p>
-<p>在 <code>Object</code>、<code>Array</code>、<code>Date</code> 以及  <strong><code>null</code></strong><br>都是 <code>Object</code><br><code>null</code> 是唯一的特例，下面會再提到  </p>
-<p><img data-src="https://dsm01pap006files.storage.live.com/y4mGp4At_MjbSIvnrU9AEgFCzvUmROBsIV5v1tGQaDaJY9tAVO1bZcprgUpUOG9btna_AAvZABPjZsB6FFu0hfNETi8bKXOole-CacnFbpoEsUE68p4L8pBfY_r0ptOJloSxkvkTjf6OAJsQ-O7HsfCfLUyxel4VPf35BpS5ZgsEhmrvZo3-fw9IwrOHeoFaey9?width=625&height=390&cropmode=none" alt="typeof各類型"></p>
-<ul>
-<li>如何真的判斷是 <strong>真</strong> 陣列 ?<br>Array 會被算在 Object 範疇裡<br>想要知道真的陣列物件可以使用<br><strong><code>Array.isArray(value)</code></strong>  </li>
-</ul>
-<p>或者更精確的判別類型<br><code>Object.prototype.toString.call(value)</code><br>prototype 是 JavaScript 很重要的屬性<br>是實作的一種基底<br><code>toString</code> 會把印出物件的屬性轉為字串</p>
-<h3 id="null-眾人皆知的漏洞"><a href="#null-眾人皆知的漏洞" class="headerlink" title="null 眾人皆知的漏洞"></a>null 眾人皆知的漏洞</h3><ul>
-<li><strong>null</strong> 為什麼是 object ?<br>  是 javascript 程式設計上的錯誤<br>  底層實作的 <code>type tag</code> object 是 00<br>  但是 <code>null</code> 也是指向 0<br>  所以 <code>null</code> 也會被判別為 object<br>  是廣為人知的 bug  </li>
-</ul>
-<p>ECMAScript 原本要改規則<br><code>typeof null===null</code><br>但是被拒絕掉了 OAO  </p>
-<h3 id="更確切一點的型態"><a href="#更確切一點的型態" class="headerlink" title="更確切一點的型態"></a>更確切一點的型態</h3><p><code>Object.prototype.toString.call(value)</code><br>不管是哪種型態，都可以更正確的被判斷<br><img data-src="https://dsm01pap006files.storage.live.com/y4mmkfwiKEgP7WgOuN5z81LDBLH4oukWL2ubilP96ARJyClsALcHwh_PvT7MPCtpr0_7dJdQqrI828TQkxB_PfjkIpYpPT3vtTXQ1wUyiGkYK0-cc3NO7nMuB8BTVjtV-kVkboovg7L3y0yIwoTaC95RrR_Bx9LgK-8N1bcq-fciqoSNozQVeSaJ7z3xgt67CIC?width=772&height=395&cropmode=none" alt="toString各類型"></p>
-<h3 id="避免出錯的-undefined"><a href="#避免出錯的-undefined" class="headerlink" title="避免出錯的 undefined"></a>避免出錯的 undefined</h3><p>JavaScript 是單線程(非同步)的語言<br>也就是程式會一行行往下執行<br>但如果要印出沒有定義的變數<br>必定會錯誤</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宣告提升 (Hoisting) 在 JavaScript 中不得不知<br>究竟 JavaScript 搞了什麼鬼<br>導致你認為的值不是那個值捏 !<br>其實這跟 JavaScript 如何運作也有關係<br>不過先從最簡單的概念開始吧 ! :O</p>
+<h2 id="何謂宣告提升？"><a href="#何謂宣告提升？" class="headerlink" title="何謂宣告提升？"></a>何謂宣告提升？</h2><p>其實我覺得很抽象<br>如果單看程式碼會不知道哪裡被提升<br>以及怎麼被提升？  </p>
+<p>所謂的提升<br>其實是 JavaScript 底層運作的機制<br>分別是執行環境 (Execution Content) 跟 作用域 (Scope)<br>根據作用域鏈 (Scope Chain) 來看的<br>不過關於這些東西慢慢地來說<br>可以先透過幾個例子來了解宣告提升    </p>
+<h3 id="變數的宣告提升"><a href="#變數的宣告提升" class="headerlink" title="變數的宣告提升"></a>變數的宣告提升</h3><p>這邊暫不討論 ES6 中的 <code>let</code> 與 <code>const</code><br>以 ES5 的宣告變數 <code>var</code> 為例</p>
+<p>基礎題</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> error <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>但如果 typeof 某個定義的變數<br>會是 undefined</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a<span class="token punctuation">)</span>
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>離奇的是用 var 也是 <code>undefined</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token keyword">var</span> a
-<span class="token operator">--</span><span class="token operator">-</span>
-result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因為 var 會做宣告提升</p>
-<ul>
-<li>宣告提升  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//var a;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span>
 <span class="token operator">--</span><span class="token operator">-</span>
-result<span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-  系統會幫你補上未定義的變數<br>  但還是不會賦值</li>
-</ul>
-<hr>
-<p>避免變數沒有定義的情況下出現錯誤<br>可以用 <code>typeof</code> 檢測  </p>
+result <span class="token operator">:</span> <span class="token keyword">undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看成 : </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a 
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+a <span class="token operator">=</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>JavaScript 幫我們在最上層補上了一個定義變數 a<br>又因為 JavaScript 是一行行往下讀<br>所以當執行到 console.log(a)<br>a 是定義了但沒有值<br>所以是 <code>undefined</code>  </p>
+<p>那有宣告跟沒宣告的差別？  </p>
+<p>這樣什麼都沒有就會出錯</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> a is not defined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>所以通常變數的宣告會在最上面<br>除了版面不會太凌亂以外<br>也是避免說忘記宣告<br>尤其是在 function 裡頭  </p>
+<h3 id="常見問題"><a href="#常見問題" class="headerlink" title="常見問題"></a>常見問題</h3><p>function 裡的變數如果未宣告會如何？<br>可以看下面的例子  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	a <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>起初我以為 a 會是 <code>is not defined</code><br>或是 <code>undefined</code><br>但是 test 執行實先把變數 a 給提升<br>並在函式內把 a 賦值 30<br>也就是這個 a 提升已經到 global 了   </p>
 <blockquote>
-<p>記住 typeof 回傳的值類別是 <strong>字串</strong><br>所以後面要是對比字串</p>
+<p>在 function 裡都沒有宣告<br>但有賦值，就會在 global 的地方宣告該變數<br>並且 <code>根據 Scope Chain</code> 往上找<br>不過一般來說不會建議沒有宣告就賦值。</p>
 </blockquote>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a <span class="token operator">!==</span><span class="token string">'undefined'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-	<span class="token comment">//dosomething...</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>錯誤寫法<br>會報錯，因為 a 沒有宣告  </p>
-<pre><code class="javascript">    if(a !== undefined)&#123;
-        console.log(a)
-        //dosomething...
-    &#125;
-</code></pre>
-<hr>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ol>
-<li><code>typeof</code> 回傳的類型是字串</li>
-<li><code>typeof null</code> 會回傳值會是 <code>object</code>  </li>
-<li><code>Object.prototype.toString.call()</code> 可以取得較正確的資料型態，包含 <code>null</code> 也會傳 <code>null</code>  </li>
+<h3 id="function-的宣告提升"><a href="#function-的宣告提升" class="headerlink" title="function 的宣告提升"></a><code>function</code> 的宣告提升</h3><p>除了變數的提升<br>其實還有 function 也會提升  </p>
+<p>函式陳述式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>		
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一般來說要 <strong>使用之前要先宣告</strong><br>但 function 可以先使用再宣告<br>因為會宣告提升    </p>
+<p>可以看成把 <code>function</code> 放到呼叫之前<br>其他程式語言是沒這樣的<br>在 JavaScript 想呼叫隨時都可以呼叫 👌<br>我是覺得很奇妙<br>但一方面覺得這樣的設計在版面上可以更易讀   </p>
+<p>函式表達式  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>透過表達式宣告一個變數將 function 存起來<br>這邊的 function 是一個沒有名字的匿名函式<br>一般來說會這樣執行  </p>
+<p>如果是宣告變數把函式存起來<br>提早先呼叫函式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">--</span><span class="token operator">-</span>
+result <span class="token operator">:</span> test is not a <span class="token keyword">function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>咦！不是 function 隨 call 隨用嗎？<br>如果是函式表達式可以把整個分為兩塊  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> test<span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也就是宣告 test 再賦值<br>由此可知宣告提升並不會連賦值都一起提升  </p>
+<p>再來看看有參數的函式呢？</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我知道！是 <code>undefined</code><br>因為 a 會做宣告提升<br>可以看成這樣 </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> a<span class="token punctuation">;</span> <span class="token comment">//undefined</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>果結不對，其實是 <code>1</code><br>這個 1 並不是來自函式的 <code>a=1</code><br>而是參數的 <code>1</code><br>由此可以知道函式裡有參數的話<br>其實參數也會做宣告提升    </p>
+<p>至於提升的順序為何？<br>如何提升？<br>後面會再提到 :D</p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
+<li><code>var</code> 會做宣告提升  </li>
+<li><code>函式陳述式</code> 會做宣告提升  </li>
+<li><code>函式表達式</code> 是屬於賦值 (等號右邊)，不會做宣告提升  </li>
 </ol>
-<p>原來如此，typeof 並不是萬能的<br>在查找 <code>Object.prototype.toString</code> 過程中<br>也認識到不同類型進行比較時<br>會轉型同類別再比較<br>Object type 的轉型會經過兩種規則  </p>
-<ol>
-<li>valueOf</li>
-<li>toString</li>
-</ol>
-<p>之後要再深入研究這兩種的差別<br>以及各類別的比較規則!  </p>
+<p>這篇了解哪些會做宣告提升<br>並且賦值的值並不會一起提升<br>下一篇要更了解比較的順序以及宣告提升的好處？    </p>
 
     </div>
 
@@ -443,7 +459,7 @@ result<span class="token operator">:</span> <span class="token keyword">undefine
       <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_API_twitch\" rel="bookmark">⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Hoisting\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</a></div>
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_typeof\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a></div>
     </li>
   </ul>
 
@@ -457,14 +473,11 @@ result<span class="token operator">:</span> <span class="token keyword">undefine
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/RosaBlog/Frontend/JavaScript/JavaScript_API_twitch/" rel="prev" title="⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰">
-                  <i class="fa fa-chevron-left"></i> ⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰
+                <a href="/RosaBlog/Frontend/JavaScript/JavaScript_typeof/" rel="prev" title="⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof">
+                  <i class="fa fa-chevron-left"></i> ⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/" rel="next" title="⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為">
-                  ⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
