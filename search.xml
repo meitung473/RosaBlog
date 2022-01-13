@@ -62,7 +62,7 @@
 <li>如果有一堆黃色驚嘆號，是正常的</li>
 <li>按開始無反應，可能是 <code>Tag</code> 或是<code>layer</code> 設定跑掉，導致程式找不到。請自行創建 layer 與 tag 替換上。  </li>
 </ol>
-<p>🤙可以詢問我， Email :  <a href="mailto:&#121;&#97;&#110;&#115;&#x68;&#x61;&#x6e;&#104;&#111;&#110;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#121;&#97;&#110;&#115;&#x68;&#x61;&#x6e;&#104;&#111;&#110;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;</a>  </p>
+<p>🤙可以詢問我， Email :  <a href="mailto:&#121;&#97;&#x6e;&#115;&#104;&#x61;&#x6e;&#104;&#x6f;&#x6e;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#121;&#97;&#x6e;&#115;&#104;&#x61;&#x6e;&#104;&#x6f;&#x6e;&#103;&#x32;&#x33;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>  </p>
 <blockquote>
 <p>📄 <strong><a href="https://1drv.ms/u/s!AtRw0OR0iI_KjYJrOgYRJWs_90BckQ">Download</a></strong>  </p>
 </blockquote>
@@ -136,790 +136,354 @@
       </tags>
   </entry>
   <entry>
-    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(I)</title>
-    <url>/RosaBlog/Blog/Hexo-BuildBloger-I/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>每次在學習新的概念，都會忘記零碎的步驟<br>想說還是來架個網頁來記錄好了  </p>
-<p>雖然我自己有在Notion 紀錄前端、動畫以及Unity等等的學習文<br>但很常忘記更新，很多都東西做完文章卻寫到一半<br>不得不說寫文章還蠻…累人的，很常想寫成「大家覺得很棒的文」  </p>
-<p>這樣不行!寫文章成了有點痛苦的事，寫的時間也加倍，就變教材了<br>於是辦了一個專頁「經營」，像跟大家紀錄分享心得這樣<br>當然，滑FB我可是不會錯過的，經營也會讓大家像在監督一樣，就決定做了!  </p>
-<p>另外也是受到 <a href="https://hulitw.medium.com/blog-e7a23a74ae2b"><strong>Huli 大大的文章</strong></a>啟發，才下定決心認真做  </p>
-<blockquote>
-<p>對阿，寫文章即使是廢文也沒關係，我的文章又沒有多少人會看，自己看得懂就好  </p>
-</blockquote>
-<p>在那之前有想過用 Blogspot 、Notion、HackMD…等等的<br>但想想自己想成為一個 Junior Web Developer<br>就還是想自己打指令來架XD  </p>
-<p>很常看技術文的時候<br>一直看到同個版面的主題，一度讓我以為是X角學院的架網站作業<br>結果是Hexo，查一查才知道這東西有多好用<br>啊~沒錯就是那個 NEXT 主題，很好看，我也很想架一個<br>說來就來吧!  </p>
-<h2 id="環境建置"><a href="#環境建置" class="headerlink" title="環境建置"></a>環境建置</h2><p>我是使用 <code>Window 10 + Visual Studio Code</code> 來建置哦!<br>簡單來說是 使用 <code>git + Hexo</code> 來架架構<br>最後使用 <code>github pages</code> 來做網站發布的地方  </p>
-<blockquote>
-<p><a href="https://hexo.io/zh-tw/">官方 Hexo 安裝文件</a></p>
-</blockquote>
-<ol>
-<li>需要下載 node.js 因為Hexo 是基於Node.js 的網誌框架<br>版本選LTS 長期維護的版本就可以了，除非有要用到很新的功能  <ul>
-<li><a href="https://nodejs.org/en/">Node.js</a></li>
-</ul>
-</li>
-<li>下載git，拿來做專案上的版本控制，至於git嘛…還在學<ul>
-<li><a href="https://git-scm.com/downloads">Downloads</a>  </li>
-</ul>
-</li>
-</ol>
-<p>原本我先創建好資料夾在Visual Studio開始步驟<br>確認npm、node 版本  </p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">npm <span class="token operator">-</span>v
-node <span class="token operator">-</span>v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ul>
-<li>v 是<code>version</code>  </li>
-</ul>
-<p>官方有說建議使用 Node.js 10.0 及以上版本  </p>
-<blockquote>
-<p>安裝Hexo</p>
-</blockquote>
-<pre class="line-numbers language-none"><code class="language-none">npm install hexo-cli -g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>挖咧，第一個安裝就遇到問題<br><img data-src="https://chi01pap001files.storage.live.com/y4mCxHVbujSFcMehB-U5KPzs--xmlmuYVVZe2pMyTZSft1rncg9MkzMxxEosNX3BuTX2KnWZ9fs3KOT_aS8Gv8d92vR79PvIFdkSQIq8LBBvUSFulofH9OmU8rtEPfEenW5qP1eVPwXf3ij67XR3qSEkl85Kn-iTyrBbx1vCJrrxlcvGY9P-nEUuOQjzGriSrSA?width=660&height=139&cropmode=none"><br>爬了一小時的文也無解阿…<br>網路上都說 WARN 是沒關係的<br>參考<a href="https://github.com/hexojs/hexo/issues?q=npm+WARN+optional+SKIPPING+OPTIONAL+DEPENDENCY:+fsevents@~2.3.2">官方issue</a>這邊的三篇文還是無解<br>像是 <code>fsevents</code> 是 Mac使用上要注意的點，Window可以忽略<br>到這步是已經完成安裝了才對，像是輸入 <code>hexo -v</code> 應該能看到hexo的版本<br>但當我查詢 Hexo 的版本來確定是否安裝了<br>結果還是悲劇QQ  </p>
-<p>於是我決定重新安裝node.js，按照巴哈這篇的指示去做<br><a href="https://home.gamer.com.tw/creationDetail.php?sn=4849277">【教學】10分鐘內從安裝Hexo到佈署至GitHub Pages - 巴哈姆特</a><br>唉呦!蠻成功的哦 ! 不過過程還是有一些奇怪的錯誤QQ<br>以下是我的紀錄  </p>
-<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>安裝完環境後在想要建立檔案夾的地方案右鍵<br>按 Git Bash here ，要開始長專案的地方了<br>接著會打開cmd  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mIK9wCuNQwZ0zJMHkou9hRVyXWh28JoKBA-1bZ6FcLDaKkUPDeGBpyQdYuH7VsvRi8nhD8WVovBSyTOKR2vGocFQviA6ShMudM1SNTyUeWmn4tvzaCQrqA_9XZkZU6RyLDkXxW-xtFuoacHlZydEqGzsdwsosj-3VDki_KfPysUZuSuBYT5f7KiXGRzy4LccO?width=380&height=477&cropmode=none">  </p>
-<ol>
-<li>輸入 <code>npm install hexo-cli -g</code> 安裝hexo</li>
-<li><code>hexo init **自訂義資料夾名稱**</code> hexo建置的設定</li>
-<li><code>cd **資料夾名稱**</code> 移到剛剛指定的資料夾，記得cd前是在資料夾外部，要設定的東西要移到裡面哦!  </li>
-<li><code>npm install</code> npm檔案建立</li>
-<li><code>hexo g</code> 建立網頁，這是 <code>hexo generate</code> 的縮寫，大致來說就是收集/重構</li>
-</ol>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m7NCCI1fphAc3k5NKaTmP41Iby0YB-h5Cbn-SwSnTImTZZTJAXyCTjmzq_CzVAaFfJLche0TAe2N1b2iDmjbLYdY5oNFGpThho_rkUOhEv6klUo9MtSGnbbFRuvSN4SM8lCcFRK8VgKkLtWDq5ZRCsl80U_tA2pgHfnSP2rcbFDcrqLekv2DOaaWDWdWX_IxP?width=256&height=143&cropmode=none"><br>有一個大大的NEXT 可以忽略，因為我已經偷去安裝NEXT主題XD<br>一開始沒有是正常的哦!  </p>
-<ol start="6">
-<li><code>hexo s</code> 建立伺服器，這是  <code>hexo server</code> 的縮寫，會開啟本機伺服器來測試哦!</li>
-</ol>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mycn74k2IMLb1w2uZqoidTS7ipFDmgX_9nGZ-2GL_7L8jfiX0em-cxLBDOu8YCbDrJVCfYn8Xjk6tHvjv8RV8QM09oQx1kStTjZaxi8lcVmolKGkM-pIN5TcDc3g1oNKLsFuH282XlaWq2rx7xlnBL7Esif-E6eXPZOmDoFXzRslmIlhzdmFzNUJtN_jjV2po?width=256&height=126&cropmode=none"></p>
-<p>之後它會寫出 <a href="http://localhost:4000/">localhost:4000</a><br>在網址中輸入<code>localhost:4000</code>就可以看到原始設定好的網站<br>哈哈我設定的太多看不出來原本的，之後還會設定相關的布局。<br>最簡單的長出網站就完成了<br><img data-src="https://chi01pap001files.storage.live.com/y4mCBYZSy_5x5ydLOC4xpxPk09WVHkKiY1buv_Qa5pOl3SoFu0g_9VBg6nQ3gc-q53DUu1dE6sSWMz71miCQZX1u0W7M-YoSTICiWD4HEkJvAEcdPq37uv-XwmdrZQz059IYZgPocbyyWRz_JEDLe_qHI9_WcB2M6HDAAZXsOot7S1trnAuWdche5gN_C9DNs5n?width=660&height=425&cropmode=none"><br>最後是要發布在github pages 上，這等下一篇在來說明吧!  </p>
-<h2 id="遇到技術排解ing"><a href="#遇到技術排解ing" class="headerlink" title="遇到技術排解ing"></a>遇到技術排解ing</h2><p>中途還是有遇到一些問題，雖然在 git 的cmd裡沒問題<br>但在Visual Studio 中的 powershell 輸入指令卻不能用😵<br>明明安裝hexo成功了卻不能在VS編輯使用指令….  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mtLrJFmWIviARn_idGlEGScnJlDZW4X9uIenTO3iDKoj9MRUcB73XwcF8mDojM8sQ6Pa-FltKSD9VC7mQM__GWt1acgomR4armP7ink0UX67mCelMg4t79T8z2KRrcyjEneSwGENJ6w87c7CuV5wOkip17Ou_4MLn7XElvmHtpdva7bN1_08VbsMA0WOTrzBV?width=660&height=115&cropmode=none"></p>
-<p>原因是Window 因安全性的問題，而開啟的一個機制<br>又稱「限制原則」，要打開的話就需要開啟權限來設定  </p>
-<p>這邊的解決方法 : <code>Set-ExecutionPolicy</code> 更細節的設定資訊可以看參考資料  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m0d30xMqYQ4AGiWx9HRjiCsP3xrKm11lqIZVUC5RgItMt77XCL6eldhygSUot7xrbCC0vLc6cMvQU2qtW2FKUHQ8eFajj_Hg3goYS5BUVrJE1R1v9d-UDbCRV-OZobhz5LNUdA83Yz918yvHotQf4gJgOnZalgXgxfxUEaoigtBMoUOErj92GWozOti0UpPS7?width=1024&height=439&cropmode=none">  </p>
-<p>啊…結果權限不夠QQ，因此要用<strong>「系統管理員」</strong>執行哦!<br>不過紅字第三行有提到，請執行<code>Set-ExecutionPolicy -Scope CurrentUser</code>  </p>
-<blockquote>
-<p>我的理解是<br>如果妳現在登入的使用者是系統管理員的話可以直接使用<br>基本上我的電腦就是了，不需要再特定開  </p>
-</blockquote>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mmJ2BZ3aT_LKsge3e5oES5mrHnK_IBEo2o6a7w7lfGGBwmgHWev35sXk7fMuSqvgnQO5F72YihlbeMVTIAuCEX6z6IjCMSO44FW1OGofu2i5wvRPKzNW6eDnVdAYolnEzxtX6I0o-ikpECKfS2LthdXvFg_R5DU6AnzP1GRztpausnBPEegbI6BGqWDhrdc4I?width=660&height=93&cropmode=none"></p>
-<p>如果再不行就到 <code>開始 &gt; 搜尋 &gt; powershell</code><br>對著應用程式按右鍵使用系統管理員執行    </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m-q_Dw7jek9H56ojCPVFlInrzSXG4PNNYgYeHS67nnvUAXn7ehSdBeI0eJmY-ZqlxtVTKkKqWKbGbfyTHJ4yvs-D8r5MJzLeEVsqbIkjYIJXh4AcS6inKRaJR5KOWa1ujEtUOMkLXN2MiQ4CTjVUgE3M3Y3pMMny-qgKkLWm62_Fu3YG_ju2QGOGSOdE9gbJO?width=256&height=103&cropmode=none"></p>
-<p>它會請求輸入值，輸入 <strong><code>RemoteSigned</code></strong><br>意思是  </p>
-<blockquote>
-<p>同意本機撰寫的腳本檔案，不需要簽署就可以執行<br>npm install 遠端下載的其它東西經過可信任的發行者簽署後才可以執行。  </p>
-</blockquote>
-<ul>
-<li> <a href="https://hsiangfeng.github.io/other/20200510/1067127387/">Window安全性 解決的辦法參考資料</a></li>
-</ul>
-<p>燈愣!<br>沒想到成功了，可以在VS裡盡情的打了<br>我想我開啟的方式可能有些錯誤啦…<br>繞了不少路，這次就當教訓吧  </p>
-<p>明天就架完成吧!<br>這篇寫得有點急有點亂，會在進行統整在新的部落格中哦!</p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>部落格</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)</title>
-    <url>/RosaBlog/Blog/Hexo-BuildBloger-III/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>呼!建置的差不多了<br>原本要總結研究 Hexo 三天的成果<br>寫成比較順暢的建構過程<br>結果一弄又更新好多東西…<br>一樣先來補齊概念吧!<br>月底再來一個大總結&gt;&lt;    </p>
-<hr>
-<h2 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h2><pre><code>+Blogger 
-|- .github
-|- .vscode
-|- .node_modules  
-|- .scaffolds
-    |- draft.md
-    |- page.md
-    |- post.md
-|- .source
-    |- _drafts
-    |- _posts
-    |- 其他頁面(略)
-|- .themes
-    |- next
-        |- (略)
-        |- languages
-        |- layout
-        |- (略)
-|- _config.next.yml
-|- _config.yml
-|- package.json
-+  
-</code></pre>
-<p>這邊我僅有挑我有用到的幾個  </p>
-<blockquote>
-<p> 最外層  </p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>.node_modules</td>
-<td>npm原始設定(不常用)</td>
-</tr>
-<tr>
-<td>.scaffolds</td>
-<td>文章狀態模板 (可以修訂統一模板)</td>
-</tr>
-<tr>
-<td>.public</td>
-<td>發布自動後生成的資料夾 (不用動)</td>
-</tr>
-<tr>
-<td>.source</td>
-<td>部落格編輯(文字都在這編輯)</td>
-</tr>
-<tr>
-<td>.themes</td>
-<td>編輯主題樣式(相關 css )</td>
-</tr>
-<tr>
-<td>._config.next.yml</td>
-<td>next 安裝設定檔，多是插件</td>
-</tr>
-<tr>
-<td>._config.yml</td>
-<td>hexo 安裝設定檔</td>
-</tr>
-<tr>
-<td>.package.json</td>
-<td>專案的設定檔，會寫安裝什麼東西(基本上不用動)</td>
-</tr>
-</tbody></table>
-<blockquote>
-<blockquote>
-<p>. scaffolds</p>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>_drafts</td>
-<td>草稿模板</td>
-</tr>
-<tr>
-<td>page .md</td>
-<td>頁面模板</td>
-</tr>
-<tr>
-<td>post .md</td>
-<td>文章模板</td>
-</tr>
-</tbody></table>
-<ul>
-<li>指令快速記!   <pre><code class="cmd">hexo new draft 文章名稱  //建立一篇草稿  
-hexo new post 文章名稱  //建立一篇新文章  
-hexo new page 頁面名稱 //建立一篇新頁面，同時source 會建立新的資料夾  
-hexo publish 版面 檔案名稱 // 發布(草稿)  
-</code></pre>
-</li>
-</ul>
-<blockquote>
-<blockquote>
-<p>. source</p>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>_drafts</td>
-<td>草稿會在這</td>
-</tr>
-<tr>
-<td>_posts</td>
-<td>發布的貼文都會在這</td>
-</tr>
-<tr>
-<td>其他頁面資料夾</td>
-<td>像是About、tags、categroies..</td>
-</tr>
-</tbody></table>
-<p>因為一開始沒有About等等的基礎頁面，自己要新增  </p>
-<pre><code class="cmd">  hexo new page About  
-  hexo new page tags 
-  hexo new page categroies 
-</code></pre>
-<p>然後新頁面新增 <code>type</code> 來做頁面記號<br><img data-src="https://chi01pap001files.storage.live.com/y4mUs5S3stfFRMyDXC2wenjxmYnUyrrWZLN195KoJDuBNbjDIUXcIHbvzGlPGiUiyTgjwNaoLwYAM6i881mLxbBrFsfqBSUm0CSwtIWpIcZ8psQgmom42pugcn98p5OsSHq8t7JU1GKO7NotQ-nqR1teCP-h9lS_J3AZkoZWgJ-o7187LBZXhCtg7x2BWH8ou9t?width=865&height=303&cropmode=none" alt="categroies_type"><br>這頁是分類，跟設定檔的地方對應哦! 頁面 - 路徑<br><img data-src="https://chi01pap001files.storage.live.com/y4mSHJlXGuxGrOywWFqkyu391Exl7Z_yJrwNUwZTN56tV5LPXobIEudNoPFKamiALfWJe9NbCEJmdI2PLekXQ5b67LgUGmQurJ8LEta7IHg3crrFvX8YfLeVZ-zTllPrB9b88o6RngYO2tbAoyjmtBFF1Fq5YxN-BnGO1Q-4DaX4Lt8H4X_apXvACFiKuR515oO?width=715&height=1510&cropmode=none" alt="路徑">  </p>
-<blockquote>
-<blockquote>
-<p>. themes - .next (依照主題去分資料夾)  </p>
-</blockquote>
-</blockquote>
-<p>如果 theme 沒有跑出 next 的資料夾，可以用git 的方式 clone 一下<br><u><a href="https://github.com/theme-next/hexo-theme-next">官方教學 底加</a></u>  </p>
-<pre><code class="cmd">    git clone https://github.com/theme-next/hexo-theme-next themes/next  
-</code></pre>
-<p>之後我就GG了，因為 NEXT 主題更新蠻快的，導致一些語法或函式沒統一更新到，最近的是8.0版<br>網路上layout檔是 <code>.swig</code> ，我的是<code>.njk</code><br>我問號了起來，不過還好語法上差不了多少<br>但在 <code>hexo g</code> 會報錯，主要是<code>load</code>的函式要更新用法 </p>
-<p>會顯示 <code>yml.safeload</code> 用法過時，必須改成 <code>yml.load</code><br>最快速的方法就是  </p>
-<pre><code class="js">1. 專案的搜尋欄打 safeload  
-2. 找到 `vendors.js` 
-3. 尋找 `yml.safeload`
-4. const dependencies = yaml.safeLoad(vendorsFile); //這行改成下面這個
-5. const dependencies = yaml.load(vendorsFile);
-</code></pre>
-<p>這樣就能重構，在 <code>hexo s</code> 一下看看是不是有跑出頁面<br>當然嫌麻煩還可以裝指定版本<br><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md">官方教學</a>    </p>
-<table>
-<thead>
-<tr>
-<th><strong>資料夾名稱</strong></th>
-<th><strong>用途</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>languages</td>
-<td>語言對應字</td>
-</tr>
-<tr>
-<td>layout</td>
-<td>調整看到的版面 基底</td>
-</tr>
-<tr>
-<td>source</td>
-<td>一些css js image 設定在這(跟外層的source不一樣)</td>
-</tr>
-</tbody></table>
-<ul>
-<li>theme 中的 source 主要掌管 next 主題的樣式而已 </li>
-<li>外層的 source 是 hexo 架構的編輯地方<br>兩者有差哦!  </li>
-</ul>
-<h3 id="語言設定"><a href="#語言設定" class="headerlink" title="語言設定"></a>語言設定</h3><p>languages 預設原本是 <code>en</code>，從 <code>_config_yml</code> 就可以更改語系<br><img data-src="https://chi01pap001files.storage.live.com/y4mGt3P_ahV1z8j1pRbpVUp8wSl6nBkqs_kpfNhZB32cMMkamaJhe70pZkqoosmLUiVaElphRPcWkvde5dQfOYASoAYIJbirgBTXzcpY8xkx7ARrrtFFRjvMQarZpJv2ANNm-XSosQEGoq0d6s9n9kv55XqPeEOrHtWGChQkJAL-o4AMO-xc_Z-p5a2MWic6Gow?width=1223&height=410&cropmode=none" alt="lang-setting">  </p>
-<p>當然網頁可以寫成多國語，待研究XDD，可以的話想寫成英文<br>有些翻譯過來的文字可能不太喜歡，或是想 自訂義<br>就可以到 theme 字料夾中的 languages 找 zh-TW<br>把想要的文字替代上去哦!<br><img data-src="https://chi01pap001files.storage.live.com/y4ma1tCvNxVMoUCdcaPYcIjlNvLRelGj3E1tbBnrI3EAXwnLvIoNp4JrjYMC7GYuWjeVhYRVFf6f0sNhPWNlDqWsTsGS8HvaqjBDyLj49cWpdfBJ9Bl0GiCJOfmCwBAxlbVdIawagjcA9XlFdu2B43oKb_6ZveVwqdQsVsKjjtjd9zUQRkYqJIBu7AIpFGaQKnd?width=1004&height=1512&cropmode=none" alt="lang-word">  </p>
-<h3 id="版面設定"><a href="#版面設定" class="headerlink" title="版面設定"></a>版面設定</h3><p>layout 有很多頁面設定，包含第三方外掛都可以設定外觀等等的<br>當然也有 css或js 可以設定，在 source 資料夾裡，基本的換色、背景圖片都可以自訂。  </p>
-<hr>
-<h2 id="調整樣式-amp-外觀"><a href="#調整樣式-amp-外觀" class="headerlink" title="調整樣式&amp;外觀"></a>調整樣式&amp;外觀</h2><p>next 的 <code>config.yml</code> 可以開啟 comment 的功能<br>因為我裝了disqus留言版，結果發現 next 主題在tags、categroies等等頁面都是套 post 的板<br>也就是 post 每一則下方有留言區是正常的<br>但誰會在<code>標籤</code>跟<code>分類</code>或是<code>關於我</code> 底下讓人留言啦!  </p>
-<p>就要修改 <code>theme &gt; next &gt; layout &gt; _layout.njk</code><br>其實可以發現 page 的版面 都用同一個 layout<br>所以在 <code>new page</code> 或<code>new post</code> 下方都會有comment(如果妳有打開的話)  </p>
-<p>打開 <code>_layout.njk</code>，找到下面這行 </p>
-<pre><code>  &#123;% include '_partials/comments.njk' %&#125;
-</code></pre>
-<p>來把它加上if-else條件，判斷哪一頁加入comment<br>改成 : </p>
-<pre><code class="js">&#123;% set page_type = page.type === 'tags' or page.type === 'categories' %&#125;
-&lt;div style=&quot;&#123;%if page_type %&#125; visibility:hidden; height:0px;&#123;% endif %&#125;&quot;&gt;
-&#123;% include '_partials/comments.njk' %&#125;  
-</code></pre>
-<p>原本我是看這篇<a href="https://hsiangfeng.github.io/hexo/20190516/2710757554/">文章教學</a><br>結果不行，因為版本問題，layout檔再也不是<code>.swig</code><br>還好語法上還能通，只有平常在寫得 <code>||</code> 要改成 <code>or</code>   </p>
-<hr>
-<h2 id="好用的寫文插件"><a href="#好用的寫文插件" class="headerlink" title="好用的寫文插件"></a>好用的寫文插件</h2><p>上一篇有提到 hexo 有的後台頁面<br>哦~我的天，markdown 雖然能馬上看見效果<br>但實際版面跟輸出後的差異蠻多的<br>後來我還是在 VS 上做編輯了<br>當然是來安裝個插件XD  </p>
-<ol>
-<li>VS 的插件商店搜尋 <code>Markdown Preview Enhanced</code></li>
-<li>安裝</li>
-<li>新增一個 post 看看 <code>hexo new post a123</code></li>
-<li>開啟檔案對著它按右鍵，選 <code>Reopen Editor with ...</code><br><img data-src="https://chi01pap001files.storage.live.com/y4m5e44Li2JyNG7g5TuAltJILiqeBueOK15DFGll5OZ4uHTS58Bu68ngUQGhBM_987DVWt6su774wdyt-a-BiUKqHX0W9AC1ohAq2SoRQRPnZBSqs-T4-xq8aQCr4Zc48fQWmdmhOYZJ_t9SIJbtk8GUHPxwB5cqSpBiWpbVmYtnbZp2Epk5FhS_pFPi9yikSaA?width=2736&height=1824&cropmode=none" alt="圖示"> </li>
-<li>上面會跳出選擇器，選<code>markdown preview</code>  </li>
-<li>在點這個開啟內分頁<br><img data-src="https://chi01pap001files.storage.live.com/y4mD3vUlN6kw2OxydnmAU1ZhFwb8pUd-ya_RTwIDBiggyqM-HXup_763uqZsG3yDfqWMcjYw2GStohPK4f88s0gSmDTD8yK5vvJVV2gO2cat_AzjyjpL_m4XutuM6hXy4AmQq1cjGdYQZkGEDo161pc8Ir8UZhMMlx4ZSdMyNLyRmRp98rCHT1QNNQIXq9-Y2S1?width=1423&height=401&cropmode=none" alt="內分頁">    </li>
-<li>在開一次原檔案在分頁中，就可以準備來編輯囉!</li>
-</ol>
-<p>燈愣! 就變這樣，邊寫可以邊看到效果 :happy:<br><img data-src="https://chi01pap001files.storage.live.com/y4mRvRQYFuUfq-zmPn2p99ZdGCFN6dBqQaGcm4gMBtYN-O6M9Oz01zGE_OL_KFQ3aG14pD7aiNcIAFH4JOi61XP8uoGLyxx5Jo0Ux7VLu8umfff5TIp1v-P7lriTZcDEOGO39yKM195CeZwH6ApqOLjfWRZ2zskQSp8ZOUZRT6qM5k6DS_UOMGa8hze41xI1iKh?width=2600&height=1615&cropmode=none" alt="寫文好幫手">  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>網站建置的差不多了<br>短時間應該沒有要再美化<br>要多努力寫文章<br>markdown 還在學習中…</p>
-<p>經過三日連發<br>這類實作文章應該就沒有每天產了<br>改成2-3天發布一篇<br>不然感覺每天都再搭特快車<br>再抓一下什麼樣的寫法才好吸收  </p>
-<p>最近有看到一種寫文章的方式<br>是時候來增強寫作技巧  XD  </p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>部落格</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(II)</title>
-    <url>/RosaBlog/Blog/Hexo-BuildBloger-II/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨日已經將網站安裝起來了<br>今天要基礎設定，以及發佈至github上<br>使用很多人用的 NEXT 主題，NEXT 也有很多好用的插件<br>像是留言區、人流計數、打賞之類的都有<br>客製化自己的部落格更方便了<br>讓我想起小時候玩無名小站的快樂…  </p>
-<h2 id="複習"><a href="#複習" class="headerlink" title="複習"></a>複習</h2><p>昨天最常使用的2個指令，今天再加一個  </p>
-<pre class="line-numbers language-none"><code class="language-none">hexo clean &#x3D;&gt; 簡寫 hexo cl &#x2F;&#x2F;清除建構檔  
-hexo g  &#x2F;&#x2F;重新建構  
-hexo s  &#x2F;&#x2F;發布伺服器(本端)  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>有時候會有囤積的檔案，clean一下之後再重新建構<br>明天再來細補資料夾的結構與檔案設定的部份<br>來做一個統整復習</p>
-<h2 id="換上NEXT主題"><a href="#換上NEXT主題" class="headerlink" title="換上NEXT主題"></a>換上NEXT主題</h2><blockquote>
-<p><a href="https://github.com/theme-next/hexo-theme-next">官方指引</a>  </p>
-</blockquote>
-<p>不過我一樣是看那位<a href="https://home.gamer.com.tw/artwork.php?sn=5138471">巴哈L大大的文章</a>，真的幫助我很多☺️  </p>
-<pre class="line-numbers language-none"><code class="language-none">npm install hexo-theme-next  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>直接在終端機輸入安裝指令<br>之後在左側的資料夾找到<br><img data-src="https://chi01pap001files.storage.live.com/y4mZoV2zYTezJ7XnQzQftdPHv7G283xYtZn29Jm7MZ5BcCvcgEz5ET80-IILT_wrv5cE-TDME573cM8j3IQndYptgcFKJboIPsDViORzMo-554RRyfmKuwmWNFLSCifx1yqRbRS_1vGsOCjc52mDfyHSBXfKC2qOJOSP-_382CTz8EjWdyen19M2UAwGLqGcNis?width=290&height=602&cropmode=none"><br><code>_config.yml</code>  ⇒ 網頁設定檔，設定一些插件開關阿，網頁名稱、網址等等的<br>NEXT安裝完後會生出 <code>_config.next.yml</code> ⇒ 是 NEXT主題中的設定，這個先不設定了。<br>首先要把網頁設定檔的一些東西設定好，善用 <code>ctrl + F</code> 直接尋找  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mg5VYrXhn9SKuFB7O410M0VrdE80dSyg12iiXxEjvdvFV36VXtMsNIyS90lEwOEjoEwGU8AvLctdsyh42QKc7m_VT5DBKUkjUwZAVZzXPWkqjbUjvOIrtXtZmk8w-NQb--hMM-_jkdmrzXBFZ8f8xG2ofs35BdVqZQ36OjvduhjK3UXSuWqfopS2MDFKov9NB?width=660&height=418&cropmode=none">  </p>
-<table>
-<thead>
-<tr>
-<th>名稱</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>url</td>
-<td>網頁的網址。先去 github 建立好一個空的網頁，複製網址貼上</td>
-</tr>
-<tr>
-<td>root</td>
-<td>網頁的根目錄，這邊寫專案名就好， /***/ 是相對路徑的寫法哦</td>
-</tr>
-<tr>
-<td>theme</td>
-<td>網站套用的主題。這邊安裝的是NEXT填寫上 next</td>
-</tr>
-<tr>
-<td>deloy</td>
-<td>發布設定。這邊先填寫 <code>type: git</code> 。 repo 等等到github 上複製即可</td>
-</tr>
-</tbody></table>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m31ODFxu3XGBixiLchDX0zi4lqY1toUWP2_3Bvbe2iqrsvUY5k035-7vUuTxYOsecl-msD3YU6BjrtEXYrR4vfzVsO0GR7w5HPZuS816bAUuUJ3b8LOyZro_eBsQX7EzvEvwyCle5dAdlWgxV2Ynrlk2WOPIyQan6qaNM5hF8XhMsowebpXBVIsiPg6QkwICt?width=256&height=68&cropmode=none">  </p>
-<blockquote>
-<p>記得 冒號 : 後面要空一格(space)，設定值才算有哦  </p>
-</blockquote>
-<p>裝完 Next 也改完設定了，再一次執行指令   </p>
-<pre class="line-numbers language-none"><code class="language-none">hexo cl
-hexo g
-hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-<p>會在終端機上看到大大的NEXT<br>開啟本機伺服器後，看到主頁面沒問題就OK囉<br>發現tags categroies 等等頁面都not found是正常的<br>因為還沒新增頁面  </p>
-<h2 id="發布至github-pages"><a href="#發布至github-pages" class="headerlink" title="發布至github pages"></a>發布至github pages</h2><p>關於上傳有兩個方式<br>分別用 https 或 SSH 形式，兩者都可以<br>都是git的上傳方式<br>根據<a href="https://wcc723.github.io/git/2018/02/12/github-ssh-https/"><strong>卡斯柏大大</strong></a>寫的，github 官方推薦https方式但也有提供SSH  </p>
-<blockquote>
-<p><strong>https</strong> ⇒ 是不用金鑰，上傳時第一次會要求登入<br><strong>SSH</strong> ⇒ 需要金鑰，不用再登入帳號認證  </p>
-</blockquote>
-<p>懶人如我，當然選SSH XDD<br>以下這邊會以 SSH 部署方式進行<br>先安裝 hexo - git 的發布工具<br>如果有慣用的可以到hexo Plugin 找一下  </p>
-<pre class="line-numbers language-none"><code class="language-none">npm install hexo-deployer-git --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<p>恩…   <code>- -save</code>  是什麼碗糕呢<br>查了一下大概是 發佈&amp;開發狀態的區別<br>不過就先照官方的做吧! 之後在總結補上概念<br><code>deploy</code> 中文是部署，就是發布的意思啦!<br>接著回到上面 <code>_config.yml</code> 檔進行設定  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mAgiLoI6WV74o0adjBGFlRZU-8LOLmfwTqA6WE10zJOcOQWQcjFuUUTtl_jsAoAXrQUu08ZmDPU8g7l7hgaAT1DOVYYDjxiWeS2hftDZXLinaOqNrU4zsLPPdPZn3nBsD5Crg07WHCYbskme0mhi0CQD_sWE-ZjVSFhPULnsB8ZurJzRRoMCsXMHt_GFO52eL?width=256&height=68&cropmode=none">  </p>
-<p>剛剛我們在 <code>deploy</code> 這邊寫打好type了<br>為了接上自己的 github repository<br>我們到要成為blog的專案底下找到 code 這個綠綠的，按一下<br>裡面會有 https 跟 SSH 的git 上傳地址 ， 複製SSH 的那串到 repo 貼上  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mtrlRgLYfAcRsAhseYDa7VThDuZI0wLDMnhFqvZ7xSbTkFjpstkcIn1SQWWs-ZgIQXy9_w2VNi0KMgNLoJdt9Uvcsq2JAyt-klGyB5qA_HHhyUCu1RJqsELKcVABJd1Rh-QcOSMEcfBXzOdw1pN1zkgWoeBD68rwLUwpTZoiXDjH5eFa_V-Rx4InL5hdAIyA2?width=660&height=487&cropmode=none">  </p>
-<p>再來我們要透過 終端機用git連接上去囉!<br>設定好登入口  </p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global user.name &quot;你的帳號名&quot;  &#x2F;&#x2F;像我的就是 meitung473  
-git config --global user.email &quot;你註冊的信箱(你的帳號)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>因為透過SSH的方式，需要金鑰，所以來建立一個新的金鑰  </p>
-<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -C &quot;你註冊的信箱(你的帳號)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>…你說這又是啥碗糕，SSH 之前略懂略懂而已，所以我又查了一下<br><code>ssh-keygen</code> ⇒ 產生金鑰， 後面的 rsa 是加密金鑰的演算，至於這些不是我的拿手就不多說了<br>好奇的話可以看 <a href="https://docs.microsoft.com/zh-tw/azure/virtual-machines/linux/create-ssh-keys-detailed">MS 官方說明</a> ，像是 為什麼有 -t 與 -C 的用途是為何  </p>
-<p>總之非對稱加密會有兩把鑰匙，一把公鑰一把私鑰<br>接著把公鑰的部分提出來，塞給自己的github，上傳的時候透過  「鑰&lt;-&gt;鑰」溝通(you know~)  </p>
-<pre class="line-numbers language-none"><code class="language-none">cat ~&#x2F;.ssh&#x2F;id_rsa.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><code>cat</code> ⇒ 是印出檔案內容指令，我們要提取剛剛產生的SSH 公鑰的部分<br><code>~./ssh/id....</code>這邊是公鑰的檔案路徑<br>你會發現輸入指令後有一大串的東西出現<br>開頭 <code>ssh-rsa AAAAB.... 你的電子信箱</code> 結尾，把它複製起來<br>接著到 github &gt; Setting，找到 <code>SSH keys and GPG keys</code> 的設定頁面，建立新的SSH key<br>複製的文字貼到key上，title取自己方便的就好</p>
-<center> 
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mtrlRgLYfAcRsAhseYDa7VThDuZI0wLDMnhFqvZ7xSbTkFjpstkcIn1SQWWs-ZgIQXy9_w2VNi0KMgNLoJdt9Uvcsq2JAyt-klGyB5qA_HHhyUCu1RJqsELKcVABJd1Rh-QcOSMEcfBXzOdw1pN1zkgWoeBD68rwLUwpTZoiXDjH5eFa_V-Rx4InL5hdAIyA2?width=256&height=189&cropmode=none" alt="step01"></p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m8_6cDZHW1v4JSUJsrUu1p9bMSzDmISLkPucVi6NDP88dCk5LwTSNVligcXEMl81_wAl0zvVnA_WXHJdKvEIccFUNyticly15iG3l2HSc4Wob7_MFbIQaPdxt1KrDyLUosjUouzN0940St1O3nLFi2qH_LUIFad_H5L0VmBpQQJZegkAIR9m0Z8NpnoCC4dbg?width=256&height=140&cropmode=none" alt="step02">  </p>
-</center>
-
-<p>恩?你說這樣就好了嗎，NONO雖然都打好了<br>但我們還沒用「(公)鑰(私)鑰」連結<br>接著輸入指令，連結到 github 做認證，當在終端機部署上去就會上傳到你的github了  </p>
-<pre class="line-numbers language-none"><code class="language-none">ssh -T git@github.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<p>出現 <code>Hi,你剛剛帳號名! …</code> 就代表成功囉!<br>最後一步了!再次打上指令  </p>
-<pre class="line-numbers language-none"><code class="language-none">hexo g  
-hexo d  &#x2F;&#x2F;部署 deploy 的縮寫<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>燈愣!等一會兒就會發現發布的網頁出現新的主題哦!<br>長得不太一樣是因為NEXT 有4種不同版型  </p>
-<p>如果發現好像沒有動靜，檢查一下 <code>branch</code> 是不是設定正確哦<br><img data-src="https://chi01pap001files.storage.live.com/y4mUwaX8yxoT5torp_6oiPYLOI5bjcEE0IJ89NRpRpuhwB6uUaD7dWVgENZka-pJtH4jWV_QrTpJhDe5styDA24xN6fvf0_nWbzeWRzgFWsz9U--NP80ITmFjg4HyStxEjbMOPPco1sLRZPDNmy9Z4TLRgNYcRlBSgGYnzNgDACmLTzLz2Kq859eMQbkhbKT1mq?width=256&height=76&cropmode=none"><br><img data-src="https://chi01pap001files.storage.live.com/y4mK9VlB_cWLjYZ-RMixf0tnkWDOEsySIboe-UtyXoGkSN38L2iUgW4cfm4ru33sO850_G6xbqnE1fQ1VmFeIuJWc4NZKcOWcI0x6NW6by4-rCVi8btKN5Hqt54R23dSlNk5hhOVUEIsc6nYJF2ihz-1AMnxct_WzyxqXEAopufB_acOFW8a5OIrzMyH9MmjSKO?width=256&height=120&cropmode=none"></p>
-<h2 id="追加-利用Hexo後臺來快速新增頁面或文章"><a href="#追加-利用Hexo後臺來快速新增頁面或文章" class="headerlink" title="[追加]利用Hexo後臺來快速新增頁面或文章"></a>[追加]利用Hexo後臺來快速新增頁面或文章</h2><p>今天查一查發現有後台可以安裝<br>挖屋~~~~簡直是一大福音<br>輸入指令安裝  </p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">npm install hexo<span class="token operator">-</span>admin <span class="token operator">--</span>save  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>重新重構與開啟伺服器 <code>hexo g</code> ⇒ <code>hexo s</code><br>打開<code>localhost:4000</code> 後面輸入 admin 進入管理後台，就會看到這樣的頁面  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m6t5lwQPLeYwvheAsHrOEHdnJDvfl0c0F_h5yuFzqA519FHGGLzP7wzctJ4tWl-gKQVjsmRL_fTPQZfF-lkmpGSk1ElGcFRl91NAVboiaUtF8aJ_5SBTB7FcXnFt0aLhgJsASoM9qihet4CBavi-X-4oSRL7ygPu1IBOAk1-G-b0e78pNOTA5C_avI3hXqGtM?width=660&height=406&cropmode=none"></p>
-<p>哦耶，這邊就可以更整潔的去組織文章與頁面囉!<br>也會同步更新到 VS 編輯器裡的檔案<br>是不是很讚呢!<br>明天慢慢把東西搬過去吧!  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到部署步驟的總結，要會的指令大概四招吧  </p>
-<pre><code class="powershell">hexo cl     //建構檔案清理
-hexo g      //檔案重構
-hexo s      //本機在進行修改的時候開的伺服器，如果要發布就不用打了
-hexo d      //發布到指定地方，要先建置好部署步驟哦
-</code></pre>
-<p>安裝下來，發現自己要去學習的東西更多了  </p>
-<ul>
-<li>npm的基礎指令  </li>
-<li>git 指令   </li>
-<li>markdown 語法   </li>
-</ul>
-<p>雖然還有很多想要的插件還沒安上…<br>就一步步來吧:D… </p>
-<hr>
-<blockquote>
-<p>參考資料 :  </p>
-<ol>
-<li><a href="https://home.gamer.com.tw/artwork.php?sn=5138471">Hexo 簡易調教指南（一）：軟體安裝及網站建構 - lewopa47894的創作 - 巴哈姆特</a>  </li>
-<li><a href="https://wcc723.github.io/git/2018/02/12/github-ssh-https/">[Github 中的 ssh、https 路徑有什麼差異？ - 如何設定 Github SSH 金鑰]</a>  </li>
-<li><a href="https://ithelp.ithome.com.tw/articles/10227181">[SSH 金鑰：免密碼登入遠端主機、傳遞檔案]</a>  </li>
-<li><a href="https://ed521.github.io/2019/08/hexo-admin/">[教學]我的第一篇 Hexo 文章：使用 hexo-admin 後台管理工具</a></li>
-</ol>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>部落格</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ 初級入門必學的CommandLine</title>
-    <url>/RosaBlog/program/LearnAboutCommandLine/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>人跟人會用語言符碼來溝通<br>而人要跟電腦溝通，我們會想到</p>
-<blockquote>
-<p>阿不就用滑鼠?</p>
-</blockquote>
+    <title>⟬ 筆記 ⟭ CSS 選擇器</title>
+    <url>/RosaBlog/Frontend/CSS/CSS-Selector/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>複習常見用法與了解選擇器權重的問題   </p>
 <span id="more"></span>  
-<p>是阿，現在我們能用滑鼠按左、右鍵<br>在畫面上操作電腦的動作<br>都多虧了<code>GUI</code>（圖形操作介面）<br>降低電腦的使用門檻<br>讓我們享受電腦帶來得便利  </p>
-<h2 id="還沒有GUI的時候"><a href="#還沒有GUI的時候" class="headerlink" title="還沒有GUI的時候"></a><strong>還沒有GUI的時候</strong></h2><p>早期沒有GUI的時代，都是使用鍵盤輸入指令來控制<br>也就是使用「文字指令介面」 <code>Commamd Line Interface</code>簡稱 <code>CLI</code>。<br>當然這大大提高了使用電腦的門檻<br>光是指令種類就讓人頭昏眼花<br>更別提如果像爸媽有點年紀的人想查個資料<br>還要向查字典一樣<br>之後每一次執行還要同樣的查字典動作<br>論誰都會覺得麻煩<br>接著爸媽不會想弄，只會叫你出來處理<br><del>於是你就立志成為工程師了</del>       </p>
-<h2 id="為什麼Command-Line-Interface-依然存在"><a href="#為什麼Command-Line-Interface-依然存在" class="headerlink" title="為什麼Command Line Interface 依然存在?"></a><strong>為什麼Command Line Interface 依然存在?</strong></h2><p>常常在想工程師一定要會CLI嗎? 或許這是個蠢問題。<br>但我喜歡探究這些問題，對於菜鳥來說理解根源才能信服XD  </p>
-<h3 id="GUI與CLI差在哪"><a href="#GUI與CLI差在哪" class="headerlink" title="GUI與CLI差在哪?"></a>GUI與CLI差在哪?</h3><blockquote>
-<p>嚐過GUI難道不香嗎?</p>
-</blockquote>
-<p>香阿，但是GUI操作你想想看有多少個動作?  </p>
-<ul>
-<li><p>以<code>複製</code>A東西到同目錄為例  </p>
+<h2 id="條件使用"><a href="#條件使用" class="headerlink" title="條件使用"></a>條件使用</h2><p>舉 class 的例子<br>選擇器還有 <code>Universal(*) 、pseudo-classes(偽類別)、id、tag(標籤)</code>等等的選擇器<br>除了 <strong>id</strong> 外基本都以此類推。</p>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 省略 Html 架構--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		<span class="token comment">&lt;!-- 範例 4 開始 --></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 1 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 2 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 3 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 4 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>item<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>來套上CSS   </p>
 <ol>
-<li>滑鼠移動到指定複製物件</li>
-<li>按下右鍵</li>
-<li>點選拷貝(copy)</li>
-<li>滑鼠移到空白處按下右鍵</li>
-<li>點選貼上(paste)  </li>
-<li>幫複製物件取新名稱  </li>
+<li>同時符合條件才套用</li>
 </ol>
+<ul>
+<li><code>.A.item</code> : 連續的，並無空格<blockquote>
+<p>是 A 又有 item 的才會被選，其他 A 不套用</p>
+</blockquote>
 </li>
-<li><p>那CLI操作呢?</p>
+</ul>
+<ol start="2">
+<li>父層以下的所有叫 OO <strong>都</strong>  套用 </li>
+</ol>
+<ul>
+<li><code>.wrapper .A</code> : 中間空一格<blockquote>
+<p>這邊通通有 class <code>A</code> 的都會被套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li> 父層的下一層要叫 OO 才套用</li>
+</ol>
+<ul>
+<li><code>.wrapper&gt;.A</code> : 下一層的 A 都會套用    <blockquote>
+<p>box 裡面的 A 是屬於 下下層，因此不套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="4">
+<li> 同一層的旁邊叫 OO 的才套用  </li>
+</ol>
+<ul>
+<li><code>.B+.C</code> : 兩個都同一層  <blockquote>
+<p>只有 B-2 旁邊的 <code>C-3</code> 會套用</p>
+</blockquote>
+</li>
+</ul>
+<ol start="5">
+<li> 同一層的右邊只要叫 OO 的都套用</li>
+</ol>
+<ul>
+<li><code>.B~.C</code> : 兩個都同一層 <blockquote>
+<p> B-2 旁邊的 <code>C-3</code> 與 <code>C-4</code> 皆會套用  </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://codepen.io/shan473/pen/BaRMyrz">練習</a>  </p>
+</blockquote>
+<h4 id="快速複習"><a href="#快速複習" class="headerlink" title="快速複習"></a>快速複習</h4><table>
+<thead>
+<tr>
+<th align="center">符號</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&gt;</td>
+<td>下一層</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td>同一層的旁邊一個</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td>同一層的旁邊所有的</td>
+</tr>
+</tbody></table>
+<h2 id="常用的選擇器"><a href="#常用的選擇器" class="headerlink" title="常用的選擇器"></a>常用的選擇器</h2><ul>
+<li>pseudo-classes (偽類別)<br>  以 <code>:</code> 表示<ul>
+<li>關於動作的 (Dynamic)<br>  像是 <code>:hover</code>、<code>:active</code> … 等等    以往在開發時可能都要實際操作再看效果<br>  在 Dev tool 中可以手動直接控制<br>  瀏覽器顯示 style 有個 <code>:hov</code><br>  <img data-src="https://chi01pap001files.storage.live.com/y4mXniSc9YQknILFFtKip8TAQ82En47NCTww_UljZH2WPpwqvQD9hnkcwXYNUQu4BrLI_6xTabbid29wewJsyt3Kj522mgEJaTDHjoN0PzHXFUSvUP8ZTj3OBzQEs91uitM5P80iFV083PpDcTt6BzOsT4yaDtMYgcVgBNAKvX0bnj3LL0-BoayHXrZxslbKj8r?width=660&height=236&cropmode=none">  </li>
+<li>選擇器<br>  <code>:nth-child(n)</code> : 選擇子層的第 n 個<br>  <code>:first-child</code>  :  指第一個<br>  <code>:first-child</code>  :  指最後一個    快速一點  <ol>
+<li><code>:nth-child(odd)</code> : 只選奇數位</li>
+<li><code>:nth-child(even)</code> : 只選偶數位</li>
+<li><code>:nth-child(an+b)</code> : 等差選  </li>
+</ol>
+<blockquote>
+<p>nth-child 是從後面解讀<br>例 : .wrapper .A:nth-child(3)<br>XX層的第 n 個元素是 OO 再動作</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>參考資料<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/Pseudo-classes">虛擬類別 - CSS | MDN (mozilla.org)</a></p>
+</blockquote>
+<ul>
+<li>pseudo-elements (偽元素)<br>  以 <code>::</code> 表示<br>  最常用的是 <code>::before</code> 跟 <code>::after</code><br>  使用上可以用 <strong>共同想加入的東西</strong><br>  例如 金錢符號    <iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/OJmdPvN?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+See the Pen <a href="https://codepen.io/shan473/pen/OJmdPvN">
+</a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
+on <a href="https://codepen.io">CodePen</a>.
+</iframe>  
+  
+  這樣只要改 ::before 的內容就可以統一修改      </li>
+</ul>
+<blockquote>
+<p>content 一定要有，沒有內容也可以空的</p>
+</blockquote>
+<p>*<code>content : attr( class or tag )</code><br>可以抓到 html 的資料 </p>
+<blockquote>
+<p>參考資料<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/content">content - CSS（层叠样式表） | MDN (mozilla.org)</a></p>
+</blockquote>
+<h2 id="選擇器權重"><a href="#選擇器權重" class="headerlink" title="選擇器權重"></a>選擇器權重</h2><p>常常會因為套用很多 CSS 而眼花撩亂<br>誰被套用了 ? 誰套了又沒效果了 ?<br>透過權重就能清楚知道</p>
+<ul>
+<li>把握基本原則<blockquote>
+<p><strong>id &gt; class &gt; tag</strong><br>越詳細越先套用<br>重複寫到一樣的，以後面的為重</p>
+</blockquote>
+</li>
+</ul>
+<p>網路上會以 <code>100 : 10 : 1</code>  來說明比重<br>但我更喜歡 Huli 大講的 <code>0,0,0</code> 越前面的越重<br>誰佔的比較前面就吃那個樣式   </p>
+<p>假如都使用 class 那第二個就是看 <code>數量</code><br>數字並不會十進位  </p>
+<p>有神人測試過 256 個 class 可以超過 id<br>不過應該不會有人會寫到這麼多 class …<br>應該是測試極限用而已  </p>
+<blockquote>
+<p>參考資料<br><a href="https://juejin.cn/post/6844903608199151630">你对CSS权重真的足够了解吗？ (juejin.cn)</a></p>
+</blockquote>
+<h3 id="進階原則"><a href="#進階原則" class="headerlink" title="進階原則"></a>進階原則</h3><p>也就是 <code>!important</code> 與 <code>inline style</code> </p>
 <ol>
-<li>開啟命令提示字元</li>
-<li>鍵盤輸入<code>cp A物件 命名複製物件新名稱</code></li>
-<li>done.</li>
-</ol>
-</li>
-</ul>
-<p>可能中間安插個去到目錄 cd 一下。</p>
-<blockquote>
-<p>幾行字，就是這麼簡單  </p>
-</blockquote>
-<p><img data-src="https://truth.bahamut.com.tw/s01/202106/80efcf5f0815fc0b7a2efdacac66b7c1.JPG">  </p>
-<p>這邊不討論ctrl C ctrl V 大法  </p>
-<p>除此之外，光是G<code>(Graphic)</code><br>圖片帶來的效能消耗讓早期的電腦吃了不少虧<br>好在現在電腦的效能水平都遠遠足夠<br>才能讓我們看見把<strong>指令步驟具象化的過程</strong>  </p>
-<p>當然我想GUI與CLI是相輔相成的狀態<br>誰不想複雜的東西簡單化呢?尤其變成圖片  </p>
-<h3 id="回到CLI為何還是存在"><a href="#回到CLI為何還是存在" class="headerlink" title="回到CLI為何還是存在"></a><strong>回到CLI為何還是存在</strong></h3><p>套用老師們最喜歡的一句話 <code>快、狠、準</code><br><del>刪除到檔案也<code>快狠準</code>QQ</del><br>從剛剛的複製例子可以得知<br>對於效能與呈現，無疑是比較快的<br>甚至是有些指令只能透過CLI來執行<br>現在的CLI也是越來越進步<br>東西好用，當然還存在阿!</p>
-<h3 id="對於我來說"><a href="#對於我來說" class="headerlink" title="對於我來說"></a><strong>對於我來說</strong></h3><p>對我來說，GUI與CLI可以說是像到外國與在地的感覺  </p>
-<ul>
-<li><p><strong>GUI</strong><br>  人生地不熟，靠Body language筆劃，或是拿圖片問是最友善的(這邊以你不會當地語言為主)。</p>
-</li>
-<li><p><strong>CLI</strong><br>  你懂我懂的語言，直接講最快。</p>
-</li>
-</ul>
-<p>這也不難解釋，為什麼程式基礎必修要會CLI<br>溝通，最講求效率:D…  </p>
-<h2 id="常用的CLI指令"><a href="#常用的CLI指令" class="headerlink" title="常用的CLI指令"></a><strong>常用的CLI指令</strong></h2><p>阿這好像才是這篇最主要的XD<br>以前上過Linux的課堂<br>順便複習與搞懂其他不懂的詞    </p>
-<h3 id="基礎四招"><a href="#基礎四招" class="headerlink" title="基礎四招"></a>基礎四招</h3><table>
-<thead>
-<tr>
-<th>常用指令</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pwd</td>
-<td>告訴你現在在哪裡?</td>
-</tr>
-<tr>
-<td>ls</td>
-<td>印出現在所在地的所有檔案</td>
-</tr>
-<tr>
-<td>cd</td>
-<td>移動到指定的地方</td>
-</tr>
-<tr>
-<td><a href="#mv">mv</a></td>
-<td>移動到指定地或是修改指定的檔案名稱</td>
-</tr>
-</tbody></table>
-<ul>
-<li>註: pwd 在window cmd沒有，用cd 有同效果。 </li>
-</ul>
-<h3 id="快速招式"><a href="#快速招式" class="headerlink" title="快速招式"></a>快速招式</h3><blockquote>
-<p>個人記到<code>資料夾新增、刪除與複製</code>，感覺就蠻夠用的。  </p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>好用指令</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="#touch">touch</a></td>
-<td>修改檔案時間或是<code>建立新檔案</code></td>
-</tr>
-<tr>
-<td><a href="#rm">rm</a></td>
-<td>刪除檔案</td>
-</tr>
-<tr>
-<td>rmdir</td>
-<td>刪除指定資料夾</td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td>建立資料夾</td>
-</tr>
-<tr>
-<td>cp</td>
-<td>複製檔案</td>
-</tr>
-<tr>
-<td>cat</td>
-<td>直接讀取檔案內容</td>
-</tr>
-<tr>
-<td><a href="#grep">grep</a></td>
-<td>抓取檔案內容中的關鍵字</td>
-</tr>
-<tr>
-<td><a href="#wget">wget</a></td>
-<td>下載檔案，後面接檔案的url</td>
-</tr>
-<tr>
-<td>clean</td>
-<td>清空目前的指令畫面</td>
-</tr>
-<tr>
-<td>curl</td>
-<td>送出 request (ex:api)</td>
-</tr>
-</tbody></table>
-<ul>
-<li>註: grep、cat、curl 在window cmd沒有效果。 </li>
-<li>weget、touch 在cmd 與 powershell都沒有效果。  </li>
-</ul>
-<h3 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h3><blockquote>
-<p>前面都會加一個小槓槓「-」，兩個的話就和在一起寫<br>例如 -al -rf    </p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>常見指令參數</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-a</td>
-<td><code>all</code>的意思，包含開頭為<code>.</code>的檔案</td>
-</tr>
-<tr>
-<td>-l</td>
-<td><code>list</code>。詳列所有東西，包含權限、屬性、時間</td>
-</tr>
-<tr>
-<td>-f</td>
-<td><code>force</code>。 強制執行 <del>(不要亂使用這個參數)</del></td>
-</tr>
-<tr>
-<td>-r</td>
-<td>這個資料夾以下的檔案一起包</td>
-</tr>
-</tbody></table>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>因為不知道叫什麼… </p>
-<table>
-<thead>
-<tr>
-<th>其他</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="#pipe%E7%B5%84%E5%90%88%E6%8A%80">| (pipe)</a></td>
-<td>組合技(將輸出給後面的輸入)</td>
-</tr>
-<tr>
-<td><a href="#redirection%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91">&gt; (redirection)</a></td>
-<td>重新導向，會將檔案內容覆蓋過去</td>
-</tr>
-<tr>
-<td>&gt;&gt;</td>
-<td>跟 “ &gt; “概念依樣，但不覆寫，而是加入</td>
-</tr>
-<tr>
-<td>..</td>
-<td>代表上一層的位置</td>
-</tr>
-<tr>
-<td>~</td>
-<td>使用者的根目錄</td>
-</tr>
-</tbody></table>
-<h3 id="快速舉例"><a href="#快速舉例" class="headerlink" title="快速舉例"></a>快速舉例</h3><h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><ol>
-<li><p>移動 mv [<strong>檔案</strong>] [<strong>新名稱</strong>]   </p>
-   <pre class="line-numbers language-none"><code class="language-none">mv &#96;123.txt&#96; &#96;456.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>檔案名稱變 <code>456.txt</code>    </p>
-</blockquote>
-</li>
-<li><p>更名 mv [<strong>檔案</strong>] [<strong>目的地</strong>]</p>
-   <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mv &#96;123.txt&#96; &#96;.\Myblog&#96;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>123.txt 就會在 <code>Myblog</code> 資料夾底下<br>   目的有分成 <strong>絕對路徑</strong> 與 <strong>相對路徑</strong></p>
+<li>inline style : 寫在 html 同一行元素裡的 style   <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>!important<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">.class&#123;
+	background:red !important;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+綜合排一下<blockquote>
+<p>!important &gt; inline style &gt; id &gt; class &gt; tag  </p>
 </blockquote>
 </li>
 </ol>
-<h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><ol>
-<li><p>修改時間<br>   EX : folder1 \ 123.txt<br>   上次檔案編輯時間 :  07/27/21 13:00<br>   現在時間 : 14:03  </p>
-   <pre class="line-numbers language-none"><code class="language-none">touch 123.txt  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>檔案寫入的編輯時間會變成 <code>07/27/21 14:03</code>  </p>
-</blockquote>
-</li>
-<li><p>建立新檔案<br>   EX: folder1\123.txt  </p>
-   <pre class="line-numbers language-none"><code class="language-none">touch 456.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>當找不到該層符合的檔案名，就會建立新檔案<br>因此在 folder1 輸入<code>ls</code>底下會有<br><code>123.txt 與 456.txt</code> 兩個檔案</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><ol>
-<li>刪除檔案<br>   EX: 我想刪除 123.txt。     <pre class="line-numbers language-none"><code class="language-none">rm 123.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>刪除資料夾<br>   EX: 我想刪除 blog 資料夾，裡面還有很多檔案<br>   結果<code>rmdir blog</code> 發現行不通，因為<code>資料夾裡面不是空的</code>     <pre class="line-numbers language-none"><code class="language-none">rm -r blog<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>利用<code>-r</code>來選取包含blog資料夾以下的所有子目錄<br>   進行刪除  </p>
-</blockquote>
-</li>
-</ol>
-<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><ul>
-<li>尋找關鍵字 grep [<strong>關鍵字</strong>] [<strong>檔案</strong>]<br>EX: 檔案 <code>123.txt</code> 裡面有 hello world 這行字<pre class="line-numbers language-none"><code class="language-none">grep o 123.txt  &#x2F;&#x2F; 我想尋找o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>執行後印出 : hell<code>o</code> w<code>o</code>rld  ，這兩個o被highlight起來  </p>
-</blockquote>
-</li>
-</ul>
-<h4 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h4><ul>
-<li>wget [<strong>url</strong>]<br>EX: 我想下載東西 <pre class="line-numbers language-none"><code class="language-none">wget http:&#x2F;&#x2F;www.google.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>圖片或是原始碼都可以取得</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="pipe組合技"><a href="#pipe組合技" class="headerlink" title="pipe組合技"></a>pipe組合技</h4><ul>
-<li>組合技應用<br>EX: 把blog資料夾裡檔名含有<code>o</code>的檔案印出來<br>資料夾 blog 含有 hello.txt、hi.txt、row.txt<br>透過 | 可以將兩者合併成一行  <pre class="line-numbers language-none"><code class="language-none">ls &#x2F;blog&#x2F; | grep o  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>印出 兩個檔案 ，<code>hello.txt row.txt</code><br>組合技可以玩串燒，愛串多少串多少<del>(?)</del>  </p>
-</blockquote>
-</li>
-</ul>
-<h4 id="redirection重新導向"><a href="#redirection重新導向" class="headerlink" title="redirection重新導向"></a>redirection重新導向</h4><ol>
-<li>覆蓋寫入<br>EX : 123.txt 檔案裡有 <code>hello</code>文字，改成bye  <pre class="line-numbers language-none"><code class="language-none">echo byebye &gt; 123.txt
-cat 123.txt &#x2F;&#x2F; 查看一下印出 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<blockquote>
-<p>123.txt 裡面的文字是 <code>byebye</code></p>
-</blockquote>
-</li>
-<li>增加寫入<br>EX : 123.txt 檔案裡有 <code>hello</code>文字，加入bye   <pre class="line-numbers language-none"><code class="language-none">echo byebye &gt;&gt; 123.txt
-cat 123.txt &#x2F;&#x2F; 查看一下印出 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<blockquote>
-<p>123.txt 裡面的文字是 <code>hello byebye</code></p>
-</blockquote>
-</li>
-</ol>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>Linux 跟 Window 內建的指令有點不太一樣<br>先知道指令的用法我覺得是件好事<br>前期底子打的越深，銜接上較無痛。<br>GOGO ! 往更深的坑前進  </p>
-<p>如果我有寫錯的地方歡迎在下面留言指教<br>新手多多包涵  </p>
+<p>看成 <code>0 , 0 , 0 , 0 , 0</code><br>越後面樣式越容易被覆蓋</p>
+<p>因此套上 <code>!important</code> 是奧義<br>並不會很常使用<br>不然其他寫的都沒意義了   </p>
+<p>最常使用的是 class 而非 id</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以前使用 CSS 重點在其他設定<br>老是一直層層疊上去<br>透過整理可以更清楚知道選擇器的權重<br>與選擇器正確的使用  </p>
 ]]></content>
       <categories>
-        <category>program</category>
+        <category>Frontend</category>
+        <category>CSS</category>
       </categories>
       <tags>
-        <tag>CommandLine</tag>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
-    <title>⟬ 紀錄 ⟭ Unity UI Navigation ─ [尋找不見的按鈕]</title>
-    <url>/RosaBlog/Unity/Navgation/</url>
-    <content><![CDATA[<p><img data-src="https://i.imgur.com/Vz6RmrN.png">  </p>
+    <title>⟬ 筆記 ⟭ HTML 基本語法</title>
+    <url>/RosaBlog/Frontend/HTML/HTML-Tags/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>這邊紀錄常用標籤與標籤用處<br>標籤基本都成雙成對<br>本篇主要複習跟稍微解析實際網頁的應用部分  </p>
 <span id="more"></span>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在做Unity + Fungus 小遊戲<br>發現 Fungus 裡的 Menu 選項不斷的亂跳<br>一直找不到問題，還找去原始碼…<br>想說是不是 Fungus 腳本有衝突<br>才知道自己連 Unity 的介面功能沒有到很熟<br>紀錄一下:D    </p>
-<h2 id="控制-Fungus-Menu-選項"><a href="#控制-Fungus-Menu-選項" class="headerlink" title="控制 Fungus Menu 選項"></a>控制 Fungus Menu 選項</h2><p>Fungus 內建的Menu 可以新增很多個選項<br>並且有不同的分支可以讓對話更加多元<br>在控制時可以使用滑鼠與鍵盤上下左右鍵操作<br>能使用鍵盤控制是來自UI物件上的Navigation(導航)<br><img data-src="https://chi01pap001files.storage.live.com/y4mYWPYxomKMTvK8NkXSc7wGnefboAs8DPi3XzwVpZlIO3b-Rndt8PKkmqQuDSmVqQnyv6XgAlkRyy2Tiasz_D_rZlIFtDQtyjAwOr31k2Ye_2_2tN8zBbZcSpagvbipBpnPJqTEe_lUHlsti2r_hIdylS477eT9LurYr1TNFzZi2KUjf0JaPHb7Kx0Tfap5j1z?width=660&height=477&cropmode=none"></p>
-<p>更往前想一點<br>那腳本是如何跟物件來互動的呢?<br>UI 能進行互動是來自 Unity 的 Event System<br>很常時候會看到腳本最上層掛這一個  </p>
+
+<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- !DOCTYPE HTML :告訴瀏覽器這是標準的 html 格式--></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">HTML</span><span class="token punctuation">></span></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- head : 網頁資本資訊--></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+		(1) title : 網站標題
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>網站標題<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+		(2) charset : 編碼
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!--body : 主要呈現的地方--></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+		(1) div : 分組，會換行 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> 
+		(2) span : 分組，不會換行
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> 
+		(3) img : 圖片 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>放source<span class="token punctuation">"</span></span> 
+			 <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>滑鼠 Hover 顯示文字<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>圖片跑不出來的替代文字<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+		(4) 清單  
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span> : 沒有排序的清單，只會出現 dot
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span> : 有排序的清單 (order)，會顯示數字
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span> : 項目
+		
+		(5) pre : 保留完整格式 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
+		說明 : 在 html 空多少格都會只有呈現一格
+		加入 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span> 後，html長相都會被「照實呈現」
+		
+		(6) br : 換行 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+		
+		(7) 表格
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+			(7-1) 表格標題 (header)
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			說明 : 可以放在首列，標題字會變粗體
+			-----
+			(7-2) 列(row)
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				(7-3) 子項
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+		
+		(8) 錨點 
+		(8-1) 連外部網絡
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>連結網址<span class="token punctuation">"</span></span> 
+		   <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">新分頁開啟</span>
+		   				   <span class="token attr-name">不加的話預設是直接打開</span>
+		<span class="token punctuation">></span></span>
+		(8-2) 連內部段落
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#段落ID<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		說明 : 使用 id 來進行連結
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
-<li><code>using UnityEngine.EventSystem</code>   </li>
+<li><code>&lt;!DOCTYPE HTML&gt;</code> 通常可加可不加<br>不加偶爾會出 Bug ，所以還是加一下。</li>
 </ul>
-<p>使我們可以在腳本中控制UI物件的事件<br>可以偵測<code>誰被按了?</code>、<code>誰被選擇了?</code> 等等的。</p>
-<h2 id="Event-System"><a href="#Event-System" class="headerlink" title="Event System"></a>Event System</h2><p>一開始新增Canvas 或 UI 物件時<br>Unity 會幫我們自動生成 Event System 這個物件<br><img data-src="https://chi01pap001files.storage.live.com/y4mKFqurQ2X7h0jJ3Frd1kPO8ipgXgBIIrqYrRtGiNY4C1piCm1NuKKjM9AO3Nqagj6DyNOs6GXStvOutfie-uffMZUMLR4sDoJwm6q3zlfz6vEnl3N1xhZKZe8dvH-Fib6_OG9Qi1OBKnIYbGVpmIIZV5P8YyjuQRw0gVeTucDuK2rV5AV6EOYeUHRjTagVWbr?width=256&height=166&cropmode=none">  </p>
-<p>仔細看一下有兩個腳本附在上面<br><img data-src="https://chi01pap001files.storage.live.com/y4mST6rqopQUEi6t6yz5eNJ6zUrND4Ljt8vOQMFh1c984h-H30bdnD4CLygkpxsGyfEOF1XORmpkFiplC5dVAk41QD3LsU7qGOsXDTdEDu65Ao_zDfCBb2QBIZoWzLProM1iVsYgR6ber8xbKpLo4wXY9oZg6JRTbUGa9J5cW3tJajUOJi7Bef-3ZGLu7IVozQa?width=468&height=660&cropmode=none"><br>分別是 <code>Event system</code> 與 <code>Standalone Input Moudle</code>  </p>
+<h3 id="實用型"><a href="#實用型" class="headerlink" title="實用型"></a>實用型</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html">1. iframe  : 嵌入網站。
+說明:通常會看到嵌入 yt 影片、網頁內容等等。
+實際上很多網站會擋，以防資訊被偷竊。
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>來源網址<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
+
+2. form : 表單
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+	2-1. input : 輸入 
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>輸入類型<span class="token punctuation">"</span></span> 
+		   <span class="token attr-name">vaule</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>被輸入的值可以先預設<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>input</span><span class="token punctuation">></span></span>
+	type 常見有 : 
+           text、password、email、radio、
+           checkbox、date
+	有作用的按鈕 :
+	    submit (送出)
+	注意 : submit 類型的 vaule 是指按鈕文字
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>input 更多類型往這邊<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTML/Element/input">超文本標記語言 | MDN (mozilla.org)</a>  </p>
+</blockquote>
+<p>範例</p>
+<ul>
+<li><strong>radio</strong> 單選  </li>
+</ul>
+<iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/bGWOrWB?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/shan473/pen/bGWOrWB">
+  </a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<ol>
+<li><code>type</code>  : 設定種類</li>
+<li><code>name</code> :  把選項群組。<br>使用單選時，要確定哪個是同一種單選<br>如果沒有 <strong>name</strong> 就沒用哦</li>
+<li><code>label</code> : 可以把內容也變的跟同個 id 有一樣的效果。<br>如果沒有 label 可以發現 <strong>使用者體驗較差</strong><br>每次點擊必須精準落在圈圈內<br>加上之後，讓 label 裡的字串點擊也可以勾選<br>以便來 <strong>提升使用者的體驗</strong></li>
+</ol>
+<blockquote>
+<p>關於 vaule 的範例<br><a href="https://matthung0807.blogspot.com/2019/08/html-input-value.html">菜鳥工程師 肉豬: HTML value屬性</a>  </p>
+</blockquote>
+<h3 id="語意化標籤"><a href="#語意化標籤" class="headerlink" title="語意化標籤"></a>語意化標籤</h3><p>英文 <em>Semantic Elements</em></p>
+<p>綜觀所有東西確實可以使用 <code>div</code> 來包裹<br>但在閱讀上其實不太方便<br>尤其網頁在爬蟲時，要讓機器方便閱讀<br>因此才有語意化標籤來輔助<br>如果是人，在閱讀上也來的更清楚快速</p>
+<blockquote>
+<p>更多的可以參照 W3 說明<br>(<a href="https://www.w3schools.com/html/html5_semantic_elements.asp">HTML Semantic Elements (w3schools.com)</a>)  </p>
+</blockquote>
+<p>提到給機器看，很大一部分跟 SEO (search engine optimization) 也有關連<br>比起看 <code>div</code> 猜意思，不如直接跟他說這是什麼區塊 </p>
+<p>這邊舉幾個是常見的  </p>
+<ol>
+<li><code>&lt;main&gt;</code> : 放主要內容的</li>
+<li><code>&lt;nav&gt;</code> : 導覽列</li>
+<li><code>&lt;footer&gt;</code> : 網頁底部資訊</li>
+<li><code>&lt;section&gt;</code> : 區塊資訊</li>
+</ol>
+<p>總之，功能跟 <code>div</code> 包裹沒差別，差在更容易識別。</p>
+<h3 id="跳脫標籤"><a href="#跳脫標籤" class="headerlink" title="跳脫標籤"></a>跳脫標籤</h3><p>有些特殊字元並沒辦法在 html 中呈現<br>當你打 想顯示 &lt;div&gt; ，怎麼打就是看不見<br>例如 <code>div</code> 前面跟後面的 <code>&lt; &gt;</code> 這個標籤<br>替代符號可以用以下幾個  </p>
 <table>
 <thead>
 <tr>
-<th>腳本名稱</th>
-<th>說明</th>
+<th>符號</th>
+<th>替代使用</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Event system</td>
-<td>處理UI物件狀態，像是button 中的滑入、滑出、點擊、拖曳等等</td>
+<td>&amp;</td>
+<td>&amp;amp;</td>
 </tr>
 <tr>
-<td>Standalone Input Moudle</td>
-<td>像是鍵盤或搖桿的輸入控制</td>
+<td>&lt;</td>
+<td>&amp;lt;</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>&amp;gt;</td>
 </tr>
 </tbody></table>
-<p>這次先專注於 Event system 腳本上<br>以下的三個設定 </p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>First Selected</td>
-<td>預設被選定的UI物件</td>
-</tr>
-<tr>
-<td>Send Navigation Event</td>
-<td>是否開啟UI導航功能</td>
-</tr>
-<tr>
-<td>Drag Threshold</td>
-<td>拖曳事件靈敏度</td>
-</tr>
-</tbody></table>
-<p>在我的專案中，遊戲操作皆來自鍵盤<br>因此需要使用到UI導航功能  </p>
-<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><p>只有三個選項，卻會超出選項格外<br><img data-src="https://i.imgur.com/v0hC0wV.gif"><br>甚至按不回來，由動圖可知選項超出後<br>不知道選到了誰    </p>
-<h3 id="問題解決"><a href="#問題解決" class="headerlink" title="問題解決"></a>問題解決</h3><p>提到 Navigation，一般設定為 <code>auto</code><br>也就是按上下左右鍵會分別對應按鈕的位置<br>如果有多個按鈕都是設<code>auto</code>就會發生我這樣的事情<br>除了auto外，也有其他的方式</p>
-<ul>
-<li>none 不被導航影響</li>
-<li>Horizontal</li>
-<li>Vertical</li>
-<li>Explicit 則是可以指定選擇跳選的對象  </li>
-</ul>
-<p><img data-src="https://i.imgur.com/Lubtgid.png"></p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a><strong>注意</strong></h4><p>當然如果其他的Button是Deactivate狀態下，是不被影響的<br>物件停用狀態腳本自然也不會被執行<br>不過物件<code>Set Active</code>開開關關會使效能產生一個臨時高峰<br>會突然LAG一下，因此我是使用<code>Canvas Group</code>的alpha值控制按鈕的出現，但實際上功能還是運行的狀態<br>所以還是吃的到Navigation事件  </p>
-<h4 id="我選到了誰"><a href="#我選到了誰" class="headerlink" title="我選到了誰?"></a><strong>我選到了誰?</strong></h4><p>這時候可以打開<code>Visualize</code>來看這些UI物件是怎麼連結的<br><img data-src="https://chi01pap001files.storage.live.com/y4mOdcNws2PW6q_sxLe5GYT3fa1Ty342iMadi9U1sHLMtA2Z1VHwPBP_iIFDhBznNzBEHBVHgsVFQSC2ut_euANWxu-otOVWFt1wlbQN1KoBFtmd2ORx930-8vW8JeH_81zE-5WLmpi2Jg8LVIFxOoDeL33Yp0UXJNk5tEW5UgX6dLcIlBbK8tMQCPUI9MYwe2U?width=660&height=421&cropmode=none"><br>我先把alpha值打開，看一下按鈕位置<br>搭啦!凌亂的連連看 (注意黃色線)<br><img data-src="https://chi01pap001files.storage.live.com/y4mxQaNp1uNlJFSzfiusdX7iG1ZaWaLCiKJ2l6WiLBBRVB_NEzB9pVX1nOvW-XeEqGIgScY1Dn54xIeBJTO84UeBaIfXDErzZ-QzjS22pFpLWwEfQQaHj-bhxCGpsDBH4obPA87l31JCD7-V4QR3A0GnuchQQBIvy3XwN5QOXSQxjYy8eTeTA8O5OwBHQVLBHAu?width=660&height=372&cropmode=none"><br>知道原因後，斷開連結就行了，把其他無關緊要的按鈕都選擇<code>none</code>就好了。  </p>
+<p>範例 : *markdown 語法也會吃 html<br> <pre>            &lt;div&gt;</pre><br> 實際上長這樣 <strong>&amp;lt;div&amp;gt;</strong></p>
+<h3 id="SEO-相關東西"><a href="#SEO-相關東西" class="headerlink" title="SEO 相關東西"></a>SEO 相關東西</h3><p>這邊我覺得蠻有趣的，所以也記錄一下      </p>
+<p>搜尋一打，為什麼有些網站名列前茅?<br>SEO 要做得好，其實跟 meta tag 脫不了關係<br>因為這部份真的很 <strong>深深深深</strong><br>有些公司是有一個專門團隊在管理這部分的<br>僅列出稍微知道的一部分  </p>
+<h4 id="SEO是給機器看的"><a href="#SEO是給機器看的" class="headerlink" title="SEO是給機器看的"></a>SEO是給機器看的</h4><p>也就是為什麼有語意化標籤的產生<br>除了內容標籤之外<br>又必須在網頁設定告訴機器哪些事?    </p>
+<p>常見的有這幾個<br>以 <a href="https://www.walkerland.com.tw/article/view/186797">這個網站</a> 為例<br>按出 devtool 打開 head 就可以看見<br>記得 head 裡面的東西是 <strong>網頁的資本資訊</strong><br><img data-src="https://chi01pap001files.storage.live.com/y4mJy12jCWqUv8I3m2vELwKn21a1DPZjMIadHGCUzAOxa4X6RW-HfYkEBrWU1KomtH6K40CNew2xpfnfk64KV51Gek1qn-XTbvyr7E65IcIgyyGjosLV9kyNCsyyjQk-1NUgZanO06xoRqbydtD3pRl7nrxCyJC0QUm5UeTudmF47vINqUkYQWoAnzv0wybtQRM?width=660&height=462&cropmode=none"></p>
+<p>這邊都是指在搜尋引擎相關的資訊 </p>
+<ol>
+<li> <code>keywords</code> : 關鍵字</li>
+<li> <code>description</code>  : 網頁敘述。這蠻重要的，寫得好容易被排的前面</li>
+<li> <code>title</code> : 網頁的標題。搏人眼球的標題容易點進來</li>
+<li> <code>property</code> : 屬性。這邊通常會給 <code>社群媒體</code> 相關設定用</li>
+</ol>
+<h5 id="property"><a href="#property" class="headerlink" title="property"></a><strong>property</strong></h5><ol>
+<li><p><code>og</code> : Open Graph protocol。最常用的是 FB 。<br>裡面可以設定在 FB 分享時出現的 <code>圖片、標題、敘述</code><br>詳細可以到 偵錯工具看<br>子屬性分別有對應的功能</p>
 <blockquote>
-<p>如果不選擇none的效果就可以知道navigation怎麼運作  </p>
+<p><a href="https://developers.facebook.com/tools/debug/?locale=zh_TW">分享偵錯工具 - Facebook for Developers</a></p>
 </blockquote>
-<p><img data-src="https://i.imgur.com/8IRNaIr.gif">  </p>
+</li>
+<li><p><code>app_id</code> : 有些網站具有 app ，會挑出訊息告訴使用者可以下載來獲得更加體驗之類的。</p>
+</li>
+</ol>
+<h5 id="JSON-LD"><a href="#JSON-LD" class="headerlink" title="JSON-LD"></a><strong>JSON-LD</strong></h5><p>這個是給 google 引擎看的<br>是在搜尋後呈現的東西<br>一樣同個網站，Umm不太好找<br>主要有找到這個標籤<br><img data-src="https://chi01pap001files.storage.live.com/y4myYnkBblETyqypt00tVvRJJCVVClV3ueNCz4wZmj6vFMd_cwhAPAFQJLmtm8-TsF-CxnhijUI_n6HF80TxRos9HOO3yWE1n96TzqWQbECYmjCGlLlXiIFfSZJe8FERdC9C8NrXgp9NLSxp8tY1B_3oEaNLMJPQ_I7YEbuNWcJMF1Px7RyrLfK5IpGyQsN-I2E?width=660&height=146&cropmode=none"></p>
 <blockquote>
-<p>選擇none的效果後  </p>
+<p>詳細參考這篇文章有提到各式種類呈現<br><a href="https://z3388638.medium.com/%E4%BD%BF%E7%94%A8-json-ld-%E8%99%95%E7%90%86-seo-%E4%B8%A6%E8%AE%93-google-%E9%87%9D%E5%B0%8D%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F%E7%B6%B2%E7%AB%99%E5%81%9A%E7%8D%A8%E7%89%B9%E7%9A%84%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E5%91%88%E7%8F%BE-9c74783c017a">使用 JSON-LD 處理 SEO，並讓 Google 針對不同形式網站做獨特的搜尋結果呈現 | by YY | Medium</a></p>
 </blockquote>
-<p><img data-src="https://i.imgur.com/D5mGljJ.gif">  </p>
-<p>看看這連連看都鎖在中間了(很糊!沒辦法Unity就這麼糊)<br><img data-src="https://i.imgur.com/CQwmNFb.png"></p>
-<h2 id="延伸思考"><a href="#延伸思考" class="headerlink" title="延伸思考"></a>延伸思考</h2><p>當然不只Fungus的Menu可以使用<br>可以搭配出更多的UI複合式選單<br>尤其是使用搖桿的玩家<br>在操作上可以更加靈活  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>總之這種情形還真得要多多注意<br>當時找這個問題找了一個小時多<br>沒想到就這麼小問題QQ</p>
+<p>google 的開發者頁面就有提到這部分</p>
+<blockquote>
+<p><a href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=zh-tw">瞭解結構化資料的運作方式 | Google 搜尋中心  |  Google Developers</a></p>
+</blockquote>
+<p>關於 JSON-LD</p>
+<blockquote>
+<p><a href="https://json-ld.org/">JSON-LD - JSON for Linking Data</a></p>
+</blockquote>
+<h5 id="robot-txt"><a href="#robot-txt" class="headerlink" title="robot.txt"></a><strong>robot.txt</strong></h5><p>這個檔案是給爬蟲看的<br>裡面也明確規範告訴爬蟲<br>哪些不要看、哪些給你看</p>
+<blockquote>
+<p>參考資料<br><a href="https://zh.wikipedia.org/wiki/Robots.txt">robots.txt - 維基百科，自由的百科全書 (wikipedia.org)</a>  </p>
+</blockquote>
+<h5 id="sitemap-xml"><a href="#sitemap-xml" class="headerlink" title="sitemap.xml"></a><strong>sitemap.xml</strong></h5><p>也就是網站地圖<br>更快速幫助機器讀懂網站架構<br>通常也會規範在 robot.txt 裡</p>
+<blockquote>
+<p>參考資料<br><a href="https://ranking.works/%E6%8A%80%E8%A1%93SEO/sitemap">【Sitemap SEO教學篇】Sitemap是什麼？一次掌握Sitemap網站地圖製作與提交流程！ | Ranking SEO</a></p>
+</blockquote>
+<h3 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h3><p>主要是紀錄 html 的架構說明<br>SEO 的部分只是蜻蜓點水<br>以後有興趣再往深處寫  </p>
 ]]></content>
       <categories>
-        <category>Unity</category>
+        <category>Frontend</category>
+        <category>HTML</category>
       </categories>
       <tags>
-        <tag>Unity</tag>
-        <tag>UI</tag>
-        <tag>Event System</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1239,357 +803,6 @@ b <span class="token operator">=</span> <span class="token number">1</span>
       </tags>
   </entry>
   <entry>
-    <title>⟬ 筆記 ⟭ HTML 基本語法</title>
-    <url>/RosaBlog/Frontend/HTML/HTML-Tags/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>這邊紀錄常用標籤與標籤用處<br>標籤基本都成雙成對<br>本篇主要複習跟稍微解析實際網頁的應用部分  </p>
-<span id="more"></span>
-
-<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- !DOCTYPE HTML :告訴瀏覽器這是標準的 html 格式--></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">HTML</span><span class="token punctuation">></span></span> 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-	<span class="token comment">&lt;!-- head : 網頁資本資訊--></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-		(1) title : 網站標題
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>網站標題<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-		(2) charset : 編碼
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-	<span class="token comment">&lt;!--body : 主要呈現的地方--></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-		(1) div : 分組，會換行 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> 
-		(2) span : 分組，不會換行
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> 
-		(3) img : 圖片 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>放source<span class="token punctuation">"</span></span> 
-			 <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>滑鼠 Hover 顯示文字<span class="token punctuation">"</span></span>
-			 <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>圖片跑不出來的替代文字<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-		(4) 清單  
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span> : 沒有排序的清單，只會出現 dot
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">></span></span> : 有排序的清單 (order)，會顯示數字
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span> : 項目
-		
-		(5) pre : 保留完整格式 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
-		說明 : 在 html 空多少格都會只有呈現一格
-		加入 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span> 後，html長相都會被「照實呈現」
-		
-		(6) br : 換行 
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-		
-		(7) 表格
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
-			(7-1) 表格標題 (header)
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
-			說明 : 可以放在首列，標題字會變粗體
-			-----
-			(7-2) 列(row)
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
-				(7-3) 子項
-				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
-		
-		(8) 錨點 
-		(8-1) 連外部網絡
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>連結網址<span class="token punctuation">"</span></span> 
-		   <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">新分頁開啟</span>
-		   				   <span class="token attr-name">不加的話預設是直接打開</span>
-		<span class="token punctuation">></span></span>
-		(8-2) 連內部段落
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">herf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#段落ID<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		說明 : 使用 id 來進行連結
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>&lt;!DOCTYPE HTML&gt;</code> 通常可加可不加<br>不加偶爾會出 Bug ，所以還是加一下。</li>
-</ul>
-<h3 id="實用型"><a href="#實用型" class="headerlink" title="實用型"></a>實用型</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html">1. iframe  : 嵌入網站。
-說明:通常會看到嵌入 yt 影片、網頁內容等等。
-實際上很多網站會擋，以防資訊被偷竊。
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>來源網址<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
-
-2. form : 表單
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
-	2-1. input : 輸入 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>輸入類型<span class="token punctuation">"</span></span> 
-		   <span class="token attr-name">vaule</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>被輸入的值可以先預設<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>input</span><span class="token punctuation">></span></span>
-	type 常見有 : 
-           text、password、email、radio、
-           checkbox、date
-	有作用的按鈕 :
-	    submit (送出)
-	注意 : submit 類型的 vaule 是指按鈕文字
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>input 更多類型往這邊<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTML/Element/input">超文本標記語言 | MDN (mozilla.org)</a>  </p>
-</blockquote>
-<p>範例</p>
-<ul>
-<li><strong>radio</strong> 單選  </li>
-</ul>
-<iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/bGWOrWB?default-tab=html%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/shan473/pen/bGWOrWB">
-  </a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
-
-<ol>
-<li><code>type</code>  : 設定種類</li>
-<li><code>name</code> :  把選項群組。<br>使用單選時，要確定哪個是同一種單選<br>如果沒有 <strong>name</strong> 就沒用哦</li>
-<li><code>label</code> : 可以把內容也變的跟同個 id 有一樣的效果。<br>如果沒有 label 可以發現 <strong>使用者體驗較差</strong><br>每次點擊必須精準落在圈圈內<br>加上之後，讓 label 裡的字串點擊也可以勾選<br>以便來 <strong>提升使用者的體驗</strong></li>
-</ol>
-<blockquote>
-<p>關於 vaule 的範例<br><a href="https://matthung0807.blogspot.com/2019/08/html-input-value.html">菜鳥工程師 肉豬: HTML value屬性</a>  </p>
-</blockquote>
-<h3 id="語意化標籤"><a href="#語意化標籤" class="headerlink" title="語意化標籤"></a>語意化標籤</h3><p>英文 <em>Semantic Elements</em></p>
-<p>綜觀所有東西確實可以使用 <code>div</code> 來包裹<br>但在閱讀上其實不太方便<br>尤其網頁在爬蟲時，要讓機器方便閱讀<br>因此才有語意化標籤來輔助<br>如果是人，在閱讀上也來的更清楚快速</p>
-<blockquote>
-<p>更多的可以參照 W3 說明<br>(<a href="https://www.w3schools.com/html/html5_semantic_elements.asp">HTML Semantic Elements (w3schools.com)</a>)  </p>
-</blockquote>
-<p>提到給機器看，很大一部分跟 SEO (search engine optimization) 也有關連<br>比起看 <code>div</code> 猜意思，不如直接跟他說這是什麼區塊 </p>
-<p>這邊舉幾個是常見的  </p>
-<ol>
-<li><code>&lt;main&gt;</code> : 放主要內容的</li>
-<li><code>&lt;nav&gt;</code> : 導覽列</li>
-<li><code>&lt;footer&gt;</code> : 網頁底部資訊</li>
-<li><code>&lt;section&gt;</code> : 區塊資訊</li>
-</ol>
-<p>總之，功能跟 <code>div</code> 包裹沒差別，差在更容易識別。</p>
-<h3 id="跳脫標籤"><a href="#跳脫標籤" class="headerlink" title="跳脫標籤"></a>跳脫標籤</h3><p>有些特殊字元並沒辦法在 html 中呈現<br>當你打 想顯示 &lt;div&gt; ，怎麼打就是看不見<br>例如 <code>div</code> 前面跟後面的 <code>&lt; &gt;</code> 這個標籤<br>替代符號可以用以下幾個  </p>
-<table>
-<thead>
-<tr>
-<th>符號</th>
-<th>替代使用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&amp;</td>
-<td>&amp;amp;</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>&amp;lt;</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>&amp;gt;</td>
-</tr>
-</tbody></table>
-<p>範例 : *markdown 語法也會吃 html<br> <pre>            &lt;div&gt;</pre><br> 實際上長這樣 <strong>&amp;lt;div&amp;gt;</strong></p>
-<h3 id="SEO-相關東西"><a href="#SEO-相關東西" class="headerlink" title="SEO 相關東西"></a>SEO 相關東西</h3><p>這邊我覺得蠻有趣的，所以也記錄一下      </p>
-<p>搜尋一打，為什麼有些網站名列前茅?<br>SEO 要做得好，其實跟 meta tag 脫不了關係<br>因為這部份真的很 <strong>深深深深</strong><br>有些公司是有一個專門團隊在管理這部分的<br>僅列出稍微知道的一部分  </p>
-<h4 id="SEO是給機器看的"><a href="#SEO是給機器看的" class="headerlink" title="SEO是給機器看的"></a>SEO是給機器看的</h4><p>也就是為什麼有語意化標籤的產生<br>除了內容標籤之外<br>又必須在網頁設定告訴機器哪些事?    </p>
-<p>常見的有這幾個<br>以 <a href="https://www.walkerland.com.tw/article/view/186797">這個網站</a> 為例<br>按出 devtool 打開 head 就可以看見<br>記得 head 裡面的東西是 <strong>網頁的資本資訊</strong><br><img data-src="https://chi01pap001files.storage.live.com/y4mJy12jCWqUv8I3m2vELwKn21a1DPZjMIadHGCUzAOxa4X6RW-HfYkEBrWU1KomtH6K40CNew2xpfnfk64KV51Gek1qn-XTbvyr7E65IcIgyyGjosLV9kyNCsyyjQk-1NUgZanO06xoRqbydtD3pRl7nrxCyJC0QUm5UeTudmF47vINqUkYQWoAnzv0wybtQRM?width=660&height=462&cropmode=none"></p>
-<p>這邊都是指在搜尋引擎相關的資訊 </p>
-<ol>
-<li> <code>keywords</code> : 關鍵字</li>
-<li> <code>description</code>  : 網頁敘述。這蠻重要的，寫得好容易被排的前面</li>
-<li> <code>title</code> : 網頁的標題。搏人眼球的標題容易點進來</li>
-<li> <code>property</code> : 屬性。這邊通常會給 <code>社群媒體</code> 相關設定用</li>
-</ol>
-<h5 id="property"><a href="#property" class="headerlink" title="property"></a><strong>property</strong></h5><ol>
-<li><p><code>og</code> : Open Graph protocol。最常用的是 FB 。<br>裡面可以設定在 FB 分享時出現的 <code>圖片、標題、敘述</code><br>詳細可以到 偵錯工具看<br>子屬性分別有對應的功能</p>
-<blockquote>
-<p><a href="https://developers.facebook.com/tools/debug/?locale=zh_TW">分享偵錯工具 - Facebook for Developers</a></p>
-</blockquote>
-</li>
-<li><p><code>app_id</code> : 有些網站具有 app ，會挑出訊息告訴使用者可以下載來獲得更加體驗之類的。</p>
-</li>
-</ol>
-<h5 id="JSON-LD"><a href="#JSON-LD" class="headerlink" title="JSON-LD"></a><strong>JSON-LD</strong></h5><p>這個是給 google 引擎看的<br>是在搜尋後呈現的東西<br>一樣同個網站，Umm不太好找<br>主要有找到這個標籤<br><img data-src="https://chi01pap001files.storage.live.com/y4myYnkBblETyqypt00tVvRJJCVVClV3ueNCz4wZmj6vFMd_cwhAPAFQJLmtm8-TsF-CxnhijUI_n6HF80TxRos9HOO3yWE1n96TzqWQbECYmjCGlLlXiIFfSZJe8FERdC9C8NrXgp9NLSxp8tY1B_3oEaNLMJPQ_I7YEbuNWcJMF1Px7RyrLfK5IpGyQsN-I2E?width=660&height=146&cropmode=none"></p>
-<blockquote>
-<p>詳細參考這篇文章有提到各式種類呈現<br><a href="https://z3388638.medium.com/%E4%BD%BF%E7%94%A8-json-ld-%E8%99%95%E7%90%86-seo-%E4%B8%A6%E8%AE%93-google-%E9%87%9D%E5%B0%8D%E4%B8%8D%E5%90%8C%E5%BD%A2%E5%BC%8F%E7%B6%B2%E7%AB%99%E5%81%9A%E7%8D%A8%E7%89%B9%E7%9A%84%E6%90%9C%E5%B0%8B%E7%B5%90%E6%9E%9C%E5%91%88%E7%8F%BE-9c74783c017a">使用 JSON-LD 處理 SEO，並讓 Google 針對不同形式網站做獨特的搜尋結果呈現 | by YY | Medium</a></p>
-</blockquote>
-<p>google 的開發者頁面就有提到這部分</p>
-<blockquote>
-<p><a href="https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data?hl=zh-tw">瞭解結構化資料的運作方式 | Google 搜尋中心  |  Google Developers</a></p>
-</blockquote>
-<p>關於 JSON-LD</p>
-<blockquote>
-<p><a href="https://json-ld.org/">JSON-LD - JSON for Linking Data</a></p>
-</blockquote>
-<h5 id="robot-txt"><a href="#robot-txt" class="headerlink" title="robot.txt"></a><strong>robot.txt</strong></h5><p>這個檔案是給爬蟲看的<br>裡面也明確規範告訴爬蟲<br>哪些不要看、哪些給你看</p>
-<blockquote>
-<p>參考資料<br><a href="https://zh.wikipedia.org/wiki/Robots.txt">robots.txt - 維基百科，自由的百科全書 (wikipedia.org)</a>  </p>
-</blockquote>
-<h5 id="sitemap-xml"><a href="#sitemap-xml" class="headerlink" title="sitemap.xml"></a><strong>sitemap.xml</strong></h5><p>也就是網站地圖<br>更快速幫助機器讀懂網站架構<br>通常也會規範在 robot.txt 裡</p>
-<blockquote>
-<p>參考資料<br><a href="https://ranking.works/%E6%8A%80%E8%A1%93SEO/sitemap">【Sitemap SEO教學篇】Sitemap是什麼？一次掌握Sitemap網站地圖製作與提交流程！ | Ranking SEO</a></p>
-</blockquote>
-<h3 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h3><p>主要是紀錄 html 的架構說明<br>SEO 的部分只是蜻蜓點水<br>以後有興趣再往深處寫  </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>HTML</category>
-      </categories>
-      <tags>
-        <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ CSS 選擇器</title>
-    <url>/RosaBlog/Frontend/CSS/CSS-Selector/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>複習常見用法與了解選擇器權重的問題   </p>
-<span id="more"></span>  
-<h2 id="條件使用"><a href="#條件使用" class="headerlink" title="條件使用"></a>條件使用</h2><p>舉 class 的例子<br>選擇器還有 <code>Universal(*) 、pseudo-classes(偽類別)、id、tag(標籤)</code>等等的選擇器<br>除了 <strong>id</strong> 外基本都以此類推。</p>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 省略 Html 架構--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token comment">&lt;!-- 範例 4 開始 --></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 1 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>B<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 2 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 3 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>C<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 4 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>item<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>P<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>來套上CSS   </p>
-<ol>
-<li>同時符合條件才套用</li>
-</ol>
-<ul>
-<li><code>.A.item</code> : 連續的，並無空格<blockquote>
-<p>是 A 又有 item 的才會被選，其他 A 不套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="2">
-<li>父層以下的所有叫 OO <strong>都</strong>  套用 </li>
-</ol>
-<ul>
-<li><code>.wrapper .A</code> : 中間空一格<blockquote>
-<p>這邊通通有 class <code>A</code> 的都會被套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="3">
-<li> 父層的下一層要叫 OO 才套用</li>
-</ol>
-<ul>
-<li><code>.wrapper&gt;.A</code> : 下一層的 A 都會套用    <blockquote>
-<p>box 裡面的 A 是屬於 下下層，因此不套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="4">
-<li> 同一層的旁邊叫 OO 的才套用  </li>
-</ol>
-<ul>
-<li><code>.B+.C</code> : 兩個都同一層  <blockquote>
-<p>只有 B-2 旁邊的 <code>C-3</code> 會套用</p>
-</blockquote>
-</li>
-</ul>
-<ol start="5">
-<li> 同一層的右邊只要叫 OO 的都套用</li>
-</ol>
-<ul>
-<li><code>.B~.C</code> : 兩個都同一層 <blockquote>
-<p> B-2 旁邊的 <code>C-3</code> 與 <code>C-4</code> 皆會套用  </p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p><a href="https://codepen.io/shan473/pen/BaRMyrz">練習</a>  </p>
-</blockquote>
-<h4 id="快速複習"><a href="#快速複習" class="headerlink" title="快速複習"></a>快速複習</h4><table>
-<thead>
-<tr>
-<th align="center">符號</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&gt;</td>
-<td>下一層</td>
-</tr>
-<tr>
-<td align="center">+</td>
-<td>同一層的旁邊一個</td>
-</tr>
-<tr>
-<td align="center">~</td>
-<td>同一層的旁邊所有的</td>
-</tr>
-</tbody></table>
-<h2 id="常用的選擇器"><a href="#常用的選擇器" class="headerlink" title="常用的選擇器"></a>常用的選擇器</h2><ul>
-<li>pseudo-classes (偽類別)<br>  以 <code>:</code> 表示<ul>
-<li>關於動作的 (Dynamic)<br>  像是 <code>:hover</code>、<code>:active</code> … 等等    以往在開發時可能都要實際操作再看效果<br>  在 Dev tool 中可以手動直接控制<br>  瀏覽器顯示 style 有個 <code>:hov</code><br>  <img data-src="https://chi01pap001files.storage.live.com/y4mXniSc9YQknILFFtKip8TAQ82En47NCTww_UljZH2WPpwqvQD9hnkcwXYNUQu4BrLI_6xTabbid29wewJsyt3Kj522mgEJaTDHjoN0PzHXFUSvUP8ZTj3OBzQEs91uitM5P80iFV083PpDcTt6BzOsT4yaDtMYgcVgBNAKvX0bnj3LL0-BoayHXrZxslbKj8r?width=660&height=236&cropmode=none">  </li>
-<li>選擇器<br>  <code>:nth-child(n)</code> : 選擇子層的第 n 個<br>  <code>:first-child</code>  :  指第一個<br>  <code>:first-child</code>  :  指最後一個    快速一點  <ol>
-<li><code>:nth-child(odd)</code> : 只選奇數位</li>
-<li><code>:nth-child(even)</code> : 只選偶數位</li>
-<li><code>:nth-child(an+b)</code> : 等差選  </li>
-</ol>
-<blockquote>
-<p>nth-child 是從後面解讀<br>例 : .wrapper .A:nth-child(3)<br>XX層的第 n 個元素是 OO 再動作</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>參考資料<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/Pseudo-classes">虛擬類別 - CSS | MDN (mozilla.org)</a></p>
-</blockquote>
-<ul>
-<li>pseudo-elements (偽元素)<br>  以 <code>::</code> 表示<br>  最常用的是 <code>::before</code> 跟 <code>::after</code><br>  使用上可以用 <strong>共同想加入的東西</strong><br>  例如 金錢符號    <iframe height="300" style="width: 100%;" scrolling="no" title="" src="https://codepen.io/shan473/embed/OJmdPvN?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-See the Pen <a href="https://codepen.io/shan473/pen/OJmdPvN">
-</a> by YanShanHong (<a href="https://codepen.io/shan473">@shan473</a>)
-on <a href="https://codepen.io">CodePen</a>.
-</iframe>  
-  
-  這樣只要改 ::before 的內容就可以統一修改      </li>
-</ul>
-<blockquote>
-<p>content 一定要有，沒有內容也可以空的</p>
-</blockquote>
-<p>*<code>content : attr( class or tag )</code><br>可以抓到 html 的資料 </p>
-<blockquote>
-<p>參考資料<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/content">content - CSS（层叠样式表） | MDN (mozilla.org)</a></p>
-</blockquote>
-<h2 id="選擇器權重"><a href="#選擇器權重" class="headerlink" title="選擇器權重"></a>選擇器權重</h2><p>常常會因為套用很多 CSS 而眼花撩亂<br>誰被套用了 ? 誰套了又沒效果了 ?<br>透過權重就能清楚知道</p>
-<ul>
-<li>把握基本原則<blockquote>
-<p><strong>id &gt; class &gt; tag</strong><br>越詳細越先套用<br>重複寫到一樣的，以後面的為重</p>
-</blockquote>
-</li>
-</ul>
-<p>網路上會以 <code>100 : 10 : 1</code>  來說明比重<br>但我更喜歡 Huli 大講的 <code>0,0,0</code> 越前面的越重<br>誰佔的比較前面就吃那個樣式   </p>
-<p>假如都使用 class 那第二個就是看 <code>數量</code><br>數字並不會十進位  </p>
-<p>有神人測試過 256 個 class 可以超過 id<br>不過應該不會有人會寫到這麼多 class …<br>應該是測試極限用而已  </p>
-<blockquote>
-<p>參考資料<br><a href="https://juejin.cn/post/6844903608199151630">你对CSS权重真的足够了解吗？ (juejin.cn)</a></p>
-</blockquote>
-<h3 id="進階原則"><a href="#進階原則" class="headerlink" title="進階原則"></a>進階原則</h3><p>也就是 <code>!important</code> 與 <code>inline style</code> </p>
-<ol>
-<li>inline style : 寫在 html 同一行元素裡的 style   <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>!important<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">.class&#123;
-	background:red !important;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-綜合排一下<blockquote>
-<p>!important &gt; inline style &gt; id &gt; class &gt; tag  </p>
-</blockquote>
-</li>
-</ol>
-<p>看成 <code>0 , 0 , 0 , 0 , 0</code><br>越後面樣式越容易被覆蓋</p>
-<p>因此套上 <code>!important</code> 是奧義<br>並不會很常使用<br>不然其他寫的都沒意義了   </p>
-<p>最常使用的是 class 而非 id</p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以前使用 CSS 重點在其他設定<br>老是一直層層疊上去<br>透過整理可以更清楚知道選擇器的權重<br>與選擇器正確的使用  </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>⟬ 紀錄 ⟭ UnityWebgl 輸出問題</title>
     <url>/RosaBlog/Unity/UnityWebGL-Output-Promblem/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很不容易終於把案子的遊戲做出來了<br>輸出 WebGL ，遇上不少問題  </p>
@@ -1728,6 +941,793 @@ on <a href="https://codepen.io">CodePen</a>.
       <tags>
         <tag>Unity</tag>
         <tag>WebGL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(II)</title>
+    <url>/RosaBlog/Blog/Hexo-BuildBloger-II/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨日已經將網站安裝起來了<br>今天要基礎設定，以及發佈至github上<br>使用很多人用的 NEXT 主題，NEXT 也有很多好用的插件<br>像是留言區、人流計數、打賞之類的都有<br>客製化自己的部落格更方便了<br>讓我想起小時候玩無名小站的快樂…  </p>
+<h2 id="複習"><a href="#複習" class="headerlink" title="複習"></a>複習</h2><p>昨天最常使用的2個指令，今天再加一個  </p>
+<pre class="line-numbers language-none"><code class="language-none">hexo clean &#x3D;&gt; 簡寫 hexo cl &#x2F;&#x2F;清除建構檔  
+hexo g  &#x2F;&#x2F;重新建構  
+hexo s  &#x2F;&#x2F;發布伺服器(本端)  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>有時候會有囤積的檔案，clean一下之後再重新建構<br>明天再來細補資料夾的結構與檔案設定的部份<br>來做一個統整復習</p>
+<h2 id="換上NEXT主題"><a href="#換上NEXT主題" class="headerlink" title="換上NEXT主題"></a>換上NEXT主題</h2><blockquote>
+<p><a href="https://github.com/theme-next/hexo-theme-next">官方指引</a>  </p>
+</blockquote>
+<p>不過我一樣是看那位<a href="https://home.gamer.com.tw/artwork.php?sn=5138471">巴哈L大大的文章</a>，真的幫助我很多☺️  </p>
+<pre class="line-numbers language-none"><code class="language-none">npm install hexo-theme-next  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>直接在終端機輸入安裝指令<br>之後在左側的資料夾找到<br><img data-src="https://chi01pap001files.storage.live.com/y4mZoV2zYTezJ7XnQzQftdPHv7G283xYtZn29Jm7MZ5BcCvcgEz5ET80-IILT_wrv5cE-TDME573cM8j3IQndYptgcFKJboIPsDViORzMo-554RRyfmKuwmWNFLSCifx1yqRbRS_1vGsOCjc52mDfyHSBXfKC2qOJOSP-_382CTz8EjWdyen19M2UAwGLqGcNis?width=290&height=602&cropmode=none"><br><code>_config.yml</code>  ⇒ 網頁設定檔，設定一些插件開關阿，網頁名稱、網址等等的<br>NEXT安裝完後會生出 <code>_config.next.yml</code> ⇒ 是 NEXT主題中的設定，這個先不設定了。<br>首先要把網頁設定檔的一些東西設定好，善用 <code>ctrl + F</code> 直接尋找  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mg5VYrXhn9SKuFB7O410M0VrdE80dSyg12iiXxEjvdvFV36VXtMsNIyS90lEwOEjoEwGU8AvLctdsyh42QKc7m_VT5DBKUkjUwZAVZzXPWkqjbUjvOIrtXtZmk8w-NQb--hMM-_jkdmrzXBFZ8f8xG2ofs35BdVqZQ36OjvduhjK3UXSuWqfopS2MDFKov9NB?width=660&height=418&cropmode=none">  </p>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>url</td>
+<td>網頁的網址。先去 github 建立好一個空的網頁，複製網址貼上</td>
+</tr>
+<tr>
+<td>root</td>
+<td>網頁的根目錄，這邊寫專案名就好， /***/ 是相對路徑的寫法哦</td>
+</tr>
+<tr>
+<td>theme</td>
+<td>網站套用的主題。這邊安裝的是NEXT填寫上 next</td>
+</tr>
+<tr>
+<td>deloy</td>
+<td>發布設定。這邊先填寫 <code>type: git</code> 。 repo 等等到github 上複製即可</td>
+</tr>
+</tbody></table>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m31ODFxu3XGBixiLchDX0zi4lqY1toUWP2_3Bvbe2iqrsvUY5k035-7vUuTxYOsecl-msD3YU6BjrtEXYrR4vfzVsO0GR7w5HPZuS816bAUuUJ3b8LOyZro_eBsQX7EzvEvwyCle5dAdlWgxV2Ynrlk2WOPIyQan6qaNM5hF8XhMsowebpXBVIsiPg6QkwICt?width=256&height=68&cropmode=none">  </p>
+<blockquote>
+<p>記得 冒號 : 後面要空一格(space)，設定值才算有哦  </p>
+</blockquote>
+<p>裝完 Next 也改完設定了，再一次執行指令   </p>
+<pre class="line-numbers language-none"><code class="language-none">hexo cl
+hexo g
+hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<p>會在終端機上看到大大的NEXT<br>開啟本機伺服器後，看到主頁面沒問題就OK囉<br>發現tags categroies 等等頁面都not found是正常的<br>因為還沒新增頁面  </p>
+<h2 id="發布至github-pages"><a href="#發布至github-pages" class="headerlink" title="發布至github pages"></a>發布至github pages</h2><p>關於上傳有兩個方式<br>分別用 https 或 SSH 形式，兩者都可以<br>都是git的上傳方式<br>根據<a href="https://wcc723.github.io/git/2018/02/12/github-ssh-https/"><strong>卡斯柏大大</strong></a>寫的，github 官方推薦https方式但也有提供SSH  </p>
+<blockquote>
+<p><strong>https</strong> ⇒ 是不用金鑰，上傳時第一次會要求登入<br><strong>SSH</strong> ⇒ 需要金鑰，不用再登入帳號認證  </p>
+</blockquote>
+<p>懶人如我，當然選SSH XDD<br>以下這邊會以 SSH 部署方式進行<br>先安裝 hexo - git 的發布工具<br>如果有慣用的可以到hexo Plugin 找一下  </p>
+<pre class="line-numbers language-none"><code class="language-none">npm install hexo-deployer-git --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<p>恩…   <code>- -save</code>  是什麼碗糕呢<br>查了一下大概是 發佈&amp;開發狀態的區別<br>不過就先照官方的做吧! 之後在總結補上概念<br><code>deploy</code> 中文是部署，就是發布的意思啦!<br>接著回到上面 <code>_config.yml</code> 檔進行設定  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mAgiLoI6WV74o0adjBGFlRZU-8LOLmfwTqA6WE10zJOcOQWQcjFuUUTtl_jsAoAXrQUu08ZmDPU8g7l7hgaAT1DOVYYDjxiWeS2hftDZXLinaOqNrU4zsLPPdPZn3nBsD5Crg07WHCYbskme0mhi0CQD_sWE-ZjVSFhPULnsB8ZurJzRRoMCsXMHt_GFO52eL?width=256&height=68&cropmode=none">  </p>
+<p>剛剛我們在 <code>deploy</code> 這邊寫打好type了<br>為了接上自己的 github repository<br>我們到要成為blog的專案底下找到 code 這個綠綠的，按一下<br>裡面會有 https 跟 SSH 的git 上傳地址 ， 複製SSH 的那串到 repo 貼上  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mtrlRgLYfAcRsAhseYDa7VThDuZI0wLDMnhFqvZ7xSbTkFjpstkcIn1SQWWs-ZgIQXy9_w2VNi0KMgNLoJdt9Uvcsq2JAyt-klGyB5qA_HHhyUCu1RJqsELKcVABJd1Rh-QcOSMEcfBXzOdw1pN1zkgWoeBD68rwLUwpTZoiXDjH5eFa_V-Rx4InL5hdAIyA2?width=660&height=487&cropmode=none">  </p>
+<p>再來我們要透過 終端機用git連接上去囉!<br>設定好登入口  </p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global user.name &quot;你的帳號名&quot;  &#x2F;&#x2F;像我的就是 meitung473  
+git config --global user.email &quot;你註冊的信箱(你的帳號)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>因為透過SSH的方式，需要金鑰，所以來建立一個新的金鑰  </p>
+<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -C &quot;你註冊的信箱(你的帳號)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>…你說這又是啥碗糕，SSH 之前略懂略懂而已，所以我又查了一下<br><code>ssh-keygen</code> ⇒ 產生金鑰， 後面的 rsa 是加密金鑰的演算，至於這些不是我的拿手就不多說了<br>好奇的話可以看 <a href="https://docs.microsoft.com/zh-tw/azure/virtual-machines/linux/create-ssh-keys-detailed">MS 官方說明</a> ，像是 為什麼有 -t 與 -C 的用途是為何  </p>
+<p>總之非對稱加密會有兩把鑰匙，一把公鑰一把私鑰<br>接著把公鑰的部分提出來，塞給自己的github，上傳的時候透過  「鑰&lt;-&gt;鑰」溝通(you know~)  </p>
+<pre class="line-numbers language-none"><code class="language-none">cat ~&#x2F;.ssh&#x2F;id_rsa.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>cat</code> ⇒ 是印出檔案內容指令，我們要提取剛剛產生的SSH 公鑰的部分<br><code>~./ssh/id....</code>這邊是公鑰的檔案路徑<br>你會發現輸入指令後有一大串的東西出現<br>開頭 <code>ssh-rsa AAAAB.... 你的電子信箱</code> 結尾，把它複製起來<br>接著到 github &gt; Setting，找到 <code>SSH keys and GPG keys</code> 的設定頁面，建立新的SSH key<br>複製的文字貼到key上，title取自己方便的就好</p>
+<center> 
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mtrlRgLYfAcRsAhseYDa7VThDuZI0wLDMnhFqvZ7xSbTkFjpstkcIn1SQWWs-ZgIQXy9_w2VNi0KMgNLoJdt9Uvcsq2JAyt-klGyB5qA_HHhyUCu1RJqsELKcVABJd1Rh-QcOSMEcfBXzOdw1pN1zkgWoeBD68rwLUwpTZoiXDjH5eFa_V-Rx4InL5hdAIyA2?width=256&height=189&cropmode=none" alt="step01"></p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m8_6cDZHW1v4JSUJsrUu1p9bMSzDmISLkPucVi6NDP88dCk5LwTSNVligcXEMl81_wAl0zvVnA_WXHJdKvEIccFUNyticly15iG3l2HSc4Wob7_MFbIQaPdxt1KrDyLUosjUouzN0940St1O3nLFi2qH_LUIFad_H5L0VmBpQQJZegkAIR9m0Z8NpnoCC4dbg?width=256&height=140&cropmode=none" alt="step02">  </p>
+</center>
+
+<p>恩?你說這樣就好了嗎，NONO雖然都打好了<br>但我們還沒用「(公)鑰(私)鑰」連結<br>接著輸入指令，連結到 github 做認證，當在終端機部署上去就會上傳到你的github了  </p>
+<pre class="line-numbers language-none"><code class="language-none">ssh -T git@github.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<p>出現 <code>Hi,你剛剛帳號名! …</code> 就代表成功囉!<br>最後一步了!再次打上指令  </p>
+<pre class="line-numbers language-none"><code class="language-none">hexo g  
+hexo d  &#x2F;&#x2F;部署 deploy 的縮寫<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>燈愣!等一會兒就會發現發布的網頁出現新的主題哦!<br>長得不太一樣是因為NEXT 有4種不同版型  </p>
+<p>如果發現好像沒有動靜，檢查一下 <code>branch</code> 是不是設定正確哦<br><img data-src="https://chi01pap001files.storage.live.com/y4mUwaX8yxoT5torp_6oiPYLOI5bjcEE0IJ89NRpRpuhwB6uUaD7dWVgENZka-pJtH4jWV_QrTpJhDe5styDA24xN6fvf0_nWbzeWRzgFWsz9U--NP80ITmFjg4HyStxEjbMOPPco1sLRZPDNmy9Z4TLRgNYcRlBSgGYnzNgDACmLTzLz2Kq859eMQbkhbKT1mq?width=256&height=76&cropmode=none"><br><img data-src="https://chi01pap001files.storage.live.com/y4mK9VlB_cWLjYZ-RMixf0tnkWDOEsySIboe-UtyXoGkSN38L2iUgW4cfm4ru33sO850_G6xbqnE1fQ1VmFeIuJWc4NZKcOWcI0x6NW6by4-rCVi8btKN5Hqt54R23dSlNk5hhOVUEIsc6nYJF2ihz-1AMnxct_WzyxqXEAopufB_acOFW8a5OIrzMyH9MmjSKO?width=256&height=120&cropmode=none"></p>
+<h2 id="追加-利用Hexo後臺來快速新增頁面或文章"><a href="#追加-利用Hexo後臺來快速新增頁面或文章" class="headerlink" title="[追加]利用Hexo後臺來快速新增頁面或文章"></a>[追加]利用Hexo後臺來快速新增頁面或文章</h2><p>今天查一查發現有後台可以安裝<br>挖屋~~~~簡直是一大福音<br>輸入指令安裝  </p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">npm install hexo<span class="token operator">-</span>admin <span class="token operator">--</span>save  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重新重構與開啟伺服器 <code>hexo g</code> ⇒ <code>hexo s</code><br>打開<code>localhost:4000</code> 後面輸入 admin 進入管理後台，就會看到這樣的頁面  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m6t5lwQPLeYwvheAsHrOEHdnJDvfl0c0F_h5yuFzqA519FHGGLzP7wzctJ4tWl-gKQVjsmRL_fTPQZfF-lkmpGSk1ElGcFRl91NAVboiaUtF8aJ_5SBTB7FcXnFt0aLhgJsASoM9qihet4CBavi-X-4oSRL7ygPu1IBOAk1-G-b0e78pNOTA5C_avI3hXqGtM?width=660&height=406&cropmode=none"></p>
+<p>哦耶，這邊就可以更整潔的去組織文章與頁面囉!<br>也會同步更新到 VS 編輯器裡的檔案<br>是不是很讚呢!<br>明天慢慢把東西搬過去吧!  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>到部署步驟的總結，要會的指令大概四招吧  </p>
+<pre><code class="powershell">hexo cl     //建構檔案清理
+hexo g      //檔案重構
+hexo s      //本機在進行修改的時候開的伺服器，如果要發布就不用打了
+hexo d      //發布到指定地方，要先建置好部署步驟哦
+</code></pre>
+<p>安裝下來，發現自己要去學習的東西更多了  </p>
+<ul>
+<li>npm的基礎指令  </li>
+<li>git 指令   </li>
+<li>markdown 語法   </li>
+</ul>
+<p>雖然還有很多想要的插件還沒安上…<br>就一步步來吧:D… </p>
+<hr>
+<blockquote>
+<p>參考資料 :  </p>
+<ol>
+<li><a href="https://home.gamer.com.tw/artwork.php?sn=5138471">Hexo 簡易調教指南（一）：軟體安裝及網站建構 - lewopa47894的創作 - 巴哈姆特</a>  </li>
+<li><a href="https://wcc723.github.io/git/2018/02/12/github-ssh-https/">[Github 中的 ssh、https 路徑有什麼差異？ - 如何設定 Github SSH 金鑰]</a>  </li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10227181">[SSH 金鑰：免密碼登入遠端主機、傳遞檔案]</a>  </li>
+<li><a href="https://ed521.github.io/2019/08/hexo-admin/">[教學]我的第一篇 Hexo 文章：使用 hexo-admin 後台管理工具</a></li>
+</ol>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>部落格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(I)</title>
+    <url>/RosaBlog/Blog/Hexo-BuildBloger-I/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>每次在學習新的概念，都會忘記零碎的步驟<br>想說還是來架個網頁來記錄好了  </p>
+<p>雖然我自己有在Notion 紀錄前端、動畫以及Unity等等的學習文<br>但很常忘記更新，很多都東西做完文章卻寫到一半<br>不得不說寫文章還蠻…累人的，很常想寫成「大家覺得很棒的文」  </p>
+<p>這樣不行!寫文章成了有點痛苦的事，寫的時間也加倍，就變教材了<br>於是辦了一個專頁「經營」，像跟大家紀錄分享心得這樣<br>當然，滑FB我可是不會錯過的，經營也會讓大家像在監督一樣，就決定做了!  </p>
+<p>另外也是受到 <a href="https://hulitw.medium.com/blog-e7a23a74ae2b"><strong>Huli 大大的文章</strong></a>啟發，才下定決心認真做  </p>
+<blockquote>
+<p>對阿，寫文章即使是廢文也沒關係，我的文章又沒有多少人會看，自己看得懂就好  </p>
+</blockquote>
+<p>在那之前有想過用 Blogspot 、Notion、HackMD…等等的<br>但想想自己想成為一個 Junior Web Developer<br>就還是想自己打指令來架XD  </p>
+<p>很常看技術文的時候<br>一直看到同個版面的主題，一度讓我以為是X角學院的架網站作業<br>結果是Hexo，查一查才知道這東西有多好用<br>啊~沒錯就是那個 NEXT 主題，很好看，我也很想架一個<br>說來就來吧!  </p>
+<h2 id="環境建置"><a href="#環境建置" class="headerlink" title="環境建置"></a>環境建置</h2><p>我是使用 <code>Window 10 + Visual Studio Code</code> 來建置哦!<br>簡單來說是 使用 <code>git + Hexo</code> 來架架構<br>最後使用 <code>github pages</code> 來做網站發布的地方  </p>
+<blockquote>
+<p><a href="https://hexo.io/zh-tw/">官方 Hexo 安裝文件</a></p>
+</blockquote>
+<ol>
+<li>需要下載 node.js 因為Hexo 是基於Node.js 的網誌框架<br>版本選LTS 長期維護的版本就可以了，除非有要用到很新的功能  <ul>
+<li><a href="https://nodejs.org/en/">Node.js</a></li>
+</ul>
+</li>
+<li>下載git，拿來做專案上的版本控制，至於git嘛…還在學<ul>
+<li><a href="https://git-scm.com/downloads">Downloads</a>  </li>
+</ul>
+</li>
+</ol>
+<p>原本我先創建好資料夾在Visual Studio開始步驟<br>確認npm、node 版本  </p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">npm <span class="token operator">-</span>v
+node <span class="token operator">-</span>v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>v 是<code>version</code>  </li>
+</ul>
+<p>官方有說建議使用 Node.js 10.0 及以上版本  </p>
+<blockquote>
+<p>安裝Hexo</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">npm install hexo-cli -g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>挖咧，第一個安裝就遇到問題<br><img data-src="https://chi01pap001files.storage.live.com/y4mCxHVbujSFcMehB-U5KPzs--xmlmuYVVZe2pMyTZSft1rncg9MkzMxxEosNX3BuTX2KnWZ9fs3KOT_aS8Gv8d92vR79PvIFdkSQIq8LBBvUSFulofH9OmU8rtEPfEenW5qP1eVPwXf3ij67XR3qSEkl85Kn-iTyrBbx1vCJrrxlcvGY9P-nEUuOQjzGriSrSA?width=660&height=139&cropmode=none"><br>爬了一小時的文也無解阿…<br>網路上都說 WARN 是沒關係的<br>參考<a href="https://github.com/hexojs/hexo/issues?q=npm+WARN+optional+SKIPPING+OPTIONAL+DEPENDENCY:+fsevents@~2.3.2">官方issue</a>這邊的三篇文還是無解<br>像是 <code>fsevents</code> 是 Mac使用上要注意的點，Window可以忽略<br>到這步是已經完成安裝了才對，像是輸入 <code>hexo -v</code> 應該能看到hexo的版本<br>但當我查詢 Hexo 的版本來確定是否安裝了<br>結果還是悲劇QQ  </p>
+<p>於是我決定重新安裝node.js，按照巴哈這篇的指示去做<br><a href="https://home.gamer.com.tw/creationDetail.php?sn=4849277">【教學】10分鐘內從安裝Hexo到佈署至GitHub Pages - 巴哈姆特</a><br>唉呦!蠻成功的哦 ! 不過過程還是有一些奇怪的錯誤QQ<br>以下是我的紀錄  </p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>安裝完環境後在想要建立檔案夾的地方案右鍵<br>按 Git Bash here ，要開始長專案的地方了<br>接著會打開cmd  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mIK9wCuNQwZ0zJMHkou9hRVyXWh28JoKBA-1bZ6FcLDaKkUPDeGBpyQdYuH7VsvRi8nhD8WVovBSyTOKR2vGocFQviA6ShMudM1SNTyUeWmn4tvzaCQrqA_9XZkZU6RyLDkXxW-xtFuoacHlZydEqGzsdwsosj-3VDki_KfPysUZuSuBYT5f7KiXGRzy4LccO?width=380&height=477&cropmode=none">  </p>
+<ol>
+<li>輸入 <code>npm install hexo-cli -g</code> 安裝hexo</li>
+<li><code>hexo init **自訂義資料夾名稱**</code> hexo建置的設定</li>
+<li><code>cd **資料夾名稱**</code> 移到剛剛指定的資料夾，記得cd前是在資料夾外部，要設定的東西要移到裡面哦!  </li>
+<li><code>npm install</code> npm檔案建立</li>
+<li><code>hexo g</code> 建立網頁，這是 <code>hexo generate</code> 的縮寫，大致來說就是收集/重構</li>
+</ol>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m7NCCI1fphAc3k5NKaTmP41Iby0YB-h5Cbn-SwSnTImTZZTJAXyCTjmzq_CzVAaFfJLche0TAe2N1b2iDmjbLYdY5oNFGpThho_rkUOhEv6klUo9MtSGnbbFRuvSN4SM8lCcFRK8VgKkLtWDq5ZRCsl80U_tA2pgHfnSP2rcbFDcrqLekv2DOaaWDWdWX_IxP?width=256&height=143&cropmode=none"><br>有一個大大的NEXT 可以忽略，因為我已經偷去安裝NEXT主題XD<br>一開始沒有是正常的哦!  </p>
+<ol start="6">
+<li><code>hexo s</code> 建立伺服器，這是  <code>hexo server</code> 的縮寫，會開啟本機伺服器來測試哦!</li>
+</ol>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mycn74k2IMLb1w2uZqoidTS7ipFDmgX_9nGZ-2GL_7L8jfiX0em-cxLBDOu8YCbDrJVCfYn8Xjk6tHvjv8RV8QM09oQx1kStTjZaxi8lcVmolKGkM-pIN5TcDc3g1oNKLsFuH282XlaWq2rx7xlnBL7Esif-E6eXPZOmDoFXzRslmIlhzdmFzNUJtN_jjV2po?width=256&height=126&cropmode=none"></p>
+<p>之後它會寫出 <a href="http://localhost:4000/">localhost:4000</a><br>在網址中輸入<code>localhost:4000</code>就可以看到原始設定好的網站<br>哈哈我設定的太多看不出來原本的，之後還會設定相關的布局。<br>最簡單的長出網站就完成了<br><img data-src="https://chi01pap001files.storage.live.com/y4mCBYZSy_5x5ydLOC4xpxPk09WVHkKiY1buv_Qa5pOl3SoFu0g_9VBg6nQ3gc-q53DUu1dE6sSWMz71miCQZX1u0W7M-YoSTICiWD4HEkJvAEcdPq37uv-XwmdrZQz059IYZgPocbyyWRz_JEDLe_qHI9_WcB2M6HDAAZXsOot7S1trnAuWdche5gN_C9DNs5n?width=660&height=425&cropmode=none"><br>最後是要發布在github pages 上，這等下一篇在來說明吧!  </p>
+<h2 id="遇到技術排解ing"><a href="#遇到技術排解ing" class="headerlink" title="遇到技術排解ing"></a>遇到技術排解ing</h2><p>中途還是有遇到一些問題，雖然在 git 的cmd裡沒問題<br>但在Visual Studio 中的 powershell 輸入指令卻不能用😵<br>明明安裝hexo成功了卻不能在VS編輯使用指令….  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mtLrJFmWIviARn_idGlEGScnJlDZW4X9uIenTO3iDKoj9MRUcB73XwcF8mDojM8sQ6Pa-FltKSD9VC7mQM__GWt1acgomR4armP7ink0UX67mCelMg4t79T8z2KRrcyjEneSwGENJ6w87c7CuV5wOkip17Ou_4MLn7XElvmHtpdva7bN1_08VbsMA0WOTrzBV?width=660&height=115&cropmode=none"></p>
+<p>原因是Window 因安全性的問題，而開啟的一個機制<br>又稱「限制原則」，要打開的話就需要開啟權限來設定  </p>
+<p>這邊的解決方法 : <code>Set-ExecutionPolicy</code> 更細節的設定資訊可以看參考資料  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m0d30xMqYQ4AGiWx9HRjiCsP3xrKm11lqIZVUC5RgItMt77XCL6eldhygSUot7xrbCC0vLc6cMvQU2qtW2FKUHQ8eFajj_Hg3goYS5BUVrJE1R1v9d-UDbCRV-OZobhz5LNUdA83Yz918yvHotQf4gJgOnZalgXgxfxUEaoigtBMoUOErj92GWozOti0UpPS7?width=1024&height=439&cropmode=none">  </p>
+<p>啊…結果權限不夠QQ，因此要用<strong>「系統管理員」</strong>執行哦!<br>不過紅字第三行有提到，請執行<code>Set-ExecutionPolicy -Scope CurrentUser</code>  </p>
+<blockquote>
+<p>我的理解是<br>如果妳現在登入的使用者是系統管理員的話可以直接使用<br>基本上我的電腦就是了，不需要再特定開  </p>
+</blockquote>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mmJ2BZ3aT_LKsge3e5oES5mrHnK_IBEo2o6a7w7lfGGBwmgHWev35sXk7fMuSqvgnQO5F72YihlbeMVTIAuCEX6z6IjCMSO44FW1OGofu2i5wvRPKzNW6eDnVdAYolnEzxtX6I0o-ikpECKfS2LthdXvFg_R5DU6AnzP1GRztpausnBPEegbI6BGqWDhrdc4I?width=660&height=93&cropmode=none"></p>
+<p>如果再不行就到 <code>開始 &gt; 搜尋 &gt; powershell</code><br>對著應用程式按右鍵使用系統管理員執行    </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m-q_Dw7jek9H56ojCPVFlInrzSXG4PNNYgYeHS67nnvUAXn7ehSdBeI0eJmY-ZqlxtVTKkKqWKbGbfyTHJ4yvs-D8r5MJzLeEVsqbIkjYIJXh4AcS6inKRaJR5KOWa1ujEtUOMkLXN2MiQ4CTjVUgE3M3Y3pMMny-qgKkLWm62_Fu3YG_ju2QGOGSOdE9gbJO?width=256&height=103&cropmode=none"></p>
+<p>它會請求輸入值，輸入 <strong><code>RemoteSigned</code></strong><br>意思是  </p>
+<blockquote>
+<p>同意本機撰寫的腳本檔案，不需要簽署就可以執行<br>npm install 遠端下載的其它東西經過可信任的發行者簽署後才可以執行。  </p>
+</blockquote>
+<ul>
+<li> <a href="https://hsiangfeng.github.io/other/20200510/1067127387/">Window安全性 解決的辦法參考資料</a></li>
+</ul>
+<p>燈愣!<br>沒想到成功了，可以在VS裡盡情的打了<br>我想我開啟的方式可能有些錯誤啦…<br>繞了不少路，這次就當教訓吧  </p>
+<p>明天就架完成吧!<br>這篇寫得有點急有點亂，會在進行統整在新的部落格中哦!</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>部落格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 筆記 ⟭ 初級入門必學的CommandLine</title>
+    <url>/RosaBlog/program/LearnAboutCommandLine/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>人跟人會用語言符碼來溝通<br>而人要跟電腦溝通，我們會想到</p>
+<blockquote>
+<p>阿不就用滑鼠?</p>
+</blockquote>
+<span id="more"></span>  
+<p>是阿，現在我們能用滑鼠按左、右鍵<br>在畫面上操作電腦的動作<br>都多虧了<code>GUI</code>（圖形操作介面）<br>降低電腦的使用門檻<br>讓我們享受電腦帶來得便利  </p>
+<h2 id="還沒有GUI的時候"><a href="#還沒有GUI的時候" class="headerlink" title="還沒有GUI的時候"></a><strong>還沒有GUI的時候</strong></h2><p>早期沒有GUI的時代，都是使用鍵盤輸入指令來控制<br>也就是使用「文字指令介面」 <code>Commamd Line Interface</code>簡稱 <code>CLI</code>。<br>當然這大大提高了使用電腦的門檻<br>光是指令種類就讓人頭昏眼花<br>更別提如果像爸媽有點年紀的人想查個資料<br>還要向查字典一樣<br>之後每一次執行還要同樣的查字典動作<br>論誰都會覺得麻煩<br>接著爸媽不會想弄，只會叫你出來處理<br><del>於是你就立志成為工程師了</del>       </p>
+<h2 id="為什麼Command-Line-Interface-依然存在"><a href="#為什麼Command-Line-Interface-依然存在" class="headerlink" title="為什麼Command Line Interface 依然存在?"></a><strong>為什麼Command Line Interface 依然存在?</strong></h2><p>常常在想工程師一定要會CLI嗎? 或許這是個蠢問題。<br>但我喜歡探究這些問題，對於菜鳥來說理解根源才能信服XD  </p>
+<h3 id="GUI與CLI差在哪"><a href="#GUI與CLI差在哪" class="headerlink" title="GUI與CLI差在哪?"></a>GUI與CLI差在哪?</h3><blockquote>
+<p>嚐過GUI難道不香嗎?</p>
+</blockquote>
+<p>香阿，但是GUI操作你想想看有多少個動作?  </p>
+<ul>
+<li><p>以<code>複製</code>A東西到同目錄為例  </p>
+<ol>
+<li>滑鼠移動到指定複製物件</li>
+<li>按下右鍵</li>
+<li>點選拷貝(copy)</li>
+<li>滑鼠移到空白處按下右鍵</li>
+<li>點選貼上(paste)  </li>
+<li>幫複製物件取新名稱  </li>
+</ol>
+</li>
+<li><p>那CLI操作呢?</p>
+<ol>
+<li>開啟命令提示字元</li>
+<li>鍵盤輸入<code>cp A物件 命名複製物件新名稱</code></li>
+<li>done.</li>
+</ol>
+</li>
+</ul>
+<p>可能中間安插個去到目錄 cd 一下。</p>
+<blockquote>
+<p>幾行字，就是這麼簡單  </p>
+</blockquote>
+<p><img data-src="https://truth.bahamut.com.tw/s01/202106/80efcf5f0815fc0b7a2efdacac66b7c1.JPG">  </p>
+<p>這邊不討論ctrl C ctrl V 大法  </p>
+<p>除此之外，光是G<code>(Graphic)</code><br>圖片帶來的效能消耗讓早期的電腦吃了不少虧<br>好在現在電腦的效能水平都遠遠足夠<br>才能讓我們看見把<strong>指令步驟具象化的過程</strong>  </p>
+<p>當然我想GUI與CLI是相輔相成的狀態<br>誰不想複雜的東西簡單化呢?尤其變成圖片  </p>
+<h3 id="回到CLI為何還是存在"><a href="#回到CLI為何還是存在" class="headerlink" title="回到CLI為何還是存在"></a><strong>回到CLI為何還是存在</strong></h3><p>套用老師們最喜歡的一句話 <code>快、狠、準</code><br><del>刪除到檔案也<code>快狠準</code>QQ</del><br>從剛剛的複製例子可以得知<br>對於效能與呈現，無疑是比較快的<br>甚至是有些指令只能透過CLI來執行<br>現在的CLI也是越來越進步<br>東西好用，當然還存在阿!</p>
+<h3 id="對於我來說"><a href="#對於我來說" class="headerlink" title="對於我來說"></a><strong>對於我來說</strong></h3><p>對我來說，GUI與CLI可以說是像到外國與在地的感覺  </p>
+<ul>
+<li><p><strong>GUI</strong><br>  人生地不熟，靠Body language筆劃，或是拿圖片問是最友善的(這邊以你不會當地語言為主)。</p>
+</li>
+<li><p><strong>CLI</strong><br>  你懂我懂的語言，直接講最快。</p>
+</li>
+</ul>
+<p>這也不難解釋，為什麼程式基礎必修要會CLI<br>溝通，最講求效率:D…  </p>
+<h2 id="常用的CLI指令"><a href="#常用的CLI指令" class="headerlink" title="常用的CLI指令"></a><strong>常用的CLI指令</strong></h2><p>阿這好像才是這篇最主要的XD<br>以前上過Linux的課堂<br>順便複習與搞懂其他不懂的詞    </p>
+<h3 id="基礎四招"><a href="#基礎四招" class="headerlink" title="基礎四招"></a>基礎四招</h3><table>
+<thead>
+<tr>
+<th>常用指令</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pwd</td>
+<td>告訴你現在在哪裡?</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>印出現在所在地的所有檔案</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>移動到指定的地方</td>
+</tr>
+<tr>
+<td><a href="#mv">mv</a></td>
+<td>移動到指定地或是修改指定的檔案名稱</td>
+</tr>
+</tbody></table>
+<ul>
+<li>註: pwd 在window cmd沒有，用cd 有同效果。 </li>
+</ul>
+<h3 id="快速招式"><a href="#快速招式" class="headerlink" title="快速招式"></a>快速招式</h3><blockquote>
+<p>個人記到<code>資料夾新增、刪除與複製</code>，感覺就蠻夠用的。  </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>好用指令</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#touch">touch</a></td>
+<td>修改檔案時間或是<code>建立新檔案</code></td>
+</tr>
+<tr>
+<td><a href="#rm">rm</a></td>
+<td>刪除檔案</td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>刪除指定資料夾</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>建立資料夾</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>複製檔案</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>直接讀取檔案內容</td>
+</tr>
+<tr>
+<td><a href="#grep">grep</a></td>
+<td>抓取檔案內容中的關鍵字</td>
+</tr>
+<tr>
+<td><a href="#wget">wget</a></td>
+<td>下載檔案，後面接檔案的url</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>清空目前的指令畫面</td>
+</tr>
+<tr>
+<td>curl</td>
+<td>送出 request (ex:api)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>註: grep、cat、curl 在window cmd沒有效果。 </li>
+<li>weget、touch 在cmd 與 powershell都沒有效果。  </li>
+</ul>
+<h3 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h3><blockquote>
+<p>前面都會加一個小槓槓「-」，兩個的話就和在一起寫<br>例如 -al -rf    </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>常見指令參數</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td><code>all</code>的意思，包含開頭為<code>.</code>的檔案</td>
+</tr>
+<tr>
+<td>-l</td>
+<td><code>list</code>。詳列所有東西，包含權限、屬性、時間</td>
+</tr>
+<tr>
+<td>-f</td>
+<td><code>force</code>。 強制執行 <del>(不要亂使用這個參數)</del></td>
+</tr>
+<tr>
+<td>-r</td>
+<td>這個資料夾以下的檔案一起包</td>
+</tr>
+</tbody></table>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>因為不知道叫什麼… </p>
+<table>
+<thead>
+<tr>
+<th>其他</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#pipe%E7%B5%84%E5%90%88%E6%8A%80">| (pipe)</a></td>
+<td>組合技(將輸出給後面的輸入)</td>
+</tr>
+<tr>
+<td><a href="#redirection%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91">&gt; (redirection)</a></td>
+<td>重新導向，會將檔案內容覆蓋過去</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>跟 “ &gt; “概念依樣，但不覆寫，而是加入</td>
+</tr>
+<tr>
+<td>..</td>
+<td>代表上一層的位置</td>
+</tr>
+<tr>
+<td>~</td>
+<td>使用者的根目錄</td>
+</tr>
+</tbody></table>
+<h3 id="快速舉例"><a href="#快速舉例" class="headerlink" title="快速舉例"></a>快速舉例</h3><h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><ol>
+<li><p>移動 mv [<strong>檔案</strong>] [<strong>新名稱</strong>]   </p>
+   <pre class="line-numbers language-none"><code class="language-none">mv &#96;123.txt&#96; &#96;456.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>檔案名稱變 <code>456.txt</code>    </p>
+</blockquote>
+</li>
+<li><p>更名 mv [<strong>檔案</strong>] [<strong>目的地</strong>]</p>
+   <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mv &#96;123.txt&#96; &#96;.\Myblog&#96;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>123.txt 就會在 <code>Myblog</code> 資料夾底下<br>   目的有分成 <strong>絕對路徑</strong> 與 <strong>相對路徑</strong></p>
+</blockquote>
+</li>
+</ol>
+<h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><ol>
+<li><p>修改時間<br>   EX : folder1 \ 123.txt<br>   上次檔案編輯時間 :  07/27/21 13:00<br>   現在時間 : 14:03  </p>
+   <pre class="line-numbers language-none"><code class="language-none">touch 123.txt  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>檔案寫入的編輯時間會變成 <code>07/27/21 14:03</code>  </p>
+</blockquote>
+</li>
+<li><p>建立新檔案<br>   EX: folder1\123.txt  </p>
+   <pre class="line-numbers language-none"><code class="language-none">touch 456.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>當找不到該層符合的檔案名，就會建立新檔案<br>因此在 folder1 輸入<code>ls</code>底下會有<br><code>123.txt 與 456.txt</code> 兩個檔案</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><ol>
+<li>刪除檔案<br>   EX: 我想刪除 123.txt。     <pre class="line-numbers language-none"><code class="language-none">rm 123.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>刪除資料夾<br>   EX: 我想刪除 blog 資料夾，裡面還有很多檔案<br>   結果<code>rmdir blog</code> 發現行不通，因為<code>資料夾裡面不是空的</code>     <pre class="line-numbers language-none"><code class="language-none">rm -r blog<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>利用<code>-r</code>來選取包含blog資料夾以下的所有子目錄<br>   進行刪除  </p>
+</blockquote>
+</li>
+</ol>
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><ul>
+<li>尋找關鍵字 grep [<strong>關鍵字</strong>] [<strong>檔案</strong>]<br>EX: 檔案 <code>123.txt</code> 裡面有 hello world 這行字<pre class="line-numbers language-none"><code class="language-none">grep o 123.txt  &#x2F;&#x2F; 我想尋找o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>執行後印出 : hell<code>o</code> w<code>o</code>rld  ，這兩個o被highlight起來  </p>
+</blockquote>
+</li>
+</ul>
+<h4 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h4><ul>
+<li>wget [<strong>url</strong>]<br>EX: 我想下載東西 <pre class="line-numbers language-none"><code class="language-none">wget http:&#x2F;&#x2F;www.google.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>圖片或是原始碼都可以取得</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="pipe組合技"><a href="#pipe組合技" class="headerlink" title="pipe組合技"></a>pipe組合技</h4><ul>
+<li>組合技應用<br>EX: 把blog資料夾裡檔名含有<code>o</code>的檔案印出來<br>資料夾 blog 含有 hello.txt、hi.txt、row.txt<br>透過 | 可以將兩者合併成一行  <pre class="line-numbers language-none"><code class="language-none">ls &#x2F;blog&#x2F; | grep o  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>印出 兩個檔案 ，<code>hello.txt row.txt</code><br>組合技可以玩串燒，愛串多少串多少<del>(?)</del>  </p>
+</blockquote>
+</li>
+</ul>
+<h4 id="redirection重新導向"><a href="#redirection重新導向" class="headerlink" title="redirection重新導向"></a>redirection重新導向</h4><ol>
+<li>覆蓋寫入<br>EX : 123.txt 檔案裡有 <code>hello</code>文字，改成bye  <pre class="line-numbers language-none"><code class="language-none">echo byebye &gt; 123.txt
+cat 123.txt &#x2F;&#x2F; 查看一下印出 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>123.txt 裡面的文字是 <code>byebye</code></p>
+</blockquote>
+</li>
+<li>增加寫入<br>EX : 123.txt 檔案裡有 <code>hello</code>文字，加入bye   <pre class="line-numbers language-none"><code class="language-none">echo byebye &gt;&gt; 123.txt
+cat 123.txt &#x2F;&#x2F; 查看一下印出 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>123.txt 裡面的文字是 <code>hello byebye</code></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>Linux 跟 Window 內建的指令有點不太一樣<br>先知道指令的用法我覺得是件好事<br>前期底子打的越深，銜接上較無痛。<br>GOGO ! 往更深的坑前進  </p>
+<p>如果我有寫錯的地方歡迎在下面留言指教<br>新手多多包涵  </p>
+]]></content>
+      <categories>
+        <category>program</category>
+      </categories>
+      <tags>
+        <tag>CommandLine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)</title>
+    <url>/RosaBlog/Blog/Hexo-BuildBloger-III/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>呼!建置的差不多了<br>原本要總結研究 Hexo 三天的成果<br>寫成比較順暢的建構過程<br>結果一弄又更新好多東西…<br>一樣先來補齊概念吧!<br>月底再來一個大總結&gt;&lt;    </p>
+<hr>
+<h2 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h2><pre><code>+Blogger 
+|- .github
+|- .vscode
+|- .node_modules  
+|- .scaffolds
+    |- draft.md
+    |- page.md
+    |- post.md
+|- .source
+    |- _drafts
+    |- _posts
+    |- 其他頁面(略)
+|- .themes
+    |- next
+        |- (略)
+        |- languages
+        |- layout
+        |- (略)
+|- _config.next.yml
+|- _config.yml
+|- package.json
++  
+</code></pre>
+<p>這邊我僅有挑我有用到的幾個  </p>
+<blockquote>
+<p> 最外層  </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.node_modules</td>
+<td>npm原始設定(不常用)</td>
+</tr>
+<tr>
+<td>.scaffolds</td>
+<td>文章狀態模板 (可以修訂統一模板)</td>
+</tr>
+<tr>
+<td>.public</td>
+<td>發布自動後生成的資料夾 (不用動)</td>
+</tr>
+<tr>
+<td>.source</td>
+<td>部落格編輯(文字都在這編輯)</td>
+</tr>
+<tr>
+<td>.themes</td>
+<td>編輯主題樣式(相關 css )</td>
+</tr>
+<tr>
+<td>._config.next.yml</td>
+<td>next 安裝設定檔，多是插件</td>
+</tr>
+<tr>
+<td>._config.yml</td>
+<td>hexo 安裝設定檔</td>
+</tr>
+<tr>
+<td>.package.json</td>
+<td>專案的設定檔，會寫安裝什麼東西(基本上不用動)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<blockquote>
+<p>. scaffolds</p>
+</blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>_drafts</td>
+<td>草稿模板</td>
+</tr>
+<tr>
+<td>page .md</td>
+<td>頁面模板</td>
+</tr>
+<tr>
+<td>post .md</td>
+<td>文章模板</td>
+</tr>
+</tbody></table>
+<ul>
+<li>指令快速記!   <pre><code class="cmd">hexo new draft 文章名稱  //建立一篇草稿  
+hexo new post 文章名稱  //建立一篇新文章  
+hexo new page 頁面名稱 //建立一篇新頁面，同時source 會建立新的資料夾  
+hexo publish 版面 檔案名稱 // 發布(草稿)  
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>. source</p>
+</blockquote>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>_drafts</td>
+<td>草稿會在這</td>
+</tr>
+<tr>
+<td>_posts</td>
+<td>發布的貼文都會在這</td>
+</tr>
+<tr>
+<td>其他頁面資料夾</td>
+<td>像是About、tags、categroies..</td>
+</tr>
+</tbody></table>
+<p>因為一開始沒有About等等的基礎頁面，自己要新增  </p>
+<pre><code class="cmd">  hexo new page About  
+  hexo new page tags 
+  hexo new page categroies 
+</code></pre>
+<p>然後新頁面新增 <code>type</code> 來做頁面記號<br><img data-src="https://chi01pap001files.storage.live.com/y4mUs5S3stfFRMyDXC2wenjxmYnUyrrWZLN195KoJDuBNbjDIUXcIHbvzGlPGiUiyTgjwNaoLwYAM6i881mLxbBrFsfqBSUm0CSwtIWpIcZ8psQgmom42pugcn98p5OsSHq8t7JU1GKO7NotQ-nqR1teCP-h9lS_J3AZkoZWgJ-o7187LBZXhCtg7x2BWH8ou9t?width=865&height=303&cropmode=none" alt="categroies_type"><br>這頁是分類，跟設定檔的地方對應哦! 頁面 - 路徑<br><img data-src="https://chi01pap001files.storage.live.com/y4mSHJlXGuxGrOywWFqkyu391Exl7Z_yJrwNUwZTN56tV5LPXobIEudNoPFKamiALfWJe9NbCEJmdI2PLekXQ5b67LgUGmQurJ8LEta7IHg3crrFvX8YfLeVZ-zTllPrB9b88o6RngYO2tbAoyjmtBFF1Fq5YxN-BnGO1Q-4DaX4Lt8H4X_apXvACFiKuR515oO?width=715&height=1510&cropmode=none" alt="路徑">  </p>
+<blockquote>
+<blockquote>
+<p>. themes - .next (依照主題去分資料夾)  </p>
+</blockquote>
+</blockquote>
+<p>如果 theme 沒有跑出 next 的資料夾，可以用git 的方式 clone 一下<br><u><a href="https://github.com/theme-next/hexo-theme-next">官方教學 底加</a></u>  </p>
+<pre><code class="cmd">    git clone https://github.com/theme-next/hexo-theme-next themes/next  
+</code></pre>
+<p>之後我就GG了，因為 NEXT 主題更新蠻快的，導致一些語法或函式沒統一更新到，最近的是8.0版<br>網路上layout檔是 <code>.swig</code> ，我的是<code>.njk</code><br>我問號了起來，不過還好語法上差不了多少<br>但在 <code>hexo g</code> 會報錯，主要是<code>load</code>的函式要更新用法 </p>
+<p>會顯示 <code>yml.safeload</code> 用法過時，必須改成 <code>yml.load</code><br>最快速的方法就是  </p>
+<pre><code class="js">1. 專案的搜尋欄打 safeload  
+2. 找到 `vendors.js` 
+3. 尋找 `yml.safeload`
+4. const dependencies = yaml.safeLoad(vendorsFile); //這行改成下面這個
+5. const dependencies = yaml.load(vendorsFile);
+</code></pre>
+<p>這樣就能重構，在 <code>hexo s</code> 一下看看是不是有跑出頁面<br>當然嫌麻煩還可以裝指定版本<br><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md">官方教學</a>    </p>
+<table>
+<thead>
+<tr>
+<th><strong>資料夾名稱</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>languages</td>
+<td>語言對應字</td>
+</tr>
+<tr>
+<td>layout</td>
+<td>調整看到的版面 基底</td>
+</tr>
+<tr>
+<td>source</td>
+<td>一些css js image 設定在這(跟外層的source不一樣)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>theme 中的 source 主要掌管 next 主題的樣式而已 </li>
+<li>外層的 source 是 hexo 架構的編輯地方<br>兩者有差哦!  </li>
+</ul>
+<h3 id="語言設定"><a href="#語言設定" class="headerlink" title="語言設定"></a>語言設定</h3><p>languages 預設原本是 <code>en</code>，從 <code>_config_yml</code> 就可以更改語系<br><img data-src="https://chi01pap001files.storage.live.com/y4mGt3P_ahV1z8j1pRbpVUp8wSl6nBkqs_kpfNhZB32cMMkamaJhe70pZkqoosmLUiVaElphRPcWkvde5dQfOYASoAYIJbirgBTXzcpY8xkx7ARrrtFFRjvMQarZpJv2ANNm-XSosQEGoq0d6s9n9kv55XqPeEOrHtWGChQkJAL-o4AMO-xc_Z-p5a2MWic6Gow?width=1223&height=410&cropmode=none" alt="lang-setting">  </p>
+<p>當然網頁可以寫成多國語，待研究XDD，可以的話想寫成英文<br>有些翻譯過來的文字可能不太喜歡，或是想 自訂義<br>就可以到 theme 字料夾中的 languages 找 zh-TW<br>把想要的文字替代上去哦!<br><img data-src="https://chi01pap001files.storage.live.com/y4ma1tCvNxVMoUCdcaPYcIjlNvLRelGj3E1tbBnrI3EAXwnLvIoNp4JrjYMC7GYuWjeVhYRVFf6f0sNhPWNlDqWsTsGS8HvaqjBDyLj49cWpdfBJ9Bl0GiCJOfmCwBAxlbVdIawagjcA9XlFdu2B43oKb_6ZveVwqdQsVsKjjtjd9zUQRkYqJIBu7AIpFGaQKnd?width=1004&height=1512&cropmode=none" alt="lang-word">  </p>
+<h3 id="版面設定"><a href="#版面設定" class="headerlink" title="版面設定"></a>版面設定</h3><p>layout 有很多頁面設定，包含第三方外掛都可以設定外觀等等的<br>當然也有 css或js 可以設定，在 source 資料夾裡，基本的換色、背景圖片都可以自訂。  </p>
+<hr>
+<h2 id="調整樣式-amp-外觀"><a href="#調整樣式-amp-外觀" class="headerlink" title="調整樣式&amp;外觀"></a>調整樣式&amp;外觀</h2><p>next 的 <code>config.yml</code> 可以開啟 comment 的功能<br>因為我裝了disqus留言版，結果發現 next 主題在tags、categroies等等頁面都是套 post 的板<br>也就是 post 每一則下方有留言區是正常的<br>但誰會在<code>標籤</code>跟<code>分類</code>或是<code>關於我</code> 底下讓人留言啦!  </p>
+<p>就要修改 <code>theme &gt; next &gt; layout &gt; _layout.njk</code><br>其實可以發現 page 的版面 都用同一個 layout<br>所以在 <code>new page</code> 或<code>new post</code> 下方都會有comment(如果妳有打開的話)  </p>
+<p>打開 <code>_layout.njk</code>，找到下面這行 </p>
+<pre><code>  &#123;% include '_partials/comments.njk' %&#125;
+</code></pre>
+<p>來把它加上if-else條件，判斷哪一頁加入comment<br>改成 : </p>
+<pre><code class="js">&#123;% set page_type = page.type === 'tags' or page.type === 'categories' %&#125;
+&lt;div style=&quot;&#123;%if page_type %&#125; visibility:hidden; height:0px;&#123;% endif %&#125;&quot;&gt;
+&#123;% include '_partials/comments.njk' %&#125;  
+</code></pre>
+<p>原本我是看這篇<a href="https://hsiangfeng.github.io/hexo/20190516/2710757554/">文章教學</a><br>結果不行，因為版本問題，layout檔再也不是<code>.swig</code><br>還好語法上還能通，只有平常在寫得 <code>||</code> 要改成 <code>or</code>   </p>
+<hr>
+<h2 id="好用的寫文插件"><a href="#好用的寫文插件" class="headerlink" title="好用的寫文插件"></a>好用的寫文插件</h2><p>上一篇有提到 hexo 有的後台頁面<br>哦~我的天，markdown 雖然能馬上看見效果<br>但實際版面跟輸出後的差異蠻多的<br>後來我還是在 VS 上做編輯了<br>當然是來安裝個插件XD  </p>
+<ol>
+<li>VS 的插件商店搜尋 <code>Markdown Preview Enhanced</code></li>
+<li>安裝</li>
+<li>新增一個 post 看看 <code>hexo new post a123</code></li>
+<li>開啟檔案對著它按右鍵，選 <code>Reopen Editor with ...</code><br><img data-src="https://chi01pap001files.storage.live.com/y4m5e44Li2JyNG7g5TuAltJILiqeBueOK15DFGll5OZ4uHTS58Bu68ngUQGhBM_987DVWt6su774wdyt-a-BiUKqHX0W9AC1ohAq2SoRQRPnZBSqs-T4-xq8aQCr4Zc48fQWmdmhOYZJ_t9SIJbtk8GUHPxwB5cqSpBiWpbVmYtnbZp2Epk5FhS_pFPi9yikSaA?width=2736&height=1824&cropmode=none" alt="圖示"> </li>
+<li>上面會跳出選擇器，選<code>markdown preview</code>  </li>
+<li>在點這個開啟內分頁<br><img data-src="https://chi01pap001files.storage.live.com/y4mD3vUlN6kw2OxydnmAU1ZhFwb8pUd-ya_RTwIDBiggyqM-HXup_763uqZsG3yDfqWMcjYw2GStohPK4f88s0gSmDTD8yK5vvJVV2gO2cat_AzjyjpL_m4XutuM6hXy4AmQq1cjGdYQZkGEDo161pc8Ir8UZhMMlx4ZSdMyNLyRmRp98rCHT1QNNQIXq9-Y2S1?width=1423&height=401&cropmode=none" alt="內分頁">    </li>
+<li>在開一次原檔案在分頁中，就可以準備來編輯囉!</li>
+</ol>
+<p>燈愣! 就變這樣，邊寫可以邊看到效果 :happy:<br><img data-src="https://chi01pap001files.storage.live.com/y4mRvRQYFuUfq-zmPn2p99ZdGCFN6dBqQaGcm4gMBtYN-O6M9Oz01zGE_OL_KFQ3aG14pD7aiNcIAFH4JOi61XP8uoGLyxx5Jo0Ux7VLu8umfff5TIp1v-P7lriTZcDEOGO39yKM195CeZwH6ApqOLjfWRZ2zskQSp8ZOUZRT6qM5k6DS_UOMGa8hze41xI1iKh?width=2600&height=1615&cropmode=none" alt="寫文好幫手">  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>網站建置的差不多了<br>短時間應該沒有要再美化<br>要多努力寫文章<br>markdown 還在學習中…</p>
+<p>經過三日連發<br>這類實作文章應該就沒有每天產了<br>改成2-3天發布一篇<br>不然感覺每天都再搭特快車<br>再抓一下什麼樣的寫法才好吸收  </p>
+<p>最近有看到一種寫文章的方式<br>是時候來增強寫作技巧  XD  </p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>部落格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>⟬ 紀錄 ⟭ Unity UI Navigation ─ [尋找不見的按鈕]</title>
+    <url>/RosaBlog/Unity/Navgation/</url>
+    <content><![CDATA[<p><img data-src="https://i.imgur.com/Vz6RmrN.png">  </p>
+<span id="more"></span>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在做Unity + Fungus 小遊戲<br>發現 Fungus 裡的 Menu 選項不斷的亂跳<br>一直找不到問題，還找去原始碼…<br>想說是不是 Fungus 腳本有衝突<br>才知道自己連 Unity 的介面功能沒有到很熟<br>紀錄一下:D    </p>
+<h2 id="控制-Fungus-Menu-選項"><a href="#控制-Fungus-Menu-選項" class="headerlink" title="控制 Fungus Menu 選項"></a>控制 Fungus Menu 選項</h2><p>Fungus 內建的Menu 可以新增很多個選項<br>並且有不同的分支可以讓對話更加多元<br>在控制時可以使用滑鼠與鍵盤上下左右鍵操作<br>能使用鍵盤控制是來自UI物件上的Navigation(導航)<br><img data-src="https://chi01pap001files.storage.live.com/y4mYWPYxomKMTvK8NkXSc7wGnefboAs8DPi3XzwVpZlIO3b-Rndt8PKkmqQuDSmVqQnyv6XgAlkRyy2Tiasz_D_rZlIFtDQtyjAwOr31k2Ye_2_2tN8zBbZcSpagvbipBpnPJqTEe_lUHlsti2r_hIdylS477eT9LurYr1TNFzZi2KUjf0JaPHb7Kx0Tfap5j1z?width=660&height=477&cropmode=none"></p>
+<p>更往前想一點<br>那腳本是如何跟物件來互動的呢?<br>UI 能進行互動是來自 Unity 的 Event System<br>很常時候會看到腳本最上層掛這一個  </p>
+<ul>
+<li><code>using UnityEngine.EventSystem</code>   </li>
+</ul>
+<p>使我們可以在腳本中控制UI物件的事件<br>可以偵測<code>誰被按了?</code>、<code>誰被選擇了?</code> 等等的。</p>
+<h2 id="Event-System"><a href="#Event-System" class="headerlink" title="Event System"></a>Event System</h2><p>一開始新增Canvas 或 UI 物件時<br>Unity 會幫我們自動生成 Event System 這個物件<br><img data-src="https://chi01pap001files.storage.live.com/y4mKFqurQ2X7h0jJ3Frd1kPO8ipgXgBIIrqYrRtGiNY4C1piCm1NuKKjM9AO3Nqagj6DyNOs6GXStvOutfie-uffMZUMLR4sDoJwm6q3zlfz6vEnl3N1xhZKZe8dvH-Fib6_OG9Qi1OBKnIYbGVpmIIZV5P8YyjuQRw0gVeTucDuK2rV5AV6EOYeUHRjTagVWbr?width=256&height=166&cropmode=none">  </p>
+<p>仔細看一下有兩個腳本附在上面<br><img data-src="https://chi01pap001files.storage.live.com/y4mST6rqopQUEi6t6yz5eNJ6zUrND4Ljt8vOQMFh1c984h-H30bdnD4CLygkpxsGyfEOF1XORmpkFiplC5dVAk41QD3LsU7qGOsXDTdEDu65Ao_zDfCBb2QBIZoWzLProM1iVsYgR6ber8xbKpLo4wXY9oZg6JRTbUGa9J5cW3tJajUOJi7Bef-3ZGLu7IVozQa?width=468&height=660&cropmode=none"><br>分別是 <code>Event system</code> 與 <code>Standalone Input Moudle</code>  </p>
+<table>
+<thead>
+<tr>
+<th>腳本名稱</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Event system</td>
+<td>處理UI物件狀態，像是button 中的滑入、滑出、點擊、拖曳等等</td>
+</tr>
+<tr>
+<td>Standalone Input Moudle</td>
+<td>像是鍵盤或搖桿的輸入控制</td>
+</tr>
+</tbody></table>
+<p>這次先專注於 Event system 腳本上<br>以下的三個設定 </p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>First Selected</td>
+<td>預設被選定的UI物件</td>
+</tr>
+<tr>
+<td>Send Navigation Event</td>
+<td>是否開啟UI導航功能</td>
+</tr>
+<tr>
+<td>Drag Threshold</td>
+<td>拖曳事件靈敏度</td>
+</tr>
+</tbody></table>
+<p>在我的專案中，遊戲操作皆來自鍵盤<br>因此需要使用到UI導航功能  </p>
+<h2 id="遇到的問題"><a href="#遇到的問題" class="headerlink" title="遇到的問題"></a>遇到的問題</h2><p>只有三個選項，卻會超出選項格外<br><img data-src="https://i.imgur.com/v0hC0wV.gif"><br>甚至按不回來，由動圖可知選項超出後<br>不知道選到了誰    </p>
+<h3 id="問題解決"><a href="#問題解決" class="headerlink" title="問題解決"></a>問題解決</h3><p>提到 Navigation，一般設定為 <code>auto</code><br>也就是按上下左右鍵會分別對應按鈕的位置<br>如果有多個按鈕都是設<code>auto</code>就會發生我這樣的事情<br>除了auto外，也有其他的方式</p>
+<ul>
+<li>none 不被導航影響</li>
+<li>Horizontal</li>
+<li>Vertical</li>
+<li>Explicit 則是可以指定選擇跳選的對象  </li>
+</ul>
+<p><img data-src="https://i.imgur.com/Lubtgid.png"></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a><strong>注意</strong></h4><p>當然如果其他的Button是Deactivate狀態下，是不被影響的<br>物件停用狀態腳本自然也不會被執行<br>不過物件<code>Set Active</code>開開關關會使效能產生一個臨時高峰<br>會突然LAG一下，因此我是使用<code>Canvas Group</code>的alpha值控制按鈕的出現，但實際上功能還是運行的狀態<br>所以還是吃的到Navigation事件  </p>
+<h4 id="我選到了誰"><a href="#我選到了誰" class="headerlink" title="我選到了誰?"></a><strong>我選到了誰?</strong></h4><p>這時候可以打開<code>Visualize</code>來看這些UI物件是怎麼連結的<br><img data-src="https://chi01pap001files.storage.live.com/y4mOdcNws2PW6q_sxLe5GYT3fa1Ty342iMadi9U1sHLMtA2Z1VHwPBP_iIFDhBznNzBEHBVHgsVFQSC2ut_euANWxu-otOVWFt1wlbQN1KoBFtmd2ORx930-8vW8JeH_81zE-5WLmpi2Jg8LVIFxOoDeL33Yp0UXJNk5tEW5UgX6dLcIlBbK8tMQCPUI9MYwe2U?width=660&height=421&cropmode=none"><br>我先把alpha值打開，看一下按鈕位置<br>搭啦!凌亂的連連看 (注意黃色線)<br><img data-src="https://chi01pap001files.storage.live.com/y4mxQaNp1uNlJFSzfiusdX7iG1ZaWaLCiKJ2l6WiLBBRVB_NEzB9pVX1nOvW-XeEqGIgScY1Dn54xIeBJTO84UeBaIfXDErzZ-QzjS22pFpLWwEfQQaHj-bhxCGpsDBH4obPA87l31JCD7-V4QR3A0GnuchQQBIvy3XwN5QOXSQxjYy8eTeTA8O5OwBHQVLBHAu?width=660&height=372&cropmode=none"><br>知道原因後，斷開連結就行了，把其他無關緊要的按鈕都選擇<code>none</code>就好了。  </p>
+<blockquote>
+<p>如果不選擇none的效果就可以知道navigation怎麼運作  </p>
+</blockquote>
+<p><img data-src="https://i.imgur.com/8IRNaIr.gif">  </p>
+<blockquote>
+<p>選擇none的效果後  </p>
+</blockquote>
+<p><img data-src="https://i.imgur.com/D5mGljJ.gif">  </p>
+<p>看看這連連看都鎖在中間了(很糊!沒辦法Unity就這麼糊)<br><img data-src="https://i.imgur.com/CQwmNFb.png"></p>
+<h2 id="延伸思考"><a href="#延伸思考" class="headerlink" title="延伸思考"></a>延伸思考</h2><p>當然不只Fungus的Menu可以使用<br>可以搭配出更多的UI複合式選單<br>尤其是使用搖桿的玩家<br>在操作上可以更加靈活  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>總之這種情形還真得要多多注意<br>當時找這個問題找了一個小時多<br>沒想到就這麼小問題QQ</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>UI</tag>
+        <tag>Event System</tag>
       </tags>
   </entry>
   <entry>
@@ -2282,7 +2282,7 @@ result <span class="token operator">:</span> test is not a <span class="token ke
     a <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token punctuation">&#125;</span>
 <span class="token function">test</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>果結不對，其實是 <code>1</code><br>這個 1 並不是來自函式的 <code>a=1</code><br>而是參數的 <code>1</code><br>由此可以知道函式裡有參數的話<br>其實參數也會做宣告提升    </p>
+<p>結果不對，其實是 <code>1</code><br>這個 1 並不是來自函式的 <code>a=1</code><br>而是參數的 <code>1</code><br>由此可以知道函式裡有參數的話<br>其實參數也會做宣告提升    </p>
 <p>至於提升的順序為何？<br>如何提升？<br>後面會再提到 :D</p>
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
 <li><code>var</code> 會做宣告提升  </li>
