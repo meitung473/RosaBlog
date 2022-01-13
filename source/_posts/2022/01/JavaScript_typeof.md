@@ -37,7 +37,7 @@ typeof 可以知道值的型態
 `Object.prototype.toString.call(value)`  
 prototype 是 JavaScript 很重要的屬性  
 是實作的一種基底  
-`toString` 會把印出物件的屬性
+`toString` 會把印出物件的屬性轉為字串
 
 ### null 眾人皆知的漏洞
 - **null** 為什麼是 object ?   
