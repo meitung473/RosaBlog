@@ -31,7 +31,7 @@
 <meta property="og:description" content="從簡單例子看何謂宣告提升">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-13T13:43:50.000Z">
-<meta property="article:modified_time" content="2022-01-13T13:54:57.133Z">
+<meta property="article:modified_time" content="2022-01-15T04:56:32.089Z">
 <meta property="article:author" content="Rosa Hong">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -142,7 +142,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/RosaBlog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">14</span></a>
+    <a href="/RosaBlog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -152,7 +152,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">19</span></a>
+    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">20</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,7 +227,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/RosaBlog/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -240,7 +240,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/RosaBlog/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -357,7 +357,7 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宣告提升 (Hoisting) 在 JavaScript 中不得不知<br>究竟 JavaScript 搞了什麼鬼<br>導致你認為的值不是那個值捏 !<br>其實這跟 JavaScript 如何運作也有關係<br>不過先從最簡單的概念開始吧 ! :O</p>
 <h2 id="何謂宣告提升？"><a href="#何謂宣告提升？" class="headerlink" title="何謂宣告提升？"></a>何謂宣告提升？</h2><p>其實我覺得很抽象<br>如果單看程式碼會不知道哪裡被提升<br>以及怎麼被提升？  </p>
-<p>所謂的提升<br>其實是 JavaScript 底層運作的機制<br>必須了解執行環境 (Execution Content) 跟 作用域 (Scope)<br>再根據作用域鏈 (Scope Chain) 來看的<br>不過關於這些東西慢慢地來說<br>可以先透過幾個例子來了解宣告提升    </p>
+<p>所謂的提升<br>其實是 JavaScript 底層運作的機制<br>必須了解執行環境 (Execution contexts) 跟 作用域 (Scope)<br>再根據作用域鏈 (Scope Chain) 來看的<br>不過關於這些東西慢慢地來說<br>可以先透過幾個例子來了解宣告提升    </p>
 <h3 id="變數的宣告提升"><a href="#變數的宣告提升" class="headerlink" title="變數的宣告提升"></a>變數的宣告提升</h3><p>這邊暫不討論 ES6 中的 <code>let</code> 與 <code>const</code><br>以 ES5 的宣告變數 <code>var</code> 為例</p>
 <p>基礎題</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
@@ -438,6 +438,7 @@ result <span class="token operator">:</span> test is not a <span class="token ke
 <li><code>var</code> 會做宣告提升  </li>
 <li><code>函式陳述式</code> 會做宣告提升  </li>
 <li><code>函式表達式</code> 是屬於賦值 (等號右邊)，不會做宣告提升  </li>
+<li>函式的 <code>參數</code> 也會做宣告提升</li>
 </ol>
 <p>這篇了解哪些會做宣告提升<br>並且知道賦值的值並不會一起提升  </p>
 <p>下一篇要更了解比較的順序以及宣告提升的好處？    </p>
@@ -456,16 +457,16 @@ result <span class="token operator">:</span> test is not a <span class="token ke
   <div class="popular-posts-header">相關文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-DataType\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態(I)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Logic\" rel="bookmark">⟬ 筆記 ⟭ JavaScript 邏輯運算子</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_API_twitch\" rel="bookmark">⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_typeof\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-DataType\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態(I)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Logic\" rel="bookmark">⟬ 筆記 ⟭ JavaScript 邏輯運算子</a></div>
     </li>
   </ul>
 
@@ -484,6 +485,9 @@ result <span class="token operator">:</span> test is not a <span class="token ke
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/RosaBlog/bookreport/lanch-website/" rel="next" title="⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機">
+                  ⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -547,14 +551,14 @@ result <span class="token operator">:</span> test is not a <span class="token ke
       <i class="fa fa-chart-line"></i>
     </span>
       <span>總字數：</span>
-    <span title="總字數">55k</span>
+    <span title="總字數">59k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>所需總閱讀時間 &asymp;</span>
-    <span title="所需總閱讀時間">50 分鐘</span>
+    <span title="所需總閱讀時間">54 分鐘</span>
   </span>
 </div>
   <div class="addthis_inline_share_toolbox">
