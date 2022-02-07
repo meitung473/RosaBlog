@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/RosaBlog/images/shan-logo-appletouch.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/RosaBlog/images/shan-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/RosaBlog/images/shan-logo-16X16.png">
+  <link rel="mask-icon" href="/RosaBlog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/RosaBlog/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"meitung473.github.io","root":"/RosaBlog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"Pisces | Gemini":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"buttons","active":true,"storage":true,"lazyload":true,"nav":{"disqus":{"text":"留言區","order":-1}},"Available values":"disqus"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="宣告提升背後的原理以及規則">
+<meta property="og:type" content="article">
+<meta property="og:title" content="⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動">
+<meta property="og:url" content="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/">
+<meta property="og:site_name" content="健忘雜記">
+<meta property="og:description" content="宣告提升背後的原理以及規則">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/cUWijRw.gif">
+<meta property="article:published_time" content="2022-01-14T03:23:19.000Z">
+<meta property="article:modified_time" content="2022-02-07T03:36:03.549Z">
+<meta property="article:author" content="Rosa Hong">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="hoisting">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/cUWijRw.gif">
+
+
+<link rel="canonical" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動 | 健忘雜記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/RosaBlog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">健忘雜記</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">紀錄學習與生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/RosaBlog/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/RosaBlog/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/RosaBlog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/RosaBlog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">21</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%92%E6%9C%89%E5%AE%A3%E5%91%8A%E6%8F%90%E5%8D%87-Hoisting-%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">如果沒有宣告提升 (Hoisting) ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-%E7%9A%84%E5%AE%A3%E5%91%8A%E6%8F%90%E5%8D%87%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">JavaScript 的宣告提升怎麼運作？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-Execution-contexts"><span class="nav-number">4.</span> <span class="nav-text">執行環境 (Execution contexts)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EC-%E5%84%B2%E5%AD%98%E7%9A%84%E7%8B%80%E6%85%8B%E7%89%A9%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">EC 儲存的狀態物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lexical-Environments"><span class="nav-number">4.2.</span> <span class="nav-text">Lexical Environments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment-Records"><span class="nav-number">4.3.</span> <span class="nav-text">Environment Records</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Declarative-Environment-Records"><span class="nav-number">4.4.</span> <span class="nav-text">Declarative Environment Records</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F-Scope"><span class="nav-number">5.</span> <span class="nav-text">作用域 (Scope)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E4%B8%80"><span class="nav-number">5.1.</span> <span class="nav-text">範例一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E4%BA%8C"><span class="nav-number">5.2.</span> <span class="nav-text">範例二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">6.</span> <span class="nav-text">小結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E7%B4%9A%E6%AF%94%E4%B8%80%E6%AF%94"><span class="nav-number">7.</span> <span class="nav-text">超級比一比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%80%E6%B3%81%E5%8A%87"><span class="nav-number">8.</span> <span class="nav-text">狀況劇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="nav-number">8.1.</span> <span class="nav-text">重複宣告變數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A4%87%E5%AE%A3%E5%91%8A%E5%87%BD%E5%BC%8F"><span class="nav-number">8.2.</span> <span class="nav-text">重複宣告函式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#global-%E5%90%8C%E5%90%8D%E8%AE%8A%E6%95%B8-v-s-function"><span class="nav-number">8.3.</span> <span class="nav-text">global 同名變數 v.s function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-%E5%85%A7%E5%90%8C%E5%90%8D-function-v-s-%E5%8F%83%E6%95%B8"><span class="nav-number">8.4.</span> <span class="nav-text">function 內同名 function v.s 參數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-%E5%85%A7%E5%90%8C%E5%90%8D-%E8%AE%8A%E6%95%B8-v-s-%E5%8F%83%E6%95%B8"><span class="nav-number">8.5.</span> <span class="nav-text">function 內同名 變數 v.s 參數</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">9.</span> <span class="nav-text">總結</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rosa Hong"
+      src="/RosaBlog/image/RosaBlog-LOGO.png">
+  <p class="site-author-name" itemprop="name">Rosa Hong</p>
+  <div class="site-description" itemprop="description">菜鳥起飛中</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/RosaBlog/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/RosaBlog/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/RosaBlog/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:yanshanhong23@gmail.com" title="聯絡我 → mailto:yanshanhong23@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>聯絡我</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/RosaHongRecord/" title="健忘雜記 → https:&#x2F;&#x2F;www.facebook.com&#x2F;RosaHongRecord&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>健忘雜記</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
+      <meta itemprop="name" content="Rosa Hong">
+      <meta itemprop="description" content="菜鳥起飛中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健忘雜記">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-01-14 11:23:19" itemprop="dateCreated datePublished" datetime="2022-01-14T11:23:19+08:00">2022-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>8.6k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>8 分鐘</span>
+    </span>
+</div>
+
+            <div class="post-description">宣告提升背後的原理以及規則</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>從上一篇 <a href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</a><br>知道有三種東西會做宣告提升<br>但是不太清楚如何運作<br>為了瞭解如何宣告提升之前<br>要問自己為什麼 <strong>需要</strong> 宣告提升？<br>如果沒有宣告提升，JavaScript 不能做到那些事？  </p>
+<h2 id="如果沒有宣告提升-Hoisting-？"><a href="#如果沒有宣告提升-Hoisting-？" class="headerlink" title="如果沒有宣告提升 (Hoisting) ？"></a>如果沒有宣告提升 (Hoisting) ？</h2><ol>
+<li>變數必須先宣告再使用 </li>
+<li>函式必須先宣告再使用<br>在設計階段，會希望將預執行函式名先寫出來，再來補齊函式中間的運作，對於執行的脈絡會更加清晰，如果沒有宣告提升，必須先等完成函式再呼叫，版面上可能就會有凌亂。</li>
+<li>函式做不到互相呼叫 <strong>(非常重要)</strong><br>A 要呼叫 B 時 ，B 根本還沒被創造  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">average</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> a<span class="token operator">+</span>b
+<span class="token punctuation">&#125;</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">average</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//1.5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 若沒有宣告提升，是不能執行的<br> 在 <code>average</code> 呼叫 <code>add</code> 時就會出錯  </li>
+</ol>
+<h2 id="JavaScript-的宣告提升怎麼運作？"><a href="#JavaScript-的宣告提升怎麼運作？" class="headerlink" title="JavaScript 的宣告提升怎麼運作？"></a>JavaScript 的宣告提升怎麼運作？</h2><p>了解宣告提升非常重要<br>接下來要了解如何運作？<br>可以來看看 ECMAScript 怎麼說 JavaScript 的運作方式    </p>
+<blockquote>
+<p>ECMAScript 是 JavaScript 的實作守則<br>可以先參考底層是如何被定義的  </p>
+</blockquote>
+<p>主要跟兩個東西有關連<br>一是執行環境 (Execution contexts)<br>二是作用域 (Scope)  </p>
+<h2 id="執行環境-Execution-contexts"><a href="#執行環境-Execution-contexts" class="headerlink" title="執行環境 (Execution contexts)"></a>執行環境 (Execution contexts)</h2><p>Execution contexts 執行環境(以下簡稱 EC)<br>ECMA 的解釋是:  </p>
+<blockquote>
+<p>Evaluation of global code or code using the eval function (15.1.2.1) establishes and enters a new execution context. Every invocation of an ECMAScript code function (13.2.1) also establishes and enters a new execution context, even if a function is calling itself recursively.</p>
+</blockquote>
+<p>剛開始執行前也會生成 global 的 EC<br>每當呼叫函式時也會生成一個新的 EC  </p>
+<p>所以 EC 有兩種  </p>
+<ol>
+<li><strong>Global Execution contexts</strong><br> 全域物件會在這邊產生<br> 產生的有包含最外層的宣告變數、函式、還有<code>this</code><br> 而 this 在不同的環境會有不同的值  <ul>
+<li>在瀏覽器上，是 <code>window</code></li>
+<li>在 node.js 上， 是一種 global 物件   </li>
+</ul>
+</li>
+<li><strong>Function Execution contexts</strong><br> 呼叫 function 時形成，除了內部中宣告變數、函式會產生外，如果有參數的話，<strong>參數</strong> 也會被算進儲存物件中。<br> function 中的儲存物件叫 <strong>Arguments Object</strong>，function 執行完後都會消失。 <blockquote>
+<p>閉包除外，閉包更像是回收的機制，雖然已經執行完畢，但是儲存的物件仍然存在且外部可以使用。   </p>
+</blockquote>
+</li>
+</ol>
+<p>EC 會層層堆疊 (Execution contexts stack)，最上層的是 <strong>正在執行</strong> 的函式，函式執行結束後就會被 pop 掉。</p>
+<p>因為 JavaScript 是單線程(同步)，在執行時會一行行往下跑，跑完的 function 就會釋放記憶體空間。  </p>
+<ul>
+<li>堆疊 (EC stack)<br><img data-src="https://i.imgur.com/cUWijRw.gif" alt="function 包 function EC 示意圖">  </li>
+</ul>
+<h3 id="EC-儲存的狀態物件"><a href="#EC-儲存的狀態物件" class="headerlink" title="EC 儲存的狀態物件"></a>EC 儲存的狀態物件</h3><p>上面不斷提到儲存物件，到底是存在哪裡？<br>又存了什麼？   </p>
+<p>EC 會包含三種的狀態物件  </p>
+<ol>
+<li><code>Lexical Environment</code> (詞語環境): 在 <strong>創造</strong> 階段就已經宣告的變數或函式陳述式所存放的環境，看的是程式碼的物理位置。</li>
+<li><code>Variable Environment</code> (變量環境): 跟 Lexical Environment 很像，已經宣告的變數或函式陳述式在 <strong>執行</strong> 階段所存放的環境，這個環境跟實際在執行程式的物理位置也有關係。</li>
+<li>ThisBinding : <code>this</code> 關鍵字。   </li>
+</ol>
+<p>ECMAScript 新版的定義更不一樣 @@ ，這邊先已 ECMAScript 262 5.1 為主。  </p>
+<p>可以注意到 </p>
+<blockquote>
+<p>The LexicalEnvironment and VariableEnvironment components of an execution context are always Lexical Environments.<br>When an execution context is created its LexicalEnvironment and VariableEnvironment components initially have the same value.</p>
+</blockquote>
+<p>在最初還沒跑程式碼的時候這兩個是一樣的， <code>Lexical Environment = Variable Environment</code><br>這邊其實我有點搞混了，既然是一樣的，那複製母體是誰 ?<br><a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/#lexical-environment">這篇文章</a> 給了很好的解釋  </p>
+<blockquote>
+<p>Variable Environment 是 Lexical Environment 的複製藍圖。<br>這也會解釋到 Scope Chain 的原理</p>
+</blockquote>
+<h3 id="Lexical-Environments"><a href="#Lexical-Environments" class="headerlink" title="Lexical Environments"></a>Lexical Environments</h3><p><code>10.2 Lexical Environments</code>  </p>
+<blockquote>
+<p>A Lexical Environment consists of an <code>Environment Record</code> and a possibly null reference to an outer Lexical Environment.     </p>
+</blockquote>
+<p>這段可以知道完整的 Lexical Environments 其實還有一個外部參考環境。<br>這個外部環境，其實跟 scope 很有關係，後面會提到為什麼有 <code>scope chain</code> 的概念，正是因為還有外部參考環境，在內部找不到的值，可以往外部尋找。  </p>
+<p>根據這段可以來看 <strong>外部參考環境</strong> 的定義  </p>
+<blockquote>
+<p>The outer environment reference is used to model the logical nesting of Lexical Environment values. The outer reference of a (inner) Lexical Environment is a reference to the Lexical Environment that logically surrounds the inner Lexical Environment.</p>
+</blockquote>
+<p>簡單來說外部參考 (reference) 是 Lexical Environment 指向的鄰近的 Lexical Environment。<br>對 global 來說是最外層，所以是外部參考環境是 <code>null</code>。   </p>
+<p>再說一次 Lexical Environment 指的是程式碼物理的位置。<code>這邊的外部參考環境跟函式在哪裡呼叫無關，跟程式碼放在哪裡關。</code></p>
+<p>往下繼續看…</p>
+<blockquote>
+<p>An <code>Environment Record</code> records the identifier bindings that are created within the <code>scope</code> of its associated Lexical Environment.</p>
+</blockquote>
+<p>從這邊可以知道 Scope 是包含 Environment Record 紀錄宣告的綁定的值，而且跟 Lexical Environments 有相關。<br>(恕我的破破英文翻譯)    </p>
+<p>不過這個 <code>Environment Record</code> 是什麼咧？ </p>
+<h3 id="Environment-Records"><a href="#Environment-Records" class="headerlink" title="Environment Records"></a>Environment Records</h3><p><code>10.2.1 Environment Records</code>  </p>
+<blockquote>
+<p>For specification purposes Environment Record values can be thought of as existing in a simple object-oriented hierarchy where Environment Record is an abstract class with two concrete subclasses, <code>declarative environment record</code> and <code>object environment record</code>. </p>
+</blockquote>
+<p>在 ECMAScript 262 5.1 是叫  <code>Environment Record</code> 可以想像成一般的 object，會記錄不同類型的變數以及函式<br>。<br><code>declarative environment record</code> 是宣告環境紀錄來仔細看一下包含哪些東西。</p>
+<h3 id="Declarative-Environment-Records"><a href="#Declarative-Environment-Records" class="headerlink" title="Declarative Environment Records"></a>Declarative Environment Records</h3><p><code>10.2.1.1 Declarative Environment Records</code></p>
+<blockquote>
+<p>Each declarative environment record is associated with an ECMAScript program scope containing variable and/or function declarations. A declarative environment record binds the set of identifiers defined by the declarations contained within its <code>scope</code>.  </p>
+</blockquote>
+<p>在定義的部分，scope 跟 Declarative Environment Records 紀錄的變數以及函式陳述式有關。<br>我們把關係一層層剝開，發現 scope 指的是 EC 中的環境紀錄宣告變數與函式的總和範圍。</p>
+<p>我試著描出上面說的架構  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">&#123;</span>
+	Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records
+	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">[</span><span class="token punctuation">[</span>ref<span class="token punctuation">.</span>outerEnv<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		surroundEC<span class="token punctuation">.</span>Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+			Environment Records
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	Variable Environment<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>不過新版已經不再是以 Lexical Environments 來說明，而是 Environment Records。(這有待專研 @@)    </p>
+<h2 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域 (Scope)"></a>作用域 (Scope)</h2><p>作用域 (Scope) 也就是 <strong>變數生存的範圍</strong><br>外部的不能取內部的值，內部可以取外部的值<br>會依循作用域鏈 (Scope Chain) 一層層往上找 </p>
+<p>Scope 有兩種</p>
+<ol>
+<li>Global Level Scope : 全域作用域<br>這邊的值在哪裡都可以存取，也是最外層的。</li>
+<li>Local Level Scope : 區域作用域<ol>
+<li>Function Level Scope<br><code>var</code> 的變數生存範圍就是以 function 為限，如果在 function 以外來取得在 function 宣告的 var 變數，會錯誤。</li>
+<li>Block Level Scope<br> 在 ES6 中，<code>let</code> 跟 <code>const</code><br> 的生存範圍是以 <code>&#123; &#125;</code>為限，也就是大括號括起來的 block，脫離 block 要取得值就會失敗。  </li>
+</ol>
+</li>
+</ol>
+<p>這邊先不討論 let 跟 const。<br>回到 scope chain 上，我們知道跟 <code>外部參考環境</code> 有關，上面有提到 <code>外部參考環境</code> 其實就是鄰近的 Lexical Environment。  </p>
+<p>綜合上面的概念， 在 function 中的外部環境 Lexical Environment 又是從<br>Variable Environment 複製過來的，所以 function 呼叫時的 scope 其實就是來自正在上一層 EC 傳入的 Variable Environment  </p>
+<p>在 <code>13 Function Definition</code> 這個定義中可以找到結果    </p>
+<blockquote>
+<p>Return the result of creating a new Function object as specified in 13.2 with parameters specified by FormalParameterListopt, and body specified by FunctionBody. <code>Pass in the VariableEnvironment of the running execution context as the Scope.</code> Pass in true as the Strict flag if the FunctionDeclaration is contained in strict code or if its FunctionBody is strict code.</p>
+</blockquote>
+<p>講起來真的蠻抽象的，來看看例子。</p>
+<h3 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//2.</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> c<span class="token operator">=</span><span class="token number">2</span>
+	<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//3.</span>
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//1.</span>
+<span class="token keyword">var</span> c<span class="token operator">=</span><span class="token number">3</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>答案是多少呢？</p>
+<p>答案是 </p>
+<ol>
+<li><code>undefined</code></li>
+<li>3</li>
+<li>2</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">b<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">&#123;</span>
+	Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">[</span><span class="token punctuation">[</span>ref<span class="token punctuation">.</span>outerEnv<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+		global<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">.</span>Variable Environment
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	Variable Environment<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+a<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">&#123;</span>
+	Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			c<span class="token operator">:</span> <span class="token keyword">undefined</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">[</span><span class="token punctuation">[</span>ref<span class="token punctuation">.</span>outerEnv<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+		global<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">.</span>Variable Environment
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	Variable Environment<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			c <span class="token operator">:</span> <span class="token number">2</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+global<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">&#123;</span>
+	Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			b <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			a <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			c <span class="token operator">:</span> <span class="token keyword">undefined</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">[</span><span class="token punctuation">[</span>ref<span class="token punctuation">.</span>outerEnv<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token keyword">null</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	Variable Environment<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			c <span class="token operator">:</span> <span class="token number">3</span> 
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第一個 console 是 <code>undefined</code>，因為 global EC 建立時，環境 (Lexical Environments) 將變數、函式陳述式的宣告先存放起來，會長這樣   </p>
+<ol>
+<li>b : func()</li>
+<li>a : func()</li>
+<li>c : undefined  </li>
+</ol>
+<p>Variable Environment 跟 Lexical Environments 還沒執行時是一樣的，執行後 Variable Environment 就會有變化。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">global<span class="token punctuation">.</span><span class="token constant">EC</span><span class="token punctuation">&#123;</span>
+	Lexical Environments<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			b <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			a <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			c <span class="token operator">:</span> <span class="token keyword">undefined</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">[</span><span class="token punctuation">[</span>ref<span class="token punctuation">.</span>outerEnv<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token keyword">null</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	Variable Environment<span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		Environment Records<span class="token operator">:</span>
+		<span class="token punctuation">&#123;</span>
+			b <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			a <span class="token operator">:</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			c <span class="token operator">:</span> <span class="token number">3</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>當 <code>var c =3</code>，Variable Environment 中的 c 才會賦值 3。  </p>
+<p>可以看到 b 即使在 a 函式中被呼叫，b 的外部參考環境其實是 global，因為這跟 Lexical Environment 有關。</p>
+<h3 id="範例二"><a href="#範例二" class="headerlink" title="範例二"></a>範例二</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> c<span class="token operator">=</span><span class="token number">2</span>
+	<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">function</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//2.</span>
+		c <span class="token operator">=</span> <span class="token number">3</span>
+	<span class="token punctuation">&#125;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//3.</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">//1.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>答案是   </p>
+<ol>
+<li><code>c is not defined</code></li>
+<li>2</li>
+<li>3</li>
+</ol>
+<p>a 的外部參考環境 是 global。<br>b 的外部參考環境是 a + global，因此 c 是 a 函式中的變數，而<code>c=3</code>，沒有重新宣告下，b 函式找不到 c，所以是找 a 函式中的 c，並改變成 <code>c=3</code>。</p>
+<p>如果把 b 函式中的 c =3 ，改為 <code>var c=3</code>，答案會變為  </p>
+<ol>
+<li><code>c is not defined</code></li>
+<li><code>undefined</code></li>
+<li>2  </li>
+</ol>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ol>
+<li>Exection Context : 執行上下文，會形成 Exection Context Stack，最下層是 global，呼叫到 function 就會再往上疊加 EC</li>
+<li>Lexical Environment : <strong>創造</strong> 階段儲存的環境</li>
+<li>Variable Environment : <strong>執行</strong> 階段儲存的環境</li>
+<li>Environment Records : 像是一個物件，儲存宣告的變數、函式陳述式，以及函式中的參數。</li>
+<li>Scope : 作用域，變數生存的範圍。</li>
+<li>Scope Chain : 作用域鏈，由 EC 的 Lexical Environment，以及其外部的 Lexical Environment 組成，其外部的 Lexical Environment 就是上一層 EC 的 Variable Environment 複製過來的。</li>
+</ol>
+<h2 id="超級比一比"><a href="#超級比一比" class="headerlink" title="超級比一比"></a>超級比一比</h2><p>了解 Scope 後，就要來了解如果有相同名稱的三個變數，Javascript 會如何來判斷順序，像是 function a、變數 a、參數 a ，三個都同名，那誰會被蓋掉誰呢 ?<br>重複的宣告又會怎麼處理呢 ?<br>可以根據 <a href="https://262.ecma-international.org/5.1/#sec-10.5">10.5 Declaration Binding Instantiation</a> 規則來看</p>
+<blockquote>
+<p>10.5.4 在呼叫的 function 裡面  </p>
+</blockquote>
+<ol>
+<li>如果有同名的 function、參數、變數，function 會先被儲存</li>
+<li>如果內部有同名的參數與變數<ol>
+<li>引數的數量 &gt; 1，內部變數初始值會變成 undefined，變數如果有重新賦值，可能會是第 n 個參數的值</li>
+<li>如果有傳入引數，那麼傳入的引數就是函式的參數初始值</li>
+<li>如果沒有傳入引數，但有參數，參數的初始值是 undefined，再依照內部執行程式碼賦值</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>10.5.5 函式陳述式    </p>
+</blockquote>
+<p>a~d : 如果有函式被重複宣告，以後面新宣告的函式為主</p>
+<p>e : 在 global 會是全域的物件<br>   宣告變數跟宣告的函式名同名，如果變數宣告了但沒賦值，同名的就會是先儲存 function 物件</p>
+<p>我寫大概的意思而已，文件上定義的很明確。  </p>
+<blockquote>
+<p>10.5.8 宣告或未宣告的變數</p>
+</blockquote>
+<ol>
+<li>已宣告的變數，後面重複宣告都已第一個為宣告主 (dn -&gt; d)</li>
+<li>已宣告且賦值的話，重複宣告又賦值以後面的值為主 (值 = dn)</li>
+<li>未宣告變數  <ol>
+<li>往上找 Scope Chain 有宣告的變數，新賦值為主</li>
+<li>如果往上找 Scope Chain 沒有宣告的變數，就會直接報錯</li>
+</ol>
+</li>
+</ol>
+<p>這邊只列出幾個，原諒我破破的英文翻譯，大概是這樣<br>10.5 列出各種會碰到的情況，只是這邊有很多代名詞，要再往回看一下定義。</p>
+<h2 id="狀況劇"><a href="#狀況劇" class="headerlink" title="狀況劇"></a>狀況劇</h2><p>雖然上面大約了解內部執行與儲存的狀況，試著來驗證常見的狀況是不是這樣</p>
+<h3 id="重複宣告變數"><a href="#重複宣告變數" class="headerlink" title="重複宣告變數"></a>重複宣告變數</h3><p>先來個簡單的重複宣告的問題，有變數以及函式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">var</span> a
+<span class="token keyword">var</span> a 
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>結果應該要等於 1，不會是 undefined<br>根據 ECMA 寫的宣告有賦值的話，以 d 為主<br>執行一下是 <code>a=1</code></p>
+<h3 id="重複宣告函式"><a href="#重複宣告函式" class="headerlink" title="重複宣告函式"></a>重複宣告函式</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hi!'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hey!'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>結果應該要等於 hey!，不會是 hi!<br>函式重複宣告是以 fn 為主<br>執行一下是 <code>hey!</code>  </p>
+<p>跟著引擎發動沒錯吧 :D<br>再來 !</p>
+<h3 id="global-同名變數-v-s-function"><a href="#global-同名變數-v-s-function" class="headerlink" title="global 同名變數 v.s function"></a>global 同名變數 v.s function</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span><span class="token number">10</span>
+<span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以拆做兩個步驟，第一個是創造之前，因為 var a 一開始是 undefined，但是 a 會被優先儲存成 function 物件<br>直到執行階段，<code>a =10</code>，a 這個物件被賦值為數字 10，a 已經不是 function 物件，被呼叫時會報錯</p>
+<p>但是如果是這個情況</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> a
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">// 這個結果</span>
+<span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>根據上面的步驟跟規則，結果會是 <code>[function a]</code>，印出 function 本身</p>
+<h3 id="function-內同名-function-v-s-參數"><a href="#function-內同名-function-v-s-參數" class="headerlink" title="function 內同名 function v.s 參數"></a>function 內同名 function v.s 參數</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">function</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">456</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>根據規則， function 內部如果同名，宣告的 function 會先優先，所以結果是 <code>[function a]</code>，印出 function 本身</p>
+<h3 id="function-內同名-變數-v-s-參數"><a href="#function-內同名-變數-v-s-參數" class="headerlink" title="function 內同名 變數 v.s 參數"></a>function 內同名 變數 v.s 參數</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> a
+  a<span class="token operator">+=</span><span class="token number">2</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token number">456</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>正當你以為 <code>a = undefined 或是 NaN</code>，不，結果是 458 ，根據規則，參數有傳入引數就是該值，而且變數 a 已存在，所以 <code>var a</code> 並不會覆蓋，由此可知參數的順序比變數來的優先。  </p>
+<p>如果沒有傳入參數呢 ?  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+  	a<span class="token operator">+=</span><span class="token number">2</span>
+	<span class="token keyword">var</span> a
+  	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第一個是 undefined，來自參數 a 已宣告但是為賦值<br>第二個 a 是 <code>NaN</code>，是因為 undefined +2 ，本來就不是數字</p>
+<blockquote>
+<p>由此可知 function 內的提升順序，<strong>function &gt; 參數 &gt; 變數</strong><br>Global 的提升順序，<strong>function &gt; 變數</strong></p>
+</blockquote>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>如果有誤歡迎告訴我，有時候寫到有點茫了…<br>整理的過程中也讓我更清楚知道，變數、參數、函式為什麼會宣告提升，以及怎麼被提升，基本上遇到該類型的題目保持一樣的邏輯跟引擎一起動就好 :D  </p>
+<p>這篇尚未提及 ES6 的 let 跟 const 宣告提升問題，下一篇會做討論</p>
+<hr>
+<p>參考 :</p>
+<ol>
+<li><a href="https://262.ecma-international.org/5.1/#sec-10.3">ECMAScript 262.5.1</a>    </li>
+<li><a href="https://www.udemy.com/course/javascriptjs/">JavaScript 全攻略：克服 JS 的奇怪部分</a></li>
+<li><a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/#structure-of-execution-context">dmitrysoshnikov ES5 關於 EC 的結構細節</a>  </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相關文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Hoisting\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-DataType\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態(I)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Logic\" rel="bookmark">⟬ 筆記 ⟭ JavaScript 邏輯運算子</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_API_twitch\" rel="bookmark">⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_typeof\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/RosaBlog/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/RosaBlog/tags/hoisting/" rel="tag"><i class="fa fa-tag"></i> hoisting</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/" rel="prev" title="⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為">
+                  <i class="fa fa-chevron-left"></i> ⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/RosaBlog/bookreport/lanch-website/" rel="next" title="⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機">
+                  ⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+      
+  <div style="">
+       
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+  </div>
+    
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RosaHong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>總字數：</span>
+    <span title="總字數">68k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>所需總閱讀時間 &asymp;</span>
+    <span title="所需總閱讀時間">1:02</span>
+  </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60f2e6dc9749c91a" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.15.0/dist/lozad.min.js"></script>
+<script src="/RosaBlog/js/utils.js"></script><script src="/RosaBlog/js/motion.js"></script><script src="/RosaBlog/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/RosaBlog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

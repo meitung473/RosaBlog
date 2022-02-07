@@ -31,9 +31,10 @@
 <meta property="og:description" content="從簡單例子看何謂宣告提升">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-13T13:43:50.000Z">
-<meta property="article:modified_time" content="2022-01-15T04:56:32.089Z">
+<meta property="article:modified_time" content="2022-02-07T03:36:07.110Z">
 <meta property="article:author" content="Rosa Hong">
 <meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="hoisting">
 <meta name="twitter:card" content="summary">
 
 
@@ -142,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/RosaBlog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">18</span></a>
+    <a href="/RosaBlog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -152,7 +153,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">20</span></a>
+    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">21</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,7 +228,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/RosaBlog/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -240,7 +241,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/RosaBlog/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -457,10 +458,7 @@ result <span class="token operator">:</span> test is not a <span class="token ke
   <div class="popular-posts-header">相關文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_API_twitch\" rel="bookmark">⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_typeof\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a></div>
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Hoisting-II\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-DataType\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態(I)</a></div>
@@ -468,12 +466,19 @@ result <span class="token operator">:</span> test is not a <span class="token ke
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript-Logic\" rel="bookmark">⟬ 筆記 ⟭ JavaScript 邏輯運算子</a></div>
     </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_API_twitch\" rel="bookmark">⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\RosaBlog\Frontend\JavaScript\JavaScript_typeof\" rel="bookmark">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a></div>
+    </li>
   </ul>
 
 
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/RosaBlog/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/RosaBlog/tags/hoisting/" rel="tag"><i class="fa fa-tag"></i> hoisting</a>
           </div>
 
         
@@ -485,8 +490,8 @@ result <span class="token operator">:</span> test is not a <span class="token ke
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/RosaBlog/bookreport/lanch-website/" rel="next" title="⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機">
-                  ⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機 <i class="fa fa-chevron-right"></i>
+                <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/" rel="next" title="⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動">
+                  ⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -551,14 +556,14 @@ result <span class="token operator">:</span> test is not a <span class="token ke
       <i class="fa fa-chart-line"></i>
     </span>
       <span>總字數：</span>
-    <span title="總字數">59k</span>
+    <span title="總字數">68k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>所需總閱讀時間 &asymp;</span>
-    <span title="所需總閱讀時間">54 分鐘</span>
+    <span title="所需總閱讀時間">1:02</span>
   </span>
 </div>
   <div class="addthis_inline_share_toolbox">
