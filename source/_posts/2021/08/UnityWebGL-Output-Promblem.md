@@ -19,28 +19,13 @@ date: 2021-08-03 19:46:32
 
 沒想到遇到對方外包的網頁公司 `伺服器` 就不行了 QQ  
 因為我也是第一次碰到這問題  
-我跟對方說， **`「這應該是伺服器的問題吧」`**  
-因為我上傳到 github pages 都妥妥的  
-私架的網站出問題，那就是伺服器端的鍋  
-沒毛病吧 QQ  
-
-對方卻說 **「我只是負責將檔案放上去而已」**  
-我還真的不知道該回答      
-
-畢竟我才剛踏入前端稍稍稍稍深一點的坑而已  
-既然是網頁公司，看到 console 跑問題  
-**`真‧工程師`** 通常會有一些概念吧   
-反倒問我菜鳥該如何解決  
-我都快 ~~哭~~ 了 XD
+網頁不是我的專長，這下我也不知道怎麼辦
 
 這篇稍微紀錄一下問題跟解決方式  
 > 主要是 `MIME type` 的問題  
 
 
 ## 遇到問題 ##  
-先碼掉跟對方的相關部分 :D   
-對方丟了個上傳後的網頁  
-叫我自己處理...  
 
 ![](https://chi01pap001files.storage.live.com/y4m8Z81Ua_QFAxCDEHu3CXVZNDlALhmbNSwT1XhMY0TSA9BscdtnomNnmQX5RP5WzdtaqXy5zYX0EiR8PJZJo03_Hk1LATCyDhLQ2vJkpbP4baeuDQB14elPoHRI061wVNDT9sZenz_5g-hWYGapBGfsv4Z60gWmUUXM_2oPLIcg1Bsij5JfL7Z5PpgMspsQO4F?width=660&height=180&cropmode=none)  
 

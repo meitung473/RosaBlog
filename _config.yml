@@ -1,17 +1,17 @@
 title: 健忘雜記
-subtitle: '紀錄學習與生活'
-description: '菜鳥起飛中'
+subtitle: "紀錄學習與生活"
+description: "菜鳥起飛中"
 keywords: 自學,部落格
 author: Rosa Hong
 language: zh-TW
-timezone: 
+timezone:
 url: https://meitung473.github.io/RosaBlog/
 root: /RosaBlog/
-permalink: ':category/:title/'
+permalink: ":category/:title/"
 permalink_defaults: null
 pretty_urls:
-  trailing_index: false
-  trailing_html: false
+    trailing_index: false
+    trailing_html: false
 source_dir: source
 public_dir: public
 
@@ -20,15 +20,15 @@ archive_dir: archives
 category_dir: categories
 
 code_dir: downloads/code
-i18n_dir: ':lang'
+i18n_dir: ":lang"
 skip_render: null
-new_post_name: ':year/:month/:title.md'
+new_post_name: ":year/:month/:title.md"
 default_layout: post
 titlecase: false
 external_link:
-  enable: false
-  field: site
-  exclude: ''
+    enable: false
+    field: site
+    exclude: ""
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -36,26 +36,26 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
-  auto_detect: true
-  tab_replace: ''
-  wrap: true
-  hljs: false
+    enable: true
+    line_number: true
+    auto_detect: true
+    tab_replace: ""
+    wrap: true
+    hljs: false
 prismjs:
-  enable: true
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+    enable: true
+    preprocess: true
+    line_number: true
+    tab_replace: ""
 index_generator:
-  path: ''
-  per_page: 10
-  order_by: '-date'
+    path: ""
+    per_page: 10
+    order_by: "-date"
 
 default_category: uncategorized
 category_map:
 tag_map:
-  Hexo: Hexo
+    Hexo: Hexo
 
 meta_generator: true
 date_format: YYYY-MM-DD
@@ -68,8 +68,8 @@ exclude: null
 ignore: null
 theme: next
 deploy:
-  type: git
-  repo: git@github.com:meitung473/RosaBlog.git
-  branch: master
+    type: git
+    repo: git@github.com:meitung473/RosaBlog.git
+    branch: master
 plugins:
-  - hexo-footnotes
+    - hexo-footnotes
