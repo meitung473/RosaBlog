@@ -33,7 +33,7 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 # imagelink:  https://1drv.ms/u/s!AtRw0OR0iI_KkKQCV2c-12_MOihFSg?e=2Yg8KF/:title/
-relative_link: false
+relative_link: true
 future: true
 highlight:
     enable: true
@@ -55,7 +55,6 @@ index_generator:
 default_category: uncategorized
 category_map:
 tag_map:
-    Hexo: Hexo
 
 meta_generator: true
 date_format: YYYY-MM-DD
