@@ -5,8 +5,8 @@ keywords: 自學,部落格
 author: Rosa Hong
 language: zh-TW
 timezone:
-url: https://meitung473.github.io/RosaBlog/
-root: /RosaBlog/
+url: https://blog.rosa.tw/
+root: /
 permalink: ":category/:title/"
 permalink_defaults: null
 pretty_urls:
