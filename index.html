@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">27</span></a>
+    <a href="/RosaBlog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">30</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -219,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/RosaBlog/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -276,6 +276,354 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
+      <meta itemprop="name" content="Rosa Hong">
+      <meta itemprop="description" content="菜鳥起飛中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健忘雜記">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-06/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 06 | 網頁頁尾版塊</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-03-25 14:05:44" itemprop="dateCreated datePublished" datetime="2022-03-25T14:05:44+08:00">2022-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>376</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>1 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="本篇成果"><a href="#本篇成果" class="headerlink" title="本篇成果"></a>本篇成果</h2><p><a href="https://codepen.io/shan473/pen/oNoMJBQ">Codepen</a><br><img data-src="https://dsm01pap006files.storage.live.com/y4mtphMUUk0c1yY9dUb53RF0jkrLI5tF-TSjeeSIBE583SwUq1Uk8UZUm-Z011ZK-Or0KbhFHvVqODwJObSn3ACJf7CuFIuu18jaIEzdPeLEqvFFMAesLSLoetnq0FPAtwi7kCTP7ZscwXBBtdaDMV7GQKnv5kTH_3vY6LSOcOkcg1zvlpCEsth5zYrQJ54RM7r?width=660&height=377&cropmode=none" alt="網頁頁尾版塊"></p>
+<h2 id="flex-grow-子元素的空間分配"><a href="#flex-grow-子元素的空間分配" class="headerlink" title="flex-grow : 子元素的空間分配"></a>flex-grow : 子元素的空間分配</h2><p><code>flex-grow</code> : 剩餘容器空間分配，運用到 flex-grow : 1，個別分配一樣的，以免內容大小不一導致 container 有大有小。  </p>
+<blockquote>
+<p><code>width : 0</code> 可以把 width 先設定為 0 ，讓 <strong>主軸</strong> 的 width 都交給 grow 分配。</p>
+</blockquote>
+<h3 id="flex-裡面的-width-100-到底沒有作用"><a href="#flex-裡面的-width-100-到底沒有作用" class="headerlink" title="flex 裡面的 width : 100% 到底沒有作用 ?"></a>flex 裡面的 width : 100% 到底沒有作用 ?</h3><p>有，在還沒設定 flex-grow 之前<br>子元素的空間是由內容去撐開的<br>拔掉本篇的 footer-item 中的 flex-grow 並將 width 設為 100%<br>依然會跟 flex-grow 一樣  </p>
+<p>在之前的篇章有介紹過 flex-shrink 壓縮值<br>原因在於 flex-shrink 預設把空間平均壓縮了<br>這也是為什麼撐開到 100% 也單一個子元素占不滿 container<br>所以設定 25% (item 總數是 4) 或 100% 也沒差  </p>
+<p>個人不太建議這樣寫，因為 width 感覺失去意義了    </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
+      <meta itemprop="name" content="Rosa Hong">
+      <meta itemprop="description" content="菜鳥起飛中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健忘雜記">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-05/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 05 | 超通用版面</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-03-25 12:31:10" itemprop="dateCreated datePublished" datetime="2022-03-25T12:31:10+08:00">2022-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>1 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="本篇成果"><a href="#本篇成果" class="headerlink" title="本篇成果"></a>本篇成果</h2><p><a href="https://codepen.io/shan473/pen/yLPqLWg">Codepen</a><br><img data-src="https://dsm01pap006files.storage.live.com/y4mHj3lx_2ZCP6jUJJdmg3J0yQ1okzs2onLtZoKl8Xl9-SHWo5R76rhJJOxB0CCcCpsr4mjLPVhk5vDB68y-tAOu5tf-ZNbKOE3h4Sre1TfJSvHP0v2J8P8TvUahMIXlTHuDmVXPLF8B_iY-H2YRC15q7MtFqTN40Pi1Q79x-NpaPicKK8MhjlUTMAusYM6_kFp?width=660&height=377&cropmode=none" alt="超通用版面"></p>
+<h2 id="object-fit"><a href="#object-fit" class="headerlink" title="object-fit"></a>object-fit</h2><p>讓置換元素 (Replaced element) 的內容如何塞到已知的父層寬度與高度的框  </p>
+<p>Replaced element 指的是內容呈現不在 CSS 的控制範圍<br>像以下這些元素  </p>
+<ol>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;object&gt;</code> </li>
+<li><code>&lt;video&gt;</code> </li>
+<li><code>&lt;textarea&gt;</code> 和 <code>&lt;input&gt;</code> 表單元素。</li>
+</ol>
+<p>簡單來說還未設定 CSS 寬高之前，是由內容去撐開的  </p>
+<p>object-fit 有 5 個屬性   </p>
+<ul>
+<li>fill : 填滿，超出會進行拉伸</li>
+<li>cover : 照片超出版面，可以讓圖片等比例縮到塞滿框，多餘的裁切。或是照原圖片裁掉不符合框的範圍</li>
+<li>contain : 等比例縮放，直到看見整張完整的圖。可能會距離框有距離  </li>
+<li>none : 不做縮放，直接塞滿框</li>
+<li>scale-down : 會是 none 跟 contain 其中一個值，看誰會拿到最小值</li>
+</ul>
+<p>參考 : <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/object-fit">object-fit</a>  </p>
+<h2 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h2><p>當父容器為 flex<br>單一個子元素可以擺脫整體的 align-items 約束<br>自己排在想要的次軸位置  </p>
+<p>* align-items 是在父層控制所有子元素的次軸位置，預設是 flex-start       </p>
+<p>以本篇為例，<code>flex-direction : column</code> 來說次軸是 X 軸<br>align-self 會控制子元素在 X 軸的排列<br>我想只讓 more button 往最右邊靠攏只要設定  </p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.more</span><span class="token punctuation">&#123;</span>
+  <span class="token property">align-self</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="margin-top-auto"><a href="#margin-top-auto" class="headerlink" title="margin-top : auto"></a>margin-top : auto</h2><p>子元素會在父層剩餘的 margin 被分配掉  </p>
+<p>那 <strong>auto</strong> 的值何來 ?<br>我們必須要告訴瀏覽器有參考值邊界才能算出剩餘的空間  </p>
+<p>以本篇的按鈕想要往下面對齊<br>父層使用 <code>display: flex</code> 跟 <code>flex-direction : column</code><br>子層會被撐開，佔滿空間<br>這時候子層就可以算出距離邊界的剩餘的空間(也就是子元素內容本身跟父層的邊界)<br>要全部往下推就要把 top 所有空間都分配掉 </p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item .txt .btn</span><span class="token punctuation">&#123;</span>
+  <span class="token property">margin-top</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>所以如果想往哪邊推，就是把反向的空間給分掉   </p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">margin-top</span> <span class="token punctuation">:</span> auto <span class="token punctuation">;</span> // 擠到下方
+<span class="token property">margin-bottom</span> <span class="token punctuation">:</span> auto <span class="token punctuation">;</span> // 擠到上方
+<span class="token property">margin-left</span> <span class="token punctuation">:</span> auto <span class="token punctuation">;</span> // 擠到右方
+<span class="token property">margin-right</span> <span class="token punctuation">:</span> auto <span class="token punctuation">;</span> // 擠到左方<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="常見的-margin-0-auto-置中技巧也是"><a href="#常見的-margin-0-auto-置中技巧也是" class="headerlink" title="常見的 margin : 0 auto 置中技巧也是"></a>常見的 margin : 0 auto 置中技巧也是</h3><p>把 box 置中</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span><span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>margin 針對左右邊都分配掉，也就是平均，所以元素才會置中  </p>
+<ul>
+<li>此時的邊界剩餘空間 ?<br>預設 box 的 display 是 block 占據整行<br>由於內容只有 100px，剩餘的空間就會是 viewport - box 內容再去分配    </li>
+</ul>
+<h2 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h2><p>有兩個值</p>
+<ul>
+<li>wrap  : 總體寬度超出螢幕寬，會換行</li>
+<li>nowrap : flex 預設，打死不換行</li>
+</ul>
+<p>當複數個元素擠在同一個容器<br>會發現他們會平均壓縮(預設 flex-shrink : 1)<br>而且打死不換行<br>即使你縮到最小，也不會有內容超出容器導致 X 向的捲軸出現<br>因為 flex 都幫你壓好好的  </p>
+<p>當然這樣的視覺是 NG 的，內容都擠一塊了<br>這時候 <code>wrap</code> 就很好用了<br>當這一行的寬度容不下多的子容器寬度就會往下排   </p>
+<p>flex 可以說是能屈能伸，你說是不是很棒呢 QQ  </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Expression-Statement/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
+      <meta itemprop="name" content="Rosa Hong">
+      <meta itemprop="description" content="菜鳥起飛中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健忘雜記">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Expression-Statement/" class="post-title-link" itemprop="url">⟬ 筆記 ⟭ JavaScript - 表達式 & 陳述式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-03-25 11:24:20" itemprop="dateCreated datePublished" datetime="2022-03-25T11:24:20+08:00">2022-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/RosaBlog/categories/Frontend/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>2 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>認識 JavaScript 中的表達式 & 陳述式</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/RosaBlog/Frontend/JavaScript/JavaScript-Expression-Statement/">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -293,7 +641,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-04/" class="post-title-link" itemprop="url">CSSSeriesZeroToOne | 04 | 交錯漂浮版</a>
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-04/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 04 | 交錯漂浮版</a>
         </h2>
 
         <div class="post-meta-container">
@@ -392,7 +740,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-03/" class="post-title-link" itemprop="url">CSSSeriesZeroToOne | 03 | 人員介紹卡片</a>
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-03/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 03 | 人員介紹卡片</a>
         </h2>
 
         <div class="post-meta-container">
@@ -590,7 +938,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-02/" class="post-title-link" itemprop="url">CSSSeriesZeroToOne | 02 | 互動卡片</a>
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-02/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 02 | 互動卡片</a>
         </h2>
 
         <div class="post-meta-container">
@@ -689,7 +1037,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-01/" class="post-title-link" itemprop="url">CSSSeriesZeroToOne | 01 | 圖文滿版區塊</a>
+            <a href="/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-01/" class="post-title-link" itemprop="url">CSSZeroToOneSeries | 01 | 圖文滿版區塊</a>
         </h2>
 
         <div class="post-meta-container">
@@ -961,303 +1309,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
-      <meta itemprop="name" content="Rosa Hong">
-      <meta itemprop="description" content="菜鳥起飛中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="健忘雜記">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/" class="post-title-link" itemprop="url">⟬ 筆記 ⟭ JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-01-14 11:23:19" itemprop="dateCreated datePublished" datetime="2022-01-14T11:23:19+08:00">2022-01-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="文章字數">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">文章字數：</span>
-      <span>8.6k</span>
-    </span>
-    <span class="post-meta-item" title="所需閱讀時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-      <span>8 分鐘</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>宣告提升背後的原理以及規則</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting-II/">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
-      <meta itemprop="name" content="Rosa Hong">
-      <meta itemprop="description" content="菜鳥起飛中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="健忘雜記">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/" class="post-title-link" itemprop="url">⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-01-13 21:43:50" itemprop="dateCreated datePublished" datetime="2022-01-13T21:43:50+08:00">2022-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="文章字數">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">文章字數：</span>
-      <span>1.7k</span>
-    </span>
-    <span class="post-meta-item" title="所需閱讀時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-      <span>2 分鐘</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>從簡單例子看何謂宣告提升</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/RosaBlog/Frontend/JavaScript/JavaScript-Hoisting/">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://meitung473.github.io/RosaBlog/Frontend/JavaScript/JavaScript_typeof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/RosaBlog/image/RosaBlog-LOGO.png">
-      <meta itemprop="name" content="Rosa Hong">
-      <meta itemprop="description" content="菜鳥起飛中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="健忘雜記">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/RosaBlog/Frontend/JavaScript/JavaScript_typeof/" class="post-title-link" itemprop="url">⟬ 筆記 ⟭ JavaScript - 資料型態 (II) typeof</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-01-12 20:19:58" itemprop="dateCreated datePublished" datetime="2022-01-12T20:19:58+08:00">2022-01-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/" itemprop="url" rel="index"><span itemprop="name">Frontend</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/RosaBlog/categories/Frontend/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="文章字數">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">文章字數：</span>
-      <span>1.3k</span>
-    </span>
-    <span class="post-meta-item" title="所需閱讀時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-      <span>1 分鐘</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用來判斷型態的 typeof</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/RosaBlog/Frontend/JavaScript/JavaScript_typeof/">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1319,14 +1370,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>總字數：</span>
-    <span title="總字數">83k</span>
+    <span title="總字數">87k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>所需總閱讀時間 &asymp;</span>
-    <span title="所需總閱讀時間">1:15</span>
+    <span title="所需總閱讀時間">1:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
