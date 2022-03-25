@@ -1,8 +1,8 @@
 ---
-title: CSSSeriesZeroToOne | 02 | 互動卡片
+title: CSSZeroToOneSeries | 02 | 互動卡片
 tags:
   - CSS
-  - CSSSeriesZeroToOne
+  - CSSZeroToOneSeries
 categories:
   - - Frontend
     - CSS

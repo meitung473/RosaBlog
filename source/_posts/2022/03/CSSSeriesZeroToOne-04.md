@@ -1,8 +1,8 @@
 ---
-title: CSSSeriesZeroToOne | 04 | 交錯漂浮版
+title: CSSZeroToOneSeries | 04 | 交錯漂浮版
 tags:
   - CSS
-  - CSSSeriesZeroToOne
+  - CSSZeroToOneSeries
 categories:
   - - Frontend
     - CSS

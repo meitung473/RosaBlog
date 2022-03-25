@@ -1,8 +1,8 @@
 ---
-title: CSSSeriesZeroToOne | 01 | 圖文滿版區塊
+title: CSSZeroToOneSeries | 01 | 圖文滿版區塊
 tags:
   - CSS
-  - CSSSeriesZeroToOne
+  - CSSZeroToOneSeries
 categories:
   - - Frontend
     - CSS

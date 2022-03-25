@@ -1,8 +1,8 @@
 ---
-title: CSSSeriesZeroToOne | 03 | 人員介紹卡片
+title: CSSZeroToOneSeries | 03 | 人員介紹卡片
 tags:
   - CSS
-  - CSSSeriesZeroToOne
+  - CSSZeroToOneSeries
 categories:
   - - Frontend
     - CSS
