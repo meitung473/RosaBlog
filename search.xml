@@ -62,7 +62,7 @@
 <li>如果有一堆黃色驚嘆號，是正常的</li>
 <li>按開始無反應，可能是 <code>Tag</code> 或是<code>layer</code> 設定跑掉，導致程式找不到。請自行創建 layer 與 tag 替換上。  </li>
 </ol>
-<p>🤙可以詢問我， Email :  <a href="mailto:&#x79;&#x61;&#x6e;&#x73;&#x68;&#97;&#x6e;&#x68;&#111;&#110;&#103;&#x32;&#51;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#x79;&#x61;&#x6e;&#x73;&#x68;&#97;&#x6e;&#x68;&#111;&#110;&#103;&#x32;&#51;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;</a>  </p>
+<p>🤙可以詢問我， Email :  <a href="mailto:&#x79;&#97;&#x6e;&#x73;&#x68;&#97;&#x6e;&#x68;&#111;&#110;&#x67;&#50;&#51;&#64;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#97;&#x6e;&#x73;&#x68;&#97;&#x6e;&#x68;&#111;&#110;&#x67;&#50;&#51;&#64;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>  </p>
 <blockquote>
 <p>📄 <strong><a href="https://1drv.ms/u/s!AtRw0OR0iI_KjYJrOgYRJWs_90BckQ">Download</a></strong>  </p>
 </blockquote>
@@ -1083,6 +1083,94 @@ on <a href="https://codepen.io">CodePen</a>.
       </tags>
   </entry>
   <entry>
+    <title>⟬ 筆記 ⟭ JavaScript - 資料型態(I)</title>
+    <url>/RosaBlog/Frontend/JavaScript/JavaScript-DataType/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇 Primaitvie vaule (原始值) 以及 Object 之間差別的說明     </p>
+<span id="more"></span>
+<h3 id="Primitive-vaule"><a href="#Primitive-vaule" class="headerlink" title="Primitive vaule"></a>Primitive vaule</h3><p>常見的有六種，另外兩種 symbol 跟 BigInt 先不做討論  </p>
+<ol>
+<li>boolean</li>
+<li>string</li>
+<li>number</li>
+<li>null </li>
+<li>undefined</li>
+<li>object ( function 函式 、array 陣列 … )</li>
+</ol>
+<p>在 <strong>null</strong> 與  <strong>undefined</strong> 的定義有點微妙<br>暫不討論   </p>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>像是 Object 或 Array 這類的會被歸類在 object</p>
+<blockquote>
+<p>注意 :  主要是記憶體跟純賦值不同<br>function 算是被視為一種 Object 只是被呼叫而已 </p>
+</blockquote>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>查詢數值型態  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'abc'</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a<span class="token punctuation">)</span> <span class="token comment">// string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其他的類別以此類推  </p>
+<blockquote>
+<p>詳細的型態說明<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#examples">typeof - JavaScript | MDN (mozilla.org)</a>    </p>
+</blockquote>
+<h3 id="可變與不可變-Immutable"><a href="#可變與不可變-Immutable" class="headerlink" title="可變與不可變 (Immutable)"></a>可變與不可變 (Immutable)</h3><h4 id="不可變"><a href="#不可變" class="headerlink" title="不可變"></a>不可變</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.</span> <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'hello'</span>
+<span class="token number">2.</span> a <span class="token operator">=</span> <span class="token string">'yo'</span>
+<span class="token number">3.</span> a<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>(2) <code>a  = yo</code> 這是被賦值，並非完全被覆蓋掉<br>在  <strong><code>hello </code></strong> 已建立了一個記憶體位置儲存值<br>而 <strong><code>yo</code></strong> 只是重新賦值<br>且又新建立一個新的記憶體位置存放值</p>
+<p>(3) 的部分是沒有任何效果的，是不會變動到 a<br>也不會改變a的值<br>要麼寫成 <code>a = a.toUpperCase()</code>  </p>
+<blockquote>
+<p>這邊講的不可變是 <strong><code>操作值所回傳的結果</code></strong><br>a.toUpperCase() 回傳回來的並沒有被改變<br>而在 a = a.toUpperCase() 才做改變  </p>
+</blockquote>
+<p>因此 CDN 這邊說明 Primaitive vaule 是不可變的   </p>
+<h4 id="可變"><a href="#可變" class="headerlink" title="可變"></a>可變</h4><p>舉 object 來看 mutable    </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.</span> <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span><span class="token number">1</span> <span class="token punctuation">&#125;</span>
+<span class="token number">2.</span> <span class="token keyword">var</span> obj2 <span class="token operator">=</span> obj 
+<span class="token number">3.</span> obj2<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token number">4.</span> obj<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token number">5.</span> obj2<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>必須先知道 Object 是儲存記憶體的位置<br>並非只有單純的值  </p>
+<ol>
+<li>(1)新建立一個 obj 實際是建立了一個記憶體<br>例如是 <code>0x01</code></li>
+<li>(2) 新物件 obj2 =  obj<br> obj 跟 obj2 是指向同一個記憶體位置  </li>
+<li>(3) obj2 改變 a 的值， <strong><code>obj 的 a 也會一同被改變</code></strong><br> 也就是 <code>obj2 = &#123;a : 2&#125; ,obj = &#123;a : 2&#125;</code>   <blockquote>
+<p>改變的是同一個記憶體位置<br>obj2 的 記憶體位置也是 <code>0x01</code><br>兩者指向的是同一個，因此改變其中一個就會通通改變  </p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>列出跟 Primative vaule 差別  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">var</span> b <span class="token operator">=</span> a
+b <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token comment">//請問 b = ?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+答案 <strong><code>b = 1 ,a = 2</code></strong><br>這邊我們可以知道這邊指的是賦值<br>並非指向同一個記憶體   </li>
+</ul>
+<ol start="4">
+<li>因此到 (4) 再看一次 <code>obj = &#123;a : 0&#125; ,obj = &#123;a : 0&#125;</code>    </li>
+<li>(5)  obj2 多新增一個 b ，但 obj 並不會新增<br>這邊 obj 已經是另一個新的記憶體 <code>0x02</code><br>代表兩者已經不一樣了<br><code>obj = &#123;a : 0&#125; ,obj = &#123;a : 0 ,b : 2&#125;</code>      </li>
+</ol>
+<p>關於 <strong>淺拷貝與深拷貝</strong> 參考可以看這篇  </p>
+<blockquote>
+<p><a href="https://blog.huli.tw/2018/06/23/javascript-call-by-value-or-reference/">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？ - Huli</a></p>
+</blockquote>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>之前在使用物件時<br>常常不知道為什麼會突然改到原物件<br>我以為的拷貝結果不是拷貝 :O<br>接觸更深後才知道<br>要複製可以使用展開的方式<br>像這樣  </p>
+<pre><code class="javascript">  var obj = &#123;
+    a:1,
+    b:2
+  &#125;
+  var obj2 = &#123;...obj&#125;
+</code></pre>
+<p>再改動 obj2 值就不會影響 obj 了  </p>
+<p>基礎篇章都只是記錄小東西<br>更新的不快<br>繼續學習 ! GOGO  </p>
+<hr>
+<blockquote>
+<p>參考資料<br><a href="https://derek.coderbridge.io/2020/09/29/javascript-%E6%A0%B8%E5%BF%83-%E8%AE%8A%E6%95%B8%E8%88%87%E4%BB%96%E7%9A%84%E7%94%A2%E5%9C%B0/">JavaScript 核心 - 變數與他們的產地 (coderbridge.io)</a>  </p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>⟬ 筆記 ⟭ HTML 基本語法</title>
     <url>/RosaBlog/Frontend/HTML/HTML-Tags/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>這邊紀錄常用標籤與標籤用處<br>標籤基本都成雙成對<br>本篇主要複習跟稍微解析實際網頁的應用部分  </p>
@@ -1271,94 +1359,6 @@ on <a href="https://codepen.io">CodePen</a>.
       </categories>
       <tags>
         <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 筆記 ⟭ JavaScript - 資料型態(I)</title>
-    <url>/RosaBlog/Frontend/JavaScript/JavaScript-DataType/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇 Primaitvie vaule (原始值) 以及 Object 之間差別的說明     </p>
-<span id="more"></span>
-<h3 id="Primitive-vaule"><a href="#Primitive-vaule" class="headerlink" title="Primitive vaule"></a>Primitive vaule</h3><p>常見的有六種，另外兩種 symbol 跟 BigInt 先不做討論  </p>
-<ol>
-<li>boolean</li>
-<li>string</li>
-<li>number</li>
-<li>null </li>
-<li>undefined</li>
-<li>object ( function 函式 、array 陣列 … )</li>
-</ol>
-<p>在 <strong>null</strong> 與  <strong>undefined</strong> 的定義有點微妙<br>暫不討論   </p>
-<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>像是 Object 或 Array 這類的會被歸類在 object</p>
-<blockquote>
-<p>注意 :  主要是記憶體跟純賦值不同<br>function 算是被視為一種 Object 只是被呼叫而已 </p>
-</blockquote>
-<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>查詢數值型態  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'abc'</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a<span class="token punctuation">)</span> <span class="token comment">// string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>其他的類別以此類推  </p>
-<blockquote>
-<p>詳細的型態說明<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#examples">typeof - JavaScript | MDN (mozilla.org)</a>    </p>
-</blockquote>
-<h3 id="可變與不可變-Immutable"><a href="#可變與不可變-Immutable" class="headerlink" title="可變與不可變 (Immutable)"></a>可變與不可變 (Immutable)</h3><h4 id="不可變"><a href="#不可變" class="headerlink" title="不可變"></a>不可變</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.</span> <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'hello'</span>
-<span class="token number">2.</span> a <span class="token operator">=</span> <span class="token string">'yo'</span>
-<span class="token number">3.</span> a<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>(2) <code>a  = yo</code> 這是被賦值，並非完全被覆蓋掉<br>在  <strong><code>hello </code></strong> 已建立了一個記憶體位置儲存值<br>而 <strong><code>yo</code></strong> 只是重新賦值<br>且又新建立一個新的記憶體位置存放值</p>
-<p>(3) 的部分是沒有任何效果的，是不會變動到 a<br>也不會改變a的值<br>要麼寫成 <code>a = a.toUpperCase()</code>  </p>
-<blockquote>
-<p>這邊講的不可變是 <strong><code>操作值所回傳的結果</code></strong><br>a.toUpperCase() 回傳回來的並沒有被改變<br>而在 a = a.toUpperCase() 才做改變  </p>
-</blockquote>
-<p>因此 CDN 這邊說明 Primaitive vaule 是不可變的   </p>
-<h4 id="可變"><a href="#可變" class="headerlink" title="可變"></a>可變</h4><p>舉 object 來看 mutable    </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1.</span> <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span><span class="token number">1</span> <span class="token punctuation">&#125;</span>
-<span class="token number">2.</span> <span class="token keyword">var</span> obj2 <span class="token operator">=</span> obj 
-<span class="token number">3.</span> obj2<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">2</span>
-<span class="token number">4.</span> obj<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">0</span>
-<span class="token number">5.</span> obj2<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>必須先知道 Object 是儲存記憶體的位置<br>並非只有單純的值  </p>
-<ol>
-<li>(1)新建立一個 obj 實際是建立了一個記憶體<br>例如是 <code>0x01</code></li>
-<li>(2) 新物件 obj2 =  obj<br> obj 跟 obj2 是指向同一個記憶體位置  </li>
-<li>(3) obj2 改變 a 的值， <strong><code>obj 的 a 也會一同被改變</code></strong><br> 也就是 <code>obj2 = &#123;a : 2&#125; ,obj = &#123;a : 2&#125;</code>   <blockquote>
-<p>改變的是同一個記憶體位置<br>obj2 的 記憶體位置也是 <code>0x01</code><br>兩者指向的是同一個，因此改變其中一個就會通通改變  </p>
-</blockquote>
-</li>
-</ol>
-<ul>
-<li>列出跟 Primative vaule 差別  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span>
-<span class="token keyword">var</span> b <span class="token operator">=</span> a
-b <span class="token operator">=</span> <span class="token number">1</span>
-<span class="token comment">//請問 b = ?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-答案 <strong><code>b = 1 ,a = 2</code></strong><br>這邊我們可以知道這邊指的是賦值<br>並非指向同一個記憶體   </li>
-</ul>
-<ol start="4">
-<li>因此到 (4) 再看一次 <code>obj = &#123;a : 0&#125; ,obj = &#123;a : 0&#125;</code>    </li>
-<li>(5)  obj2 多新增一個 b ，但 obj 並不會新增<br>這邊 obj 已經是另一個新的記憶體 <code>0x02</code><br>代表兩者已經不一樣了<br><code>obj = &#123;a : 0&#125; ,obj = &#123;a : 0 ,b : 2&#125;</code>      </li>
-</ol>
-<p>關於 <strong>淺拷貝與深拷貝</strong> 參考可以看這篇  </p>
-<blockquote>
-<p><a href="https://blog.huli.tw/2018/06/23/javascript-call-by-value-or-reference/">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？ - Huli</a></p>
-</blockquote>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>之前在使用物件時<br>常常不知道為什麼會突然改到原物件<br>我以為的拷貝結果不是拷貝 :O<br>接觸更深後才知道<br>要複製可以使用展開的方式<br>像這樣  </p>
-<pre><code class="javascript">  var obj = &#123;
-    a:1,
-    b:2
-  &#125;
-  var obj2 = &#123;...obj&#125;
-</code></pre>
-<p>再改動 obj2 值就不會影響 obj 了  </p>
-<p>基礎篇章都只是記錄小東西<br>更新的不快<br>繼續學習 ! GOGO  </p>
-<hr>
-<blockquote>
-<p>參考資料<br><a href="https://derek.coderbridge.io/2020/09/29/javascript-%E6%A0%B8%E5%BF%83-%E8%AE%8A%E6%95%B8%E8%88%87%E4%BB%96%E7%9A%84%E7%94%A2%E5%9C%B0/">JavaScript 核心 - 變數與他們的產地 (coderbridge.io)</a>  </p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1728,6 +1728,189 @@ b <span class="token operator">=</span> <span class="token number">1</span>
       </tags>
   </entry>
   <entry>
+    <title>⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</title>
+    <url>/RosaBlog/Frontend/JavaScript/JavaScript_API_twitch/</url>
+    <content><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>紀錄串接 API 的過程以及想法<br>事不宜遲，直接上手吧 !  </p>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><h3 id="事前預備"><a href="#事前預備" class="headerlink" title="事前預備"></a>事前預備</h3><ol>
+<li>創建帳號進入 twitch dev<br> <a href="https://dev.twitch.tv/">Home | Twitch Developers</a></li>
+<li>建立 app<br> <img data-src="https://dsm01pap006files.storage.live.com/y4mh-F93GYryYifP-KaHhsLHMLdlRFmH8aH0JC7-ViFhkXZ5hSaibFN5NpsXMprq0qqLd3X4czumdP1D_dKDvbv0iFjtMYWWZl9eMO0DiXLs5wRAU5e7hJUIx6Xnmc0p5DIOWbB31h37gq-deaq9Dx8edWnlXXdJhLmSyCq-x6YqkUiWEg2sngSnn3iCMw3gj5r?width=660&height=379&cropmode=none"><br> 填上 app 名稱以及 app 應用地方  </li>
+</ol>
+<ul>
+<li><code>OAuth</code> 開發階段可設為本機<br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mt-abtC6iaRNJOcL06xmknc_DuRdRzrfQP2uyGOYGjVMCT5wTWo3kaaohr9CSO-oX8ttudhoCYPVByDWhMDc8dHS_PZD4hYBs2CD7OH4V0y5oVSc5oSNMdiSsLbkZQEoNIcc-GR-LNEFZvcA_5KGnrrt-CIBYGsk5X5RbIou1jXLAeUUlSx6rXFsnr5ifXMBd?width=660&height=637&cropmode=none"><br>  設定完按儲存    </li>
+</ul>
+<h3 id="認證"><a href="#認證" class="headerlink" title="認證"></a>認證</h3><p>API 文件 : <a href="https://dev.twitch.tv/docs/api">Twitch API | Twitch Developers</a><br>Step 1 已經做完了所以直接跳 Step 2  </p>
+<ol>
+<li>透過 twitch cli 認證 app  <ul>
+<li>下載 cli 之前，先看自己的電腦系統<br>  因為我是 window 所以用 <a href="https://scoop.sh/">Scoop</a>  <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">iwr</span> <span class="token operator">-</span>useb get<span class="token punctuation">.</span>scoop<span class="token punctuation">.</span>sh <span class="token punctuation">|</span> <span class="token function">iex</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+再透過 Scoop 下載 twitch cli<br>→  <a href="https://github.com/twitchdev/twitch-cli#scoop">官方操作</a></li>
+</ul>
+ <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">scoop bucket <span class="token function">add</span> twitch https://github.com/twitchdev/scoop-bucket.git
+scoop <span class="token function">install</span> twitch-cli<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ol>
+<ul>
+<li>再來拿取 <strong>app-token</strong> 認證<br>  以防自己 cli 沒裝成功<br>  可以用 <strong>twitch version</strong> 來確認一下          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">twitch token<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  如果是第一次拿取 token<br>  會要求 <code>client-id</code> 跟 <code>client-secret</code><br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mG2G8j3XoHH9PQKBsVEt5iN7jDGaTfj4edFSEWc_5e3SGLo-eeXErIS_YuC8KAMtJp7d6sJa_kWfn6pTP08n5BnHC60oUFk2DC1V87ozkdR9uI-Fr60OnFBfgXIfJPZpm9D75EyIIz1L8aikwhZ0GT_AMWASyBv5q819n69I53hmp9ekGl3L2C4g0VyIckD4S?width=660&height=121&cropmode=none"><br>  來源是這裡<br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mdi7Nh5dMfPQ5xzSVtxSdnByfMY4LZWnKeCPaCfw-h2GWDXkXiq5bviTNls30NA8ACNG0Zq1NDiNEmeP9hwTLueF-GZtj13QR0eLFHiovrg6mXTjaapiuXFN9OGw0kcqywuRIlUr1UrgveD-uJYIryaNqV83W3toFb157Hko6Hhry98S5ucLULH5XcA2gOpkV?width=660&height=657&cropmode=none"><br>  輸入進去就會獲得一組 token<br>  先複製起來，待會會用到 !  </li>
+</ul>
+<blockquote>
+<p>twitch token 出現錯誤怎辦 ?<br><code>responded with an error while generating token</code><br><strong>莫驚莫慌莫害怕</strong><br>透過 <code>twitch configure</code><br>刷新設定再索取一次<br><img data-src="https://dsm01pap006files.storage.live.com/y4m5G8UcXoxPKOlkwNHqQT_XMLTpCR-o0mZ-MukKd3rYsfZIlReY4a4r0spvs413G12ssJf-JcSZLBdDxs1m4WL5m9K6uIhj6Tyf1-iLOSi1QcHl25_27HYeUav6X_yU0uWUx9Rmbp6jGFUTIcpb5PhCNHQBMn1gRvHWabo9pZsm5XqZ80ufADj_rexSeDSxtjh?width=660&height=145&cropmode=none">   </p>
+</blockquote>
+<p>官方有提到認證時效性的問題<br>過 60 天會失效<br>過期之後再重新設定一次 ~  </p>
+<h3 id="拿資料"><a href="#拿資料" class="headerlink" title="拿資料"></a>拿資料</h3><p>使用資料前先有辦法<strong>拿到資料</strong><br>所以必須了解 twitch api 的規則<br>→ <a href="https://dev.twitch.tv/docs/api/guide">Guide | Twitch Developers</a><br>→ <a href="https://dev.twitch.tv/docs/api/reference#get-streams">Reference | Twitch Developers</a>    </p>
+<p>規則 :   </p>
+<ol>
+<li>要加入請求 2 個標頭  <ul>
+<li><strong>client-id</strong>  </li>
+<li><strong>Authorization</strong>  </li>
+</ul>
+</li>
+<li>傳參數用 <code>&amp;</code> 串<br> 像這樣<br> <code>&amp;login=twitch&amp;login=twitchgaming</code>  </li>
+</ol>
+<p>接著來串目前正在串流的遊戲 LOL<br>動手之前先想好如何架構    </p>
+<h4 id="個人想法與流程"><a href="#個人想法與流程" class="headerlink" title="個人想法與流程"></a>個人想法與流程</h4><p>透過 game_name 來知道 game_id<br>再找 streams  </p>
+<ol>
+<li>拿到 Game id (data1)  </li>
+<li>拿到 data1.id<br> 找正在串流資料符合的遊戲之 data2  </li>
+<li>data2 中要用到的  <ul>
+<li>user_id  </li>
+<li>live_titile   </li>
+<li>thumbnail_img_url  </li>
+</ul>
+</li>
+<li>拿到 符合 data2.user_id 的 data3  </li>
+<li>data3 中  <ul>
+<li>找 data3_user_id 和 data2_user_id 一樣的  <ul>
+<li>data3_user_name  </li>
+<li>data3_user_profile_img_url  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>把資料展現在畫面<br> data中的 3-2,3-3，5-1-1,5-1-2<br> 最後出現在畫面上  </li>
+</ol>
+<h3 id="javascript-實際操作"><a href="#javascript-實際操作" class="headerlink" title="javascript 實際操作"></a>javascript 實際操作</h3><p>官方文件有範例知道取的資料格式<br>→ <a href="https://dev.twitch.tv/docs/api/reference#get-streams">Reference-streams | Twitch Developers</a>  </p>
+<p>使用 HTTP method 的 <code>GET</code> 來取得我們想要的資料    </p>
+<p>看一下 reference 可以查到什麼<br>query string 的參數有 <code>game</code><br>要的遊戲名稱是 <code>League of Legends</code><br>網址會轉成 <code>League%20of%20Legends</code>  </p>
+<p>因此在找的時候 api 的 url 是<br><code>https://api.twitch.tv/helix/streams?game=League%20of%20Legends</code>  </p>
+<p>直接輸入在網址會沒有回應<br>是因為 CORS 的問題<br>要加上 <code>標頭</code><br>並且透過 ajax 來存取  </p>
+<h4 id="前置設定"><a href="#前置設定" class="headerlink" title="前置設定"></a>前置設定</h4><p>把 id 跟 Authorization 設定成變數<br>jquery 的 ajax 為<code>$.ajax(&quot;網址&quot;,設定)</code><br>把設定內容寫在一起  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> clientID <span class="token operator">=</span> <span class="token string">"i9vpv94xpthipcxeo902aunlhw9940"</span>
+<span class="token keyword">const</span> token <span class="token operator">=</span> <span class="token string">"Bearer 1wcbnczsqjzp3675p5dngbxq19hh5d"</span>
+<span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token string">"https://api.twitch.tv/helix/"</span>
+
+<span class="token keyword">const</span> XhrSetting <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+ method<span class="token operator">:</span><span class="token string">"GET"</span><span class="token punctuation">,</span>
+ <span class="token function-variable function">beforeSend</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">xhr</span><span class="token punctuation">)</span>
+ <span class="token punctuation">&#123;</span>
+ 	xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'Client-ID'</span><span class="token punctuation">,</span> clientID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>setRequestHeader</code> : 用來設定 HTTP 的表頭請求，<code>XMLHttpRequest</code> 物件中的方法。   </li>
+</ul>
+<p>參考 :<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/setRequestHeader">XMLHttpRequest.setRequestHeader() - Web APIs | MDN (mozilla.org)</a></p>
+<h4 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h4><p>根據上面的架構先存取遊戲 id<br>以下都是使用 jquery    </p>
+<ul>
+<li>GetGames</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetGames</span><span class="token punctuation">(</span><span class="token parameter">gamename<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ 	$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token string">"games/?name="</span><span class="token operator">+</span>gamename<span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
+ 	<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ 	<span class="token function">callback</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>為什麼用 callback function ?<br>callback function 是可以把 B 函式<br>作為 A 函式的參數  </p>
+<p>這樣可以拿 GetGame 拿到的 response裡的 id 再去拿下一個資料  </p>
+</blockquote>
+<p>再來就是取得串流資料    </p>
+<ul>
+<li><p>GetStreams</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetStreams</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">streams/?game_id=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;first=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>limit<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>language<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
+ <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">streams</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	 <span class="token comment">/*
+	 	拿 userId 取頭貼
+		以及顯示在 html 
+	 */</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>GetUser : 串流的 userId 再去得個別資訊  </p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetUser</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token string">"users?id="</span><span class="token operator">+</span>data<span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
+ <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token function">callback</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>這裡的 response 是要顯示在 html 資訊的<br>所以這邊的函式是 <code>渲染畫面</code>  </p>
+</blockquote>
+<ul>
+<li><p>GetColumn : 顯示  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetColumn</span><span class="token punctuation">(</span><span class="token parameter">stream<span class="token punctuation">,</span>data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">const</span> userProfileImg <span class="token operator">=</span> data<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>profile_image_url<span class="token punctuation">;</span>
+ <span class="token keyword">const</span> stremsThumbnail <span class="token operator">=</span> stream<span class="token punctuation">.</span>thumbnail_url<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"-&#123;width&#125;x&#123;height&#125;"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span>
+ <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+ &lt;div class="card">
+	 &lt;div class="card_video">
+	 &lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stremsThumbnail<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" alt="">
+	 &lt;/div>
+	 &lt;div class="card_profile">
+		 &lt;div class="card_profile_img">
+		 &lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>userProfileImg<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" alt="">
+		 &lt;/div>
+		 &lt;div class="card_profile_content">
+			 &lt;div class="card_profile_content_title"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stream<span class="token punctuation">.</span>title<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/div>
+			 &lt;div class="card_profile_content_name"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stream<span class="token punctuation">.</span>user_name<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/div>
+		 &lt;/div>
+	 &lt;/div>
+ &lt;/div>
+ </span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>利用<code>‵‵</code> 包裹字串是 ES6 的語法<br>  可以塞多行文字，其帶入值用 <code>$&#123;value&#125;</code>    </p>
+</li>
+</ul>
+<p>接著合補完 <code>GetGames</code>  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetStreams</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+ $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">streams/?game_id=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;first=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>limit<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>language<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
+ <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">streams</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	 streams<span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">stream</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token function">GetUser</span><span class="token punctuation">(</span>stream<span class="token punctuation">.</span>user_id<span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			 <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id <span class="token operator">===</span> stream<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span>
+				 <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.row'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span> <span class="token function">GetColumn</span><span class="token punctuation">(</span>stream<span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+		 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最後在補上  </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> limit <span class="token operator">=</span> <span class="token number">20</span> <span class="token comment">// 資料數量</span>
+<span class="token keyword">const</span> language <span class="token operator">=</span> <span class="token string">"&amp;language=zh"</span> <span class="token comment">//語言系</span>
+<span class="token keyword">const</span> gameName <span class="token operator">=</span> <span class="token string">"League%20of%20Legends"</span>
+<span class="token function">GetGames</span><span class="token punctuation">(</span>gameName<span class="token punctuation">,</span>GetStreams<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>結果 :<br><img data-src="https://dsm01pap006files.storage.live.com/y4mzBThzpbO12L6GrjUQzYhQb-bPJf086nDiPhzZnbGQHRhXmro10FMYN4kHIfrwUCxHuwNb8L7ZqW8_1xhj5Uw7k7KLJG7TqHWnrginQRlFeMxpjarZfQgYkzfEqjEKHdyz7oYhvsftONoZ4e-e9sYzZL-E7-E02dOG6GfGV-HBOCrvsfYGTTIRlW6I-Xo9Wdx?width=1024&height=593&cropmode=none">    </li>
+</ul>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>透過實戰一次串接<br>就比較知道 API 內容在做什麼<br>從中也認識 RESTful API 的意義<br>還有 HTTP Method、StatusCode  </p>
+<p>實作時覺得結構上可以再更精簡<br>有些重複性的東西盡可能省略    </p>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>AJAX</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>⟬ 筆記 ⟭ CSS 預處理器 Sass 介紹&amp;安裝</title>
     <url>/RosaBlog/Frontend/CSS/CSS-Sass-01/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>CSS 寫到一個程度後<br>有點難以去維修<br>大量的大括號以及分號<br>使得架構越來越龐大<br>在我苦惱 CSS 跟我一樣肥的時候<br>剛好認識了 <strong>CSS 預處理器</strong>  </p>
@@ -2014,189 +2197,6 @@ sass <span class="token operator">--</span>version <span class="token operator">
       <tags>
         <tag>CSS</tag>
         <tag>Sass</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰</title>
-    <url>/RosaBlog/Frontend/JavaScript/JavaScript_API_twitch/</url>
-    <content><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>紀錄串接 API 的過程以及想法<br>事不宜遲，直接上手吧 !  </p>
-<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><h3 id="事前預備"><a href="#事前預備" class="headerlink" title="事前預備"></a>事前預備</h3><ol>
-<li>創建帳號進入 twitch dev<br> <a href="https://dev.twitch.tv/">Home | Twitch Developers</a></li>
-<li>建立 app<br> <img data-src="https://dsm01pap006files.storage.live.com/y4mh-F93GYryYifP-KaHhsLHMLdlRFmH8aH0JC7-ViFhkXZ5hSaibFN5NpsXMprq0qqLd3X4czumdP1D_dKDvbv0iFjtMYWWZl9eMO0DiXLs5wRAU5e7hJUIx6Xnmc0p5DIOWbB31h37gq-deaq9Dx8edWnlXXdJhLmSyCq-x6YqkUiWEg2sngSnn3iCMw3gj5r?width=660&height=379&cropmode=none"><br> 填上 app 名稱以及 app 應用地方  </li>
-</ol>
-<ul>
-<li><code>OAuth</code> 開發階段可設為本機<br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mt-abtC6iaRNJOcL06xmknc_DuRdRzrfQP2uyGOYGjVMCT5wTWo3kaaohr9CSO-oX8ttudhoCYPVByDWhMDc8dHS_PZD4hYBs2CD7OH4V0y5oVSc5oSNMdiSsLbkZQEoNIcc-GR-LNEFZvcA_5KGnrrt-CIBYGsk5X5RbIou1jXLAeUUlSx6rXFsnr5ifXMBd?width=660&height=637&cropmode=none"><br>  設定完按儲存    </li>
-</ul>
-<h3 id="認證"><a href="#認證" class="headerlink" title="認證"></a>認證</h3><p>API 文件 : <a href="https://dev.twitch.tv/docs/api">Twitch API | Twitch Developers</a><br>Step 1 已經做完了所以直接跳 Step 2  </p>
-<ol>
-<li>透過 twitch cli 認證 app  <ul>
-<li>下載 cli 之前，先看自己的電腦系統<br>  因為我是 window 所以用 <a href="https://scoop.sh/">Scoop</a>  <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">iwr</span> <span class="token operator">-</span>useb get<span class="token punctuation">.</span>scoop<span class="token punctuation">.</span>sh <span class="token punctuation">|</span> <span class="token function">iex</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-再透過 Scoop 下載 twitch cli<br>→  <a href="https://github.com/twitchdev/twitch-cli#scoop">官方操作</a></li>
-</ul>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">scoop bucket <span class="token function">add</span> twitch https://github.com/twitchdev/scoop-bucket.git
-scoop <span class="token function">install</span> twitch-cli<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-</ol>
-<ul>
-<li>再來拿取 <strong>app-token</strong> 認證<br>  以防自己 cli 沒裝成功<br>  可以用 <strong>twitch version</strong> 來確認一下          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">twitch token<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-  如果是第一次拿取 token<br>  會要求 <code>client-id</code> 跟 <code>client-secret</code><br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mG2G8j3XoHH9PQKBsVEt5iN7jDGaTfj4edFSEWc_5e3SGLo-eeXErIS_YuC8KAMtJp7d6sJa_kWfn6pTP08n5BnHC60oUFk2DC1V87ozkdR9uI-Fr60OnFBfgXIfJPZpm9D75EyIIz1L8aikwhZ0GT_AMWASyBv5q819n69I53hmp9ekGl3L2C4g0VyIckD4S?width=660&height=121&cropmode=none"><br>  來源是這裡<br>  <img data-src="https://dsm01pap006files.storage.live.com/y4mdi7Nh5dMfPQ5xzSVtxSdnByfMY4LZWnKeCPaCfw-h2GWDXkXiq5bviTNls30NA8ACNG0Zq1NDiNEmeP9hwTLueF-GZtj13QR0eLFHiovrg6mXTjaapiuXFN9OGw0kcqywuRIlUr1UrgveD-uJYIryaNqV83W3toFb157Hko6Hhry98S5ucLULH5XcA2gOpkV?width=660&height=657&cropmode=none"><br>  輸入進去就會獲得一組 token<br>  先複製起來，待會會用到 !  </li>
-</ul>
-<blockquote>
-<p>twitch token 出現錯誤怎辦 ?<br><code>responded with an error while generating token</code><br><strong>莫驚莫慌莫害怕</strong><br>透過 <code>twitch configure</code><br>刷新設定再索取一次<br><img data-src="https://dsm01pap006files.storage.live.com/y4m5G8UcXoxPKOlkwNHqQT_XMLTpCR-o0mZ-MukKd3rYsfZIlReY4a4r0spvs413G12ssJf-JcSZLBdDxs1m4WL5m9K6uIhj6Tyf1-iLOSi1QcHl25_27HYeUav6X_yU0uWUx9Rmbp6jGFUTIcpb5PhCNHQBMn1gRvHWabo9pZsm5XqZ80ufADj_rexSeDSxtjh?width=660&height=145&cropmode=none">   </p>
-</blockquote>
-<p>官方有提到認證時效性的問題<br>過 60 天會失效<br>過期之後再重新設定一次 ~  </p>
-<h3 id="拿資料"><a href="#拿資料" class="headerlink" title="拿資料"></a>拿資料</h3><p>使用資料前先有辦法<strong>拿到資料</strong><br>所以必須了解 twitch api 的規則<br>→ <a href="https://dev.twitch.tv/docs/api/guide">Guide | Twitch Developers</a><br>→ <a href="https://dev.twitch.tv/docs/api/reference#get-streams">Reference | Twitch Developers</a>    </p>
-<p>規則 :   </p>
-<ol>
-<li>要加入請求 2 個標頭  <ul>
-<li><strong>client-id</strong>  </li>
-<li><strong>Authorization</strong>  </li>
-</ul>
-</li>
-<li>傳參數用 <code>&amp;</code> 串<br> 像這樣<br> <code>&amp;login=twitch&amp;login=twitchgaming</code>  </li>
-</ol>
-<p>接著來串目前正在串流的遊戲 LOL<br>動手之前先想好如何架構    </p>
-<h4 id="個人想法與流程"><a href="#個人想法與流程" class="headerlink" title="個人想法與流程"></a>個人想法與流程</h4><p>透過 game_name 來知道 game_id<br>再找 streams  </p>
-<ol>
-<li>拿到 Game id (data1)  </li>
-<li>拿到 data1.id<br> 找正在串流資料符合的遊戲之 data2  </li>
-<li>data2 中要用到的  <ul>
-<li>user_id  </li>
-<li>live_titile   </li>
-<li>thumbnail_img_url  </li>
-</ul>
-</li>
-<li>拿到 符合 data2.user_id 的 data3  </li>
-<li>data3 中  <ul>
-<li>找 data3_user_id 和 data2_user_id 一樣的  <ul>
-<li>data3_user_name  </li>
-<li>data3_user_profile_img_url  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>把資料展現在畫面<br> data中的 3-2,3-3，5-1-1,5-1-2<br> 最後出現在畫面上  </li>
-</ol>
-<h3 id="javascript-實際操作"><a href="#javascript-實際操作" class="headerlink" title="javascript 實際操作"></a>javascript 實際操作</h3><p>官方文件有範例知道取的資料格式<br>→ <a href="https://dev.twitch.tv/docs/api/reference#get-streams">Reference-streams | Twitch Developers</a>  </p>
-<p>使用 HTTP method 的 <code>GET</code> 來取得我們想要的資料    </p>
-<p>看一下 reference 可以查到什麼<br>query string 的參數有 <code>game</code><br>要的遊戲名稱是 <code>League of Legends</code><br>網址會轉成 <code>League%20of%20Legends</code>  </p>
-<p>因此在找的時候 api 的 url 是<br><code>https://api.twitch.tv/helix/streams?game=League%20of%20Legends</code>  </p>
-<p>直接輸入在網址會沒有回應<br>是因為 CORS 的問題<br>要加上 <code>標頭</code><br>並且透過 ajax 來存取  </p>
-<h4 id="前置設定"><a href="#前置設定" class="headerlink" title="前置設定"></a>前置設定</h4><p>把 id 跟 Authorization 設定成變數<br>jquery 的 ajax 為<code>$.ajax(&quot;網址&quot;,設定)</code><br>把設定內容寫在一起  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> clientID <span class="token operator">=</span> <span class="token string">"i9vpv94xpthipcxeo902aunlhw9940"</span>
-<span class="token keyword">const</span> token <span class="token operator">=</span> <span class="token string">"Bearer 1wcbnczsqjzp3675p5dngbxq19hh5d"</span>
-<span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token string">"https://api.twitch.tv/helix/"</span>
-
-<span class="token keyword">const</span> XhrSetting <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
- method<span class="token operator">:</span><span class="token string">"GET"</span><span class="token punctuation">,</span>
- <span class="token function-variable function">beforeSend</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">xhr</span><span class="token punctuation">)</span>
- <span class="token punctuation">&#123;</span>
- 	xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'Client-ID'</span><span class="token punctuation">,</span> clientID<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'Authorization'</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>setRequestHeader</code> : 用來設定 HTTP 的表頭請求，<code>XMLHttpRequest</code> 物件中的方法。   </li>
-</ul>
-<p>參考 :<br><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/setRequestHeader">XMLHttpRequest.setRequestHeader() - Web APIs | MDN (mozilla.org)</a></p>
-<h4 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h4><p>根據上面的架構先存取遊戲 id<br>以下都是使用 jquery    </p>
-<ul>
-<li>GetGames</li>
-</ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetGames</span><span class="token punctuation">(</span><span class="token parameter">gamename<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- 	$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token string">"games/?name="</span><span class="token operator">+</span>gamename<span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
- 	<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- 	<span class="token function">callback</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">)</span>
- <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>為什麼用 callback function ?<br>callback function 是可以把 B 函式<br>作為 A 函式的參數  </p>
-<p>這樣可以拿 GetGame 拿到的 response裡的 id 再去拿下一個資料  </p>
-</blockquote>
-<p>再來就是取得串流資料    </p>
-<ul>
-<li><p>GetStreams</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetStreams</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">streams/?game_id=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;first=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>limit<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>language<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
- <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">streams</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	 <span class="token comment">/*
-	 	拿 userId 取頭貼
-		以及顯示在 html 
-	 */</span>
- <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>GetUser : 串流的 userId 再去得個別資訊  </p>
-</li>
-</ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetUser</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token string">"users?id="</span><span class="token operator">+</span>data<span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
- <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- <span class="token function">callback</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>這裡的 response 是要顯示在 html 資訊的<br>所以這邊的函式是 <code>渲染畫面</code>  </p>
-</blockquote>
-<ul>
-<li><p>GetColumn : 顯示  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetColumn</span><span class="token punctuation">(</span><span class="token parameter">stream<span class="token punctuation">,</span>data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
- <span class="token keyword">const</span> userProfileImg <span class="token operator">=</span> data<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>profile_image_url<span class="token punctuation">;</span>
- <span class="token keyword">const</span> stremsThumbnail <span class="token operator">=</span> stream<span class="token punctuation">.</span>thumbnail_url<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"-&#123;width&#125;x&#123;height&#125;"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span>
- <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
- &lt;div class="card">
-	 &lt;div class="card_video">
-	 &lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stremsThumbnail<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" alt="">
-	 &lt;/div>
-	 &lt;div class="card_profile">
-		 &lt;div class="card_profile_img">
-		 &lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>userProfileImg<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">" alt="">
-		 &lt;/div>
-		 &lt;div class="card_profile_content">
-			 &lt;div class="card_profile_content_title"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stream<span class="token punctuation">.</span>title<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/div>
-			 &lt;div class="card_profile_content_name"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>stream<span class="token punctuation">.</span>user_name<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/div>
-		 &lt;/div>
-	 &lt;/div>
- &lt;/div>
- </span><span class="token template-punctuation string">`</span></span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>利用<code>‵‵</code> 包裹字串是 ES6 的語法<br>  可以塞多行文字，其帶入值用 <code>$&#123;value&#125;</code>    </p>
-</li>
-</ul>
-<p>接著合補完 <code>GetGames</code>  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">GetStreams</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-
- $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>url<span class="token operator">+</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">streams/?game_id=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;first=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>limit<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>language<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>XhrSetting<span class="token punctuation">)</span>
- <span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">streams</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	 streams<span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">stream</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-		<span class="token function">GetUser</span><span class="token punctuation">(</span>stream<span class="token punctuation">.</span>user_id<span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			 <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id <span class="token operator">===</span> stream<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span>
-				 <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.row'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span> <span class="token function">GetColumn</span><span class="token punctuation">(</span>stream<span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
-		 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-	 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>最後在補上  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> limit <span class="token operator">=</span> <span class="token number">20</span> <span class="token comment">// 資料數量</span>
-<span class="token keyword">const</span> language <span class="token operator">=</span> <span class="token string">"&amp;language=zh"</span> <span class="token comment">//語言系</span>
-<span class="token keyword">const</span> gameName <span class="token operator">=</span> <span class="token string">"League%20of%20Legends"</span>
-<span class="token function">GetGames</span><span class="token punctuation">(</span>gameName<span class="token punctuation">,</span>GetStreams<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>結果 :<br><img data-src="https://dsm01pap006files.storage.live.com/y4mzBThzpbO12L6GrjUQzYhQb-bPJf086nDiPhzZnbGQHRhXmro10FMYN4kHIfrwUCxHuwNb8L7ZqW8_1xhj5Uw7k7KLJG7TqHWnrginQRlFeMxpjarZfQgYkzfEqjEKHdyz7oYhvsftONoZ4e-e9sYzZL-E7-E02dOG6GfGV-HBOCrvsfYGTTIRlW6I-Xo9Wdx?width=1024&height=593&cropmode=none">    </li>
-</ul>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>透過實戰一次串接<br>就比較知道 API 內容在做什麼<br>從中也認識 RESTful API 的意義<br>還有 HTTP Method、StatusCode  </p>
-<p>實作時覺得結構上可以再更精簡<br>有些重複性的東西盡可能省略    </p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>AJAX</tag>
       </tags>
   </entry>
   <entry>
@@ -2937,6 +2937,59 @@ body
       </tags>
   </entry>
   <entry>
+    <title>CSSZeroToOneSeries | 04 | 交錯漂浮版</title>
+    <url>/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-04/</url>
+    <content><![CDATA[<h2 id="本篇成果"><a href="#本篇成果" class="headerlink" title="本篇成果"></a>本篇成果</h2><p><a href="https://codepen.io/shan473/pen/JjOZEBv">Codepen</a><br><img data-src="https://dsm01pap006files.storage.live.com/y4myrS3n9KEVx68j_Eae0KRrAYX2x2pFSw4IpKeLRuSQUsYqqzoIbIJ_TZHOxs96dBkjq9Or4jrv4cbmLYZJHh8XJf5UwXUa8Fst54z9sV0FCDctxAGmKDM3WK1sB4h8QsOqArz8DIpcZX4fpHELmYZC4xd994q-I2LITANufFsVCXWAneTdCRxsl7eG7xqpK_I?width=1024&height=1016&cropmode=none" alt="交錯漂浮版"></p>
+<h2 id="box-sizing-盒子計算方式"><a href="#box-sizing-盒子計算方式" class="headerlink" title="box-sizing 盒子計算方式"></a>box-sizing 盒子計算方式</h2><p>box sizing 有兩種屬性  </p>
+<ul>
+<li><code>content-box</code> : 只有內容 (width) 的大小，其他另外算 (padding、border)</li>
+<li><code>border-box</code> : 到 border 之前的都計算在內   </li>
+</ul>
+<p>在早期瀏覽器支援度沒那麼高，都會加上前綴 (prefix)<br>如果擔心使用的瀏覽器是否有支援也可以到 <a href="https://caniuse.com/?search=box-sizing">caniuse</a> 查詢  </p>
+<h2 id="flex-shirk-壓縮值"><a href="#flex-shirk-壓縮值" class="headerlink" title="flex-shirk : 壓縮值"></a>flex-shirk : 壓縮值</h2><p>父層設定 flex 後<br>預設內容會進行並排而且壓縮<br>壓縮值預設是 flex-shirk : 1<br>所有子項會照數目去壓縮寬度    </p>
+<p>如果是 0 的話 flex 不會幫你壓內容<br>而是解開束縛~  </p>
+<p>在這個排版中我們將兩個子元素 <code>.txt</code> 跟 <code>.pic</code>  width 設定 55%<br>整體容器的大小照理來說是 110%<br>但實際上預設最大值只有 100%<br>在還未設定 flex-shirk 之前，我們可以看到容器實際大小是 600 而不是 660<br>即使設定兩個子項都設 100% ，flex 還是只會將空間平均分配後縮壓   </p>
+<p>這時候只要加上 flex-shirk : 0，把壓縮比取消<br>正確的寬度就會是 660 了    </p>
+<p>這也是為什麼有人設定完 flex 後，想把剩餘空間平均撐開<br>填入 width 把原本內容還大的數值<br>因為 flex 自己就會幫你壓完算完    </p>
+<h2 id="nth-child-選兒子"><a href="#nth-child-選兒子" class="headerlink" title="nth-child : 選兒子"></a>nth-child : 選兒子</h2><p>跟 nth-of-type 很像，但是 nth-child 只認位置      </p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 翻譯 : 是第一個，而且 class 是 box 的 */</span>
+<span class="token selector">.box:nth-child(1)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> 
+<span class="token comment">/* 翻譯 : 是第一個，而且在 box 裡 */</span>
+<span class="token selector">.box :nth-child(1)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但如果配上 <code>&gt;</code> ，如果有孫子，並不包含在內，因為 <code>&gt;</code> 是指下一層而已，只包到兒子。 </p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>grand<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>father<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>father<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 被套入樣式的只有 grand 裡面第一個 fater，但是 child 不會有 */</span>
+<span class="token selector">.grand:nth-child(1)</span><span class="token punctuation">&#123;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也可以奇數、偶數    </p>
+<ul>
+<li>奇數 : <code>nth-child(odd)</code>  </li>
+<li>偶數 : <code>nth-child(even)</code>  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Frontend</category>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>CSSZeroToOneSeries</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSSZeroToOneSeries | 02 | 互動卡片</title>
     <url>/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-02/</url>
     <content><![CDATA[<h2 id="本篇成果"><a href="#本篇成果" class="headerlink" title="本篇成果"></a>本篇成果</h2><p><a href="https://codepen.io/shan473/pen/LYOdJjV">Codepen</a><br><img data-src="https://dsm01pap006files.storage.live.com/y4mBJbcOCZ4CF8WqJt5NbdIirs1thioqss6qbUqW3ReiXiJK9hPjNOthclckHXTZPXb1Y7DFw_kR-UQQmMYqzIWBfGLog7LogLdEVu4TEuI-iaz_91LgvrZteMyvlcB3mxOq4RxeHRiFqrz0JlQOD0O3tLstdIvdeXoDZD7l2saSLi84O8Vhu92m_J2Fd4O1rgh?width=1024&height=585&cropmode=none" alt="互動圖卡"></p>
@@ -3081,59 +3134,6 @@ body
   <span class="token property">box-shadow</span><span class="token punctuation">:</span> -3px 3px 0px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>0<span class="token punctuation">,</span>1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img data-src="https://dsm01pap006files.storage.live.com/y4mA2Jyaa1HqhHgBom2vW4U42LqOPi2CjxozjxzGJOYstpR76s_Cx5_QWCghJR8bAN3Ua6RYK3LK6lsHOGnMsv9JZ3iB_u8CW4RRpBXgO9hAj6S_ZStsvoVVms31KuLFAbBkI_8KIGN9IKeyeTKTm70222bEwW5LV0pbhJlidC1yHB78ona8fSGWn6lljvyM-ph?width=370&height=192&cropmode=none" alt="正確的三角陰影"></p>
-]]></content>
-      <categories>
-        <category>Frontend</category>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-        <tag>CSSZeroToOneSeries</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSSZeroToOneSeries | 04 | 交錯漂浮版</title>
-    <url>/RosaBlog/Frontend/CSS/CSSSeriesZeroToOne-04/</url>
-    <content><![CDATA[<h2 id="本篇成果"><a href="#本篇成果" class="headerlink" title="本篇成果"></a>本篇成果</h2><p><a href="https://codepen.io/shan473/pen/JjOZEBv">Codepen</a><br><img data-src="https://dsm01pap006files.storage.live.com/y4myrS3n9KEVx68j_Eae0KRrAYX2x2pFSw4IpKeLRuSQUsYqqzoIbIJ_TZHOxs96dBkjq9Or4jrv4cbmLYZJHh8XJf5UwXUa8Fst54z9sV0FCDctxAGmKDM3WK1sB4h8QsOqArz8DIpcZX4fpHELmYZC4xd994q-I2LITANufFsVCXWAneTdCRxsl7eG7xqpK_I?width=1024&height=1016&cropmode=none" alt="交錯漂浮版"></p>
-<h2 id="box-sizing-盒子計算方式"><a href="#box-sizing-盒子計算方式" class="headerlink" title="box-sizing 盒子計算方式"></a>box-sizing 盒子計算方式</h2><p>box sizing 有兩種屬性  </p>
-<ul>
-<li><code>content-box</code> : 只有內容 (width) 的大小，其他另外算 (padding、border)</li>
-<li><code>border-box</code> : 到 border 之前的都計算在內   </li>
-</ul>
-<p>在早期瀏覽器支援度沒那麼高，都會加上前綴 (prefix)<br>如果擔心使用的瀏覽器是否有支援也可以到 <a href="https://caniuse.com/?search=box-sizing">caniuse</a> 查詢  </p>
-<h2 id="flex-shirk-壓縮值"><a href="#flex-shirk-壓縮值" class="headerlink" title="flex-shirk : 壓縮值"></a>flex-shirk : 壓縮值</h2><p>父層設定 flex 後<br>預設內容會進行並排而且壓縮<br>壓縮值預設是 flex-shirk : 1<br>所有子項會照數目去壓縮寬度    </p>
-<p>如果是 0 的話 flex 不會幫你壓內容<br>而是解開束縛~  </p>
-<p>在這個排版中我們將兩個子元素 <code>.txt</code> 跟 <code>.pic</code>  width 設定 55%<br>整體容器的大小照理來說是 110%<br>但實際上預設最大值只有 100%<br>在還未設定 flex-shirk 之前，我們可以看到容器實際大小是 600 而不是 660<br>即使設定兩個子項都設 100% ，flex 還是只會將空間平均分配後縮壓   </p>
-<p>這時候只要加上 flex-shirk : 0，把壓縮比取消<br>正確的寬度就會是 660 了    </p>
-<p>這也是為什麼有人設定完 flex 後，想把剩餘空間平均撐開<br>填入 width 把原本內容還大的數值<br>因為 flex 自己就會幫你壓完算完    </p>
-<h2 id="nth-child-選兒子"><a href="#nth-child-選兒子" class="headerlink" title="nth-child : 選兒子"></a>nth-child : 選兒子</h2><p>跟 nth-of-type 很像，但是 nth-child 只認位置      </p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 翻譯 : 是第一個，而且 class 是 box 的 */</span>
-<span class="token selector">.box:nth-child(1)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> 
-<span class="token comment">/* 翻譯 : 是第一個，而且在 box 裡 */</span>
-<span class="token selector">.box :nth-child(1)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>但如果配上 <code>&gt;</code> ，如果有孫子，並不包含在內，因為 <code>&gt;</code> 是指下一層而已，只包到兒子。 </p>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>grand<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>father<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>father<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 被套入樣式的只有 grand 裡面第一個 fater，但是 child 不會有 */</span>
-<span class="token selector">.grand:nth-child(1)</span><span class="token punctuation">&#123;</span>
-  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-  <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>也可以奇數、偶數    </p>
-<ul>
-<li>奇數 : <code>nth-child(odd)</code>  </li>
-<li>偶數 : <code>nth-child(even)</code>  </li>
-</ul>
 ]]></content>
       <categories>
         <category>Frontend</category>
@@ -3829,6 +3829,266 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
+    <title>⟬ 紀錄 ⟭ Foresea畢業專題(III)─《Finalfinal.docx》</title>
+    <url>/RosaBlog/bookreport/Foresea-bookreport-III/</url>
+    <content><![CDATA[<h2 id="閱讀前注意"><a href="#閱讀前注意" class="headerlink" title="閱讀前注意"></a>閱讀前注意</h2><p>文長慎入，純心得，就當作看一個很長的故事吧。<br>我的文筆也沒有很好，若看不下去請自行左上角離開<br>其中個人主觀意識較重，若不喜勿入<br>如果你只想知道校外展我遇到了什麼事，可以到<strong>開花時刻</strong>這個快速連結<br>6/6 是表定的畢業典禮日期，疫情打亂了所有秩序😵，一年前誰能想到如此情況呢?<br>在家寫寫最後一篇廢文，這篇是大學的最後一篇。  </p>
+<span id="more"></span>  
+
+<h2 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h2><p>將分享我從 <strong>找組員 ⇒ 專題期間 ⇒ 專題結束後 ⇒ 校外展覽</strong> 的心路歷程。  </p>
+<h3 id="播下美好的理想種子"><a href="#播下美好的理想種子" class="headerlink" title="播下美好的理想種子"></a>播下美好的理想種子</h3><p>團隊合作理想上是件美好的事，實際上是非常要命的。<br>除了有共同的目標，後續的團隊經營更是關鍵，相信大家都有體會過。<br>畢業專題，就是個魔王大挑戰。一年下來，情誼不是更加牢固，就是散掉👿   </p>
+<blockquote>
+<p>還有 <strong>專案管理</strong> 請好好學</p>
+</blockquote>
+<h4 id="落地生根的地方"><a href="#落地生根的地方" class="headerlink" title="落地生根的地方"></a>落地生根的地方</h4><p>說到分組，我想大家<code>**&quot;預設&quot;**</code>應該是自己的好朋友，這是最正常不過的答案了<br>不管能力、共識默契，都無須重新培養，是最佳的選擇。<br>而我，眾所皆知是個邊緣人🤪，預設是 null (空值)，只有兩條路 被撿 跟 自己找。  </p>
+<h4 id="栽種的實力"><a href="#栽種的實力" class="headerlink" title="栽種的實力"></a>栽種的實力</h4><p>我認知自己的能力是普通且算平均的，在遊戲程式、網頁、動畫這些方面還堪用<br>加上當時想法只有 <strong>我想做一個互動作品</strong>。<br>起初我有向一些人談論過我的想法，但從未正式談論”成組”這件事。<br>因為一開始我在消極被動等待，等待有人撿我🥺<br>但最終…沒人撿😵，所以我自己成組去尋找人了。  </p>
+<blockquote>
+<p><strong>題外</strong> | 有時候我會好奇，大家會怎麼選擇…  </p>
+</blockquote>
+<ul>
+<li>🙉 現是蔡逼八，左看有潛力<del>但戰力還不穩</del>  </li>
+<li>🕵️‍♂️現有點實力與戰力<del>但是會吃老本</del><br>考量的中間因素有很多，例如 專案時程、個人特質、團隊性質等等，並沒有一個正確答案。  </li>
+</ul>
+<h4 id="鋪上土壤"><a href="#鋪上土壤" class="headerlink" title="鋪上土壤"></a><strong>鋪上土壤</strong></h4><p>慶幸的是，在升大三的暑假結束時，我順利找到3位組員。<br>當時不少人對我找的人有點疑惑，連組員們各自也不例外，都覺得很奇妙。  </p>
+<blockquote>
+<p>為什麼會找她呢 ? 而不是…  </p>
+</blockquote>
+<p>這三位確實是沒什麼合作過，4人也完全沒有在同一組過<br>如果問我當時在想什麼，可能是被附身了吧。  </p>
+<ul>
+<li>沒啦 ! 我當然是有跟3位好好說清楚找他們的原因。<br>我的專案所需的職位，分別是 <ul>
+<li>遊戲程式</li>
+<li>網頁</li>
+<li>美術</li>
+<li>動畫  </li>
+</ul>
+</li>
+</ul>
+<p>企劃則是所有人共寫，找人的標準來自上面的<strong>題外話</strong></p>
+<ul>
+<li>潛力者*2 + 戰力者*2  </li>
+</ul>
+<p>當然我是潛力者🥴，程式菜逼八。<br>綜合起來，需要在各方面是有互補的。<br>目標一致，但各自思考的面相是非常獨立的<br>不會太常出現<code>毫無理由</code>或<code>附和通過意見</code>的問題。  </p>
+<p>實際上到成組這期間，我等待回覆是非常煎熬。<br>當時最大的困難，是讓<strong>兩兩好友</strong>拆在不同組這個問題。  </p>
+<p>無時不刻，讓我覺得自己像卡通裡的個反派🕵️<br>如我上面所說的，普遍的<strong>預設值</strong>是好朋友。我並不是刻意將其拆散，單純是找符合我需求的<br>在邀請第一個人的時候，我意識到這個問題，並去詢問多個局外人，有的人說 :  </p>
+<blockquote>
+<p>「很不道德，你應該找兩個人討論，找一個這麼做是在破壞人家的友誼」<br>「為什麼兩個都不找進來 ? 問題不就解決了 ?」  </p>
+</blockquote>
+<p>也有人說 : </p>
+<blockquote>
+<p>「即使是朋友，目標也可能各自不同，選擇是個人自由，沒什麼問題」  </p>
+</blockquote>
+<p>中間，我不斷地告訴其中兩位，希望各自可以跟好朋友談談，要拒絕我也沒關係。<br>這個問題，在理想跟愧疚之間，糾結我整個暑假🥴。  </p>
+<h4 id="種子驚喜包"><a href="#種子驚喜包" class="headerlink" title="種子驚喜包"></a>種子驚喜包</h4><p>壞事是這樣的全新團隊需要磨合的點更多，只能祈禱這樣的組合一路順利。<br>好事是這裡將 從0共同成長，0偏頗、0規則，可塑性更高(我不確定是不是這樣講)<br>傳統來說就是新活力新氣象🥴<br>我想這3位都應該有預設心理:  </p>
+<blockquote>
+<p>投資一定有風險，<strong>團隊組成有凱也有雷</strong>，組成前應詳閱公開說明書。  </p>
+</blockquote>
+<p>很抱歉，我沒有給3位詳閱說明書的機會，不過非常謝謝她們答應當時的我<br>票選出主題、決定好指導老師，大家抱著美好的理想起步了<br>不過卻也是另一個噩夢的正式開始…  </p>
+<blockquote>
+<h5 id="分組題外話-綜觀大學生涯"><a href="#分組題外話-綜觀大學生涯" class="headerlink" title="分組題外話 | 綜觀大學生涯"></a><strong>分組題外話 | 綜觀大學生涯</strong></h5></blockquote>
+<p>坦白講，每次組隊就像是在玩踩地雷，但我踩得蠻歡樂的<br>不過記住同時<strong>自己對別人也是顆地雷</strong>。<br>每一堂的團體作業，我的組員組成都不會一樣。<br><del>如果不喜歡驚喜，建議不要這樣。</del><br>大學團體作業很多，可以跟朋友、跟能力強的、跟混分的等等，但先取決於自己的角色定位<br>四年裡，我加入過許多不同的團體組合裡，很好玩也很刺激<br>不談”合作愉不愉快”，跟平時不同群的人交流，讓我知道更多不同面向需要思考。<br>如果還有團體作業，我蠻建議跳脫平時的組，不過後果請自行負責。  </p>
+<h3 id="發育不良的樹"><a href="#發育不良的樹" class="headerlink" title="發育不良的樹"></a>發育不良的樹</h3><blockquote>
+<p><strong>理想很美滿，現實很骨感。</strong></p>
+</blockquote>
+<p>樹苗的成長，沒人保證能長得又大又直<br>專案的時程，沒人有十足把握在準確的時間完成😭</p>
+<h4 id="陸上颱風警報"><a href="#陸上颱風警報" class="headerlink" title="陸上颱風警報"></a>陸上颱風警報</h4><p>除了專題外，同時還有畢業展覽的事務正在進行。<br>我與組內的另一位組員分別擔任總、副召，要讓工作跟專題達平衡非常困難 😵<br>展覽籌備前期有很長時間都在討論與規劃，更棘手的是事務涉及多個組。<br>溝通與合作在磨合期是相當花費時間的。<br>若有重大事件，幾乎是要將我的專題停擺，先將另一邊止血。<br>這樣的問題，發生不少次，但也沒辦法，該解決就需要解決。<br>但每次專題一停擺，我很想跟專題組員切腹謝罪去了  </p>
+<h4 id="瘦弱的樹苗"><a href="#瘦弱的樹苗" class="headerlink" title="瘦弱的樹苗"></a><strong>瘦弱的樹苗</strong></h4><p>在升大四的暑假，我就已經陸續在寫遊戲中的程式<br>組內的大家也如火如荼的進行各自的進度。<br>偶爾會與指導教授定期的專案進度討論，但每每到這個環節，我很緊張也很尷尬。<br>因為我總是 是那個 <code>進度沒有達標</code> ，而且會說「<strong>相信我會完成</strong>」的人。<br>(什麼熱血笨蛋啦!)<br>說這句話的同時，我想讓大家安心，另外也是在為自己打氣，雖然聽起來很唬爛。  </p>
+<blockquote>
+<p>結果是什麼呢?  </p>
+</blockquote>
+<p>當然是我成了投資中最大的風險，成了團隊之雷，更成了一個打臉自己的人😰  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKsiKYyPeJlzwV7CX1cucK-W1yrWxB7UMDdHDDRZ1YUtZ4HVTwKmHqplY8i1LM4m-9jWGwMSJO8A-XZvQowN4_RitKSKr4D6sUklWxjrpStu0ymf0kn31zDMszPG5XJIQUjkx9hwR6-tJdUGqZmjZAZH-af_d3QALcqKdlENtWz44OYMugCHgCwDamgAVDaGz?width=256&height=256&cropmode=none"> </p>
+</center>   
+
+<p>當看到其他組員拿出一堆的進度，而我有時候因為程式問題卡住很長一段時間<br>大家不斷地在成長，只有我還在原地。我心裡開始迷惘，不知所措。<br>因為程式會寫就是會寫，按下執行就知道了，跑不出來就是寫的人的問題。<br>無疑地，當時超級菜雞般的程式能力，是完全無法支撐起整個專案。<br>即使我學習再學習，練習再練習，常常還是跑出令人絕望的 Error 與 BUG。 </p>
+<center>  
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mQV5G4B0IOVO5ESIMw1byLnoLNxteeWCaJpbfiH1hHi7iDWytdwQYwbyABQ2PXAWiEVgqJ80W68t8faBQDfnovvsaEMli2KKblFrMKmXVdC4rOykE9L3wG-TbgtKga_ZUweHjd7g8DpnqRfHcjXX83f4shg4axqWnYSc4B-2vw2cz82eoKUqmWGC0MisIoka8?width=256&height=174&cropmode=none"> </p>
+</center> 
+大家非常包容，知道我身兼畢展總召與擔任程式的部分比較繁重，都說沒關係  
+老實說，到最後我已經不知道大家是真的相信我，還是被我逼到不得不相信我了。  
+不論如何，專案時程不能變成無底洞，所以我告訴自己，一刻都不能怠惰。  
+至此，我開始跟日出報到:D...。  
+
+<h4 id="不間斷的夏秋季颱風"><a href="#不間斷的夏秋季颱風" class="headerlink" title="不間斷的夏秋季颱風"></a><strong>不間斷的夏秋季颱風</strong></h4><p>之前聽做專題的學長姊都說好幾天會做到日出。<br>我思考了一下🥴，Umm…年輕人，我還行啦👍<br>第一次做到看日出，我心想 :<br>「真感動，我認真到日出，程式修好就順了吧，日出再見了」  </p>
+<blockquote>
+<p><strong>沒想到，這一再見，真的每天再見面。</strong></p>
+</blockquote>
+<p>製作專題的當年9至12月，我每天都在看日出，少說也有3.5個月<br>日夜顛倒加上畢展總總事務，心理與生理狀況都開始亮起了紅燈。<br>我的焦慮值<strong>MAX</strong> ! 躁鬱值<strong>MAX</strong> ! 體重<strong>MAX</strong> !<br>生理期直接Bang不見🎉 !<br>經歷幾次的狂風暴雨，盆栽倒了，而我也被吹倒了🥀</p>
+<h4 id="長歪的樹"><a href="#長歪的樹" class="headerlink" title="長歪的樹"></a><strong>長歪的樹</strong></h4><blockquote>
+<p><strong>早上八點，晚安</strong>🌑<strong>；早上十一點，早安</strong>⛅</p>
+</blockquote>
+<p>不僅是專題的程式的問題，畢展的事同時也讓人心煩。<br>日復一日的熬夜，我開始對專題變得有點消極。<br>會對組員說 :<br>「<strong>我們可以提出概念性的東西，做出一兩關就好，不一定要完全做完…blabla</strong>」<br>到了專案進度討論，大家會告訴我，先去完成其他的關卡比較重要，小東西之後再細修<br>很不巧，A關卡與B關卡中間機制需要連動。當我完成A，再去完成B，換成A有問題了  </p>
+<p>◢▆▅▄▃ 崩╰(〒皿〒)╯潰 ▃▄▅▆◣  </p>
+<p>寫不出來，崩潰挾帶氣憤，我就會說「不然你來寫啊 !」<br><del>阿…容我回到過去揍自己一拳</del><br>氣憤中更多的是對自己做不到目標而感到失望。<br>最不幸的大概是家裡的娃娃們，全變成我的出氣筒，橫屍遍野。<br>早期對專題懷抱的熱情，已經被消磨成灰了。  </p>
+<h3 id="滿地枯葉"><a href="#滿地枯葉" class="headerlink" title="滿地枯葉"></a>滿地枯葉</h3><p>ˍ(:з」∠) 我…想…躺著休息</p>
+<h4 id="用力吸收水分的根"><a href="#用力吸收水分的根" class="headerlink" title="用力吸收水分的根"></a><strong>用力吸收水分的根</strong></h4><p>專題總共有4次報告，我一共上台3場。<br>最後2場，都是前一天熬滿夜把程式硬是弄出來，勉強弄好3-4關(但我們一共有6個關卡哦🥴)<br>組員們在報告前10分鐘，都還在幫忙我弄報告的大大小小事，非常感激不離不棄😭<br>因為遊戲進度是掌握在我手上，其他人是不太好說明遊戲新產出的部分<br>所以我報告是最適合的，我知道我才能把這邊的進度好好說明。<br>我想最緊張的不是我，而是指導教授跟組員們，每次都是在現場打開驚喜包🎁  </p>
+<center> 
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mMZgrK4sHXixsgQLTeCBVabRw0CPchkWizOj7WWxq8hivFiGPteNC2fxfW-aEwaNQRsJpNZ_3jTnNrvpZNDEpPrU4xQRYmNtUID4Y33HzwB_ERuYEA_RV7f9Z7xmA4wN7cCQQykhpTXWMXU-ad9tHCJzHY4Zv0rvX0mY3FbsjTkpwAsEJGtRSUs0E_oVPTjJv?width=256&height=145&cropmode=none">  </p>
+</center> 
+
+<ul>
+<li>大家心臟有沒有越變越大顆呢?  </li>
+</ul>
+<p>報告的結果，想當然爾，非常之差💩。<br>有一場，回想起來我都覺得很尷尬，因為沒有獲得什麼新回饋。<br>都是之前提過的，「美術很棒」、「網頁很棒」。<br>當下我在想我的部份是 <strong><code>無藥可救</code></strong> 了? 還是 <strong><code>出乎意料</code></strong> 呢?<br>不管怎樣，我知道我搞砸了。<br>無聲的回饋，間接說明我努力的還不夠。<br>最後一場更是慘不忍睹😢，因為遊戲沒有做完，僅有4關的試玩的影片片段。<br>組內成品還好還有網頁跟動畫。  </p>
+<center>   
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4m0Uxbx4G-Qpga3ZmbeaieLwy7-KWgS1l-MkPwVvICU2jdhRXq8vuWpHkHRPg29sHCKulQ0Vcd8Pv4aI1wc9ryicXDknqIKfMGUa2BdRJIW5lS-PURXmhp0KTGLAryvaLWU-BWd_sdZeBX60cGbjnKBpnt7tUz65KkyaA00OM8n5DTQNC6bM-lDhTIsxucS7FQ?width=256&height=256&cropmode=none">  </p>
+</center>   
+
+<ul>
+<li>當時被問到我是回答 :<br>黑丟，還沒做完 🙈 ，瞬間冷場。  </li>
+</ul>
+<h4 id="溺死的根"><a href="#溺死的根" class="headerlink" title="溺死的根"></a><strong>溺死的根</strong></h4><blockquote>
+<p><strong>努力≠有結果</strong></p>
+</blockquote>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKcfCrbkRMCaopIkNsDbQIgg1Y4-ezX4RFUSL8PRkmzz18gtPLsYpxpI5RRizytEQIuJFHEkGxfY2q_lInJdVmNvpJtlNPZW945yANIIg3PSRhqodcgqONnhsdSwrBTFvaEh2eFhXZz3VzPrjWjiDOljlKrhdOEQQ8dg5untwmPzQLLsqFGaNVfLAlcvNmnSA?width=660&height=440&cropmode=none"></p>
+<ul>
+<li>學習經驗曲線 </li>
+</ul>
+<p>大家都懂這個曲線，學習最難的，就是一開始陡~~~到攀不過的顛坡。<br>投入大量的時間與努力，獲得的成果卻是不如預期。<br>從我寫程式開始，毫無意外也遇到這個問題。<br>越寫不是越有成就，而是失望。  </p>
+<p>每天熬夜讀文件、看教學、反覆修修改改，執行後卻還是出BUG。<br>順利的話，1天可以寫出一關。遇到問題時，都可能要修到1個禮拜，甚至更久。<br>隨著時間，坐在電腦前已經不知道自己在做什麼了，會覺得這有什麼意義呢?<br>期間我推掉很多的社交活動，窩在家學習、學習、還是學習。  </p>
+<p>以前開電腦，很開心。現在開電腦，我只會想砸壞電腦。<br>一開機，我會問自己還要繼續嗎 ? 隨時放手，就一路爛也沒人能奈何了我💩  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mpRtrZKORO9rXvUtd4tm5-jhN5j27y0fiZAbcWEnbwsTKbGTNh2x16j3cKHajzxBTbvgtdZJlmClfnS0s8EjZJFXAebjHx0QnIxB48IlSgtecYllYxC9e0Kmi3obDdeEFRcMi2YHJXg6QMq5SaODO5i2VDIcigQDG-zASVtanwEvgEfgrtvlR5LHRETy5wo9L?width=256&height=256&cropmode=none">   </p>
+</center>
+
+<p>大家也爛 d(`･∀･)b  </p>
+<blockquote>
+<p><strong>要，當然要繼續。責任心告訴我不能就這樣。</strong>  </p>
+</blockquote>
+<p>堅持這樣的心情，一路到校內展，讓我做出第一版的  Foresea<br>不過是歪七扭八的Foresea<br>如果你在校內展玩到，我跟你說聲抱歉，你玩到一個非常失敗的遊戲。<br>當時的Foresea是一個跑不順，機制上一堆bug，架構鬆散的作品。  </p>
+<ul>
+<li><p><strong>關於Foresea ver1.0</strong><br>  美術、動畫、網站這些產出可以說相當的好。  </p>
+<p>  我會覺得校內展Foresea遊戲失敗的原因，<br>  在於我的能力沒辦法完好地展現企劃中的玩法與流程<br>  在11月的時候，我就做不下去了  </p>
+<p>  因為心裡始終無法認同自己做出來的作品<br>  更覺得自己浪費了這些美術圖，組員辛苦畫出來，而我沒有能力去展現出來。      </p>
+</li>
+</ul>
+<h4 id="軟爛的泥土"><a href="#軟爛的泥土" class="headerlink" title="軟爛的泥土"></a><strong>軟爛的泥土</strong></h4><p>因某些因素，當時有討論到<strong>要不要將專題報告延長兩周</strong>左右<br>但我知道再怎麼延，我還是無法完好地呈現出來<br>加上我的精神上非常抗拒，我想把報告結束、展覽結束，結束長久下來的熬夜。<br>當最後一場報告結束，  </p>
+<blockquote>
+<p><strong>「結束了，成品怎樣也沒關係吧?」<br>「即使有BUG，或瑕疵，再修也不會有什麼改變」</strong>  </p>
+</blockquote>
+<p>這些想法不斷湧現<br>但結果是我又一路從報告結束修到校內展，至少讓展覽可以順利展出幾關的原型。<br>校內展覽結束，本是專題的終點。<br>但對我來說，卻只是中繼點。    </p>
+<h3 id="新芽"><a href="#新芽" class="headerlink" title="新芽"></a>新芽</h3><p>一個新開始，不難；中斷的重新開始，更難。  </p>
+<h4 id="殘枝"><a href="#殘枝" class="headerlink" title="殘枝"></a><strong>殘枝</strong></h4><p>五月初是校外展，四月中旬是競賽報名截止，代表我必須在這之前將作品完成。<br>另外，我還有展覽總召的身分，越快到展日，這段期間是也是不能閒的🤯。<br>這幾個月，我每天都會打開電腦，開啟Unity，接著跑去躺在床上，看著娃娃，對自己說 :    </p>
+<blockquote>
+<p><strong>你這廢物，去工作，快去電腦前坐好</strong>  </p>
+</blockquote>
+<p>這是我每天的例行公事，我不是對自己喊加油、喊要堅持下去<br>我也不是斗M，沒有喜歡被罵的癖好。<br>一番精神喊話後，我會把Unity關掉，開啟Youtube開始看迷因，讓自己開心點。<br>我知道自己腦袋亂糟糟的，沒有動力做下去，也不知道從哪裡下手。  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4menHF2FwISc3qcsoKFfru0O3K4WnXG2sKH7YQf3DlgWHz7e7vX9SKqmkEnHWGlCtag_KgxWQlTRtH2XnB1jvSzoS4Ok0sdQW0MRaT45C72HUxmz8glJtmb0gRNeJaaRAMDnZli5MFocePYBkPNCmz6ZmaF6TB4i3h7oceMwtn5LqHfmaSOX9An81-M3Kwf80y?width=371&height=660&cropmode=none">  </p>
+</center>
+
+<center>Indeed. ┐(´д`)┌ 阿還真的就打出來了。</center>
+  
+
+<p>3月，這個模式還是繼續，只是對自己說的話更狠了。<br>期間我不只看大量的迷因，之前訂閱很多程式教學跟遊戲開發者的頻道，我也看了不少<br>偶爾看完，靈感一來就會重新釐清思緒，將遊戲的內容文件重新整理、修改<br>卡住了，又返回到床上，說一樣的話，再滾回到電腦前執行例行公事  </p>
+<h4 id="養分"><a href="#養分" class="headerlink" title="養分"></a><strong>養分</strong></h4><p>吸收新的知識，我的程式能力有逐漸成長，實際上到3月我還沒正式修改到遊戲的程式<br>大多是開新檔案練習。  </p>
+<p>準備的差不多後，我下定決心把遊戲中的程式碼全都砍了<br>就是把遊戲互動的部份全都歸零。這時候離競賽截止點還有一個月半。<br>我知道風險很高，況且我沒有多大的把握能做完，但我知道我必須做。  </p>
+<p>如果你還記得上一篇分享提到的<strong>程式耦合問題</strong>，我正是要解決這個問題<br>否則這個作品還是會中途運作崩潰、遊玩不順利，總總都會影響遊玩體驗。<br>更別說展覽3天，每天8小時。除了基本求能運作外，更要兼顧穩定。</p>
+<h4 id="重新發芽"><a href="#重新發芽" class="headerlink" title="重新發芽"></a><strong>重新發芽</strong></h4><p>一天天的特殊精神喊話，老實說也不是沒用處。<br>越喊會對自己的能力很氣憤，氣憤到很不甘心，不想只有這樣結束😠。<br>帶著這份不甘心，我每天瘋狂打著鍵盤，從早打到晚  </p>
+<p>因為住在家裡，要照顧好家裡的大小事，所以天天見日出的模式是不行的<br>4月初，我把原本的進度補回。(這麼快速的原因，回想一下學習經驗曲線)<br>因為要上繳競賽成品，一邊請組員幫我試玩，當然還是少不了很多的Bug。<br>平時學習的反饋在我製作上的錯誤，是越來越少，程式運作也變更流暢  </p>
+<h4 id="豪雨後的蟲災"><a href="#豪雨後的蟲災" class="headerlink" title="豪雨後的蟲災"></a><strong>豪雨後的蟲災</strong></h4><p>離繳件剩兩個禮拜，這時候，不幸的事情發生了。<br>在家準備晚飯，接到一通家人出車禍的電話，雖然沒有大礙，我依然失落了好幾天。<br>低落的心情，也影響我在製作上的速度，但我的手還是沒有停止。  </p>
+<p>直到繳件當日傍晚，剩餘一個關卡的BUG還沒修完，其餘的都能正常運作，<del>正當我以為。</del><br>我稍微放心地收拾書包，從圖書館騎車回家，趕緊洗完澡完成剩下的部分。<br>除了主程式外，還有企畫書，我事先有準備好文件，剩下一些急忙委託組員協力完成<br>晚上十點組員試玩到有出現嚴重的BUG，我不斷地測試，但始終想不到問題。    </p>
+<blockquote>
+<p>可怕的BUG，在第一關出現了。  </p>
+</blockquote>
+<p>總不能剛開始玩就出現BUG吧 !!!<br>我拋棄維修另一個關卡，瘋狂般的不斷測試與修改第一關的BUG<br>幾經測試都行不通，我開始崩潰了，發給組員 : <strong>我好想放棄</strong> 的訊息  </p>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4myqNuZwO1Lkh-WrEskpxQv17jgiR4x_fseebiLuEFCoZXz_2mkLLVm0F24iRaZiIyQyFzcyX6TB9MeN9Bv2Zd-9E8Y5Vi6wd0ehxgB0ZbLnj4RRaVBsQthX_pimMOTACjvdd9IaxvMYdUuwFASPwAA1LWwJ4BpCFkt3mopbP3DDhd7d8TF9X-ORT7kTny-JyJ?width=256&height=144&cropmode=none"><br>WTF  </p>
+</center>
+
+<p>後來冷靜了一會，終於把該死的BUG解決了。<br>其實Foresea這時依然不是完整的，我還是將它打包繳件去了<br>其中放視企畫書有一項可說明<code>未完成的部分</code>我詳實填上。<br>組內的其他作品都已經登陸完成，只剩遊戲的部分。  </p>
+<h4 id="雨後陽光"><a href="#雨後陽光" class="headerlink" title="雨後陽光"></a><strong>雨後陽光</strong></h4><p>最後一天，晚上十一點五十五分，最後一步了，我將企畫書上傳，始終無法成功<br>原因是官方的伺服器被塞爆了，最後一刻，全台各地的同學也正拼命地上傳。 </p>
+<p>五十八分，還是<strong>失敗</strong>。<br>五十九分，依然是<strong>失敗</strong>。<br>整點十二點，<strong>失敗</strong>。  </p>
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mKkIyZW8L8QaxhJSAjyR3MCYMR6YOK9vVc7n-ynHVNkNmhG3QHv01S3hEWWvux-r1RmoOXRvuFprp0HNqeo5HH9i-LJmuPSlzH-ikDLolCXkWF4ExQ0a6dBdi4zqY28mkZeZWm5EwAsY4JUQk_7YsAeB4shfxGQ5cp9ST-Esl-w46aoICsoY8hkCDDuuvgxZe?width=600&height=338&cropmode=none"></p>
+<center>絕望ing</center>  
+
+<p>我跟組員告訴這壞消息，遊戲組的項目是沒有參加了，我非常抱歉。<br>同時我也不放棄的將瀏覽器切到上一頁<br>反覆重試繼續上傳<br>直到十二點零五分  </p>
+<blockquote>
+<p>???? ，我發現上傳%數還會動  </p>
+</blockquote>
+<p>沒多久，上傳成功。<br>我急忙按送出，看見欄位狀態是完成的。  </p>
+<p>以為我累壞眼花了，我又反反覆覆刷新頁面20次，看到狀態依舊是完成。<br>我告訴組員，好像…報成功了。<br>關上電腦，我安心的吃起晚餐。<br>這一餐即使冷掉，還是很美味😌   </p>
+<h3 id="往更高處"><a href="#往更高處" class="headerlink" title="往更高處"></a><strong>往更高處</strong></h3><p>樹枝不會乖乖挺直往上生長，<br>可能躺得長、坐者長、趴著長，還是<del>八仙…</del><br>總之，一切就是出乎意料的發生。  </p>
+<h4 id="特級肥料"><a href="#特級肥料" class="headerlink" title="特級肥料"></a><strong>特級肥料</strong></h4><p>很匆忙又不完整的狀態下，我知道得獎或入圍機率很低<br>但我還是沒有停止修改Foresea。<br>繳件讓我獲得短暫的休息，隔天起床我還是跟往常一樣，嘎啦嘎拉地打著鍵盤<br>把握在展覽前完成Foresea，包含一些細節上的優化。  </p>
+<p>四月底，組員第一時間貼出我們入圍消息，我不敢置信，<del>因為我被暴雷了</del>。<br>完全出乎我意料之外，網頁入圍就很棒了，我不敢相信的是遊戲竟然也入圍。  </p>
+<p>開心了幾小時，我又回到電腦面前繼續修改。<br>這個消息把修BUG到快沒電的我，換上新的強勁電池，滿電開始運作。  </p>
+<h3 id="開花時刻"><a href="#開花時刻" class="headerlink" title="開花時刻"></a><strong>開花時刻</strong></h3><p>展覽前3日，扛著行李到高雄，準備展前布置。<br>白天到展場幫忙，傍晚我馬上回到旅館，打開電腦又敲起鍵盤<br>一敲又是到早上六點，八點又趕到會場布置。  </p>
+<p>直至展覽前一天，我還是沒睡，除了修遊戲之外，也在準備來客導覽的內容。<br>完成主程式輸出後，把預備用的電腦充飽電，等待著明天上戰場。  </p>
+<p>展覽第一天，我的電腦中邪了。<del>絕對不是毒。</del><br>前一天檢查還好好的電腦，早上拔掉充電線重新檢查檔案<br>電腦開機卻不斷進入藍屏，修復作業也無用，眼看都要八點了<br>我緊急叫上組員的預備機，才解決這件事。展覽前組內就有準備2-3台電腦  </p>
+<p>好消息是<br>我以為要幫服役5年的電腦舉辦喪禮了，經過CPR(重灌作業)起死回生了🥴  </p>
+<p>God，能讓我稍微輕鬆一些嗎OTZ。  </p>
+<p>第一天，首發導覽是我，為了提神，灌了咖啡就上陣了<br>展覽這段期間，遇見很多有趣的人，像是 </p>
+<ul>
+<li>👨‍🎓同樣是學生，會交流製作心得與校際之間的差別等等</li>
+<li>👨‍💻遇到開發者，會給予很有用的回饋建議，解惑我的問題</li>
+<li>👾遇到遊戲論壇廠商，提供後續成品的發展建議</li>
+</ul>
+<blockquote>
+<h4 id="關於學生"><a href="#關於學生" class="headerlink" title="關於學生"></a><strong>關於學生</strong></h4></blockquote>
+<p>遇到科系性質很像的學校，像是中教大的數位<br>非常活潑的跑來交流，說著我們系的教程是他們的基底😆<br>互相吐槽著學習遇到的好笑的事<br>後來還來個校際外交，邀請對方去的攤位做客XDD。<br>也有遇到很多厭世大學生，看著看著就會開始談心的也很多😆  </p>
+<p>既然是性質很像，不免去逛逛，交流一下。<br>中教大的作品目標導向非常明確，通常是專注在某種議題上去發想<br>成品也蠻完整的，種類也很多，有桌遊、電腦遊戲、網頁、平面等等<br>結合議題延伸的成品，讓內容很充實。<br>如果未來有什麼聯展，我覺得也是不錯的經驗。  </p>
+<blockquote>
+<h4 id="關於開發者"><a href="#關於開發者" class="headerlink" title="關於開發者"></a><strong>關於開發者</strong></h4></blockquote>
+<p>當時被問到 : </p>
+<ul>
+<li>製作這個專題對你的意義是什麼 ? 遇到最困難的是什麼 ?</li>
+<li>作品往後的發展你們是怎麼想的 ?</li>
+<li>議題只是為專題而生? 還是有什麼企圖心 ?</li>
+</ul>
+<p>我知道可以很滑溜的說，會將作品提供給某某單位做教學使用、更新成手機板供大眾用等等的<br>但我卻誠實地說 : </p>
+<p><strong>「對，專題一結束，這個作品也走向終點了。」</strong></p>
+<p>因為我也想知道 <strong>同屆學生裡之間的差別</strong> 到底在哪。  </p>
+<blockquote>
+<p>講解得很詳細，專題也很完整，但就是少了 <strong>商業化</strong> 的思考</p>
+</blockquote>
+<p>對方舉例了很多他自己怎麼將作品商業化的例子，<br>像是 推出季更DLC 、找網紅推廣試玩等等<br>這邊比較像是行銷面，開發方面就不細講了，比較吃團隊創意😵。  </p>
+<p>後來我才知道 他也是個學生同時也是個開發者。<br>但不難看出，在各展覽競賽獲獎的作品，行銷面確實也做得不錯，<br>甚至很早就覺得 <strong>這一定會得獎</strong>  </p>
+<p>很快的一天就結束了，展覽過程中也少不了BUG的存在😵<br>導覽時幾乎都被我搞笑地呼攏過去。整體來說導覽很好玩，甚至我都忘了我沒睡這件事。 </p>
+<p>這幾天嗑了很多的咖啡因，都是處在完全亢奮的狀態<br>其中一天我意識到我快不行了，於是就休息了一下。<br><del>就跟著跑去唱卡拉OK桑一下，主要讓自己的精神緩緩😵</del><br>每天回到旅館後，第一件事就是坐在床上修起BUG。<br>沒錯，又熬到天荒地老。<br>在展覽最後一天，修到剩下不影響運作的小BUG🥳  </p>
+<h3 id="高處"><a href="#高處" class="headerlink" title="高處"></a><strong>高處</strong></h3><p>最後一天，因為有入圍，下午就前往頒獎典禮看開獎。<br>如果你是未來想創業、想獲得獎項、獲得廠商青睞，我非常建議你去看頒獎典禮，是自由參加  </p>
+<p>頒獎時，會請不同領域的專家以及公司創始人來頒獎<br>同時也會講解 <strong>評比的方向、目前市場所需、以及他們最想要看見的(現今作品欠缺的是什麼)</strong><br>不少獎項是有從缺的，代表當屆是沒有到水準的，但就是會有那一兩個脫穎而出無疑是金獎的  </p>
+<p>這裡，會聽到 <strong>自己跟別人有多大的差別OTZ</strong>，不會只有是校系問題，有很多小校系也是有得獎<br>總之大家都是有機會的，取決於 <strong>你是不是有做到那些面向。</strong>  </p>
+<p>評審最常講到<strong>商業化</strong>這件事，以<a href="https://gnn.gamer.com.tw/detail.php?sn=214633"><strong>遊戲組金獎</strong></a>為例好了<br>劈頭說 <strong>這直接可以賣了</strong>，除了完整度很高，架構穩，Idea也是不可少的，更重要的是發展性<br>這類型的遊戲性高，往後更新的方向是非常廣的。  </p>
+<p>當然，不同類型有他獨特的地方，我想教育遊戲也是有自己的一片天，看要怎麼發展而已。<br>有興趣的話可以查查看歷屆獲獎作品。  </p>
+<p>這天，我覺得自己的能力很弱，看著頒獎，比不上這些優秀的同學，我很失落<br>但我也知道自己欠缺了什麼，之後會更加地努力💪。<br>三天的展覽，跟著回程搭的末班車一同結束了。  </p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>完整看完的人給你拍拍手👏👏👏<br>雖然沒有100%將時間投入製作，因為同時3-4月我在考駕照，還有準備5月初的多益<del>(職場預備用)</del><br>製作Foresea幾乎占滿我大學最後一年的生活，不過幸好我活過來了。<br>還好駕照過了，可惜英文最後近乎裸考上陣，考了個不是很滿意的分數，應該夠用啦🥴。<br>但我還是不會後悔啦。  </p>
+<p>沒有這些歷程，就不會有第二篇的程式分享文<br>更不會有雙入圍或校外評分獲獎那些結果。<br>最主要的還是組員們非常可靠，才有這些成就👍，危難時都能立即神救援。  </p>
+<p>雖然很多時刻，我只能跟別人說</p>
+<blockquote>
+<p><strong>抱歉，我真的笑不出來</strong>  </p>
+</blockquote>
+<p>很多心情，並沒有告訴組員、朋友、甚至是父母<br>我不太想讓人去跟著操心，這些 <strong>需要從自己改變的事</strong>。<br>這不是好方法，我知道😕，但這就是我。<br>有人告訴我，這種什麼都沒講的人很容易出事<br>放心啦我還在貼 memes 代表我沒事0v0b  </p>
+<p>曾經有人問我為什麼所有事情都要拼命做到100分 ? 有些事情根本不值得。 </p>
+<blockquote>
+<p><strong>是啊。我也很想知道到底是什麼驅使我這麼做。</strong></p>
+</blockquote>
+<p>有些一看，就知道我拼命的結果不會是滿意的，但我還是會做。<br>像是繪畫這件事，並不是我的專長，我曾熬夜花好幾天去完成一個作業<br>結果理所當然還是比設計強項的同學差個十萬八千里<br>但如果不做，我就不會知道自己極限到哪裡，也看不清楚自己。  </p>
+<p>還記得某堂課有抽彩虹卡，我抽到  </p>
+<blockquote>
+<p> <strong>「I am Me,and I am okay.」</strong>  </p>
+</blockquote>
+<center>
+
+<p><img data-src="https://chi01pap001files.storage.live.com/y4mdzIhAuXcAQuWuA69j7sXX5tId3C6_zCrp6xIZ8bwjmO423wbh6Sz5b3wrPDifwBIRIScg0_O61AXgf5TRJLBIIG0GpL3nH1xCK3Ng3awd1jnGLyvEWolPX8uhGaWK1NLmjNxuByu7AvEKEQRG9EJoq2aVWD3OixoT7oLPhBLq7_eIxRA9yxMNuMo4riMW1X0?width=256&height=172&cropmode=none">  </p>
+</center>
+
+<p>網路上的圖，我的忘記收在哪了<br>但我一直記得這句話<br>現在再看到真是一言難盡。 </p>
+<p>分享這些事，希望你也別遇到同樣的問題<br>要是遇到時也別氣餒，至少還有我這個<strong>廢出新高度</strong>的極端例子<br>讓你不會那麼快放棄🥴<br>好的，各位，掰掰了~ (´◓Д◔`)  </p>
+]]></content>
+      <categories>
+        <category>bookreport</category>
+      </categories>
+      <tags>
+        <tag>畢業專題</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>⟬ 筆記 ⟭ 初探 Git</title>
     <url>/RosaBlog/program/LearnAboutGit/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>新增一個新檔案的時候<br>你會好好命名放進資料夾理嗎?<br>還是就<code>「未命名-1」</code>先放著在桌面呢?  </p>
@@ -4244,266 +4504,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
       <tags>
         <tag>CommandLine</tag>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>⟬ 紀錄 ⟭ Foresea畢業專題(III)─《Finalfinal.docx》</title>
-    <url>/RosaBlog/bookreport/Foresea-bookreport-III/</url>
-    <content><![CDATA[<h2 id="閱讀前注意"><a href="#閱讀前注意" class="headerlink" title="閱讀前注意"></a>閱讀前注意</h2><p>文長慎入，純心得，就當作看一個很長的故事吧。<br>我的文筆也沒有很好，若看不下去請自行左上角離開<br>其中個人主觀意識較重，若不喜勿入<br>如果你只想知道校外展我遇到了什麼事，可以到<strong>開花時刻</strong>這個快速連結<br>6/6 是表定的畢業典禮日期，疫情打亂了所有秩序😵，一年前誰能想到如此情況呢?<br>在家寫寫最後一篇廢文，這篇是大學的最後一篇。  </p>
-<span id="more"></span>  
-
-<h2 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h2><p>將分享我從 <strong>找組員 ⇒ 專題期間 ⇒ 專題結束後 ⇒ 校外展覽</strong> 的心路歷程。  </p>
-<h3 id="播下美好的理想種子"><a href="#播下美好的理想種子" class="headerlink" title="播下美好的理想種子"></a>播下美好的理想種子</h3><p>團隊合作理想上是件美好的事，實際上是非常要命的。<br>除了有共同的目標，後續的團隊經營更是關鍵，相信大家都有體會過。<br>畢業專題，就是個魔王大挑戰。一年下來，情誼不是更加牢固，就是散掉👿   </p>
-<blockquote>
-<p>還有 <strong>專案管理</strong> 請好好學</p>
-</blockquote>
-<h4 id="落地生根的地方"><a href="#落地生根的地方" class="headerlink" title="落地生根的地方"></a>落地生根的地方</h4><p>說到分組，我想大家<code>**&quot;預設&quot;**</code>應該是自己的好朋友，這是最正常不過的答案了<br>不管能力、共識默契，都無須重新培養，是最佳的選擇。<br>而我，眾所皆知是個邊緣人🤪，預設是 null (空值)，只有兩條路 被撿 跟 自己找。  </p>
-<h4 id="栽種的實力"><a href="#栽種的實力" class="headerlink" title="栽種的實力"></a>栽種的實力</h4><p>我認知自己的能力是普通且算平均的，在遊戲程式、網頁、動畫這些方面還堪用<br>加上當時想法只有 <strong>我想做一個互動作品</strong>。<br>起初我有向一些人談論過我的想法，但從未正式談論”成組”這件事。<br>因為一開始我在消極被動等待，等待有人撿我🥺<br>但最終…沒人撿😵，所以我自己成組去尋找人了。  </p>
-<blockquote>
-<p><strong>題外</strong> | 有時候我會好奇，大家會怎麼選擇…  </p>
-</blockquote>
-<ul>
-<li>🙉 現是蔡逼八，左看有潛力<del>但戰力還不穩</del>  </li>
-<li>🕵️‍♂️現有點實力與戰力<del>但是會吃老本</del><br>考量的中間因素有很多，例如 專案時程、個人特質、團隊性質等等，並沒有一個正確答案。  </li>
-</ul>
-<h4 id="鋪上土壤"><a href="#鋪上土壤" class="headerlink" title="鋪上土壤"></a><strong>鋪上土壤</strong></h4><p>慶幸的是，在升大三的暑假結束時，我順利找到3位組員。<br>當時不少人對我找的人有點疑惑，連組員們各自也不例外，都覺得很奇妙。  </p>
-<blockquote>
-<p>為什麼會找她呢 ? 而不是…  </p>
-</blockquote>
-<p>這三位確實是沒什麼合作過，4人也完全沒有在同一組過<br>如果問我當時在想什麼，可能是被附身了吧。  </p>
-<ul>
-<li>沒啦 ! 我當然是有跟3位好好說清楚找他們的原因。<br>我的專案所需的職位，分別是 <ul>
-<li>遊戲程式</li>
-<li>網頁</li>
-<li>美術</li>
-<li>動畫  </li>
-</ul>
-</li>
-</ul>
-<p>企劃則是所有人共寫，找人的標準來自上面的<strong>題外話</strong></p>
-<ul>
-<li>潛力者*2 + 戰力者*2  </li>
-</ul>
-<p>當然我是潛力者🥴，程式菜逼八。<br>綜合起來，需要在各方面是有互補的。<br>目標一致，但各自思考的面相是非常獨立的<br>不會太常出現<code>毫無理由</code>或<code>附和通過意見</code>的問題。  </p>
-<p>實際上到成組這期間，我等待回覆是非常煎熬。<br>當時最大的困難，是讓<strong>兩兩好友</strong>拆在不同組這個問題。  </p>
-<p>無時不刻，讓我覺得自己像卡通裡的個反派🕵️<br>如我上面所說的，普遍的<strong>預設值</strong>是好朋友。我並不是刻意將其拆散，單純是找符合我需求的<br>在邀請第一個人的時候，我意識到這個問題，並去詢問多個局外人，有的人說 :  </p>
-<blockquote>
-<p>「很不道德，你應該找兩個人討論，找一個這麼做是在破壞人家的友誼」<br>「為什麼兩個都不找進來 ? 問題不就解決了 ?」  </p>
-</blockquote>
-<p>也有人說 : </p>
-<blockquote>
-<p>「即使是朋友，目標也可能各自不同，選擇是個人自由，沒什麼問題」  </p>
-</blockquote>
-<p>中間，我不斷地告訴其中兩位，希望各自可以跟好朋友談談，要拒絕我也沒關係。<br>這個問題，在理想跟愧疚之間，糾結我整個暑假🥴。  </p>
-<h4 id="種子驚喜包"><a href="#種子驚喜包" class="headerlink" title="種子驚喜包"></a>種子驚喜包</h4><p>壞事是這樣的全新團隊需要磨合的點更多，只能祈禱這樣的組合一路順利。<br>好事是這裡將 從0共同成長，0偏頗、0規則，可塑性更高(我不確定是不是這樣講)<br>傳統來說就是新活力新氣象🥴<br>我想這3位都應該有預設心理:  </p>
-<blockquote>
-<p>投資一定有風險，<strong>團隊組成有凱也有雷</strong>，組成前應詳閱公開說明書。  </p>
-</blockquote>
-<p>很抱歉，我沒有給3位詳閱說明書的機會，不過非常謝謝她們答應當時的我<br>票選出主題、決定好指導老師，大家抱著美好的理想起步了<br>不過卻也是另一個噩夢的正式開始…  </p>
-<blockquote>
-<h5 id="分組題外話-綜觀大學生涯"><a href="#分組題外話-綜觀大學生涯" class="headerlink" title="分組題外話 | 綜觀大學生涯"></a><strong>分組題外話 | 綜觀大學生涯</strong></h5></blockquote>
-<p>坦白講，每次組隊就像是在玩踩地雷，但我踩得蠻歡樂的<br>不過記住同時<strong>自己對別人也是顆地雷</strong>。<br>每一堂的團體作業，我的組員組成都不會一樣。<br><del>如果不喜歡驚喜，建議不要這樣。</del><br>大學團體作業很多，可以跟朋友、跟能力強的、跟混分的等等，但先取決於自己的角色定位<br>四年裡，我加入過許多不同的團體組合裡，很好玩也很刺激<br>不談”合作愉不愉快”，跟平時不同群的人交流，讓我知道更多不同面向需要思考。<br>如果還有團體作業，我蠻建議跳脫平時的組，不過後果請自行負責。  </p>
-<h3 id="發育不良的樹"><a href="#發育不良的樹" class="headerlink" title="發育不良的樹"></a>發育不良的樹</h3><blockquote>
-<p><strong>理想很美滿，現實很骨感。</strong></p>
-</blockquote>
-<p>樹苗的成長，沒人保證能長得又大又直<br>專案的時程，沒人有十足把握在準確的時間完成😭</p>
-<h4 id="陸上颱風警報"><a href="#陸上颱風警報" class="headerlink" title="陸上颱風警報"></a>陸上颱風警報</h4><p>除了專題外，同時還有畢業展覽的事務正在進行。<br>我與組內的另一位組員分別擔任總、副召，要讓工作跟專題達平衡非常困難 😵<br>展覽籌備前期有很長時間都在討論與規劃，更棘手的是事務涉及多個組。<br>溝通與合作在磨合期是相當花費時間的。<br>若有重大事件，幾乎是要將我的專題停擺，先將另一邊止血。<br>這樣的問題，發生不少次，但也沒辦法，該解決就需要解決。<br>但每次專題一停擺，我很想跟專題組員切腹謝罪去了  </p>
-<h4 id="瘦弱的樹苗"><a href="#瘦弱的樹苗" class="headerlink" title="瘦弱的樹苗"></a><strong>瘦弱的樹苗</strong></h4><p>在升大四的暑假，我就已經陸續在寫遊戲中的程式<br>組內的大家也如火如荼的進行各自的進度。<br>偶爾會與指導教授定期的專案進度討論，但每每到這個環節，我很緊張也很尷尬。<br>因為我總是 是那個 <code>進度沒有達標</code> ，而且會說「<strong>相信我會完成</strong>」的人。<br>(什麼熱血笨蛋啦!)<br>說這句話的同時，我想讓大家安心，另外也是在為自己打氣，雖然聽起來很唬爛。  </p>
-<blockquote>
-<p>結果是什麼呢?  </p>
-</blockquote>
-<p>當然是我成了投資中最大的風險，成了團隊之雷，更成了一個打臉自己的人😰  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKsiKYyPeJlzwV7CX1cucK-W1yrWxB7UMDdHDDRZ1YUtZ4HVTwKmHqplY8i1LM4m-9jWGwMSJO8A-XZvQowN4_RitKSKr4D6sUklWxjrpStu0ymf0kn31zDMszPG5XJIQUjkx9hwR6-tJdUGqZmjZAZH-af_d3QALcqKdlENtWz44OYMugCHgCwDamgAVDaGz?width=256&height=256&cropmode=none"> </p>
-</center>   
-
-<p>當看到其他組員拿出一堆的進度，而我有時候因為程式問題卡住很長一段時間<br>大家不斷地在成長，只有我還在原地。我心裡開始迷惘，不知所措。<br>因為程式會寫就是會寫，按下執行就知道了，跑不出來就是寫的人的問題。<br>無疑地，當時超級菜雞般的程式能力，是完全無法支撐起整個專案。<br>即使我學習再學習，練習再練習，常常還是跑出令人絕望的 Error 與 BUG。 </p>
-<center>  
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mQV5G4B0IOVO5ESIMw1byLnoLNxteeWCaJpbfiH1hHi7iDWytdwQYwbyABQ2PXAWiEVgqJ80W68t8faBQDfnovvsaEMli2KKblFrMKmXVdC4rOykE9L3wG-TbgtKga_ZUweHjd7g8DpnqRfHcjXX83f4shg4axqWnYSc4B-2vw2cz82eoKUqmWGC0MisIoka8?width=256&height=174&cropmode=none"> </p>
-</center> 
-大家非常包容，知道我身兼畢展總召與擔任程式的部分比較繁重，都說沒關係  
-老實說，到最後我已經不知道大家是真的相信我，還是被我逼到不得不相信我了。  
-不論如何，專案時程不能變成無底洞，所以我告訴自己，一刻都不能怠惰。  
-至此，我開始跟日出報到:D...。  
-
-<h4 id="不間斷的夏秋季颱風"><a href="#不間斷的夏秋季颱風" class="headerlink" title="不間斷的夏秋季颱風"></a><strong>不間斷的夏秋季颱風</strong></h4><p>之前聽做專題的學長姊都說好幾天會做到日出。<br>我思考了一下🥴，Umm…年輕人，我還行啦👍<br>第一次做到看日出，我心想 :<br>「真感動，我認真到日出，程式修好就順了吧，日出再見了」  </p>
-<blockquote>
-<p><strong>沒想到，這一再見，真的每天再見面。</strong></p>
-</blockquote>
-<p>製作專題的當年9至12月，我每天都在看日出，少說也有3.5個月<br>日夜顛倒加上畢展總總事務，心理與生理狀況都開始亮起了紅燈。<br>我的焦慮值<strong>MAX</strong> ! 躁鬱值<strong>MAX</strong> ! 體重<strong>MAX</strong> !<br>生理期直接Bang不見🎉 !<br>經歷幾次的狂風暴雨，盆栽倒了，而我也被吹倒了🥀</p>
-<h4 id="長歪的樹"><a href="#長歪的樹" class="headerlink" title="長歪的樹"></a><strong>長歪的樹</strong></h4><blockquote>
-<p><strong>早上八點，晚安</strong>🌑<strong>；早上十一點，早安</strong>⛅</p>
-</blockquote>
-<p>不僅是專題的程式的問題，畢展的事同時也讓人心煩。<br>日復一日的熬夜，我開始對專題變得有點消極。<br>會對組員說 :<br>「<strong>我們可以提出概念性的東西，做出一兩關就好，不一定要完全做完…blabla</strong>」<br>到了專案進度討論，大家會告訴我，先去完成其他的關卡比較重要，小東西之後再細修<br>很不巧，A關卡與B關卡中間機制需要連動。當我完成A，再去完成B，換成A有問題了  </p>
-<p>◢▆▅▄▃ 崩╰(〒皿〒)╯潰 ▃▄▅▆◣  </p>
-<p>寫不出來，崩潰挾帶氣憤，我就會說「不然你來寫啊 !」<br><del>阿…容我回到過去揍自己一拳</del><br>氣憤中更多的是對自己做不到目標而感到失望。<br>最不幸的大概是家裡的娃娃們，全變成我的出氣筒，橫屍遍野。<br>早期對專題懷抱的熱情，已經被消磨成灰了。  </p>
-<h3 id="滿地枯葉"><a href="#滿地枯葉" class="headerlink" title="滿地枯葉"></a>滿地枯葉</h3><p>ˍ(:з」∠) 我…想…躺著休息</p>
-<h4 id="用力吸收水分的根"><a href="#用力吸收水分的根" class="headerlink" title="用力吸收水分的根"></a><strong>用力吸收水分的根</strong></h4><p>專題總共有4次報告，我一共上台3場。<br>最後2場，都是前一天熬滿夜把程式硬是弄出來，勉強弄好3-4關(但我們一共有6個關卡哦🥴)<br>組員們在報告前10分鐘，都還在幫忙我弄報告的大大小小事，非常感激不離不棄😭<br>因為遊戲進度是掌握在我手上，其他人是不太好說明遊戲新產出的部分<br>所以我報告是最適合的，我知道我才能把這邊的進度好好說明。<br>我想最緊張的不是我，而是指導教授跟組員們，每次都是在現場打開驚喜包🎁  </p>
-<center> 
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mMZgrK4sHXixsgQLTeCBVabRw0CPchkWizOj7WWxq8hivFiGPteNC2fxfW-aEwaNQRsJpNZ_3jTnNrvpZNDEpPrU4xQRYmNtUID4Y33HzwB_ERuYEA_RV7f9Z7xmA4wN7cCQQykhpTXWMXU-ad9tHCJzHY4Zv0rvX0mY3FbsjTkpwAsEJGtRSUs0E_oVPTjJv?width=256&height=145&cropmode=none">  </p>
-</center> 
-
-<ul>
-<li>大家心臟有沒有越變越大顆呢?  </li>
-</ul>
-<p>報告的結果，想當然爾，非常之差💩。<br>有一場，回想起來我都覺得很尷尬，因為沒有獲得什麼新回饋。<br>都是之前提過的，「美術很棒」、「網頁很棒」。<br>當下我在想我的部份是 <strong><code>無藥可救</code></strong> 了? 還是 <strong><code>出乎意料</code></strong> 呢?<br>不管怎樣，我知道我搞砸了。<br>無聲的回饋，間接說明我努力的還不夠。<br>最後一場更是慘不忍睹😢，因為遊戲沒有做完，僅有4關的試玩的影片片段。<br>組內成品還好還有網頁跟動畫。  </p>
-<center>   
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4m0Uxbx4G-Qpga3ZmbeaieLwy7-KWgS1l-MkPwVvICU2jdhRXq8vuWpHkHRPg29sHCKulQ0Vcd8Pv4aI1wc9ryicXDknqIKfMGUa2BdRJIW5lS-PURXmhp0KTGLAryvaLWU-BWd_sdZeBX60cGbjnKBpnt7tUz65KkyaA00OM8n5DTQNC6bM-lDhTIsxucS7FQ?width=256&height=256&cropmode=none">  </p>
-</center>   
-
-<ul>
-<li>當時被問到我是回答 :<br>黑丟，還沒做完 🙈 ，瞬間冷場。  </li>
-</ul>
-<h4 id="溺死的根"><a href="#溺死的根" class="headerlink" title="溺死的根"></a><strong>溺死的根</strong></h4><blockquote>
-<p><strong>努力≠有結果</strong></p>
-</blockquote>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKcfCrbkRMCaopIkNsDbQIgg1Y4-ezX4RFUSL8PRkmzz18gtPLsYpxpI5RRizytEQIuJFHEkGxfY2q_lInJdVmNvpJtlNPZW945yANIIg3PSRhqodcgqONnhsdSwrBTFvaEh2eFhXZz3VzPrjWjiDOljlKrhdOEQQ8dg5untwmPzQLLsqFGaNVfLAlcvNmnSA?width=660&height=440&cropmode=none"></p>
-<ul>
-<li>學習經驗曲線 </li>
-</ul>
-<p>大家都懂這個曲線，學習最難的，就是一開始陡~~~到攀不過的顛坡。<br>投入大量的時間與努力，獲得的成果卻是不如預期。<br>從我寫程式開始，毫無意外也遇到這個問題。<br>越寫不是越有成就，而是失望。  </p>
-<p>每天熬夜讀文件、看教學、反覆修修改改，執行後卻還是出BUG。<br>順利的話，1天可以寫出一關。遇到問題時，都可能要修到1個禮拜，甚至更久。<br>隨著時間，坐在電腦前已經不知道自己在做什麼了，會覺得這有什麼意義呢?<br>期間我推掉很多的社交活動，窩在家學習、學習、還是學習。  </p>
-<p>以前開電腦，很開心。現在開電腦，我只會想砸壞電腦。<br>一開機，我會問自己還要繼續嗎 ? 隨時放手，就一路爛也沒人能奈何了我💩  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mpRtrZKORO9rXvUtd4tm5-jhN5j27y0fiZAbcWEnbwsTKbGTNh2x16j3cKHajzxBTbvgtdZJlmClfnS0s8EjZJFXAebjHx0QnIxB48IlSgtecYllYxC9e0Kmi3obDdeEFRcMi2YHJXg6QMq5SaODO5i2VDIcigQDG-zASVtanwEvgEfgrtvlR5LHRETy5wo9L?width=256&height=256&cropmode=none">   </p>
-</center>
-
-<p>大家也爛 d(`･∀･)b  </p>
-<blockquote>
-<p><strong>要，當然要繼續。責任心告訴我不能就這樣。</strong>  </p>
-</blockquote>
-<p>堅持這樣的心情，一路到校內展，讓我做出第一版的  Foresea<br>不過是歪七扭八的Foresea<br>如果你在校內展玩到，我跟你說聲抱歉，你玩到一個非常失敗的遊戲。<br>當時的Foresea是一個跑不順，機制上一堆bug，架構鬆散的作品。  </p>
-<ul>
-<li><p><strong>關於Foresea ver1.0</strong><br>  美術、動畫、網站這些產出可以說相當的好。  </p>
-<p>  我會覺得校內展Foresea遊戲失敗的原因，<br>  在於我的能力沒辦法完好地展現企劃中的玩法與流程<br>  在11月的時候，我就做不下去了  </p>
-<p>  因為心裡始終無法認同自己做出來的作品<br>  更覺得自己浪費了這些美術圖，組員辛苦畫出來，而我沒有能力去展現出來。      </p>
-</li>
-</ul>
-<h4 id="軟爛的泥土"><a href="#軟爛的泥土" class="headerlink" title="軟爛的泥土"></a><strong>軟爛的泥土</strong></h4><p>因某些因素，當時有討論到<strong>要不要將專題報告延長兩周</strong>左右<br>但我知道再怎麼延，我還是無法完好地呈現出來<br>加上我的精神上非常抗拒，我想把報告結束、展覽結束，結束長久下來的熬夜。<br>當最後一場報告結束，  </p>
-<blockquote>
-<p><strong>「結束了，成品怎樣也沒關係吧?」<br>「即使有BUG，或瑕疵，再修也不會有什麼改變」</strong>  </p>
-</blockquote>
-<p>這些想法不斷湧現<br>但結果是我又一路從報告結束修到校內展，至少讓展覽可以順利展出幾關的原型。<br>校內展覽結束，本是專題的終點。<br>但對我來說，卻只是中繼點。    </p>
-<h3 id="新芽"><a href="#新芽" class="headerlink" title="新芽"></a>新芽</h3><p>一個新開始，不難；中斷的重新開始，更難。  </p>
-<h4 id="殘枝"><a href="#殘枝" class="headerlink" title="殘枝"></a><strong>殘枝</strong></h4><p>五月初是校外展，四月中旬是競賽報名截止，代表我必須在這之前將作品完成。<br>另外，我還有展覽總召的身分，越快到展日，這段期間是也是不能閒的🤯。<br>這幾個月，我每天都會打開電腦，開啟Unity，接著跑去躺在床上，看著娃娃，對自己說 :    </p>
-<blockquote>
-<p><strong>你這廢物，去工作，快去電腦前坐好</strong>  </p>
-</blockquote>
-<p>這是我每天的例行公事，我不是對自己喊加油、喊要堅持下去<br>我也不是斗M，沒有喜歡被罵的癖好。<br>一番精神喊話後，我會把Unity關掉，開啟Youtube開始看迷因，讓自己開心點。<br>我知道自己腦袋亂糟糟的，沒有動力做下去，也不知道從哪裡下手。  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4menHF2FwISc3qcsoKFfru0O3K4WnXG2sKH7YQf3DlgWHz7e7vX9SKqmkEnHWGlCtag_KgxWQlTRtH2XnB1jvSzoS4Ok0sdQW0MRaT45C72HUxmz8glJtmb0gRNeJaaRAMDnZli5MFocePYBkPNCmz6ZmaF6TB4i3h7oceMwtn5LqHfmaSOX9An81-M3Kwf80y?width=371&height=660&cropmode=none">  </p>
-</center>
-
-<center>Indeed. ┐(´д`)┌ 阿還真的就打出來了。</center>
-  
-
-<p>3月，這個模式還是繼續，只是對自己說的話更狠了。<br>期間我不只看大量的迷因，之前訂閱很多程式教學跟遊戲開發者的頻道，我也看了不少<br>偶爾看完，靈感一來就會重新釐清思緒，將遊戲的內容文件重新整理、修改<br>卡住了，又返回到床上，說一樣的話，再滾回到電腦前執行例行公事  </p>
-<h4 id="養分"><a href="#養分" class="headerlink" title="養分"></a><strong>養分</strong></h4><p>吸收新的知識，我的程式能力有逐漸成長，實際上到3月我還沒正式修改到遊戲的程式<br>大多是開新檔案練習。  </p>
-<p>準備的差不多後，我下定決心把遊戲中的程式碼全都砍了<br>就是把遊戲互動的部份全都歸零。這時候離競賽截止點還有一個月半。<br>我知道風險很高，況且我沒有多大的把握能做完，但我知道我必須做。  </p>
-<p>如果你還記得上一篇分享提到的<strong>程式耦合問題</strong>，我正是要解決這個問題<br>否則這個作品還是會中途運作崩潰、遊玩不順利，總總都會影響遊玩體驗。<br>更別說展覽3天，每天8小時。除了基本求能運作外，更要兼顧穩定。</p>
-<h4 id="重新發芽"><a href="#重新發芽" class="headerlink" title="重新發芽"></a><strong>重新發芽</strong></h4><p>一天天的特殊精神喊話，老實說也不是沒用處。<br>越喊會對自己的能力很氣憤，氣憤到很不甘心，不想只有這樣結束😠。<br>帶著這份不甘心，我每天瘋狂打著鍵盤，從早打到晚  </p>
-<p>因為住在家裡，要照顧好家裡的大小事，所以天天見日出的模式是不行的<br>4月初，我把原本的進度補回。(這麼快速的原因，回想一下學習經驗曲線)<br>因為要上繳競賽成品，一邊請組員幫我試玩，當然還是少不了很多的Bug。<br>平時學習的反饋在我製作上的錯誤，是越來越少，程式運作也變更流暢  </p>
-<h4 id="豪雨後的蟲災"><a href="#豪雨後的蟲災" class="headerlink" title="豪雨後的蟲災"></a><strong>豪雨後的蟲災</strong></h4><p>離繳件剩兩個禮拜，這時候，不幸的事情發生了。<br>在家準備晚飯，接到一通家人出車禍的電話，雖然沒有大礙，我依然失落了好幾天。<br>低落的心情，也影響我在製作上的速度，但我的手還是沒有停止。  </p>
-<p>直到繳件當日傍晚，剩餘一個關卡的BUG還沒修完，其餘的都能正常運作，<del>正當我以為。</del><br>我稍微放心地收拾書包，從圖書館騎車回家，趕緊洗完澡完成剩下的部分。<br>除了主程式外，還有企畫書，我事先有準備好文件，剩下一些急忙委託組員協力完成<br>晚上十點組員試玩到有出現嚴重的BUG，我不斷地測試，但始終想不到問題。    </p>
-<blockquote>
-<p>可怕的BUG，在第一關出現了。  </p>
-</blockquote>
-<p>總不能剛開始玩就出現BUG吧 !!!<br>我拋棄維修另一個關卡，瘋狂般的不斷測試與修改第一關的BUG<br>幾經測試都行不通，我開始崩潰了，發給組員 : <strong>我好想放棄</strong> 的訊息  </p>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4myqNuZwO1Lkh-WrEskpxQv17jgiR4x_fseebiLuEFCoZXz_2mkLLVm0F24iRaZiIyQyFzcyX6TB9MeN9Bv2Zd-9E8Y5Vi6wd0ehxgB0ZbLnj4RRaVBsQthX_pimMOTACjvdd9IaxvMYdUuwFASPwAA1LWwJ4BpCFkt3mopbP3DDhd7d8TF9X-ORT7kTny-JyJ?width=256&height=144&cropmode=none"><br>WTF  </p>
-</center>
-
-<p>後來冷靜了一會，終於把該死的BUG解決了。<br>其實Foresea這時依然不是完整的，我還是將它打包繳件去了<br>其中放視企畫書有一項可說明<code>未完成的部分</code>我詳實填上。<br>組內的其他作品都已經登陸完成，只剩遊戲的部分。  </p>
-<h4 id="雨後陽光"><a href="#雨後陽光" class="headerlink" title="雨後陽光"></a><strong>雨後陽光</strong></h4><p>最後一天，晚上十一點五十五分，最後一步了，我將企畫書上傳，始終無法成功<br>原因是官方的伺服器被塞爆了，最後一刻，全台各地的同學也正拼命地上傳。 </p>
-<p>五十八分，還是<strong>失敗</strong>。<br>五十九分，依然是<strong>失敗</strong>。<br>整點十二點，<strong>失敗</strong>。  </p>
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mKkIyZW8L8QaxhJSAjyR3MCYMR6YOK9vVc7n-ynHVNkNmhG3QHv01S3hEWWvux-r1RmoOXRvuFprp0HNqeo5HH9i-LJmuPSlzH-ikDLolCXkWF4ExQ0a6dBdi4zqY28mkZeZWm5EwAsY4JUQk_7YsAeB4shfxGQ5cp9ST-Esl-w46aoICsoY8hkCDDuuvgxZe?width=600&height=338&cropmode=none"></p>
-<center>絕望ing</center>  
-
-<p>我跟組員告訴這壞消息，遊戲組的項目是沒有參加了，我非常抱歉。<br>同時我也不放棄的將瀏覽器切到上一頁<br>反覆重試繼續上傳<br>直到十二點零五分  </p>
-<blockquote>
-<p>???? ，我發現上傳%數還會動  </p>
-</blockquote>
-<p>沒多久，上傳成功。<br>我急忙按送出，看見欄位狀態是完成的。  </p>
-<p>以為我累壞眼花了，我又反反覆覆刷新頁面20次，看到狀態依舊是完成。<br>我告訴組員，好像…報成功了。<br>關上電腦，我安心的吃起晚餐。<br>這一餐即使冷掉，還是很美味😌   </p>
-<h3 id="往更高處"><a href="#往更高處" class="headerlink" title="往更高處"></a><strong>往更高處</strong></h3><p>樹枝不會乖乖挺直往上生長，<br>可能躺得長、坐者長、趴著長，還是<del>八仙…</del><br>總之，一切就是出乎意料的發生。  </p>
-<h4 id="特級肥料"><a href="#特級肥料" class="headerlink" title="特級肥料"></a><strong>特級肥料</strong></h4><p>很匆忙又不完整的狀態下，我知道得獎或入圍機率很低<br>但我還是沒有停止修改Foresea。<br>繳件讓我獲得短暫的休息，隔天起床我還是跟往常一樣，嘎啦嘎拉地打著鍵盤<br>把握在展覽前完成Foresea，包含一些細節上的優化。  </p>
-<p>四月底，組員第一時間貼出我們入圍消息，我不敢置信，<del>因為我被暴雷了</del>。<br>完全出乎我意料之外，網頁入圍就很棒了，我不敢相信的是遊戲竟然也入圍。  </p>
-<p>開心了幾小時，我又回到電腦面前繼續修改。<br>這個消息把修BUG到快沒電的我，換上新的強勁電池，滿電開始運作。  </p>
-<h3 id="開花時刻"><a href="#開花時刻" class="headerlink" title="開花時刻"></a><strong>開花時刻</strong></h3><p>展覽前3日，扛著行李到高雄，準備展前布置。<br>白天到展場幫忙，傍晚我馬上回到旅館，打開電腦又敲起鍵盤<br>一敲又是到早上六點，八點又趕到會場布置。  </p>
-<p>直至展覽前一天，我還是沒睡，除了修遊戲之外，也在準備來客導覽的內容。<br>完成主程式輸出後，把預備用的電腦充飽電，等待著明天上戰場。  </p>
-<p>展覽第一天，我的電腦中邪了。<del>絕對不是毒。</del><br>前一天檢查還好好的電腦，早上拔掉充電線重新檢查檔案<br>電腦開機卻不斷進入藍屏，修復作業也無用，眼看都要八點了<br>我緊急叫上組員的預備機，才解決這件事。展覽前組內就有準備2-3台電腦  </p>
-<p>好消息是<br>我以為要幫服役5年的電腦舉辦喪禮了，經過CPR(重灌作業)起死回生了🥴  </p>
-<p>God，能讓我稍微輕鬆一些嗎OTZ。  </p>
-<p>第一天，首發導覽是我，為了提神，灌了咖啡就上陣了<br>展覽這段期間，遇見很多有趣的人，像是 </p>
-<ul>
-<li>👨‍🎓同樣是學生，會交流製作心得與校際之間的差別等等</li>
-<li>👨‍💻遇到開發者，會給予很有用的回饋建議，解惑我的問題</li>
-<li>👾遇到遊戲論壇廠商，提供後續成品的發展建議</li>
-</ul>
-<blockquote>
-<h4 id="關於學生"><a href="#關於學生" class="headerlink" title="關於學生"></a><strong>關於學生</strong></h4></blockquote>
-<p>遇到科系性質很像的學校，像是中教大的數位<br>非常活潑的跑來交流，說著我們系的教程是他們的基底😆<br>互相吐槽著學習遇到的好笑的事<br>後來還來個校際外交，邀請對方去的攤位做客XDD。<br>也有遇到很多厭世大學生，看著看著就會開始談心的也很多😆  </p>
-<p>既然是性質很像，不免去逛逛，交流一下。<br>中教大的作品目標導向非常明確，通常是專注在某種議題上去發想<br>成品也蠻完整的，種類也很多，有桌遊、電腦遊戲、網頁、平面等等<br>結合議題延伸的成品，讓內容很充實。<br>如果未來有什麼聯展，我覺得也是不錯的經驗。  </p>
-<blockquote>
-<h4 id="關於開發者"><a href="#關於開發者" class="headerlink" title="關於開發者"></a><strong>關於開發者</strong></h4></blockquote>
-<p>當時被問到 : </p>
-<ul>
-<li>製作這個專題對你的意義是什麼 ? 遇到最困難的是什麼 ?</li>
-<li>作品往後的發展你們是怎麼想的 ?</li>
-<li>議題只是為專題而生? 還是有什麼企圖心 ?</li>
-</ul>
-<p>我知道可以很滑溜的說，會將作品提供給某某單位做教學使用、更新成手機板供大眾用等等的<br>但我卻誠實地說 : </p>
-<p><strong>「對，專題一結束，這個作品也走向終點了。」</strong></p>
-<p>因為我也想知道 <strong>同屆學生裡之間的差別</strong> 到底在哪。  </p>
-<blockquote>
-<p>講解得很詳細，專題也很完整，但就是少了 <strong>商業化</strong> 的思考</p>
-</blockquote>
-<p>對方舉例了很多他自己怎麼將作品商業化的例子，<br>像是 推出季更DLC 、找網紅推廣試玩等等<br>這邊比較像是行銷面，開發方面就不細講了，比較吃團隊創意😵。  </p>
-<p>後來我才知道 他也是個學生同時也是個開發者。<br>但不難看出，在各展覽競賽獲獎的作品，行銷面確實也做得不錯，<br>甚至很早就覺得 <strong>這一定會得獎</strong>  </p>
-<p>很快的一天就結束了，展覽過程中也少不了BUG的存在😵<br>導覽時幾乎都被我搞笑地呼攏過去。整體來說導覽很好玩，甚至我都忘了我沒睡這件事。 </p>
-<p>這幾天嗑了很多的咖啡因，都是處在完全亢奮的狀態<br>其中一天我意識到我快不行了，於是就休息了一下。<br><del>就跟著跑去唱卡拉OK桑一下，主要讓自己的精神緩緩😵</del><br>每天回到旅館後，第一件事就是坐在床上修起BUG。<br>沒錯，又熬到天荒地老。<br>在展覽最後一天，修到剩下不影響運作的小BUG🥳  </p>
-<h3 id="高處"><a href="#高處" class="headerlink" title="高處"></a><strong>高處</strong></h3><p>最後一天，因為有入圍，下午就前往頒獎典禮看開獎。<br>如果你是未來想創業、想獲得獎項、獲得廠商青睞，我非常建議你去看頒獎典禮，是自由參加  </p>
-<p>頒獎時，會請不同領域的專家以及公司創始人來頒獎<br>同時也會講解 <strong>評比的方向、目前市場所需、以及他們最想要看見的(現今作品欠缺的是什麼)</strong><br>不少獎項是有從缺的，代表當屆是沒有到水準的，但就是會有那一兩個脫穎而出無疑是金獎的  </p>
-<p>這裡，會聽到 <strong>自己跟別人有多大的差別OTZ</strong>，不會只有是校系問題，有很多小校系也是有得獎<br>總之大家都是有機會的，取決於 <strong>你是不是有做到那些面向。</strong>  </p>
-<p>評審最常講到<strong>商業化</strong>這件事，以<a href="https://gnn.gamer.com.tw/detail.php?sn=214633"><strong>遊戲組金獎</strong></a>為例好了<br>劈頭說 <strong>這直接可以賣了</strong>，除了完整度很高，架構穩，Idea也是不可少的，更重要的是發展性<br>這類型的遊戲性高，往後更新的方向是非常廣的。  </p>
-<p>當然，不同類型有他獨特的地方，我想教育遊戲也是有自己的一片天，看要怎麼發展而已。<br>有興趣的話可以查查看歷屆獲獎作品。  </p>
-<p>這天，我覺得自己的能力很弱，看著頒獎，比不上這些優秀的同學，我很失落<br>但我也知道自己欠缺了什麼，之後會更加地努力💪。<br>三天的展覽，跟著回程搭的末班車一同結束了。  </p>
-<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>完整看完的人給你拍拍手👏👏👏<br>雖然沒有100%將時間投入製作，因為同時3-4月我在考駕照，還有準備5月初的多益<del>(職場預備用)</del><br>製作Foresea幾乎占滿我大學最後一年的生活，不過幸好我活過來了。<br>還好駕照過了，可惜英文最後近乎裸考上陣，考了個不是很滿意的分數，應該夠用啦🥴。<br>但我還是不會後悔啦。  </p>
-<p>沒有這些歷程，就不會有第二篇的程式分享文<br>更不會有雙入圍或校外評分獲獎那些結果。<br>最主要的還是組員們非常可靠，才有這些成就👍，危難時都能立即神救援。  </p>
-<p>雖然很多時刻，我只能跟別人說</p>
-<blockquote>
-<p><strong>抱歉，我真的笑不出來</strong>  </p>
-</blockquote>
-<p>很多心情，並沒有告訴組員、朋友、甚至是父母<br>我不太想讓人去跟著操心，這些 <strong>需要從自己改變的事</strong>。<br>這不是好方法，我知道😕，但這就是我。<br>有人告訴我，這種什麼都沒講的人很容易出事<br>放心啦我還在貼 memes 代表我沒事0v0b  </p>
-<p>曾經有人問我為什麼所有事情都要拼命做到100分 ? 有些事情根本不值得。 </p>
-<blockquote>
-<p><strong>是啊。我也很想知道到底是什麼驅使我這麼做。</strong></p>
-</blockquote>
-<p>有些一看，就知道我拼命的結果不會是滿意的，但我還是會做。<br>像是繪畫這件事，並不是我的專長，我曾熬夜花好幾天去完成一個作業<br>結果理所當然還是比設計強項的同學差個十萬八千里<br>但如果不做，我就不會知道自己極限到哪裡，也看不清楚自己。  </p>
-<p>還記得某堂課有抽彩虹卡，我抽到  </p>
-<blockquote>
-<p> <strong>「I am Me,and I am okay.」</strong>  </p>
-</blockquote>
-<center>
-
-<p><img data-src="https://chi01pap001files.storage.live.com/y4mdzIhAuXcAQuWuA69j7sXX5tId3C6_zCrp6xIZ8bwjmO423wbh6Sz5b3wrPDifwBIRIScg0_O61AXgf5TRJLBIIG0GpL3nH1xCK3Ng3awd1jnGLyvEWolPX8uhGaWK1NLmjNxuByu7AvEKEQRG9EJoq2aVWD3OixoT7oLPhBLq7_eIxRA9yxMNuMo4riMW1X0?width=256&height=172&cropmode=none">  </p>
-</center>
-
-<p>網路上的圖，我的忘記收在哪了<br>但我一直記得這句話<br>現在再看到真是一言難盡。 </p>
-<p>分享這些事，希望你也別遇到同樣的問題<br>要是遇到時也別氣餒，至少還有我這個<strong>廢出新高度</strong>的極端例子<br>讓你不會那麼快放棄🥴<br>好的，各位，掰掰了~ (´◓Д◔`)  </p>
-]]></content>
-      <categories>
-        <category>bookreport</category>
-      </categories>
-      <tags>
-        <tag>畢業專題</tag>
       </tags>
   </entry>
   <entry>
