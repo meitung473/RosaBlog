@@ -8,7 +8,7 @@ categories:
     - CSS
 author: RosaHong
 date: 2022-03-25 14:05:44
-description:
+description: CSS切版練習 - 網頁頁尾版塊
 ---
 
 ## 本篇成果

@@ -8,7 +8,7 @@ categories:
     - CSS
 author: RosaHong
 date: 2022-03-25 12:31:10
-description:
+description: CSS切版練習 - 超通用版面
 ---
 
 ## 本篇成果

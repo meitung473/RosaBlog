@@ -123,7 +123,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
     # Replace the default image and set the url here.
-    url: /image/RosaBlog-LOGO.png
+    url: /images/RosaBlog-LOGO.png
     # If true, the avatar will be dispalyed in circle.
     rounded: false
     # If true, the avatar will be rotated with the cursor.
@@ -138,12 +138,12 @@ site_state: Posts
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
     GitHub: https://github.com/meitung473 || fab fa-github
-    聯絡我: mailto:yanshanhong23@gmail.com || fa fa-envelope
+    聯絡我: mailto:a8870506@gmail.com || fa fa-envelope
     #Weibo: https://weibo.com/yourname || fab fa-weibo
     #Google: https://plus.google.com/yourname || fab fa-google
     #Twitter: https://twitter.com/yourname || fab fa-twitter
     # 健忘雜記: https://www.facebook.com/RosaHongRecord/ || fab fa-facebook
-    #Rosa Hong: https://www.facebook.com/yanshan.hong1 || fa fa-user
+    Rosa Hong: https://www.facebook.com/yanshan.hong1 || fa fa-facebook
     #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
     #YouTube: https://youtube.com/yourname || fab fa-youtube
     #Instagram: https://instagram.com/yourname || fab fa-instagram
@@ -195,7 +195,7 @@ footer:
         # Icon name in Font Awesome. See: https://fontawesome.com/icons
         name: fa fa-heart
         # If you want to animate the icon, set it to true.
-        animated: true
+        animated: false
         # Change the color of icon, using Hex Code.
         color: "#ff0000"
 
@@ -643,7 +643,7 @@ rating:
 
 # AddThis Share. See: https://www.addthis.com
 # Go to https://www.addthis.com/dashboard to customize your tools.
-add_this_id: ra-60f2e6dc9749c91a
+add_this_id:
 
 # ---------------------------------------------------------------
 # Statistics and Analytics
@@ -809,7 +809,7 @@ mermaid:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-    enable: true
+    enable: false
     async: false
     transition:
         # All available transition variants: https://theme-next.js.org/animate/
