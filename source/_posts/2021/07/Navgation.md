@@ -1,8 +1,7 @@
 ---
-title: ⟬ 紀錄 ⟭ Unity UI Navigation ─ [尋找不見的按鈕]
+title: 紀錄 | Unity ─ UI Navigation 尋找不見的按鈕
 tags:
   - Unity
-  - UI
   - Event System
 categories:
   - Unity
@@ -45,19 +44,19 @@ Unity 會幫我們自動生成 Event System 這個物件
 ![](https://chi01pap001files.storage.live.com/y4mST6rqopQUEi6t6yz5eNJ6zUrND4Ljt8vOQMFh1c984h-H30bdnD4CLygkpxsGyfEOF1XORmpkFiplC5dVAk41QD3LsU7qGOsXDTdEDu65Ao_zDfCBb2QBIZoWzLProM1iVsYgR6ber8xbKpLo4wXY9oZg6JRTbUGa9J5cW3tJajUOJi7Bef-3ZGLu7IVozQa?width=468&height=660&cropmode=none)  
 分別是 `Event system` 與 `Standalone Input Moudle`  
 
-| 腳本名稱 | 說明 |  
-| --- | --- |  
-| Event system | 處理UI物件狀態，像是button 中的滑入、滑出、點擊、拖曳等等 |  
-| Standalone Input Moudle | 像是鍵盤或搖桿的輸入控制 |  
+| 腳本名稱                | 說明                                                      |
+| ----------------------- | --------------------------------------------------------- |
+| Event system            | 處理UI物件狀態，像是button 中的滑入、滑出、點擊、拖曳等等 |
+| Standalone Input Moudle | 像是鍵盤或搖桿的輸入控制                                  |
 
 這次先專注於 Event system 腳本上  
 以下的三個設定 
 
-| 功能 | 說明 |  
-| --- | --- |  
-| First Selected| 預設被選定的UI物件|    
-| Send Navigation Event | 是否開啟UI導航功能 |  
-| Drag Threshold | 拖曳事件靈敏度 |  
+| 功能                  | 說明               |
+| --------------------- | ------------------ |
+| First Selected        | 預設被選定的UI物件 |
+| Send Navigation Event | 是否開啟UI導航功能 |
+| Drag Threshold        | 拖曳事件靈敏度     |
 
 在我的專案中，遊戲操作皆來自鍵盤  
 因此需要使用到UI導航功能  

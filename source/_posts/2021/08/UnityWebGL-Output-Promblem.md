@@ -1,8 +1,8 @@
 ---
-title: ⟬ 紀錄 ⟭ UnityWebgl 輸出問題
+title: 紀錄 | UnityWebGL 輸出問題
 tags:
-  - Unity
   - WebGL
+  - Unity
 categories:
   - Unity
 author: Rosa Hong

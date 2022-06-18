@@ -4,9 +4,7 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
-description: CSS切版練習 - 人員介紹卡片
+	- Front-end
 author: RosaHong
 date: 2022-03-20 10:21:28
 ---
@@ -15,7 +13,7 @@ date: 2022-03-20 10:21:28
 ## 本篇成果
 [Codepen](https://codepen.io/shan473/pen/qBVKqOO)
 ![人員介紹卡片](https://dsm01pap006files.storage.live.com/y4mHzg-JW7SyoAHGTdGlUdj_5ZnwCD4xI67k_hSfC3GQoVpUstnuk7UTBR7UmUJpb13ZdYrbWwiYAHfilOlHT7mMJQ7HXqcji-jzR8muC__o_Dw1iYTtrnTdQi6XfOoLIEtZsrFHqsrZq3aNmq8disMaXDMzI_RxGM47SUv3SgTztsiBsVOTkzmRI7CYrfu6ytD?width=1024&height=585&cropmode=none)
-
+<!-- more -->
 ## 計算區塊尺寸  
 現代在撰寫 CSS 之前，在 reset 你可能會看到     
 ```css

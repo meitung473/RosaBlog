@@ -8,7 +8,8 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "test": "hexo clean && hexo generate && gulp && hexo server",
-    "online": "hexo clean && hexo generate && gulp && hexo deploy"
+    "online": "hexo clean && hexo generate && gulp && hexo deploy",
+    "dev": "hexo clean && hexo generate && hexo server"
   },
   "hexo": {
     "version": "5.4.0"

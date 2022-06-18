@@ -1,9 +1,10 @@
 ---
-title: ⟬ 紀錄 ⟭ Foresea畢業專題(II) ─《菜雞在Unity裡的漫長旅程》
+title: 心得 | Foresea畢業專題(II) ─《菜雞在 Unity 裡的漫長旅程》
 tags:
   - 畢業專題
+  - Unity
 categories:
-  - bookreport
+  - 紀錄
 author: Rosa Hong
 date: 2021-05-24 14:58:08
 ---
@@ -87,14 +88,14 @@ date: 2021-05-24 14:58:08
    - 寫程式超級苦手    
     可以用視覺化程式工具來打造整個專案，這邊列舉三個常見的  
 
-| **Fungus** | PlayMaker | bolt |
-| :---: | :---: | :---: |
+|                                                                                                                                         **Fungus**                                                                                                                                         |                                                                                                                                           PlayMaker                                                                                                                                           |                                                                                                                                           bolt                                                                                                                                           |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | ![Fungus](https://chi01pap001files.storage.live.com/y4mkfhN24Lbc49rFFaLHFFlzmnSh8Zuv_hBQBnX5bhf6ZoUfuBitk2LWvZUjoddAfWinO0xPJYmKcHxLLGjdv2G4Xj5P7vCeelxUtd8_RKjbOnPqi9VBJ08QPkF-1kA-8Oc46pNIWtvN8hmOtUvc9BXtvDG3w1z00ZouUJeOYgIfV_7oqXYzX4LcWlDHyi5Rrpf?width=64&height=128&cropmode=none) | ![PlayMaker](https://chi01pap001files.storage.live.com/y4mpgpEnb_uv7folt3ZpcsTYMtqqqo_T-YoEybEGKP-ksmMLfyqSVXZH9O9Cd-2p63exqjtaF2SZLiNfMoXubHQj2J1rtZ3dL50WWsfF_noVQBHUYv8vqGRddYj38E2e34HdSNFHpuS7QWnihbJpD9gsWrzymekydAhcbJhQeTOlsaXYugV_4-RpTR0BA70KTD-?width=64&height=128&cropmode=none) | ![bolt](https://chi01pap001files.storage.live.com/y4m7J5a0UmNmKPGIrzwNoo0oWBDVkMBy2o939beWfQ_ap7zSKutxnKgq8T0qFZ52LDHmBzGOp8LCLQ_gOGS0-X-yEDv8_40WWvDM3k191Jm5AVXLSohQQOkwNyvqT2bUidkRnAeL_MWXGFBaeFW4ch-JzZbTZ49Q4Dhv5jNgYJN6zXvlgr6Agn6iX8AISstt0F8?width=64&height=128&cropmode=none) |
-|**不需要撰寫任何程式** | 不需要撰寫任何程式 |不須撰寫程式，但也可以混著C#寫|  
-| **免費** | 必須**氪金**💵|**免費**|  
-|**⭐歷屆最常用** |  教學資源豐富 |教學資源算豐富|
-| 很方便的對話系統 |  中文學習資源不少 |近年發展快速|
-| 缺點是有點制式 | **[用過都說讚](https://hutonggames.com/showcase.html)** |Unity官方有教學|
+|                                                                                                                                   **不需要撰寫任何程式**                                                                                                                                   |                                                                                                                                      不需要撰寫任何程式                                                                                                                                       |                                                                                                                              不須撰寫程式，但也可以混著C#寫                                                                                                                              |
+|                                                                                                                                          **免費**                                                                                                                                          |                                                                                                                                         必須**氪金**💵                                                                                                                                         |                                                                                                                                         **免費**                                                                                                                                         |
+|                                                                                                                                      **⭐歷屆最常用**                                                                                                                                       |                                                                                                                                         教學資源豐富                                                                                                                                          |                                                                                                                                      教學資源算豐富                                                                                                                                      |
+|                                                                                                                                      很方便的對話系統                                                                                                                                      |                                                                                                                                       中文學習資源不少                                                                                                                                        |                                                                                                                                       近年發展快速                                                                                                                                       |
+|                                                                                                                                       缺點是有點制式                                                                                                                                       |                                                                                                                    **[用過都說讚](https://hutonggames.com/showcase.html)**                                                                                                                    |                                                                                                                                     Unity官方有教學                                                                                                                                      |
 
 - **`至於我推不推視覺化工具呢?`**  
     其中 **[<PlayMaker?bolt?>](https://www.youtube.com/watch?v=OqHM0ZNtZ_4)** 影片留言區提到，我覺得非常中肯。      
@@ -108,11 +109,11 @@ date: 2021-05-24 14:58:08
 可以試著使用Godot或Construct 2(3)等引擎  
 如果你是要做純RPG遊戲，也可以使用 RPG製作大師  
 
-| 應用程式 | 說明 |      
-| --- | --- |  
-| [Godot](https://godotengine.org/) | 近年興起的開源遊戲引擎， 也有不少人從Unity 跳槽到這裡 |    
-| [Construct 2 (3)](https://www.construct.net/en) | 可以線上編輯。據我所知有些國內大學是使用這個。 |   
-| [RPG製作大師](https://store.steampowered.com/app/363890/RPG_Maker_MV/) | 下載要`$$`，發展悠久網路上資源很豐富，但就是只能做純正的RPG啦。 |    
+| 應用程式                                                               | 說明                                                            |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Godot](https://godotengine.org/)                                      | 近年興起的開源遊戲引擎， 也有不少人從Unity 跳槽到這裡           |
+| [Construct 2 (3)](https://www.construct.net/en)                        | 可以線上編輯。據我所知有些國內大學是使用這個。                  |
+| [RPG製作大師](https://store.steampowered.com/app/363890/RPG_Maker_MV/) | 下載要`$$`，發展悠久網路上資源很豐富，但就是只能做純正的RPG啦。 |
 
 ## 正篇 ## 
 
@@ -128,41 +129,41 @@ date: 2021-05-24 14:58:08
 網路上學習資源非常多，這邊稍微列舉我常看的  
 
 
-| **Youtube** | 中/英 | 說明 |  
-| :--- | :---: | --- |  
-| [阿空的遊戲部屋](https://www.youtube.com/channel/UCzmz_uFDw73m0JDI5ILmA3A)| 中 |多為2D，概念從頭講起，非常清楚|  
-|[yasuHs](https://www.youtube.com/channel/UCbZ34gnooSIHXAZUW1_wvgQ) | 中 | 功能重點教學，操作非常清楚 |  
-| [陳間時光](https://www.youtube.com/c/%E9%99%B3%E9%96%93%E6%99%82%E5%85%89%E5%B7%A5%E4%BD%9C%E5%AE%A4/videos)|中|有教學Fungus，C#基礎概念等等，講解非常清楚，影片略長|  
-| [白米飯](https://www.youtube.com/c/%E7%99%BD%E7%B1%B3%E9%A3%AF/videos)|中|有bolt教學以及應用教學|  
-| [M Studio](https://www.youtube.com/c/MStudioUnity/featured)|中|教學種類繁多，講解清楚|  
-| [Brackeys](https://www.youtube.com/user/Brackeys)|英|內容含 2D&3D、Unity功能，講解非常詳細，首推! ~~可惜他不做影片了~~|  
-| [Code Monkey](https://www.youtube.com/c/CodeMonkeyUnity/featured)|英|很多功能性教學，非常推薦，講解非常詳細|  
-| [Alexander Zotov](https://www.youtube.com/c/AlexanderZotov/featured)|英|功能重點教學，操作清楚，省時間學習大推👍|  
-| [Blackthornprod](https://www.youtube.com/channel/UC9Z1XWw1kmnvOOFsj6Bzy2g)|英|2D為主，單功能性教學，講解詳細，也有很多Devlog|  
-| [samyam](https://www.youtube.com/c/samyam/videos)|英|以單功能教學為主，講解非常清楚。||    
+| **Youtube**                                                                                                  | 中/英 | 說明                                                              |
+| :----------------------------------------------------------------------------------------------------------- | :---: | ----------------------------------------------------------------- |
+| [阿空的遊戲部屋](https://www.youtube.com/channel/UCzmz_uFDw73m0JDI5ILmA3A)                                   |  中   | 多為2D，概念從頭講起，非常清楚                                    |
+| [yasuHs](https://www.youtube.com/channel/UCbZ34gnooSIHXAZUW1_wvgQ)                                           |  中   | 功能重點教學，操作非常清楚                                        |
+| [陳間時光](https://www.youtube.com/c/%E9%99%B3%E9%96%93%E6%99%82%E5%85%89%E5%B7%A5%E4%BD%9C%E5%AE%A4/videos) |  中   | 有教學Fungus，C#基礎概念等等，講解非常清楚，影片略長              |
+| [白米飯](https://www.youtube.com/c/%E7%99%BD%E7%B1%B3%E9%A3%AF/videos)                                       |  中   | 有bolt教學以及應用教學                                            |
+| [M Studio](https://www.youtube.com/c/MStudioUnity/featured)                                                  |  中   | 教學種類繁多，講解清楚                                            |
+| [Brackeys](https://www.youtube.com/user/Brackeys)                                                            |  英   | 內容含 2D&3D、Unity功能，講解非常詳細，首推! ~~可惜他不做影片了~~ |
+| [Code Monkey](https://www.youtube.com/c/CodeMonkeyUnity/featured)                                            |  英   | 很多功能性教學，非常推薦，講解非常詳細                            |
+| [Alexander Zotov](https://www.youtube.com/c/AlexanderZotov/featured)                                         |  英   | 功能重點教學，操作清楚，省時間學習大推👍                           |
+| [Blackthornprod](https://www.youtube.com/channel/UC9Z1XWw1kmnvOOFsj6Bzy2g)                                   |  英   | 2D為主，單功能性教學，講解詳細，也有很多Devlog                    |
+| [samyam](https://www.youtube.com/c/samyam/videos)                                                            |  英   | 以單功能教學為主，講解非常清楚。                                  |  |
 
-| **論壇** | 說明 |    
-|---|--- |  
-| [Stack Overflow](https://stackoverflow.com/)|所有難題都在這裡解決，踏入程式圈一定要知道的|  
-|[Unity官方論壇](https://forum.unity.com/)|可以更精準找到跟你有一樣問題的串。|    
-|[巴哈 Unity3D 遊戲引擎哈拉版](https://forum.gamer.com.tw/B.php?bsn=60602)|你懂得。|    
+| **論壇**                                                                  | 說明                                         |
+| ------------------------------------------------------------------------- | -------------------------------------------- |
+| [Stack Overflow](https://stackoverflow.com/)                              | 所有難題都在這裡解決，踏入程式圈一定要知道的 |
+| [Unity官方論壇](https://forum.unity.com/)                                 | 可以更精準找到跟你有一樣問題的串。           |
+| [巴哈 Unity3D 遊戲引擎哈拉版](https://forum.gamer.com.tw/B.php?bsn=60602) | 你懂得。                                     |
 
-| **網頁** |  
-|:---|  
-|[胡亂說‧隨便寫](https://godstamps.blogspot.com/)|  
-|[【Unity遊戲製作】勇者拉德小酒館](https://jerrard-liu.blogspot.com/)|  
-|[山姆遊戲](http://sammaru.blogspot.com/search?updated-max=2017-11-25T21%3A14%3A00%2B08%3A00&max-results=10#PageNo=2)|  
-|[鴨仔開發日記](https://www.douduck08.com/)|    
+| **網頁**                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------- |
+| [胡亂說‧隨便寫](https://godstamps.blogspot.com/)                                                                     |
+| [【Unity遊戲製作】勇者拉德小酒館](https://jerrard-liu.blogspot.com/)                                                 |
+| [山姆遊戲](http://sammaru.blogspot.com/search?updated-max=2017-11-25T21%3A14%3A00%2B08%3A00&max-results=10#PageNo=2) |
+| [鴨仔開發日記](https://www.douduck08.com/)                                                                           |
 
-| FB社團 |  
-| :---|   
-| [Unity 應用領域](https://www.facebook.com/groups/UnityFrontier/) |  
-| [Indie Game Developers IGD](https://www.facebook.com/groups/IndieGameDevs/) |   
+| FB社團                                                                      |
+| :-------------------------------------------------------------------------- |
+| [Unity 應用領域](https://www.facebook.com/groups/UnityFrontier/)            |
+| [Indie Game Developers IGD](https://www.facebook.com/groups/IndieGameDevs/) |
 
 > **C#基礎加強**  
 
-| | |  
-| :--- | --- |  
+|                                                                                     |                                      |
+| :---------------------------------------------------------------------------------- | ------------------------------------ |
 | [小山的教學平台](https://www.youtube.com/channel/UCmumrs_hb9s6eoVI29gLBgA/featured) | C#好幫手，對於基礎加強可以從這裡開始 |
 
 #### 加強搜尋力 ####

@@ -1,10 +1,8 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript - 宣告提升(III) - let & const 以及 TDZ
+title: 筆記 | JavaScript - 宣告提升(III) - let & const 以及 TDZ
 tags:
-  - hoisting
   - JavaScript
 categories:
-  - Frontend
   - JavaScript
 description: 了解let & const 的宣告提升以及 TDZ 的意思
 author: Rosa Hong

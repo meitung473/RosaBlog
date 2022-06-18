@@ -1,9 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ HTML 基本語法
+title: 筆記 | HTML 基本語法
 tags:
   - HTML
 categories:
-  - [Frontend,HTML]
+  - Front-end
 author: RosaHong
 date: 2021-08-10 13:38:09
 ---
@@ -152,10 +152,10 @@ date: 2021-08-10 13:38:09
 替代符號可以用以下幾個  
 
 | 符號 | 替代使用 |
-| --- | --- | 
-|  & | \&amp\; |
-| <  | \&lt\;|
-| > | \&gt\;|  
+| ---- | -------- |
+| &    | \&amp\;  |
+| <    | \&lt\;   |
+| >    | \&gt\;   |
 
 範例 : \*markdown 語法也會吃 html 
  <pre>			&lt;div&gt;</pre>

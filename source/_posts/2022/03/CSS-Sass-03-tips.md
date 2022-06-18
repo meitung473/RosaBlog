@@ -1,11 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ Sass 小技巧
+title: 筆記 | Sass 小技巧
 tags:
-  - CSS
   - Sass
 categories:
-  - - Frontend
-    - CSS
+  - Front-end
 author: Rosa Hong
 date: 2022-03-19 23:15:57
 description:

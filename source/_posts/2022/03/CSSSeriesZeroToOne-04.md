@@ -4,9 +4,7 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
-description: CSS切版練習 - 交錯漂浮版
+	- Front-end
 author: RosaHong
 date: 2022-03-20 14:11:18
 ---
@@ -14,6 +12,7 @@ date: 2022-03-20 14:11:18
 ## 本篇成果
 [Codepen](https://codepen.io/shan473/pen/JjOZEBv)
 ![交錯漂浮版](https://dsm01pap006files.storage.live.com/y4myrS3n9KEVx68j_Eae0KRrAYX2x2pFSw4IpKeLRuSQUsYqqzoIbIJ_TZHOxs96dBkjq9Or4jrv4cbmLYZJHh8XJf5UwXUa8Fst54z9sV0FCDctxAGmKDM3WK1sB4h8QsOqArz8DIpcZX4fpHELmYZC4xd994q-I2LITANufFsVCXWAneTdCRxsl7eG7xqpK_I?width=1024&height=1016&cropmode=none)
+<!-- more -->
 
 ## box-sizing 盒子計算方式
 box sizing 有兩種屬性  

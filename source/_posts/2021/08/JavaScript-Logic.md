@@ -1,9 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript 邏輯運算子
+title: 筆記 | JavaScript 邏輯運算子
 tags:
   - JavaScript
 categories:
-  - [Frontend,JavaScript]
+  - JavaScript
 author: Rosa Hong
 date: 2021-08-04 14:33:55
 ---

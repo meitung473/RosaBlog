@@ -4,17 +4,15 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
+	- Front-end
 author: RosaHong
 date: 2022-03-25 12:31:10
-description: CSS切版練習 - 超通用版面
 ---
 
 ## 本篇成果
 [Codepen](https://codepen.io/shan473/pen/yLPqLWg)
 ![超通用版面](https://dsm01pap006files.storage.live.com/y4mHj3lx_2ZCP6jUJJdmg3J0yQ1okzs2onLtZoKl8Xl9-SHWo5R76rhJJOxB0CCcCpsr4mjLPVhk5vDB68y-tAOu5tf-ZNbKOE3h4Sre1TfJSvHP0v2J8P8TvUahMIXlTHuDmVXPLF8B_iY-H2YRC15q7MtFqTN40Pi1Q79x-NpaPicKK8MhjlUTMAusYM6_kFp?width=660&height=377&cropmode=none)
-
+<!-- more -->
 ## object-fit  
 讓置換元素 (Replaced element) 的內容如何塞到已知的父層寬度與高度的框  
 

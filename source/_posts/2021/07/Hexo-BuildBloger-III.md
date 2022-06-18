@@ -1,10 +1,9 @@
 ---
-title: ⟬ 紀錄 ⟭ HEXO 一起來做部落格(III)
+title: 紀錄 | HEXO 一起來做部落格(III)
 tags:
-  - Hexo
-  - 部落格
-categories:
   - Blog
+categories:
+  - Hexo
 author: Rosa Hong
 date: 2021-07-18 20:51:58  
 description: 一邊建置Blog，一邊紀錄。 ─ Day03
@@ -57,24 +56,24 @@ description: 一邊建置Blog，一邊紀錄。 ─ Day03
 
 >  最外層  
 
-| **資料夾名稱** | **用途** |
-| --- | --- |  
-| .node_modules  | npm原始設定(不常用)  |  
-| .scaffolds  | 文章狀態模板 (可以修訂統一模板)  |
-| .public | 發布自動後生成的資料夾 (不用動) |  
-| .source  | 部落格編輯(文字都在這編輯)  | 
-| .themes  | 編輯主題樣式(相關 css )  |  
-| ._config.next.yml  | next 安裝設定檔，多是插件  | 
-| ._config.yml  | hexo 安裝設定檔  | 
-| .package.json  | 專案的設定檔，會寫安裝什麼東西(基本上不用動)  | 
+| **資料夾名稱**    | **用途**                                     |
+| ----------------- | -------------------------------------------- |
+| .node_modules     | npm原始設定(不常用)                          |
+| .scaffolds        | 文章狀態模板 (可以修訂統一模板)              |
+| .public           | 發布自動後生成的資料夾 (不用動)              |
+| .source           | 部落格編輯(文字都在這編輯)                   |
+| .themes           | 編輯主題樣式(相關 css )                      |
+| ._config.next.yml | next 安裝設定檔，多是插件                    |
+| ._config.yml      | hexo 安裝設定檔                              |
+| .package.json     | 專案的設定檔，會寫安裝什麼東西(基本上不用動) |
 
 >> . scaffolds
 
 | **資料夾名稱** | **用途** |
-| --- | --- |  
-| _drafts  | 草稿模板  |  
-| page .md  | 頁面模板  |
-| post .md | 文章模板 |  
+| -------------- | -------- |
+| _drafts        | 草稿模板 |
+| page .md       | 頁面模板 |
+| post .md       | 文章模板 |
 
 
 - 指令快速記!   
@@ -88,11 +87,11 @@ description: 一邊建置Blog，一邊紀錄。 ─ Day03
 
 >> . source
 
-| **資料夾名稱** | **用途** |
-| --- | --- |  
-| _drafts  | 草稿會在這  |  
-| _posts  | 發布的貼文都會在這  |
-| 其他頁面資料夾 | 像是About、tags、categroies.. |  
+| **資料夾名稱** | **用途**                      |
+| -------------- | ----------------------------- |
+| _drafts        | 草稿會在這                    |
+| _posts         | 發布的貼文都會在這            |
+| 其他頁面資料夾 | 像是About、tags、categroies.. |
 
 
 因為一開始沒有About等等的基礎頁面，自己要新增  
@@ -134,11 +133,11 @@ description: 一邊建置Blog，一邊紀錄。 ─ Day03
 當然嫌麻煩還可以裝指定版本 
 [官方教學](https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md)    
 
-| **資料夾名稱** | **用途** |  
-| --- | --- |  
-| languages  | 語言對應字  |  
-| layout  | 調整看到的版面 基底  | 
-| source  | 一些css js image 設定在這(跟外層的source不一樣) |  
+| **資料夾名稱** | **用途**                                        |
+| -------------- | ----------------------------------------------- |
+| languages      | 語言對應字                                      |
+| layout         | 調整看到的版面 基底                             |
+| source         | 一些css js image 設定在這(跟外層的source不一樣) |
 - theme 中的 source 主要掌管 next 主題的樣式而已 
 - 外層的 source 是 hexo 架構的編輯地方  
 兩者有差哦!  

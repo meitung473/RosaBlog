@@ -4,18 +4,16 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
+	- Front-end
 author: RosaHong
 date: 2022-03-25 14:05:44
-description: CSS切版練習 - 網頁頁尾版塊
 ---
 
 ## 本篇成果
 [Codepen](https://codepen.io/shan473/pen/oNoMJBQ)
 ![網頁頁尾版塊](https://dsm01pap006files.storage.live.com/y4mtphMUUk0c1yY9dUb53RF0jkrLI5tF-TSjeeSIBE583SwUq1Uk8UZUm-Z011ZK-Or0KbhFHvVqODwJObSn3ACJf7CuFIuu18jaIEzdPeLEqvFFMAesLSLoetnq0FPAtwi7kCTP7ZscwXBBtdaDMV7GQKnv5kTH_3vY6LSOcOkcg1zvlpCEsth5zYrQJ54RM7r?width=660&height=377&cropmode=none)
 
-
+<!-- more -->
 ## flex-grow : 子元素的空間分配
 `flex-grow` : 剩餘容器空間分配，運用到 flex-grow : 1，個別分配一樣的，以免內容大小不一導致 container 有大有小。  
 > `width : 0` 可以把 width 先設定為 0 ，讓 **主軸** 的 width 都交給 grow 分配。

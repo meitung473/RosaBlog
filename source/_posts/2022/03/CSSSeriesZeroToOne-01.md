@@ -4,9 +4,7 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
-description: CSS切版練習 - 圖文滿版區塊
+	- Front-end
 author: RosaHong
 date: 2022-03-18 09:53:05
 ---
@@ -27,6 +25,7 @@ date: 2022-03-18 09:53:05
 [Codepen](https://codepen.io/shan473/pen/oNoEjNV?editors=0100)  
 ![圖文滿版區塊](https://dsm01pap006files.storage.live.com/y4mFal1-hjaKzBYO0ceMmC3QyeuTEau2VqzDJF9KrNlLlaJqh1_6IA96aYDhEfXLD8hxMLGT-e2HeoUSEuxZzdB9J6Avk0LArKj0fgN4pP4drg_Qdza2-44tROHeK-PkxW5KrMWNXsxRYHNQIlD6Kw6MfCSVx-zj_uT7j_yf072F9X-qDfe2ro6EJNp59rN5m-z?width=1024&height=585&cropmode=none)
 
+<!-- more -->
 
 ## Reset 一下
 刻板面之前要先 reset，這樣我們才能掌控間距大小   

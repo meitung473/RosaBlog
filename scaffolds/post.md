@@ -4,6 +4,6 @@ date: {{ date }}
 tags:
 categories:
 description:
-author:
+author: Rosa Hong
 
 ---

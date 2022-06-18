@@ -1,12 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript - 宣告提升(I) - 我以為的以為
+title: 筆記 | JavaScript - 宣告提升(I) - 我以為的以為
 tags:
-  - hoisting
   - JavaScript
-
 categories:
-  - - Frontend
-    - JavaScript
+  - JavaScript
 description: 從簡單例子看何謂宣告提升
 author: Rosa Hong
 date: 2022-01-13 21:43:50

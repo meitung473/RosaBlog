@@ -224,4 +224,4 @@ console.log(obj1.b.f === obj2.b.f);
 - 概念 : [關於JS中的淺拷貝(shallow copy)以及深拷貝(deep copy) | by Andy Chen | Andy的技術分享blog | Medium](https://medium.com/andy-blog/%E9%97%9C%E6%96%BCjs%E4%B8%AD%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D-shallow-copy-%E4%BB%A5%E5%8F%8A%E6%B7%B1%E6%8B%B7%E8%B2%9D-deep-copy-5f5bbe96c122)
 - 實作 : [js深拷贝和浅拷贝及其实现方式 - SegmentFault 思否](https://segmentfault.com/a/1190000039310119)
 - 實作 : [浅探js深拷贝和浅拷贝 - SegmentFault 思否](https://segmentfault.com/a/1190000016970483?utm_source=sf-similar-article)
-- [14. [JS] 深拷貝是什麼？如何實現？ - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天 (ithome.com.tw)](https://ithelp.ithome.com.tw/articles/10223178)
+- [14. [JS] 深拷貝是什麼？如何實現？](https://ithelp.ithome.com.tw/articles/10223178)

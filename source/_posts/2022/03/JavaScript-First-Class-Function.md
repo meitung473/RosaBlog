@@ -1,9 +1,8 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript - first class function (一級函式)
+title: 筆記 | JavaScript - first class function (一級函式)
 tags:
   - JavaScript
 categories:
-  - Frontend
   - JavaScript
 author: Rosa Hong
 date: 2022-03-26 13:34:14
@@ -42,25 +41,23 @@ JavaScript 的 function 符合 first class function
 	greet(hello,'rosa!')
 	```
 - function 裡面又回傳另一個 function。
-	這樣的函式也稱作高階函式 ( **Higher-Order Function** )，最常看到的例子是閉包 (Closure)
+  	只要接收函式作為參數，或是回傳函式作為輸出的函式
+	就稱作高階函式 ( **Higher-Order Function** )    
+	像是 Array 中的 `map` function
 	```javascript 
-	let mymoney = 0
-	const addmoney = function(num){
-			return function(){
-	      console.log('add money!')
-	      mymoney +=num
-	      console.log('current',mymoney)
-				return mymoney
-			}
+	[1,2,3].map((num)=> num * 2 )
+	// 實作
+	function arrayMap(fn,array){
+		let length = array.length
+		let newArray = [] 
+		for(let i=0 ; i<length ; i++){
+			newArray.push(fn(array[i]))
+		}
+		return newArray
 	}
-	// 新增一個加 10 塊錢的方法
-	const add10 = addmoney(10)
-	//呼叫加錢
-	add10()
-	add10()
-	add10()
-	---
-	current money : 30
+	arrayMap((item)=>{
+		return item * 2 	
+	},[1,2,3,4])
 	```
 - function 跟物件一樣有屬性 (property)  
   下面進行說明
@@ -122,3 +119,4 @@ IIFE 的例子很常在 JQuery 看見
 ## 參考
 1. [[筆記] JavaScript 中函式就是一種物件 ─ 談談 first class function（一等公民函式） ~ PJCHENder 那些沒告訴你的小細節](https://pjchender.blogspot.com/2016/03/javascriptfunctionobjects.html)
 2. [一級函式（First-class Function） - 術語表 | MDN (mozilla.org)](https://developer.mozilla.org/zh-TW/docs/Glossary/First-class_Function)
+3. [JS 原力覺醒 Day19 - 一級函式與高階函式](https://ithelp.ithome.com.tw/articles/10224519)

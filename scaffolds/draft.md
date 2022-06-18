@@ -2,6 +2,6 @@
 title: {{ title }}
 tags:
 categories:
-author:
+author: Rosa Hong
 description:
 ---

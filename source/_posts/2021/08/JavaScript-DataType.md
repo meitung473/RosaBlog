@@ -1,9 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript - 資料型態(I)
+title: 筆記 | JavaScript - 資料型態(I)
 tags:
   - JavaScript
 categories:
-  - [Frontend,JavaScript]
+  - JavaScript
 author: Rosa Hong
 date: 2021-08-31 09:26:15
 ---

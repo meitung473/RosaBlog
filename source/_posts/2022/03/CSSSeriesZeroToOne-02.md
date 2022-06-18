@@ -4,9 +4,7 @@ tags:
   - CSS
   - CSSZeroToOneSeries
 categories:
-  - - Frontend
-    - CSS
-description: CSS切版練習 - 互動卡片
+	- Front-end
 author: RosaHong
 date: 2022-03-18 09:53:19
 ---
@@ -16,7 +14,7 @@ date: 2022-03-18 09:53:19
 [Codepen](https://codepen.io/shan473/pen/LYOdJjV)
 ![互動圖卡](https://dsm01pap006files.storage.live.com/y4mBJbcOCZ4CF8WqJt5NbdIirs1thioqss6qbUqW3ReiXiJK9hPjNOthclckHXTZPXb1Y7DFw_kR-UQQmMYqzIWBfGLog7LogLdEVu4TEuI-iaz_91LgvrZteMyvlcB3mxOq4RxeHRiFqrz0JlQOD0O3tLstdIvdeXoDZD7l2saSLi84O8Vhu92m_J2Fd4O1rgh?width=1024&height=585&cropmode=none)
 
-
+<!-- more -->
 ## 圖片間距問題 
 img 是 inline 元素，但又可以按照圖片大小來設定寬高，所以又很像 inline-block。  
 而且圖片是沒有 baseline 的，距離下方有會 1 px 的問題。   

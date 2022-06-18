@@ -3,17 +3,16 @@ title: 關於健忘雜記
 date: 2021-07-16 17:27:35
 type: about
 ---
-<center>
+## 我是誰 ? 
+踏上前端不歸路的女子。  
+非本科系，未來想慢慢補齊 CS 相關課程，走向更深的~~火坑~~   
 
-![](https://chi01pap001files.storage.live.com/y4mnWrgZw2nS1zW6VuFgFAycjicT8FoQzP3t4HwBLEc--pOHHR7vD1Ln-NfiapE4NEZl0mP0IrTrKp-qzXE8DGG1owACO2Nb1H1780iGzbsUvPnF1GfnCL-UohhV8Czo5C-T4i8Byh-mu1-a2jMiDdAQ_S2IC9M48vs_U_9UXC8i-bWg0YiB_JosfOjh8yyiex1?width=256&height=256&cropmode=none)
+近來目標 : 
+- 研究 UIUX  
 
+### 部落格名
+> 健忘 ─ 人生漫漫，記不起所有東西，某階段就像健忘
+> 雜記 ─ 是漫步，隨性記下經歷過的景物  
 
-</center>
-
-### 我是誰? ### 
-Hi,我是Rosa Hong    
-非理工科系出身  
-目前自學程式中   
-涉及網頁開發與遊戲開發     
-偶爾寫寫部落格紀錄所學所聞  
-歡迎跟我交流交流 :D  
+起初建立部落格的目標是紀錄學習歷程，遇到類似問題筆記可以幫助自己  
+未來希望記錄觀察生活的瑣事，培養表達自己的觀點。

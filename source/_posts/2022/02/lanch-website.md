@@ -1,12 +1,11 @@
 ---
-title: ⟬ 紀錄 ⟭ DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機
+title: 紀錄 | DIY 架站 - 安裝 LAMP Server + phpMyAdmin  並且部屬在 AWS EC2 主機
 tags:
-  - Backend
   - MySQL
   - phpMyadmin
   - LAMP
 categories:
-  - bookreport
+  - Back-end 
 description: 紀錄 DIY 架站的歷程
 author: Rosa Hong
 date: 2022-02-06 12:38:32

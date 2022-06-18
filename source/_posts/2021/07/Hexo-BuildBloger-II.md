@@ -1,10 +1,9 @@
 ---
-title: ⟬ 紀錄 ⟭ HEXO 一起來做部落格(II)
+title: 紀錄 | HEXO 一起來做部落格(II)
 tags:
-  - Hexo
-  - 部落格
-categories:
   - Blog
+categories:
+  - Hexo
 author: Rosa Hong
 description: 一邊建置Blog，一邊紀錄。 ─ Day02
 date: 2021-07-17 13:32:35
@@ -54,12 +53,12 @@ NEXT安裝完後會生出 `_config.next.yml` ⇒ 是 NEXT主題中的設定，�
 
 ![](https://chi01pap001files.storage.live.com/y4mg5VYrXhn9SKuFB7O410M0VrdE80dSyg12iiXxEjvdvFV36VXtMsNIyS90lEwOEjoEwGU8AvLctdsyh42QKc7m_VT5DBKUkjUwZAVZzXPWkqjbUjvOIrtXtZmk8w-NQb--hMM-_jkdmrzXBFZ8f8xG2ofs35BdVqZQ36OjvduhjK3UXSuWqfopS2MDFKov9NB?width=660&height=418&cropmode=none)  
 
-| 名稱 | 說明 | 
-| --- | --- | 
-| url | 網頁的網址。先去 github 建立好一個空的網頁，複製網址貼上 |  
-| root | 網頁的根目錄，這邊寫專案名就好， /***/ 是相對路徑的寫法哦 |  
-| theme | 網站套用的主題。這邊安裝的是NEXT填寫上 next |
-| deloy | 發布設定。這邊先填寫 `type: git` 。 repo 等等到github 上複製即可 |  
+| 名稱  | 說明                                                             |
+| ----- | ---------------------------------------------------------------- |
+| url   | 網頁的網址。先去 github 建立好一個空的網頁，複製網址貼上         |
+| root  | 網頁的根目錄，這邊寫專案名就好， /***/ 是相對路徑的寫法哦        |
+| theme | 網站套用的主題。這邊安裝的是NEXT填寫上 next                      |
+| deloy | 發布設定。這邊先填寫 `type: git` 。 repo 等等到github 上複製即可 |
 
 ![](https://chi01pap001files.storage.live.com/y4m31ODFxu3XGBixiLchDX0zi4lqY1toUWP2_3Bvbe2iqrsvUY5k035-7vUuTxYOsecl-msD3YU6BjrtEXYrR4vfzVsO0GR7w5HPZuS816bAUuUJ3b8LOyZro_eBsQX7EzvEvwyCle5dAdlWgxV2Ynrlk2WOPIyQan6qaNM5hF8XhMsowebpXBVIsiPg6QkwICt?width=256&height=68&cropmode=none)  
 

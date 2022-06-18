@@ -1,9 +1,9 @@
 ---
-title: ⟬ 紀錄 ⟭ Foresea畢業專題(I) ─《綜合資源分享》
+title: 心得 | Foresea畢業專題(I) ─《綜合資源分享》
 tags:
   - 畢業專題
 categories:
-  - bookreport
+  - 紀錄
 author: Rosa Hong
 date: 2021-05-18 14:09:24
 ---
@@ -56,15 +56,15 @@ Foresea 是我的畢業專題，組成為四人，我負責遊戲程式的部分
 ## 資源分享正篇 ## 
 
 ### 一、音樂 / 音效 資源 ###
-| 用途 | 網站 |
-| ---| --- |
+| 用途 | 網站                                                        |
+| ---- | ----------------------------------------------------------- |
 | 音效 | [小森平音效](https://taira-komori.jpn.org/freesoundtw.html) |
-| 音效 |  [音人](https://on-jin.com/kiyaku.php) |
-| 音效 | [Xyz](https://gamesounds.xyz/) |
-| BGM | [TAM](https://www.tam-music.com/se000_category/natural) |
-| BGM | [甘茶の音楽工房](http://amachamusic.chagasi.com/index.html) |
-| BGM | [conte-de-fees](http://conte-de-fees.com/) |
-| Both | Youtube 音效庫 |  
+| 音效 | [音人](https://on-jin.com/kiyaku.php)                       |
+| 音效 | [Xyz](https://gamesounds.xyz/)                              |
+| BGM  | [TAM](https://www.tam-music.com/se000_category/natural)     |
+| BGM  | [甘茶の音楽工房](http://amachamusic.chagasi.com/index.html) |
+| BGM  | [conte-de-fees](http://conte-de-fees.com/)                  |
+| Both | Youtube 音效庫                                              |
 
 也可以找找 Unity 商店有些人免費提供的音樂包  
 ⚠ 遵守CC，有些須註明標記，請自行斟酌  

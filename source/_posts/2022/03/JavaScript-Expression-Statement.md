@@ -1,10 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ JavaScript - 表達式 & 陳述式
+title: 筆記 | JavaScript - 表達式 & 陳述式
 tags:
-  - JavaScript
+	- JavaScript
 categories:
-  - - Frontend
-    - JavaScript
+	- JavaScript
 description: 認識 JavaScript 中的表達式 & 陳述式
 author: Rosa Hong
 date: 2022-03-25 11:24:20

@@ -1,10 +1,9 @@
 ---
-title: ⟬ 筆記 ⟭ 初探 Git
+title: 筆記 | 初探 Git
 tags:
   - Git
-  - CommandLine
 categories:
-  - program
+  - Programming
 author: Rosa Hong
 date: 2021-07-30 21:22:26
 ---
@@ -130,16 +129,16 @@ Git 是一個版本控制的軟體
 
 把握基本的指令，在工作上應該綽綽有餘了  
 
-| 指令 | 說明 | 
-| --- | --- | 
-| [init](#init) | 初始化。告訴這個專案加入git的版控功能 | 
-| [status](#status) | 查看狀態。沒事有事可以點一下 |
-| [add](#add) | 加入版本控制的行列。新檔案一定要打一下 |
-| [commit](#commit) | 建立新的版本。 |
-| [log](#log) | 查看歷史紀錄。 | 
-| [checkout](#checkout) | 查看指定的檔案版本狀態，或是切到該分支 | 
-| [branch](#branch) | 開一個新分支 | 
-| merge | 把別的分支 **`合併進來`** 所在的分支  |   
+| 指令                  | 說明                                   |
+| --------------------- | -------------------------------------- |
+| [init](#init)         | 初始化。告訴這個專案加入git的版控功能  |
+| [status](#status)     | 查看狀態。沒事有事可以點一下           |
+| [add](#add)           | 加入版本控制的行列。新檔案一定要打一下 |
+| [commit](#commit)     | 建立新的版本。                         |
+| [log](#log)           | 查看歷史紀錄。                         |
+| [checkout](#checkout) | 查看指定的檔案版本狀態，或是切到該分支 |
+| [branch](#branch)     | 開一個新分支                           |
+| merge                 | 把別的分支 **`合併進來`** 所在的分支   |
  
 
 ## 名詞解釋 ##

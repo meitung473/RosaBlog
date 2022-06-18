@@ -1,9 +1,9 @@
 ---
-title: ⟬ 紀錄 ⟭ Foresea畢業專題(III)─《Finalfinal.docx》
+title: 心得 | Foresea畢業專題(III)─《Finalfinal.docx》
 tags:
   - 畢業專題
 categories:
-  - bookreport
+  - 紀錄
 author: Rosa Hong
 date: 2021-06-06 01:02:46
 ---

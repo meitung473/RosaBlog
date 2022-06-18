@@ -1,10 +1,10 @@
 ---
-title: ⟬ 紀錄 ⟭ JavaScript - Twitch API 實戰
+title: 紀錄 | 串接 Twitch API 實戰
 tags:
   - JavaScript
   - AJAX
 categories:
-  - [Frontend,JavaScript]
+  - Front-end
 author: Rosa Hong
 description: 學習 twitch api 如何使用
 date: 2021-12-23 11:32:09
