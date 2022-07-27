@@ -1,442 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/shan-logo-appletouch.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/shan-logo.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/shan-logo-16X16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
-
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.rosa.tw","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"Pisces | Gemini":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"buttons","active":true,"storage":true,"lazyload":true,"nav":{"disqus":{"text":"留言區","order":-1}},"Available values":"disqus"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S8ZEBJDRWG');
-</script>
-
-  <meta name="description" content="前言 想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 $.ajax  或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。 本篇記錄 fetch 的使用方式與常見的使用誤區。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="筆記 | JavaScript - fetch 獲取遠端資料">
-<meta property="og:url" content="https://blog.rosa.tw/2022/06/06/JavaScript-fetch">
-<meta property="og:site_name" content="健忘雜記">
-<meta property="og:description" content="前言 想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 $.ajax  或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。 本篇記錄 fetch 的使用方式與常見的使用誤區。">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-06-22T04:45:11.000Z">
-<meta property="article:modified_time" content="2022-07-27T05:30:49.732Z">
-<meta property="article:author" content="Rosa Hong">
-<meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="https://blog.rosa.tw/2022/06/06/JavaScript-fetch.html">
-
-
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>筆記 | JavaScript - fetch 獲取遠端資料 | 健忘雜記</title>
-  
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-S8ZEBJDRWG');
-      }
-    </script>
-
-
-
-
-
-
-  <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="健忘雜記" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">健忘雜記</h1>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">紀錄學習與生活</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">20</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">14</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">51</span></a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-        
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-44"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch"><span class="nav-number">2.</span> <span class="nav-text">fetch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#then-catch"><span class="nav-number">2.1.</span> <span class="nav-text">then &amp; catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC%E8%99%95%E7%90%86-Response-status-Response-ok"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP 狀態碼處理 Response.status &amp;  Response.ok</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Response-text-json"><span class="nav-number">2.3.</span> <span class="nav-text">Response.text() &amp; .json()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST"><span class="nav-number">3.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch-%E7%9A%84-Headers"><span class="nav-number">4.</span> <span class="nav-text">fetch 的 Headers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Type"><span class="nav-number">4.1.</span> <span class="nav-text">Content Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#credentials"><span class="nav-number">4.2.</span> <span class="nav-text">credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D-mode-%E7%9A%84%E8%AA%A4%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">對 mode 的誤解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC-XMLHttpRequest-%E9%82%84%E6%98%AF%E5%AD%98%E5%9C%A8"><span class="nav-number">6.</span> <span class="nav-text">為什麼 XMLHttpRequest 還是存在 ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%9C%E5%85%85-%E5%B9%BE%E7%A8%AE%E7%99%BC-request-%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">補充 : 幾種發 request 的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E-15"><span class="nav-number">8.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83-18"><span class="nav-number">9.</span> <span class="nav-text">參考</span></a></li></ol></div>
-      </section>
-      <!--/noindex-->
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Rosa Hong"
-      src="/images/RosaBlog-LOGO.png">
-  <p class="site-author-name" itemprop="name">Rosa Hong</p>
-  <div class="site-description" itemprop="description">菜鳥起飛中</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">51</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/meitung473" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;meitung473" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:a8870506@gmail.com" title="聯絡我 → mailto:a8870506@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.facebook.com/yanshan.hong1" title="Rosa Hong → https:&#x2F;&#x2F;www.facebook.com&#x2F;yanshan.hong1" rel="noopener" target="_blank"><i class="fa fa-facebook fa-fw"></i></a>
-      </span>
-  </div>
-
-
-
-      </section>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-      
-
-      
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://blog.rosa.tw/2022/06/06/JavaScript-fetch">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/RosaBlog-LOGO.png">
-      <meta itemprop="name" content="Rosa Hong">
-      <meta itemprop="description" content="菜鳥起飛中">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="健忘雜記">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          筆記 | JavaScript - fetch 獲取遠端資料
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2022-06-22 12:45:11" itemprop="dateCreated datePublished" datetime="2022-06-22T12:45:11+08:00">2022-06-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/2022/" itemprop="url" rel="index"><span itemprop="name">2022</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/2022/06/" itemprop="url" rel="index"><span itemprop="name">06</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="文章字數">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">文章字數：</span>
-      <span>4.5k</span>
-    </span>
-    <span class="post-meta-item" title="所需閱讀時間">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-      <span>4 分鐘</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="前言-44">前言</h2>
-<p>想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 <code>$.ajax</code>  或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。<br>
-本篇記錄 fetch 的使用方式與常見的使用誤區。</p>
-<span id="more"></span>
-<h2 id="fetch">fetch</h2>
-<p>fetch 是 HTML5 原生獲取遠端的方式，其操作也十分簡單</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-<span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>obj<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// 第二個參數為 options</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>沒有 options 的物件，只有網址的話是 <code>GET</code>。<br>
-fetch 回傳的是一個 Promise 物件，Promise 簡單來說是 <strong>處理非同步操作的特殊物件</strong>，有關於 Promise 之後會再補充。</p>
-<h3 id="then-catch">then &amp; catch</h3>
-<p>如果要拿到回傳的 response ，可以透過 <code>then</code>。要接 .then 前面的物件必要類型為 Promise，而 <code>fetch()</code> 回傳的就是一個 Promise 物件。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> endPoint <span class="token operator">=</span> <span class="token string">'https://restcountries.com/v3.1/name/Taiwan'</span>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/shan-logo-appletouch.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/shan-logo.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/shan-logo-16X16.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"blog.rosa.tw",root:"/",scheme:"Gemini",version:"8.0.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,"Pisces | Gemini":240},copycode:!0,bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!0,pangu:!1,comments:{style:"buttons",active:!0,storage:!0,lazyload:!0,nav:{disqus:{text:"留言區",order:-1}},"Available values":"disqus"},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"fadeInDown",post_body:"fadeInDown",coll_header:"fadeInLeft",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"搜尋...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-S8ZEBJDRWG")</script><meta name="description" content="前言 想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 $.ajax  或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。 本篇記錄 fetch 的使用方式與常見的使用誤區。"><meta property="og:type" content="article"><meta property="og:title" content="筆記 | JavaScript - fetch 獲取遠端資料"><meta property="og:url" content="https://blog.rosa.tw/2022/06/06/JavaScript-fetch"><meta property="og:site_name" content="健忘雜記"><meta property="og:description" content="前言 想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 $.ajax  或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。 本篇記錄 fetch 的使用方式與常見的使用誤區。"><meta property="og:locale" content="zh_TW"><meta property="article:published_time" content="2022-06-22T04:45:11.000Z"><meta property="article:modified_time" content="2022-07-27T05:30:49.732Z"><meta property="article:author" content="Rosa Hong"><meta property="article:tag" content="JavaScript"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://blog.rosa.tw/2022/06/06/JavaScript-fetch.html"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-TW"}</script><title>筆記 | JavaScript - fetch 獲取遠端資料 | 健忘雜記</title><script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script><script>if(CONFIG.hostname===location.hostname){function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-S8ZEBJDRWG")}</script><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript><link rel="alternate" href="/atom.xml" title="健忘雜記" type="application/atom+xml"></head><body itemscope itemtype="http://schema.org/WebPage"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切換導航欄"><span class="toggle-line"></span><span class="toggle-line"></span><span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">健忘雜記</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">紀錄學習與生活</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i> 首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i> 標籤<span class="badge">20</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i> 分類<span class="badge">14</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i> 歸檔<span class="badge">51</span></a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i> 搜尋</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"> <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜尋..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span><span class="toggle-line"></span><span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc"> 文章目錄</li><li class="sidebar-nav-overview"> 本站概要</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-30"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch"><span class="nav-number">2.</span> <span class="nav-text">fetch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#then-catch"><span class="nav-number">2.1.</span> <span class="nav-text">then &amp; catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E7%8B%80%E6%85%8B%E7%A2%BC%E8%99%95%E7%90%86-Response-status-Response-ok"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP 狀態碼處理 Response.status &amp; Response.ok</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Response-text-json"><span class="nav-number">2.3.</span> <span class="nav-text">Response.text() &amp; .json()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST"><span class="nav-number">3.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch-%E7%9A%84-Headers"><span class="nav-number">4.</span> <span class="nav-text">fetch 的 Headers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Type"><span class="nav-number">4.1.</span> <span class="nav-text">Content Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#credentials"><span class="nav-number">4.2.</span> <span class="nav-text">credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D-mode-%E7%9A%84%E8%AA%A4%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">對 mode 的誤解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC-XMLHttpRequest-%E9%82%84%E6%98%AF%E5%AD%98%E5%9C%A8"><span class="nav-number">6.</span> <span class="nav-text">為什麼 XMLHttpRequest 還是存在 ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%9C%E5%85%85-%E5%B9%BE%E7%A8%AE%E7%99%BC-request-%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">補充 : 幾種發 request 的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E-4"><span class="nav-number">8.</span> <span class="nav-text">結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83-15"><span class="nav-number">9.</span> <span class="nav-text">參考</span></a></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="Rosa Hong" src="/images/RosaBlog-LOGO.png"><p class="site-author-name" itemprop="name">Rosa Hong</p><div class="site-description" itemprop="description">菜鳥起飛中</div></div><div class="site-state-wrap animated"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">51</span> <span class="site-state-item-name">文章</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">14</span> <span class="site-state-item-name">分類</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">20</span> <span class="site-state-item-name">標籤</span></a></div></nav></div><div class="links-of-author animated"><span class="links-of-author-item"><a href="https://github.com/meitung473" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;meitung473" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a></span><span class="links-of-author-item"><a href="mailto:a8870506@gmail.com" title="聯絡我 → mailto:a8870506@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a></span><span class="links-of-author-item"><a href="https://www.facebook.com/yanshan.hong1" title="Rosa Hong → https:&#x2F;&#x2F;www.facebook.com&#x2F;yanshan.hong1" rel="noopener" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW"><link itemprop="mainEntityOfPage" href="https://blog.rosa.tw/2022/06/06/JavaScript-fetch"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/RosaBlog-LOGO.png"><meta itemprop="name" content="Rosa Hong"><meta itemprop="description" content="菜鳥起飛中"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="健忘雜記"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> 筆記 | JavaScript - fetch 獲取遠端資料</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i></span> <span class="post-meta-item-text">發表於</span> <time title="創建時間：2022-06-22 12:45:11" itemprop="dateCreated datePublished" datetime="2022-06-22T12:45:11+08:00">2022-06-22</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i></span> <span class="post-meta-item-text">分類於</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2022/" itemprop="url" rel="index"><span itemprop="name">2022</span></a></span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2022/06/" itemprop="url" rel="index"><span itemprop="name">06</span></a></span></span></div><div class="post-meta"><span class="post-meta-item" title="文章字數"><span class="post-meta-item-icon"><i class="far fa-file-word"></i></span> <span class="post-meta-item-text">文章字數：</span> <span>4.5k</span></span><span class="post-meta-item" title="所需閱讀時間"><span class="post-meta-item-icon"><i class="far fa-clock"></i></span> <span class="post-meta-item-text">所需閱讀時間 &asymp;</span> <span>4 分鐘</span></span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="前言-30">前言</h2><p>想要獲取遠端的資料可以使用 AJAX ，在 ES6 之前大多會使用 JQuery 的 <code>$.ajax</code> 或者原生的 XHR，而在 HTML5 則提供 fetch 使用，更多時候會使用 axios 套件。<br> 本篇記錄 fetch 的使用方式與常見的使用誤區。</p><span id="more"></span><h2 id="fetch">fetch</h2><p>fetch 是 HTML5 原生獲取遠端的方式，其操作也十分簡單</p><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>obj<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// 第二個參數為 options</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>沒有 options 的物件，只有網址的話是 <code>GET</code>。<br> fetch 回傳的是一個 Promise 物件，Promise 簡單來說是 <strong>處理非同步操作的特殊物件</strong>，有關於 Promise 之後會再補充。</p><h3 id="then-catch">then &amp; catch</h3><p>如果要拿到回傳的 response ，可以透過 <code>then</code>。要接 .then 前面的物件必要類型為 Promise，而 <code>fetch()</code> 回傳的就是一個 Promise 物件。</p><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> endPoint <span class="token operator">=</span> <span class="token string">'https://restcountries.com/v3.1/name/Taiwan'</span>
 <span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>是 <code>fetch().then</code> 而不是 <strong>fetch.then</strong>，是 fetch 這個函式裡面回傳 Promise</p>
-</blockquote>
-<p>then 接收的參數是 Promise 中 resolve 或是 reject 的函式運行的結果，通常是 resolve，如果是 reject 則會用 <code>.catch</code> 來作錯誤處理。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>是 <code>fetch().then</code> 而不是 <strong>fetch.then</strong>，是 fetch 這個函式裡面回傳 Promise</p></blockquote><p>then 接收的參數是 Promise 中 resolve 或是 reject 的函式運行的結果，通常是 resolve，如果是 reject 則會用 <code>.catch</code> 來作錯誤處理。</p><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>會被丟進 catch 處理的 err 並不是像 XHR status 404 或 500 這類的，而是可能網路連線錯誤或者網址有誤導致不能發出 request 。</p>
-<h3 id="HTTP-狀態碼處理-Response-status-Response-ok">HTTP 狀態碼處理 Response.status &amp;  Response.ok</h3>
-<p>只要是 HTTP 狀態碼 400 以上的我們通常會在 XHR 做錯誤處理</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">xhr<span class="token punctuation">.</span><span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>但是 fetch 不管狀態碼多少，只要有正確的發出請求後回傳的 response 都會進入 resolve ，如果要處理像 onerror 的錯誤可以透過 .then 中 response 的 status 或 ok。</p>
-<ul>
-<li>response.status : 回傳結果的 HTTP code</li>
-</ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>會被丟進 catch 處理的 err 並不是像 XHR status 404 或 500 這類的，而是可能網路連線錯誤或者網址有誤導致不能發出 request 。</p><h3 id="HTTP-狀態碼處理-Response-status-Response-ok">HTTP 狀態碼處理 Response.status &amp; Response.ok</h3><p>只要是 HTTP 狀態碼 400 以上的我們通常會在 XHR 做錯誤處理</p><pre class="line-numbers language-js" data-language="js"><code class="language-js">xhr<span class="token punctuation">.</span><span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>但是 fetch 不管狀態碼多少，只要有正確的發出請求後回傳的 response 都會進入 resolve ，如果要處理像 onerror 的錯誤可以透過 .then 中 response 的 status 或 ok。</p><ul><li>response.status : 回傳結果的 HTTP code</li></ul><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status<span class="token punctuation">)</span> <span class="token comment">// 200 代表成功</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>response.ok : 回傳 boolean ，如果 HTTP code 在 200~299 就回傳 true</li>
-</ul>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li>response.ok : 回傳 boolean ，如果 HTTP code 在 200~299 就回傳 true</li></ul><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
 		<span class="token keyword">if</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>ok<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 			console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'success'</span><span class="token punctuation">)</span>
 		<span class="token punctuation">&#125;</span> 
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Response-text-json">Response.text() &amp; .json()</h3>
-<p>可以將 response 解析成想要的形式</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="Response-text-json">Response.text() &amp; .json()</h3><p>可以將 response 解析成想要的形式</p><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">return</span> response<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token comment">// return response.json() 兩者擇一</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li><code>.text()</code> : 直接印出文字</li>
-<li><code>.json()</code> : 自動幫我們解析 json 格式的資料</li>
-</ul>
-<p>其他種類的格式 :</p>
-<ul>
-<li><code>.blob()</code>：把資料轉成Blob物件</li>
-<li><code>.formData()</code>：把資料轉成FormData物件</li>
-<li><code>.arrayBuffer()</code>：把資料轉成二進制數組</li>
-</ul>
-<blockquote>
-<p>這些方法 <strong>只能擇一</strong>，一但被解析過就不能重複再使用其他的函式解析了。</p>
-</blockquote>
-<h2 id="POST">POST</h2>
-<p>POST 也很簡單，跟 <code>$.ajax()</code> 的操作很像</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 第二個參數可以攜帶 header 、body 或 Http 等資訊</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ul><li><code>.text()</code> : 直接印出文字</li><li><code>.json()</code> : 自動幫我們解析 json 格式的資料</li></ul><p>其他種類的格式 :</p><ul><li><code>.blob()</code>：把資料轉成Blob物件</li><li><code>.formData()</code>：把資料轉成FormData物件</li><li><code>.arrayBuffer()</code>：把資料轉成二進制數組</li></ul><blockquote><p>這些方法 <strong>只能擇一</strong>，一但被解析過就不能重複再使用其他的函式解析了。</p></blockquote><h2 id="POST">POST</h2><p>POST 也很簡單，跟 <code>$.ajax()</code> 的操作很像</p><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 第二個參數可以攜帶 header 、body 或 Http 等資訊</span>
 <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>name<span class="token operator">:</span><span class="token string">'Rosa'</span><span class="token punctuation">&#125;</span>
 <span class="token function">fetch</span><span class="token punctuation">(</span>endPoint<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
 	method<span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
@@ -446,17 +25,7 @@ fetch 回傳的是一個 Promise 物件，Promise 簡單來說是 <strong>處理
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>fetch 的 options 還有包含其他常見的 HTTP 處理，<br>
-在 body 中如果我們要上傳的格式是 JSON 檔，記得要將內容轉換成 JSON 格式。</p>
-<blockquote>
-<p><strong>GET 與 HEAD 是沒有 body 的</strong></p>
-</blockquote>
-<h2 id="fetch-的-Headers">fetch 的 Headers</h2>
-<p>以往在 XHR 要加上 Header</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">XMLHttpRequest<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span>header<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>在 fetch 要加上 Header，可以直接加，或者 new 出一個 Header 容器來放置所需的內容。</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 直接使用 headers</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>fetch 的 options 還有包含其他常見的 HTTP 處理，<br> 在 body 中如果我們要上傳的格式是 JSON 檔，記得要將內容轉換成 JSON 格式。</p><blockquote><p><strong>GET 與 HEAD 是沒有 body 的</strong></p></blockquote><h2 id="fetch-的-Headers">fetch 的 Headers</h2><p>以往在 XHR 要加上 Header</p><pre class="line-numbers language-js" data-language="js"><code class="language-js">XMLHttpRequest<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span>header<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在 fetch 要加上 Header，可以直接加，或者 new 出一個 Header 容器來放置所需的內容。</p><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 直接使用 headers</span>
 <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
 	headers<span class="token operator">:</span><span class="token punctuation">&#123;</span>
 		<span class="token comment">//...</span>
@@ -467,21 +36,12 @@ fetch 回傳的是一個 Promise 物件，Promise 簡單來說是 <strong>處理
 	headers<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Headers</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
 		<span class="token comment">//...</span>
 	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Content-Type">Content Type</h3>
-<p>表單 或是 JSON 格式資料</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token comment">//JSON</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="Content-Type">Content Type</h3><p>表單 或是 JSON 格式資料</p><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token comment">//JSON</span>
 'Content-Type'<span class="token operator">:</span> 'application/json'
 <span class="token comment">// 表單</span>
-'Content-Type'<span class="token operator">:</span> 'application/x-www-form-urlencoded' <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="credentials">credentials</h3>
-<p>預設上不會自動帶上或接收任何 cookies，如果網站依賴 session 會導致請求回傳未經認證，想把 cookies 一起帶上，要加</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+'Content-Type'<span class="token operator">:</span> 'application/x-www-form-urlencoded' <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h3 id="credentials">credentials</h3><p>預設上不會自動帶上或接收任何 cookies，如果網站依賴 session 會導致請求回傳未經認證，想把 cookies 一起帶上，要加</p><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
 	credentials<span class="token operator">:</span> <span class="token string">'include'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="對-mode-的誤解">對 mode 的誤解</h2>
-<p>發送 request 可能會遇到 CORS 的限制，fetch 中mode 提供 <code>'no-cors'</code> 的方法，乍看之下會以為能突破 CORS 限制，既不會跳出錯誤 (不會跳到 .catch)，也能發出 request ，但 <strong>response 的 status 是 0 ，body 是空的</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="對-mode-的誤解">對 mode 的誤解</h2><p>發送 request 可能會遇到 CORS 的限制，fetch 中mode 提供 <code>'no-cors'</code> 的方法，乍看之下會以為能突破 CORS 限制，既不會跳出錯誤 (不會跳到 .catch)，也能發出 request ，但 <strong>response 的 status 是 0 ，body 是空的</strong></p><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
 	method<span class="token operator">:</span><span class="token string">'POST'</span><span class="token punctuation">,</span>
 	headers<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Headers</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
 		<span class="token string">'Content-Type'</span><span class="token operator">:</span><span class="token string">'application/json'</span>
@@ -492,30 +52,7 @@ fetch 回傳的是一個 Promise 物件，Promise 簡單來說是 <strong>處理
 <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>麻瓜翻譯機 :<br>
-不會回傳錯誤，也不會突破 CORS 的限制<br>
-避免發生錯誤，硬要丟出一個 request ，還你一個安心 response，裡面包含沒東西的 body 以及 status 為 0 。</p>
-</blockquote>
-<p>CORS 的限制是後端要解決，前端無法直接實現掛跨 CORS。</p>
-<h2 id="為什麼-XMLHttpRequest-還是存在">為什麼 XMLHttpRequest 還是存在 ?</h2>
-<p>我們都知道 XHR 寫起來有點囉嗦，在 fetch 問世之後，除了支援舊的瀏覽器會使用到 XHR，現代開發大多還是使用 fetch，但是 XMLHttpRequest 並沒有被廢棄，因為 fetch 還是有些功能是無法做到的。</p>
-<p>**fetch 做不到 : **</p>
-<ol>
-<li>上傳進度追蹤，fetch 必須搭配其他的 API 才能做到，</li>
-<li>錯誤的回應處理<br>
-fetch 不管 HTTP 404 還是 500 ，也還是會 resolve，代表 <strong>你確實有送出 request</strong>，<code>.catch</code> 會抓到的錯誤只會是 <strong>網路錯誤或其他會中斷 request 的情況</strong>。對於錯誤的處理不是那麼直覺。</li>
-<li>中斷  (absort) fetch<br>
-目前沒有直接中斷 fetch (Promise) 的方法，不像 XHR 提供 <code>.absort()</code>，但是 WebAPIs 有提供 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/AbortController#browser_compatibility">AbortController</a> 可以讓 fetch 做到中斷，目前為實驗性(?)<br>
-<a href="https://mdn.github.io/dom-examples/abort-api/">MDN 提供的範例</a>，讓你突然不想看影片的時候，停止發出 request。</li>
-<li>逾時處理 (timeout)<br>
-XHR 逾期的時候可以暫停發出請求，第三點也提到 fetch 因為沒有中斷的功能，無法做到。</li>
-</ol>
-<h2 id="補充-幾種發-request-的方法">補充 : 幾種發 request 的方法</h2>
-<p>以下都會使用 GET 為例</p>
-<ol>
-<li>XHR <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>麻瓜翻譯機 :<br> 不會回傳錯誤，也不會突破 CORS 的限制<br> 避免發生錯誤，硬要丟出一個 request ，還你一個安心 response，裡面包含沒東西的 body 以及 status 為 0 。</p></blockquote><p>CORS 的限制是後端要解決，前端無法直接實現掛跨 CORS。</p><h2 id="為什麼-XMLHttpRequest-還是存在">為什麼 XMLHttpRequest 還是存在 ?</h2><p>我們都知道 XHR 寫起來有點囉嗦，在 fetch 問世之後，除了支援舊的瀏覽器會使用到 XHR，現代開發大多還是使用 fetch，但是 XMLHttpRequest 並沒有被廢棄，因為 fetch 還是有些功能是無法做到的。</p><p>**fetch 做不到 : **</p><ol><li>上傳進度追蹤，fetch 必須搭配其他的 API 才能做到，</li><li>錯誤的回應處理<br> fetch 不管 HTTP 404 還是 500 ，也還是會 resolve，代表 <strong>你確實有送出 request</strong>，<code>.catch</code> 會抓到的錯誤只會是 <strong>網路錯誤或其他會中斷 request 的情況</strong>。對於錯誤的處理不是那麼直覺。</li><li>中斷 (absort) fetch<br> 目前沒有直接中斷 fetch (Promise) 的方法，不像 XHR 提供 <code>.absort()</code>，但是 WebAPIs 有提供 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/AbortController#browser_compatibility">AbortController</a> 可以讓 fetch 做到中斷，目前為實驗性(?)<br> <a href="https://mdn.github.io/dom-examples/abort-api/">MDN 提供的範例</a>，讓你突然不想看影片的時候，停止發出 request。</li><li>逾時處理 (timeout)<br> XHR 逾期的時候可以暫停發出請求，第三點也提到 fetch 因為沒有中斷的功能，無法做到。</li></ol><h2 id="補充-幾種發-request-的方法">補充 : 幾種發 request 的方法</h2><p>以下都會使用 GET 為例</p><ol><li>XHR<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 xhr<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
 xhr<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>state<span class="token operator">>=</span><span class="token number">200</span> <span class="token operator">&amp;&amp;</span> response<span class="token punctuation">.</span>state <span class="token operator">&lt;=</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -525,9 +62,7 @@ xhr<span class="token punctuation">.</span><span class="token function-variable 
 xhr<span class="token punctuation">.</span><span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
-xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li>JQuery <pre class="line-numbers language-js" data-language="js"><code class="language-js">$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li>JQuery<pre class="line-numbers language-js" data-language="js"><code class="language-js">$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
 	method <span class="token operator">:</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
 	url <span class="token operator">:</span> url
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
@@ -536,103 +71,17 @@ xhr<span class="token punctuation">.</span><span class="token function">send</sp
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li>fetch <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li>fetch<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li>axios <pre class="line-numbers language-js" data-language="js"><code class="language-js">axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li>axios<pre class="line-numbers language-js" data-language="js"><code class="language-js">axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
  <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ol>
-<h2 id="結語-15">結語</h2>
-<p>在我學習 JavaScript 這段期間，講到遠端取資料，很多教學並不會提到 fetch 或是 XMLHttpRequest，反而是叫你直接使用 axios，畢竟重新造輪子是很麻煩的 🥴，不過 fetch 無疑的是會越來越完善，不論是用何者工具或手法必有一定誕生的理由，了解原理後開發都可以更得心應手。</p>
-<p>我蠻喜歡<a href="https://www.ithome.com.tw/voice/121435">良葛格 下的這番結論</a></p>
-<blockquote>
-<p>舊東西誕生在舊的時代，適時地解決了當時的問題，而後從中累積了不少的使用經驗，因而誕生了新的技術、概念或規範，急著預言舊東西將會逝去，並不會讓開發者看起來更為耀眼，只會讓開發者看不清楚新東西的本質罷了。</p>
-</blockquote>
-<h2 id="參考-18">參考</h2>
-<ol>
-<li>從 fetch 解決什麼問題來看 : <a href="https://www.ithome.com.tw/voice/121435">從XHR到Fetch | iThome</a></li>
-<li>Huli 大的 fetch 系列影片
-<ul>
-<li><a href="https://youtu.be/_8cLWMAQe3A">Fetch 與 Promise 補充系列（一）：初探 Fetch</a></li>
-<li><a href="https://youtu.be/Ovv9tPhiW_0">Fetch 與 Promise 補充系列（二）：fetch 的 POST 與錯誤處理</a></li>
-<li><a href="https://youtu.be/5A9ogWY7J7w">Fetch 與 Promise 補充系列（三）：fetch 的使用注意事項</a></li>
-</ul>
-</li>
-<li>XHR v.s fetch，單純只是好奇查詢 XD <a href="https://blog.openreplay.com/ajax-battle-xmlhttprequest-vs-the-fetch-api">Ajax Battle: XMLHttpRequest vs the Fetch API </a></li>
-<li><a href="https://zh.javascript.info/fetch">Fetch</a></li>
-<li>很推的詳細文字版學習 : <a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/ajax_fetch.html">AJAX與Fetch API · 從ES6開始的JavaScript學習生活 (gitbooks.io)</a></li>
-</ol>
-
-    </div>
-
-    
-    
-    
-      
-  <div class="popular-posts-header">相關文章</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\08\08\JavaScript-DataType.html" rel="bookmark">筆記 | JavaScript - 資料型態(I)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\08\08\JavaScript-Logic.html" rel="bookmark">筆記 | JavaScript 邏輯運算子</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\12\12\JavaScript_API_twitch.html" rel="bookmark">紀錄 | 串接 Twitch API 實戰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting-III.html" rel="bookmark">筆記 | JavaScript - 宣告提升(III) - let & const 以及 TDZ</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting.html" rel="bookmark">筆記 | JavaScript - 宣告提升(I) - 我以為的以為</a></div>
-    </li>
-  </ul>
-
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2022/06/06/JavaScript-Event-Loop-01" rel="prev" title="筆記 | JavaScript - Event Loop 事件循環 (I)">
-                  <i class="fa fa-chevron-left"></i> 筆記 | JavaScript - Event Loop 事件循環 (I)
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2022/07/07/React-Higher-Order-Component" rel="next" title="筆記 | React Higher Order Component (HOC)">
-                  筆記 | React Higher Order Component (HOC) <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-  
-  
-  
-
-
-
-      
-      
-  <div style="">
-       
-
-<script>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ol><h2 id="結語-4">結語</h2><p>在我學習 JavaScript 這段期間，講到遠端取資料，很多教學並不會提到 fetch 或是 XMLHttpRequest，反而是叫你直接使用 axios，畢竟重新造輪子是很麻煩的 🥴，不過 fetch 無疑的是會越來越完善，不論是用何者工具或手法必有一定誕生的理由，了解原理後開發都可以更得心應手。</p><p>我蠻喜歡<a href="https://www.ithome.com.tw/voice/121435">良葛格 下的這番結論</a></p><blockquote><p>舊東西誕生在舊的時代，適時地解決了當時的問題，而後從中累積了不少的使用經驗，因而誕生了新的技術、概念或規範，急著預言舊東西將會逝去，並不會讓開發者看起來更為耀眼，只會讓開發者看不清楚新東西的本質罷了。</p></blockquote><h2 id="參考-15">參考</h2><ol><li>從 fetch 解決什麼問題來看 : <a href="https://www.ithome.com.tw/voice/121435">從XHR到Fetch | iThome</a></li><li>Huli 大的 fetch 系列影片<ul><li><a href="https://youtu.be/_8cLWMAQe3A">Fetch 與 Promise 補充系列（一）：初探 Fetch</a></li><li><a href="https://youtu.be/Ovv9tPhiW_0">Fetch 與 Promise 補充系列（二）：fetch 的 POST 與錯誤處理</a></li><li><a href="https://youtu.be/5A9ogWY7J7w">Fetch 與 Promise 補充系列（三）：fetch 的使用注意事項</a></li></ul></li><li>XHR v.s fetch，單純只是好奇查詢 XD <a href="https://blog.openreplay.com/ajax-battle-xmlhttprequest-vs-the-fetch-api">Ajax Battle: XMLHttpRequest vs the Fetch API</a></li><li><a href="https://zh.javascript.info/fetch">Fetch</a></li><li>很推的詳細文字版學習 : <a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/ajax_fetch.html">AJAX與Fetch API · 從ES6開始的JavaScript學習生活 (gitbooks.io)</a></li></ol></div><div class="popular-posts-header">相關文章</div><ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting-III.html" rel="bookmark">筆記 | JavaScript - 宣告提升(III) - let & const 以及 TDZ</a></div></li><li class="popular-posts-item"><div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting.html" rel="bookmark">筆記 | JavaScript - 宣告提升(I) - 我以為的以為</a></div></li><li class="popular-posts-item"><div class="popular-posts-title"><a href="\2022\01\01\JavaScript_typeof.html" rel="bookmark">筆記 | JavaScript - 資料型態 (II) typeof</a></div></li><li class="popular-posts-item"><div class="popular-posts-title"><a href="\2022\04\04\JavaScript-Closure-I.html" rel="bookmark">筆記 | JavaScript - Closure 閉包(I) 基礎概念</a></div></li><li class="popular-posts-item"><div class="popular-posts-title"><a href="\2022\04\04\JavaScript-Closure-II.html" rel="bookmark">筆記 | JavaScript - Closure 閉包(II) 常見陷阱題</a></div></li></ul><footer class="post-footer"><div class="post-tags"><a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2022/06/06/JavaScript-Event-Loop-01" rel="prev" title="筆記 | JavaScript - Event Loop 事件循環 (I)"><i class="fa fa-chevron-left"></i> 筆記 | JavaScript - Event Loop 事件循環 (I)</a></div><div class="post-nav-item"> <a href="/2022/07/07/React-Higher-Order-Component" rel="next" title="筆記 | React Higher Order Component (HOC)">筆記 | React Higher Order Component (HOC)<i class="fa fa-chevron-right"></i></a></div></div></footer></article><div style=""><script>
   window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
@@ -652,74 +101,7 @@ xhr<span class="token punctuation">.</span><span class="token function">send</sp
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script>
-
-  </div>
-    
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      
-
-      
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RosaHong</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-      <span>總字數：</span>
-    <span title="總字數">166k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span>所需總閱讀時間 &asymp;</span>
-    <span title="所需總閱讀時間">2:31</span>
-  </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1.15.0/dist/lozad.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-<script>
+</script></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2022</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">RosaHong</span></div><div class="wordcount"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-chart-line"></i></span> <span>總字數：</span> <span title="總字數">166k</span></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-coffee"></i></span> <span>所需總閱讀時間 &asymp;</span> <span title="所需總閱讀時間">2:31</span></span></div><div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動</div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script src="//cdn.jsdelivr.net/npm/lozad@1.15.0/dist/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/local-search.js"></script><script>
 if (document.querySelectorAll('.mermaid').length) {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
     mermaid.init({
@@ -731,25 +113,4 @@ if (document.querySelectorAll('.mermaid').length) {
     }, '.mermaid');
   }, window.mermaid);
 }
-</script>
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-  
-      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
-
-
-  
-
-</body>
-</html>
+</script><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"></body></html>

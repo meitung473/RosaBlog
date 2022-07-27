@@ -1,13 +1,1 @@
-async function publishBtn(tp,app){
-    let file = tp.file.find_tfile(tp.file.title);
-    let path  = "_posts";
-    const folder = app.vault.getAbstractFileByPath(path).name; 
-    let year  = tp.date.now("YYYY");
-    let month = tp.date.now("MM");
-    const {update} = app.plugins.plugins["metaedit"].api;
-    await update("date",tp.date.now("yyyy-MM-DD hh:mm:ss"),file)
-    if(tp.frontmatter.date !== undefined){
-        await tp.file.move(`/${folder}/${year}/${month}/${tp.file.title}`)
-    }
-}
-module.exports = publishBtn
+var publishBtn=function(){var n=_asyncToGenerator(regeneratorRuntime.mark(function t(e,n){var r,i,a,o,u;return regeneratorRuntime.wrap(function(t){for(;;)switch(t.prev=t.next){case 0:return r=e.file.find_tfile(e.file.title),"_posts",i=n.vault.getAbstractFileByPath("_posts").name,a=e.date.now("YYYY"),o=e.date.now("MM"),u=n.plugins.plugins.metaedit.api.update,t.next=8,u("date",e.date.now("yyyy-MM-DD hh:mm:ss"),r);case 8:if(void 0!==e.frontmatter.date)return t.next=11,e.file.move("/"+i+"/"+a+"/"+o+"/"+e.file.title);t.next=11;break;case 11:case"end":return t.stop()}},t,this)}));return function(t,e){return n.apply(this,arguments)}}();function _asyncToGenerator(t){return function(){var u=t.apply(this,arguments);return new Promise(function(a,o){return function e(t,n){try{var r=u[t](n),i=r.value}catch(t){return void o(t)}if(!r.done)return Promise.resolve(i).then(function(t){e("next",t)},function(t){e("throw",t)});a(i)}("next")})}}module.exports=publishBtn;
