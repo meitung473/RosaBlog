@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/shan-logo-appletouch.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/shan-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/shan-logo-16X16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.rosa.tw","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"Pisces | Gemini":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"buttons","active":true,"storage":true,"lazyload":true,"nav":{"disqus":{"text":"留言區","order":-1}},"Available values":"disqus"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S8ZEBJDRWG');
+</script>
+
+  <meta name="description" content="前言 JavaScript 中的 function 是很神奇的東西 在初學時看到很多名詞 像 callback function(回呼函式)、First-Class Function(一級函式)、High-Order Function(高階函式) 還有 Closure(閉包) 等等的，總是會霧撒撒… 本篇來初步認識 function 中的 First-Class Function 概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="筆記 | JavaScript - first class function (一級函式)">
+<meta property="og:url" content="https://blog.rosa.tw/2022/03/03/JavaScript-First-Class-Function">
+<meta property="og:site_name" content="健忘雜記">
+<meta property="og:description" content="前言 JavaScript 中的 function 是很神奇的東西 在初學時看到很多名詞 像 callback function(回呼函式)、First-Class Function(一級函式)、High-Order Function(高階函式) 還有 Closure(閉包) 等等的，總是會霧撒撒… 本篇來初步認識 function 中的 First-Class Function 概念">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-03-26T05:34:14.000Z">
+<meta property="article:modified_time" content="2022-07-27T05:30:49.731Z">
+<meta property="article:author" content="Rosa Hong">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.rosa.tw/2022/03/03/JavaScript-First-Class-Function.html">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>筆記 | JavaScript - first class function (一級函式) | 健忘雜記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8ZEBJDRWG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-S8ZEBJDRWG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="健忘雜記" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">健忘雜記</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">紀錄學習與生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">51</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-30"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%B4%9A%E5%87%BD%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">一級函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E5%BC%8F%E4%B9%9F%E6%98%AF%E7%89%A9%E4%BB%B6%E7%9A%84%E4%B8%80%E7%A8%AE"><span class="nav-number">3.</span> <span class="nav-text">函式也是物件的一種 ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%9C%E5%85%85-%E5%87%BD%E5%BC%8F%E5%9B%9E%E5%82%B3%E4%B8%80%E5%80%8B%E5%8F%A6%E4%B8%80%E5%80%8B%E5%87%BD%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">補充 : 函式回傳一個另一個函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83-2"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Rosa Hong"
+      src="/images/RosaBlog-LOGO.png">
+  <p class="site-author-name" itemprop="name">Rosa Hong</p>
+  <div class="site-description" itemprop="description">菜鳥起飛中</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/meitung473" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;meitung473" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:a8870506@gmail.com" title="聯絡我 → mailto:a8870506@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yanshan.hong1" title="Rosa Hong → https:&#x2F;&#x2F;www.facebook.com&#x2F;yanshan.hong1" rel="noopener" target="_blank"><i class="fa fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://blog.rosa.tw/2022/03/03/JavaScript-First-Class-Function">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/RosaBlog-LOGO.png">
+      <meta itemprop="name" content="Rosa Hong">
+      <meta itemprop="description" content="菜鳥起飛中">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="健忘雜記">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          筆記 | JavaScript - first class function (一級函式)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-03-26 13:34:14" itemprop="dateCreated datePublished" datetime="2022-03-26T13:34:14+08:00">2022-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2022/" itemprop="url" rel="index"><span itemprop="name">2022</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2022/03/" itemprop="url" rel="index"><span itemprop="name">03</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>2 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言-30">前言</h2>
+<p>JavaScript 中的 function 是很神奇的東西<br>
+在初學時看到很多名詞<br>
+像 callback function(回呼函式)、First-Class Function(一級函式)、High-Order Function(高階函式)<br>
+還有 Closure(閉包) 等等的，總是會霧撒撒…<br>
+本篇來初步認識 function 中的 First-Class Function 概念</p>
+<span id="more"></span>
+<h2 id="一級函式">一級函式</h2>
+<blockquote>
+<p>函式可以被視為其他變數一樣，像是 function 可以指定成變數，也可以做為參數傳入別的 funciton。</p>
+</blockquote>
+<p>JavaScript 的 function 符合 first class function</p>
+<ul>
+<li>函式只是物件的一種</li>
+<li>function 可以儲存成變數 (function expression) <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">greet</span> <span class="token operator">=</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>function 可以當作參數傳入別的 function 中，這邊把 function 當作 <strong>值</strong> 來使用。<br>
+(這樣的方式會稱這個 function 是 callback function)  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token string">'hello,'</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">greet</span><span class="token punctuation">(</span><span class="token parameter">message<span class="token punctuation">,</span>name</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">greet</span><span class="token punctuation">(</span>hello<span class="token punctuation">,</span><span class="token string">'rosa!'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>function 裡面又回傳另一個 function。<br>
+只要接收函式作為參數，或是回傳函式作為輸出的函式<br>
+就稱作高階函式 ( <strong>Higher-Order Function</strong> )<br>
+像是 Array 中的 <code>map</code> function  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span><span class="token operator">=></span> num <span class="token operator">*</span> <span class="token number">2</span> <span class="token punctuation">)</span>
+<span class="token comment">// 實作</span>
+<span class="token keyword">function</span> <span class="token function">arrayMap</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span>array</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">let</span> length <span class="token operator">=</span> array<span class="token punctuation">.</span>length
+	<span class="token keyword">let</span> newArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> 
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i<span class="token operator">=</span><span class="token number">0</span> <span class="token punctuation">;</span> i<span class="token operator">&lt;</span>length <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		newArray<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> newArray
+<span class="token punctuation">&#125;</span>
+<span class="token function">arrayMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> item <span class="token operator">*</span> <span class="token number">2</span> 	
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>function 跟物件一樣有屬性 (property)<br>
+下面進行說明</li>
+</ul>
+<h2 id="函式也是物件的一種">函式也是物件的一種 ?</h2>
+<p>範例 :</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'invoke this'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 直接執行</span>
+hello<span class="token punctuation">.</span>people<span class="token operator">=</span><span class="token string">'rosa'</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>hello<span class="token punctuation">.</span>people<span class="token punctuation">)</span> <span class="token comment">// output : rosa</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>執行 (invoke) 函式，是透過 <code>()</code></li>
+<li>可以直接用 <code>.</code> 建立物件中的 key-value</li>
+</ol>
+<p>證明 function 是一種特殊的物件，也可以當作物件來使用。</p>
+<h2 id="補充-函式回傳一個另一個函式">補充 : 函式回傳一個另一個函式</h2>
+<p>調用函式與回傳的函式有幾種做法</p>
+<ol>
+<li>存成變數</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello, Rosa!'</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">const</span> myFunc <span class="token operator">=</span> <span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// myFunc 接收的是一個 function</span>
+<span class="token function">myFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 呼叫</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>雙括號直接呼叫</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello, Rosa!'</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span>
+<span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>IIFE (Immediately Invoked Function Expression): 定義完就回傳的 function</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello, Rosa!'</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#125;</span>
+<span class="token function">sayhi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>IIFE 的例子很常在 JQuery 看見</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//$ = jQuery</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="參考-2">參考</h2>
+<ol>
+<li><a href="https://pjchender.blogspot.com/2016/03/javascriptfunctionobjects.html">[筆記] JavaScript 中函式就是一種物件 ─ 談談 first class function（一等公民函式） ~ PJCHENder 那些沒告訴你的小細節</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/First-class_Function">一級函式（First-class Function） - 術語表 | MDN (mozilla.org)</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10224519">JS 原力覺醒 Day19 - 一級函式與高階函式</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相關文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\08\08\JavaScript-DataType.html" rel="bookmark">筆記 | JavaScript - 資料型態(I)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\08\08\JavaScript-Logic.html" rel="bookmark">筆記 | JavaScript 邏輯運算子</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\12\12\JavaScript_API_twitch.html" rel="bookmark">紀錄 | 串接 Twitch API 實戰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting-III.html" rel="bookmark">筆記 | JavaScript - 宣告提升(III) - let & const 以及 TDZ</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2022\01\01\JavaScript-Hoisting.html" rel="bookmark">筆記 | JavaScript - 宣告提升(I) - 我以為的以為</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/03/CSSSeriesZeroToOne-06" rel="prev" title="CSSZeroToOneSeries | 06 | 網頁頁尾版塊">
+                  <i class="fa fa-chevron-left"></i> CSSZeroToOneSeries | 06 | 網頁頁尾版塊
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/03/JavaScript-call-by-what" rel="next" title="筆記 | JavaScript - 參數傳遞 call by value or call by reference & call by sharing">
+                  筆記 | JavaScript - 參數傳遞 call by value or call by reference & call by sharing <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+      
+  <div style="">
+       
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+  </div>
+    
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RosaHong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>總字數：</span>
+    <span title="總字數">166k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>所需總閱讀時間 &asymp;</span>
+    <span title="所需總閱讀時間">2:31</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.15.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
