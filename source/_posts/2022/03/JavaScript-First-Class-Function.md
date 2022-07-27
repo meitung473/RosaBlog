@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - first class function (一級函式)
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2022'
+  - '03'
 author: Rosa Hong
 date: 2022-03-26 13:34:14
 description:

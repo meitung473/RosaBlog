@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - Closure 閉包(II) 常見陷阱題
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-13 21:51:51
 description:

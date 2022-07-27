@@ -5,7 +5,8 @@ tags:
   - phpMyadmin
   - LAMP
 categories:
-  - Back-end 
+  - '2022'
+  - '02'
 description: 紀錄 DIY 架站的歷程
 author: Rosa Hong
 date: 2022-02-06 12:38:32

@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - 參數傳遞 call by value or call by reference & c
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '03'
 author: Rosa Hong
 date: 2022-03-26 23:12:05
 description:

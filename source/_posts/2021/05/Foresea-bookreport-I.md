@@ -3,7 +3,8 @@ title: 心得 | Foresea畢業專題(I) ─《綜合資源分享》
 tags:
   - 畢業專題
 categories:
-  - 紀錄
+  - '2021'
+  - '05'
 author: Rosa Hong
 date: 2021-05-18 14:09:24
 ---

@@ -3,7 +3,8 @@ title: 筆記 | CSS 選擇器
 tags:
   - CSS
 categories:
-  - Front-end
+  - '2021'
+  - 08
 author: RosaHong
 date: 2021-08-11 11:02:04
 ---

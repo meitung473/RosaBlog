@@ -4,7 +4,8 @@ tags:
   - JavaScript
   - AJAX
 categories:
-  - Front-end
+  - '2021'
+  - '12'
 author: Rosa Hong
 description: 學習 twitch api 如何使用
 date: 2021-12-23 11:32:09

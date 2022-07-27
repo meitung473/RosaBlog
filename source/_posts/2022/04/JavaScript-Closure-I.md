@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - Closure 閉包(I) 基礎概念
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-13 21:51:39
 description:

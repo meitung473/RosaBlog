@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - 資料型態(I)
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2021'
+  - 08
 author: Rosa Hong
 date: 2021-08-31 09:26:15
 ---

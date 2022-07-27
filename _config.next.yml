@@ -491,7 +491,7 @@ math:
     # Default (false) will load mathjax / katex script on demand.
     # That is it only render those page which has `mathjax: true` in front-matter.
     # If you set it to true, it will load mathjax / katex srcipt EVERY PAGE.
-    every_page: false
+    every_page: true
 
     mathjax:
         enable: false
@@ -499,7 +499,7 @@ math:
         tags: none
 
     katex:
-        enable: false
+        enable: true
         # See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex
         copy_tex: false
 
@@ -654,7 +654,7 @@ add_this_id:
 # Google Analytics
 # See: https://analytics.google.com
 google_analytics:
-    tracking_id: # <app_id>
+    tracking_id: G-S8ZEBJDRWG
     # By default, NexT will load an external gtag.js script on your site.
     # If you only need the pageview feature, set the following option to true to get a better performance.
     only_pageview: false

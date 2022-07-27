@@ -7,7 +7,7 @@ language: zh-TW
 timezone:
 url: https://blog.rosa.tw/
 root: /
-permalink: ":category/:title/"
+permalink: ":year/:month/:hash.html"
 permalink_defaults: null
 pretty_urls:
     trailing_index: false
@@ -22,7 +22,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: ":lang"
 skip_render: null
-new_post_name: ":year/:month/:title.md"
+new_post_name: ":category/:title"
 default_layout: post
 titlecase: false
 external_link:
@@ -72,3 +72,22 @@ deploy:
     branch: master
 plugins:
     - hexo-footnotes
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - markdown-it-katex
+auto_category:
+ enable: true
+ depth:
+server:
+  port: 4001
+  compress: true
+  header: true
+
+

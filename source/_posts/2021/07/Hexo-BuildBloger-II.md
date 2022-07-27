@@ -3,7 +3,8 @@ title: 紀錄 | HEXO 一起來做部落格(II)
 tags:
   - Blog
 categories:
-  - Hexo
+  - '2021'
+  - '07'
 author: Rosa Hong
 description: 一邊建置Blog，一邊紀錄。 ─ Day02
 date: 2021-07-17 13:32:35

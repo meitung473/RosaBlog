@@ -7,9 +7,10 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "test": "hexo clean && hexo generate && gulp && hexo server",
+    "test": "hexo clean && hexo generate && gulp && hexo server -p 5000",
     "online": "hexo clean && hexo generate && gulp && hexo deploy",
-    "dev": "hexo clean && hexo generate && hexo server"
+    "dev": "hexo clean && hexo generate && hexo server",
+    "prepare": "husky install"
   },
   "hexo": {
     "version": "5.4.0"
@@ -28,6 +29,7 @@
     "gulp-uglify": "^3.0.2",
     "hexo": "^5.0.0",
     "hexo-admin": "^2.3.0",
+    "hexo-auto-category": "^0.2.1",
     "hexo-deployer-git": "^3.0.0",
     "hexo-footnotes": "^1.0.2",
     "hexo-generator-archive": "^1.0.0",
@@ -38,20 +40,22 @@
     "hexo-generator-tag": "^1.0.0",
     "hexo-related-popular-posts": "^5.0.1",
     "hexo-renderer-ejs": "^1.0.0",
-    "hexo-renderer-marked": "^4.0.0",
+    "hexo-renderer-markdown-it": "^6.0.1",
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
     "hexo-theme-landscape": "^0.0.3",
     "hexo-theme-next": "^8.6.1",
-    "hexo-word-counter": "0.0.3"
+    "hexo-word-counter": "0.0.3",
+    "markdown-it-katex": "^2.0.3"
   },
   "main": "index.js",
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "gulp-imagemin": "^8.0.0"
+    "gulp-imagemin": "^8.0.0",
+    "husky": "^8.0.1"
   },
   "author": "",
   "license": "ISC",

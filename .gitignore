@@ -5,3 +5,8 @@ db.json
 node_modules/
 public/
 .deploy*/
+
+.obsidian/workspace
+source/template
+source/template_md
+source/template_script

@@ -3,7 +3,8 @@ title: 筆記 | 初級入門必學的 CommandLine
 tags:
   - Programming
 categories:
-  - Programming
+  - '2021'
+  - '07'
 author: Rosa Hong
 date: 2021-07-27 19:30:57
 ---

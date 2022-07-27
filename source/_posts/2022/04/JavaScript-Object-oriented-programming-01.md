@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - class 物件導向 (I) 初探 OOP
 tags:
   - OOP
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-19 12:33:15
 description:

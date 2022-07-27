@@ -3,7 +3,8 @@ title: 心得 | Foresea畢業專題(III)─《Finalfinal.docx》
 tags:
   - 畢業專題
 categories:
-  - 紀錄
+  - '2021'
+  - '06'
 author: Rosa Hong
 date: 2021-06-06 01:02:46
 ---

@@ -1,9 +1,10 @@
 ---
 title: 筆記 | JavaScript - 宣告提升(II) - 跟著 JavaScript 引擎發動
 tags:
-	- JavaScript
+  - JavaScript
 categories:
-	- JavaScript
+  - '2022'
+  - '01'
 description: 宣告提升背後的原理以及規則
 author: Rosa Hong
 date: 2022-01-14 11:23:19

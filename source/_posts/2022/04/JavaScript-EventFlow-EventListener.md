@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - 事件機制原理 & 事件代理
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-12 10:24:14
 description:

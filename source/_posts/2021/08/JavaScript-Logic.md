@@ -3,7 +3,8 @@ title: 筆記 | JavaScript 邏輯運算子
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2021'
+  - 08
 author: Rosa Hong
 date: 2021-08-04 14:33:55
 ---

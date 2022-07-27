@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - Event Loop 事件循環 (I)
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2022'
+  - '06'
 author: Rosa Hong
 date: 2022-06-18 00:54:45
 ---

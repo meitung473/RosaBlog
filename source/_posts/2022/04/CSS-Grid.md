@@ -4,8 +4,10 @@ tags:
   - CSS
   - grid
 categories:
-	- Front-end
+  - '2022'
+  - '04'
 author: Rosa Hong
+fileClass: categories
 date: 2022-04-09 18:55:08
 description:
 ---

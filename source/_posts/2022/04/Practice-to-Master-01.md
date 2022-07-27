@@ -4,7 +4,8 @@ tags:
   - React
   - styled-components
 categories:
-    - Front-end
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-29 12:00:01
 ---

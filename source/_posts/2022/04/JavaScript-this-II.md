@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - this (II) call、appaly、bind
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-15 11:07:53
 description:

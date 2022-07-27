@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - Prototype 物件導向 (III) 原型 & 原型鏈
 tags:
   - JavaScript
 categories:
-    - JavaScript
+  - '2022'
+  - '04'
 author: Rosa Hong
 date: 2022-04-19 12:33:30
 description:

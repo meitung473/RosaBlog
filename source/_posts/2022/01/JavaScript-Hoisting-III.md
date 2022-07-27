@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - 宣告提升(III) - let & const 以及 TDZ
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2022'
+  - '01'
 description: 了解let & const 的宣告提升以及 TDZ 的意思
 author: Rosa Hong
 date: 2022-01-15 16:31:51

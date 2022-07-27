@@ -1,0 +1,13 @@
+{
+  "livePreview": false,
+  "strictLineBreaks": false,
+  "showFrontmatter": false,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "useTab": false,
+  "tabSize": 2,
+  "autoConvertHtml": true,
+  "legacyEditor": false,
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true
+}

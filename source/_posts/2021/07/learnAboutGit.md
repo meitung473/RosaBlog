@@ -3,7 +3,8 @@ title: 筆記 | 初探 Git
 tags:
   - Git
 categories:
-  - Programming
+  - '2021'
+  - '07'
 author: Rosa Hong
 date: 2021-07-30 21:22:26
 ---

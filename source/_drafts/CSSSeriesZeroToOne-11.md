@@ -3,10 +3,10 @@ title: CSSZeroToOneSeries | 11 | 表格
 tags:
   - CSS
   - CSSZeroToOneSeries
-categories:
-	- Front-end
+categories: Front-end
 author: Rosa Hong
 ---
+
 ## 本篇成果
 [Codepen](https://codepen.io/shan473/pen/dyZQqKm?editors=0100)
 ![導覽列](https://dsm01pap006files.storage.live.com/y4m9T4H16Ta75kDzYcQq5DvDiixK4mUT7-zgyeMbwFltHZbFafI5uejyNEI2PKXuVsHwbitph6KpHB-W1twOqWHvFYJXV0ZHqpaK31pEbAbsnH7ffzVJrY4jCn-DQT8BuQlWSI7mhiwxpMOte8vgXL82SlBMc9CDVnRs4GQaX5zSfAIPFEVdD6wo429FOHMt4kh?width=1024&height=133&cropmode=none)
@@ -25,6 +25,7 @@ author: Rosa Hong
 ## scope : 表格的讀取
 告訴電腦要怎麼去定義標題，是 row 還是 column
 畫面上不會有任何區別，如果是螢幕閱讀器，就會知道標題是要讀行還是列
+
 ```html
 <th scope="col">1</th>
 <th scope="col">2</th>
@@ -34,6 +35,7 @@ author: Rosa Hong
 
 ## colspan : 跨欄
 td 會有跨欄的時候，在屬性加上要跨的數量
+
 ```html
 <td colspan="2">我要跨兩欄</td>
 ```
@@ -44,6 +46,7 @@ td 會有跨欄的時候，在屬性加上要跨的數量
 
 ### css - caption side : 把標題放...
 caption 可以寫在 html 結構的一開始，再透過 caption side 來放置 caption 的位置
+
 ```css
 caption side: bottom;
 ```

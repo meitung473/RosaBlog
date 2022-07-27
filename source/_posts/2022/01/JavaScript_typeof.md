@@ -3,7 +3,8 @@ title: 筆記 | JavaScript - 資料型態 (II) typeof
 tags:
   - JavaScript
 categories:
-  - JavaScript
+  - '2022'
+  - '01'
 description: 用來判斷型態的 typeof
 author: Rosa Hong
 date: 2022-01-12 20:19:58
