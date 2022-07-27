@@ -15,5 +15,6 @@
     "public/",
     "themes/",
     "scaffolds/"
-  ]
+  ],
+  "promptDelete": false
 }

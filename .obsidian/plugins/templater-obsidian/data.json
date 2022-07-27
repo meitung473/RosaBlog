@@ -1,17 +1,12 @@
 {
   "command_timeout": 5,
-  "templates_folder": "template_md",
-  "templates_pairs": [
-    [
-      "server",
-      "hexo g"
-    ]
-  ],
+  "templates_folder": "source/template_md",
+  "templates_pairs": [],
   "trigger_on_file_creation": false,
   "auto_jump_to_cursor": true,
   "enable_system_commands": true,
   "shell_path": "",
-  "user_scripts_folder": "templater_script",
+  "user_scripts_folder": "source/templater_script",
   "enable_folder_templates": true,
   "folder_templates": [
     {
