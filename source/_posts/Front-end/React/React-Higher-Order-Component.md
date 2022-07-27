@@ -1,11 +1,9 @@
 ---
 title: 筆記 | React Higher Order Component (HOC)
 tags: React
-categories:
-  - '2022'
-  - '07'
+categories: [Front-end,React]
 author: Rosa Hong
-date: 2022-07-26 15:32:36
+date: 2022-07-27 06:30:10
 description:
 ---
 
