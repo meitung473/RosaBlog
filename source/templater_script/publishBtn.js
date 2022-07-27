@@ -8,14 +8,11 @@ async function publishBtn(tp,app){
         }
         return [...categories]
     })()
-    console.log(middlepath)
     const folder = app.vault.getAbstractFileByPath(path).name; 
-    // let year  = tp.date.now("YYYY");
-    // let month = tp.date.now("MM");
     const {update} = app.plugins.plugins["metaedit"].api;
     await update("date",tp.date.now("yyyy-MM-DD hh:mm:ss"),file)
+
     let nonesistsfolder = app.vault.getAbstractFileByPath(`/${folder}/${middlepath.join('/')}`);
-    
     let newpath =`/source/${folder}/`
    
    
