@@ -7,7 +7,7 @@ language: zh-TW
 timezone:
 url: https://blog.rosa.tw/
 root: /
-permalink: ":year/:month/:hash.html"
+permalink: ":year/:month/:title.html"
 permalink_defaults: null
 pretty_urls:
     trailing_index: false
