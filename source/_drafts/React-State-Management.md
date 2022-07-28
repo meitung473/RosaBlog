@@ -1,10 +1,9 @@
 ---
+date: 2022-07-28 12:29:12
 title: React - 淺談狀態管理
 author: Rosa Hong
 tags: React
-categories: 
-- Frontend
-- React
+categories: [Front-end,React]
 description: 
 ---
 > 文章來自 :

@@ -41,11 +41,12 @@ highlight:
     auto_detect: true
     tab_replace: ""
     wrap: true
-    hljs: false
+    hljs: true
+
 prismjs:
-    enable: true
+    enable: false
     preprocess: true
-    line_number: true
+    line_number: false
     tab_replace: ""
 index_generator:
     path: ""
@@ -86,7 +87,7 @@ auto_category:
  enable: true
  depth:
 server:
-  port: 4001
+  port: 4002
   compress: true
   header: true
 

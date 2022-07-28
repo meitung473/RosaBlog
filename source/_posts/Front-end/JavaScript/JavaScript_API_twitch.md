@@ -1,16 +1,12 @@
 ---
 title: 紀錄 | 串接 Twitch API 實戰
 tags:
-  - JavaScript
   - AJAX
-categories:
-  - '2021'
-  - '12'
+categories: [Front-end,JavaScript]
 author: Rosa Hong
 description: 學習 twitch api 如何使用
 date: 2021-12-23 11:32:09
 ---
-
 ## 概要  
 紀錄串接 API 的過程以及想法  
 事不宜遲，直接上手吧 !  

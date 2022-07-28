@@ -1,7 +1,7 @@
 {
   "livePreview": false,
-  "strictLineBreaks": false,
-  "showFrontmatter": false,
+  "strictLineBreaks": true,
+  "showFrontmatter": true,
   "showLineNumber": true,
   "spellcheck": true,
   "useTab": false,
@@ -16,5 +16,10 @@
     "themes/",
     "scaffolds/"
   ],
-  "promptDelete": false
+  "promptDelete": true,
+  "readableLineLength": true,
+  "autoPairMarkdown": true,
+  "showUnsupportedFiles": true,
+  "newLinkFormat": "relative",
+  "newFileLocation": "current"
 }

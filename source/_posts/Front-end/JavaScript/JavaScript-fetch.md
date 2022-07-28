@@ -1,11 +1,10 @@
 ---
 title: 筆記 | JavaScript - fetch 獲取遠端資料
 tags:
-  - JavaScript
-categories:
-  - '2022'
-  - '06'
-author: Rosa Hong
+  - fetch
+  - AJAX
+author: Rosa Hong 
+categories: [Front-end,JavaScript]
 date: 2022-06-22 12:45:11
 description:
 ---

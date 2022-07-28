@@ -1,12 +1,11 @@
 ---
-title: 筆記 | React Higher Order Component (HOC)
+title: 筆記 | React - Higher Order Component (HOC)
 tags: React
 categories: [Front-end,React]
 author: Rosa Hong
 date: 2022-07-27 06:30:10
 description:
 ---
-
 > 文章來自 : 
 > 1. [Higher-Order Components – React](https://zh-hant.reactjs.org/docs/higher-order-components.html)
 

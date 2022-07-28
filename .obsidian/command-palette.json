@@ -1,0 +1,7 @@
+{
+  "pinned": [
+    "templater-obsidian:source/template_md/createDraft.md",
+    "templater-obsidian:source/template_md/publish.md",
+    "templater-obsidian:source/template_md/backToDraft.md"
+  ]
+}

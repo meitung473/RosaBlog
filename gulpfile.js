@@ -2,7 +2,7 @@ let gulp = require("gulp");
 let cleanCSS = require("gulp-clean-css");
 let htmlmin = require("gulp-htmlmin");
 let htmlclean = require("gulp-htmlclean");
-let babel = require("gulp-babel"); /* 转换为es2015 */
+const babel = require('gulp-babel');
 let uglify = require("gulp-uglify");
 let imagemin = import("gulp-imagemin");
 
@@ -54,7 +54,7 @@ gulp.task("minify-js", function () {
             .src(`${root}/${pattern}.js`)
             .pipe(
                 babel({
-                    presets: ["env"],
+                    presets: ['@babel/env']
                 })
             )
             .pipe(uglify())
@@ -62,7 +62,7 @@ gulp.task("minify-js", function () {
     );
 });
 
-// 压缩图片
+// 压缩图片 (暫時我沒有要用)
 gulp.task("minify-images", function () {
     return (
         gulp

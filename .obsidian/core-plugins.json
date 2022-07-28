@@ -2,7 +2,6 @@
   "file-explorer",
   "global-search",
   "switcher",
-  "backlink",
   "outgoing-link",
   "tag-pane",
   "page-preview",
@@ -14,6 +13,5 @@
   "markdown-importer",
   "outline",
   "word-count",
-  "workspaces",
   "file-recovery"
 ]
