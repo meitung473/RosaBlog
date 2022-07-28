@@ -18,7 +18,7 @@ description:
 # 什麼是 Higher Order Component  ?
 HOC 是一個 function，把另一個元件的邏輯包起來，產生新的 **加強版** 元件， 使元件內部的邏輯可以重複使用。而且不會動到原本 Component 的結構，而是加上 HOC 帶來的功能。
 
-被共用的邏輯是封裝 () 在裡面，大部分第三方 library 都是這麼使用。 
+被共用的邏輯是封裝在裡面，大部分第三方 library 都是這麼使用。 
 例如 : react-redux 裡 `connect()` 就是一個 HOC。
 ```jsx
 const NewComponent = connect(StoreProp,StateProps)(Component);
@@ -345,8 +345,6 @@ const EnhancedComponent = enhance(WrappedComponent)
 -  lodash.flowRight
 - Redux
 - Ramda
-
-我覺得就是 **柯里化** (curried function)，使 function 每次都只接收一個參數，並且同時是 pure function。
 
 # 慣例 : 用 displayName 取名字幫助 Debug
 HOCs 是 Container 的概念，如果結構上是使用 :  
