@@ -9,13 +9,13 @@ description:
 > 文章來自 : 
 > 1. [Higher-Order Components – React](https://zh-hant.reactjs.org/docs/higher-order-components.html)
 
-# 摘要
+## 摘要
 1. 了解 HOC 的運作原理，以及意義
 2. HOC 的架構與實作
 3. HOC 應用上的注意事項
 
 <!-- more -->
-# 什麼是 Higher Order Component  ?
+## 什麼是 Higher Order Component  ?
 HOC 是一個 function，把另一個元件的邏輯包起來，產生新的 **加強版** 元件， 使元件內部的邏輯可以重複使用。而且不會動到原本 Component 的結構，而是加上 HOC 帶來的功能。
 
 被共用的邏輯是封裝在裡面，大部分第三方 library 都是這麼使用。 
@@ -36,7 +36,7 @@ const handleToggle = ()=>{
 ```
 toggle 這個邏輯要被抽成可重複性的邏輯，所以 HOC 可以是一個叫 `withtoggle(<Component/>)`，又稱具有 toggle 功能, 的 Component。
 
-# HOC  的架構
+## HOC  的架構
 最基本的架構是包裹著另一個 Component，回傳的是一個新的 Component。其他參數可以自訂，也可以傳入想要共同使用 data。
 >  HOC 是一個 pure function (same input ,same output)，不具有副作用 (side effects)
 
@@ -73,7 +73,7 @@ const EnhancedComponent = (WrappedComponent) =>{
 
 例 : `<WithToggleCompoent index="1"/>` 像是 index 這個 props，在不影響原本 `<WrappedComponent/>`情況下把 `props` 都塞回去。如果沒有 `{...props}` 這步驟，就不會接收到 HOC 包裹的效果。
 
-# 橫切關注點 (Cross-cutting concern)
+## 橫切關注點 (Cross-cutting concern)
 邏輯是透過 HOC 攜帶的，並不是硬生生嵌入在某元件的程式碼中，有助於 **橫切關注點**。
 
 範例情境 : 
@@ -87,12 +87,12 @@ const EnhancedComponent = (WrappedComponent) =>{
 
 HOC 之所以說是加強版的元件，它追加新的功能在原本的元件上，但也不影響原本的元件。
 
-# 實作練習
+## 實作練習
 codepen 👉 [React - HOC practice](https://codepen.io/shan473/pen/WNzjdmJ)   
 
 凡是有操作開開關關的 Component ，包成 `withToggle` 的 HOC，把同樣的 **開關邏輯** 抽出來。以 W3school 的 [Navbar](https://www.w3schools.com/howto/howto_js_sidenav.asp) 與 [Accordion](https://www.w3schools.com/howto/howto_js_accordion.asp) 為例。
 
-## HOC withToggle
+### HOC withToggle
 - 建立一個 HOC - `withToggle`
 ```js
 const withToggle = (Component) => {
@@ -112,7 +112,7 @@ const NavbarWithToggle = withToggle(Navbar);
 ```
 主要傳入的 props 是 `open` 的 state ，與 `togglehandler` 這個 method
 
-## Accordion
+### Accordion
 基本的 Accordion (手風琴)，手風琴最重要的就是改變 `maxheight` 讓內容伸縮。
 ```js
 function Accordion({open,togglehandler,index}){
@@ -147,7 +147,7 @@ function Accordion({open,togglehandler,index}){
 }
 ```
 
-## Navbar fullwidth
+### Navbar fullwidth
 重點是改變 `width`
 ```js
 function Navbar({open,togglehandler,type}){
@@ -182,12 +182,12 @@ function Navbar({open,togglehandler,type}){
 }
 ```
 
-## 效果
+### 效果
 ![](https://i.imgur.com/6tr37Nj.gif)
 如此一來我們只要幫元件包上 `withToggle` 都可以擁有開開關關的功能。  
 看到 w3school 的 Navbar 範例有很多款，我決定再來實作可以依照不同類型產生客製化的 Navbar😎。
 
-## 再包裝 Navbar : withNavbarType
+### 再包裝 Navbar : withNavbarType
 不同的 type ， width 不一樣。一開始新增 type 的參數來達成效果。
 ```js
 // 利用 Object bracket notation 的特性，帶字串當索引
@@ -263,7 +263,7 @@ React.useEffect(()=>{
 ```
 在這個 Navbar 例子中，我使用 HOC 在包裹著另一個 HOC，讓元件可以往上追加想要的資料或功能。
 
-# 慣例 : 使用 HOC 傳遞不相關的 props 
+## 慣例 : 使用 HOC 傳遞不相關的 props 
 慣例是 React 官方建議的操作習慣。  
 [🔗章節連結](https://zh-hant.reactjs.org/docs/higher-order-components.html#convention-pass-unrelated-props-through-to-the-wrapped-component) 
 
@@ -312,7 +312,7 @@ const withData = (Component,data)=>{
 ```
 一開始我有點看不懂這個例子，想不到應用的例子。原本只知道可以 **加功能**，但沒有想過類似分類篩的概念，經過幾次的實作突然就悟了😂。
 
-# 慣例 : 最大化的可組合性 (Maximizing Composability)
+## 慣例 : 最大化的可組合性 (Maximizing Composability)
 HOC 的寫法可以只回傳一個參數，也可以回傳好幾個參數。HOC 並沒有特別限制傳遞的參數量，但是那顯得很冗長，盡可能讓 HOC 只接收一個參數。
 
 像 React-redux，使用 `connect()()` 這樣呈現
@@ -346,7 +346,7 @@ const EnhancedComponent = enhance(WrappedComponent)
 - Redux
 - Ramda
 
-# 慣例 : 用 displayName 取名字幫助 Debug
+## 慣例 : 用 displayName 取名字幫助 Debug
 HOCs 是 Container 的概念，如果結構上是使用 :  
 ```js
 const withToggle = (WrappedComponent)=> (props)=> {
@@ -404,7 +404,7 @@ displayName 這個屬性是 React 提供我們替 Component 取不同的名稱�
 
 另外像上面寫的 `withNavbarType()` 這樣包裹起來，括號以外的會在外部 (圖中灰色方塊區)，類似 Component 的附加訊息，但被括號包裹住的最裡面才是顯示元件的 displayName。
 
-# 注意 : 不要直接修改到原本的 Component
+## 注意 : 不要直接修改到原本的 Component
 - 假如我們要操作有關元件的生命週期，不應該直接修改元件的 prototype
 	```js
 	// ❌ 壞透了
@@ -439,7 +439,7 @@ displayName 這個屬性是 React 提供我們替 Component 取不同的名稱�
 	}
 	```
 
-# 注意 : 不要在 render function 使用 HOC
+## 注意 : 不要在 render function 使用 HOC
 function 是 Object 的一種，每次 re-render 都是新的 function (object)，造成效能上的浪費。所以要在外部產生 HOC 再帶入新的 Component 中。
 
 > 簡單來說 : **{ } !== { }**，要避免這種情況發生
@@ -483,7 +483,7 @@ codepen 中預設的引入的 React script 是 production mode，是不能使用
 
 以肉眼來看，當 App 的 state 改變，進行 re-render，如果是在 render 產生的 `<Accordion/>`會閃一下，因為對 App 來說 `<Accordion/>` 是新物件，等同於產生新的 DOM 節點 並且 repaint 。放在外部的話，就沒有這個問題。
 
-# 注意 : refs 並不會被傳遞
+## 注意 : refs 並不會被傳遞
 **refs** 不是 props 的一種，就像 `key`，是由 React 來控制的。就像你不能在子元件中拿到 `❌props.key`。如果在 HOC 使用 ref，接收到 ref 的不會是 WrappedComponent，而是 HOC 本身。
 
 要使 WrappedComponent 能夠接收 ref ，必須使用 `React.forwardRef`[^1]。
@@ -528,7 +528,7 @@ function Accordion({ open, togglehandler, index,forwardRef }) {
 - App 在這裡 `createref / useRef` 👉  `<AccordionwithToggle2 ref={✅} />` 
 - HOC 裡面的 `<WrappedComponent/>` 不能使用 ref 傳，要取別名。 HOC 👉`<WrappedComponent ref={❌} forwardref={✅} />`
 
-# 總結
+## 總結
 關於 HOC 的特點
 1. 是一個 Design Pattern ，可以提高 Component 重複性
 2. 是一個 function ，包裹另一個 Component，回傳新的 Component，又稱 **加強版 Component**，並且不會影響到包住的 Component 。
