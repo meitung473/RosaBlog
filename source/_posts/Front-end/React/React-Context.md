@@ -1,10 +1,9 @@
 ---
-title: 筆記 | React Context API
+date: 2022-07-31 05:31:43
+title: 筆記 | React - Context API
 author: Rosa Hong
 tags: React
-categories:
-  - Frontend
-  - React
+categories: [Front-end,React]
 description:
 ---
 > 文章來自 : 
@@ -13,9 +12,9 @@ description:
 
 ## 摘要
 主要以 Class Component 為主
-- 使用 Context 的時機
-- 如何使用 class Component 的 ContextAPI
-- Context 缺點
+1. 使用 Context 的時機
+2. 如何使用 class Component 的 ContextAPI
+3. Context 缺點
 
 <!-- more -->
 ## 什麼時候用 Context ? 
