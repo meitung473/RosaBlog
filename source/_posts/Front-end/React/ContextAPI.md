@@ -263,7 +263,7 @@ function Content() {
    4. 耦合性高，不好做測試
 
 ## 如何改善 Context 的效能問題
-Dan 大提供 $3$ 種優化 Context 的方式[^5]，主要以 Hooks 為主。
+Dan 大提供 $3$  種優化 Context 的方式[^5]，主要以 Hooks 為主。
 
 1. 分開不同的 Context，跟上面 [[#Multiple Context | 多個 Context]] 是一樣的意思，只有用到 theme 就拆成 themeContext，不要跟其他 Context 包在一起。**分開 Context 這是最好的方式**
 2.  `memo` 作為 component 的 props 觀察需要**需要變化的 value**。

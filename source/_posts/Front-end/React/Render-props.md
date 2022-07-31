@@ -14,6 +14,7 @@ date: 2022-07-31 05:35:00
 1. 什麼是 render props 
 2. render props 的應用範例
 3. render props 與 HOC (higher order component) 的差別
+<!-- more -->
 
 # 什麼是 render props
 render props 是一種把 props 當作 render function 的概念。  
@@ -50,7 +51,7 @@ function Wrapper(props){
 ```
 叫不叫 `render` 都沒關係，這是種命名上的慣例而已。
 
-如果使用過 [[../React - Context API#Context Consumer| ContextAPI (class Component)]] ，Consumer 的另一個型態就是 :
+如果使用過 [Context Consumer](https://blog.rosa.tw/2022/07/React/React-Context)，Consumer 的另一個型態就是 :
 ```jsx
 class AComponent extends React.Component{
 	render(){
@@ -117,7 +118,7 @@ const ToggleComponent = ()=>{
 ```
 
 # 實際範例
-可以先複習 HOC 的部份，會改寫來自 [[React - Higher Order Component#實作練習|  HOC 範例]]。  
+可以先複習 HOC 的部份，會改寫來自 [HOC 實作練習](https://blog.rosa.tw/2022/07/React/Higher-Order-Component)。  
 
 
 接下來我要做的 : 
