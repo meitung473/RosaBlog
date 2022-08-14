@@ -23,13 +23,13 @@ render props 是一種把 props 當作 render function 的概念。
 - 這是一種 : 但是不見得一定要用 `props.children` 
 ```jsx
 function AComponent(){
-	return (
-		<div>
-			{props => {
-				/* 把 children 寫成 function 帶入*/
-			}}
-		</div>
-	)
+  return (
+    <div>
+      {props => {
+        /* 把 children 寫成 function 帶入*/
+      }}
+    </div>
+  )
 }
 ```
 - 實際上只要 props 是 function ，而且在 render function 內部被呼叫

@@ -17,7 +17,7 @@ description:
 3. 使用 Context API
    - Context + useState
    - Context + useReducer
-/temp
+
 ## 提升 State 的方式
 這是最常看見的，但會有 prop drilling 的問題。
 原本 count 只存在於 `<Counter/>` 當中，這時候 Display 也要用到 count ，把 state 提升到兩人的上一層，共享 count 值。 

@@ -23,7 +23,9 @@ date:
 
 # templater : 用程式碼幫你造文章
 
-
+1. createDraft
+2. publish
+3. backToDraft
 
 
 # Obsidian Git  + husky : 輕鬆備份與發佈
