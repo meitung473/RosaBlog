@@ -263,7 +263,7 @@ function Counter(){
 ```
 
 ### 用 Imperatively 方法改變 DOM 跟 Child Component 
-Imperative 的意思在 [[#補充 Declarative v s Imperative in JavaScript]] 章節解釋過。如果使用
+Imperative 的意思在 [補充 Declarative v s Imperative in JavaScript](https://blog.rosa.tw/2022/08/React/ref-and-callback-ref#%E8%A3%9C%E5%85%85-Declarative-v-s-Imperative-in-JavaScript) 章節解釋過。如果使用
 state 的思路來看，會利用 focus state 來控制元件的狀態，基於好奇，我也就實作了 state 版本。
 
 #### 實作 : 使用 state 來控制 autofocus
@@ -481,7 +481,8 @@ const Form = React.forwardRef((props, ref) => {
 ```jsx
 {show && <input autoFocus/>}
 ```
-不過衍生問題就在 [[#實作 使用 state 來控制 autofocus]] 的部分有討論過，如果在 input 是 "已出現" 的狀況下透過按鈕來控制 `autoFocus` ，由於 React 的淺比較優化導致元件僅修改屬性，而  `autoFocus` 只會在元件 mount 執行。 
+不過衍生問題就在 [實作 使用 state 來控制 autofocus](https://blog.rosa.tw/2022/08/React/ref-and-callback-ref#%E8%A3%9C%E5%85%85-Declarative-v-s-Imperative-in-JavaScript) 
+的部分有討論過，如果在 input 是 "已出現" 的狀況下透過按鈕來控制 `autoFocus` ，由於 React 的淺比較優化導致元件僅修改屬性，而  `autoFocus` 只會在元件 mount 執行。 
 
 最後一個解決的問題就是靠 **callback ref** 自己去判斷 Element node 是否存在去執行邏輯 : 
 ```jsx
@@ -682,7 +683,7 @@ React.useEffect(() => {
 
 ## 總結
 1. ref 可以看做是一個普通 JavaScript 物件，帶有 `current` 屬性，React 確保改變它不會造成 re-render，也不會隨生命週期改變 。
-2. 不能使用 `useRef` 替代 `useState`。 `useRef` 不會觸發 re-render ，操作後不保證能同步 UI (資料改了但是 React 不會刷新畫面，參見 : [[#抓 Previous 的值]])。
+2. 不能使用 `useRef` 替代 `useState`。 `useRef` 不會觸發 re-render ，操作後不保證能同步 UI (資料改了但是 React 不會刷新畫面，參見 : [抓 Previous 的值](https://blog.rosa.tw/2022/08/React/ref-and-callback-ref#%E8%A3%9C%E5%85%85-Declarative-v-s-Imperative-in-JavaScript)。
 3. 最好在 effect 或是 event handler 裡面更新 ref ，因為 ref 的建立與更新的時間點。
 4. 最常拿來直接操作 DOM 元素。
 5. callback ref 常用來測量 DOM 的大小
