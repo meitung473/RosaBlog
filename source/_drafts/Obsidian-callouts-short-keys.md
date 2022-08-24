@@ -29,8 +29,8 @@ templater 可以讓使用者在 obsidian 裡面寫 JS 或者加上 bash 等功�
 4. 成功建立
 
 當然還有些 edge case 要處理，例如 : 
-1. 在已存在 callouts 的段落，替換不同類型的 callouts
-2. 空內容情況添加 callouts 不應該成立 (但我覺得這暫不考慮，因為就是有內容想添加 callouts，感覺多此一舉了。)
+1. 在已存在 callouts 的段落，替換不同類型的 callouts (已做)
+2. 空內容情況添加 callouts 不應該成立 (但我覺得這暫不考慮，因為就是有內容想添加 callouts，感覺多此一舉了，所以暫時沒這問題)
 
 ### 寫程式碼
 
