@@ -11,14 +11,14 @@ date: 2022-08-24 10:43:24
 > 2. [React Hook 筆記 useRef. useRef 神奇的地方除了可以在不 re-render… ](https://medium.com/hannah-lin/react-hook-%E7%AD%86%E8%A8%98-useref-c628cbf0d7fb)
 > 3. [Imperative vs Declarative Programming in JavaScript](https://www.linkedin.com/pulse/imperative-vs-declarative-programming-javascript-yehuda-margolis)
 
-# 摘要
+## 摘要
 1. 什麼是 ref ?
 2. ref 使用的時機
 3. ref 的另一種型態 callback ref
 
 <!-- more -->
 
-# 什麼是 ref ?
+## 什麼是 ref ?
 ref 提供 React 資料流以外的操作方式，讓我們可以改變 React Component 的 instance (實例)，或者它來來操作 DOM 元素。
 
 ref 可看作是一個普通的 JavaScript 物件，內部具有 current 的屬性的東西，可以直接 (mutable) 改變它。 React 保證它在生命週期 (render) 循環中永遠都指向同一個位址。
@@ -26,10 +26,10 @@ ref 可看作是一個普通的 JavaScript 物件，內部具有 current 的屬�
 const ref = {current : ... };
 ```
 
-# 不過度使用 ref
+## 不過度使用 ref
 使用 ref 的第一直覺上，我們可能會想說 ref **要在哪裡發生** ( 像是 state 會放到需要用到的元件內)，ref 不單單是拿來存放不會影響 re-render 的值，不應該被過度使用操作有關 React 資料流的部分。這時候應該使用 state，並且考慮 **哪個 component 應該擁有狀態**，如果是要共同擁有的 state 要做的是 *提升 state*。
 
-# 使用 ref 的時機
+## 使用 ref 的時機
 1. focus、選擇文字或影音媒體播放等等
 2. 觸發即時的動畫
 3. 與第三方 DOM 函式整合
@@ -38,8 +38,8 @@ const ref = {current : ... };
 
 例如 : 對話視窗我們可以不用暴露 `open()` 或 `close()` 方法 ，而是使用 `isOpen` 作為 props 來操作。 我們不用告訴某元件要怎麼做 (HOW) ，而告訴其結果 (WHAT) 就好。
 
-# 補充 : Declarative v.s Imperative in JavaScript
-## Declarative 宣告式
+## 補充 : Declarative v.s Imperative in JavaScript
+### Declarative 宣告式
 著重於 WHAT (想要拿到的結果是什麼)，比較抽象的流程，多使用表達式 (expression)，特色是單純運算且具有回傳值。像是 functional programming。 
 
 **特色 :** 
@@ -58,7 +58,7 @@ console.log(multiple([1,2,3]))
 ```
 將其 function 名稱代表回傳的意義會使程式碼比較了解，也可以說 **定義 OO 是什麼**。
 
-## Imperative 命令式
+### Imperative 命令式
 著重於 HOW (目標到底要怎麼做)，具體表示應該怎麼做來達到目標，一步步按照步驟，常使用 statement 流程控制 (if , while , for , switch) 等。像是 OOP。
 
 **特色 :** 
@@ -77,7 +77,7 @@ const multiple = array =>{
 console.log(multiple([1,2,3]))
 ```
 
-## 小結
+### 小結
 從例子來看，兩種方式都能達到結果，在 Imperative 中可以很清楚看見 state 是 "如何變化" 的，經過一步步的流程控制得出結果；在 Declarative 中資料的變化都被藏到內部另一個函式中 (邏輯被抽象化)，我們看到的是 "結果"。
 
 JavaScript 使我們可以用兩種方式來實作，其各有優缺 : 
@@ -97,7 +97,7 @@ JavaScript 使我們可以用兩種方式來實作，其各有優缺 :
 - 缺點 :  
   1. 運行的比較慢一點，但在小型的應用程式不是太明顯。
  
-# 建立 ref
+## 建立 ref
 在 class component 可以在建立 (constructor)  時新建 ref，可以是代表屬於某個 instance 的屬性，或者透過屬性 (attribute) 依附在 React element，在整個 component 裡面被參考。
 ```jsx
 class MyComponent extends React.Component {
@@ -122,13 +122,13 @@ const ref = useRef(0)
 
 除非做延遲初始化[^1]，避免在 render 時設定 ref ，造成非預期的行為，所以我們應該 **在 event handler 和 effect 中修改 ref**。
 
-# 存取 ref
+## 存取 ref
 Ref 的值會根據節點的類型而有所不同：
 1. 建立的 ref 用在 html 元素上的屬性，等同於取得 DOM 元素本身作為 current 屬性。
 2. 客製化的 class component 使用 ref 時，ref 等同於此 component mount 之後的實例(instance) 當作 current。 (簡單來說 ref 可以直接傳給 class component 中的子元件，但 functional component 不行)
 3. 不能在 functional component 上使用 ref，因為他們沒有實例 (instance)。
 
-## 在 DOM Element 加上 Ref
+### 在 DOM Element 加上 Ref
 在 DOM Element 加上 ref，利用 ref 來儲存對於 DOM 節點的參考：
 ```jsx
 class CustomTextInput extends React.Component {
@@ -162,7 +162,7 @@ class CustomTextInput extends React.Component {
 ```
 React 會在 component mount 的時候將 DOM element 賦值到 current 屬性，並在 unmount 時將它清空回 null 。 ref 的更新發生在生命週期 `componentDidMount` 或 `componentDidUpdate` 之前。
 
-## 在 Class Component 加上 Ref
+### 在 Class Component 加上 Ref
 如果我們想在父元件 mount 之後，自動做 `focus` 這件事，可以透過父元件的 ref 拿到 `textInput` 實例本身 (也可以直接使用內部的方法)，並在 `componentDidMount` 呼叫。
 ```jsx
 class AutoFocusTextInput extends React.Component {
@@ -191,7 +191,7 @@ class CustomTextInput extends React.Component {
 }
 ```
 
-## Ref 和 Function Component
+### Ref 和 Function Component
 不能用 function component 使用 ref ，因為本身沒有 instance ，不能像 class component 直接將 ref 傳給 child component。
 ```jsx
 /* 沒有這東西 */
@@ -218,12 +218,12 @@ function Input(){
 ```
 如果在父元件真的想將 ref 交遞給其他 function component ，React 會建議使用 **傳送 ref** (`forwardRef`) 的方式，**傳送 Ref 使得 component 能夠選擇要不要把 child component 的 ref 當作自己的 ref** 。不過這樣的方法不太建議，因為會破壞 component 的封裝。但有時候觸發 focus 或測量 child 的 DOM 節點的大小、位置是很有用的。
 
-# 實務上的 ref
+## 實務上的 ref
 1. 計算 render 次數 (少)
 2. **用 Imperatively 方法改變 DOM 跟 Child Component (最常)**
 3. 想抓 Previous 的值 (少)
 
-## 計算 render 次數
+### 計算 render 次數
 如果用 state 來計算，這個例子會導致無窮迴圈， `setState` 導致 re-render ，做 `setRenderCount` 又一而再地觸發，沒完沒了。
 ```jsx
 function Counter(){
@@ -262,11 +262,11 @@ function Counter(){
 }
 ```
 
-## 用 Imperatively 方法改變 DOM 跟 Child Component 
+### 用 Imperatively 方法改變 DOM 跟 Child Component 
 Imperative 的意思在 [[#補充 Declarative v s Imperative in JavaScript]] 章節解釋過。如果使用
 state 的思路來看，會利用 focus state 來控制元件的狀態，基於好奇，我也就實作了 state 版本。
 
-### 實作 : 使用 state 來控制 autofocus
+#### 實作 : 使用 state 來控制 autofocus
 利用 key 的特性，讓 React 換掉節點，為什麼用 key 後面會解釋
 ```jsx
 function App() {
@@ -301,7 +301,7 @@ useEffect(()=>{
 
 原本是透過替換不同的 html tag，實作 `autoFocus` 成功，但這不是正確的答案，又突然想到 key 的作用，結果就出來了。
 
-### 使用 ref
+#### 使用 ref
 回到 ref ，建立 ref 綁在 DOM element 上，使我們可以直接操作 DOM，比上面的簡單多了。
 ```jsx
 function App(){
@@ -321,7 +321,7 @@ function App(){
 
 > ref 並不會出現在 `devtool` 的檢查視窗上，實際看到的只會是  `<input type="text"/>`
 
-## 抓 Previous 的值
+### 抓 Previous 的值
 function component 因為 closure 的關係，只會記住當次 render 的 state 或 props 甚至是任何東西，我們沒辦法拿到上一次 render 的值。而透過 ref  來建立不會隨 render 而改變的盒子，讓我們可以在下一次 effect 呼叫之前先記住上一次的值。
 ```jsx
 function App(){
@@ -363,7 +363,7 @@ function App(){
 
 
 
-# callback ref
+## callback ref
 ref 還有另一種形式，不是將 `createRef()` 所產生的 ref 傳遞下去，而是把一個 function 往下傳 (function 也是一種 Object)。 function 會將 React component 的實例 (instance) 或 HTML DOM 作為它的參數，儲存之後在別的地方使用。
 
 - class component
@@ -413,7 +413,6 @@ React 會在 component render 時用 DOM element 呼叫 ref callback，然後在
 
 ### 有 ref + effect 為什麼還需要 callback ref
 ref 建立/更新的時間點是在 render 階段，且在 `componentDidMount` 或 `componentDidUpdate` 觸發時能夠維持在最新的狀態 (在裡面獲取 state 是最新的)，換成 Hooks 是 `setState` 當下能拿到最新值，並且在 effect 執行之前發生。這避免在還沒獲取到 DOM 元素之前拿到 null 來操作。以往我們直接在 html tag 加上 ref 在 effect 操作 ref 時就已經拿到 `ref.current` 存取的 DOM 元素本身。 
-
 
 到這裡好像都沒問題，但如果是 **子元件的條件式渲染** 呢 ? 在子元件巢狀結構中，父元件並不知道子元件的巢狀元件是否存在 (或是存在於第一次 render )，導致 render 之後在父元件的 ref 不知道有沒有抓到就執行 effect，而導致錯誤。
 
@@ -556,13 +555,13 @@ const Form = (props)=>{
 });
 ```
 
-# callback ref 的使用時機
+## callback ref 的使用時機
 1. 節點會消失又出現，需要動態的控制元件本身
 2. 測量 DOM 的位置、大小
 
 callback ref 提供動態的方式讓我們取得 DOM 節點，並且在 browser painting 之前可以做一些事。從上面 `autofocus` 可以讓元件建立又做 DOM 的 `focus()`。
 
-## 小實作
+### 小實作
 Accordion 的內容會按照 `open` 開關影響高度，我們只要在 `open` 觸發 re-render 時，一併把樣式改變就可以輕鬆做到功能。
 👉[Collapsibles/Accordion React callback ref](https://codepen.io/shan473/pen/MWVxzPX)
 ```jsx
@@ -608,14 +607,14 @@ React.useEffect(()=>{
 
 通常 ref + `useEffect` 都可以做到 callback ref 做到的事。但  `useEffect` 具有 clean up function，假如元件具有監聽事件且 `unmount` 時，需要做清除的動作 (clean up function)，effect 使時我們拿到的 `ref.current` 依舊是上一次 render ，對 `ref.current` 取消監聽事件是可以的，但是 callback ref 在 unmount 時會把 node 回歸到 null，不能對 null 取消監聽事件。
 
-## 注意
+### 注意
 如果 callback ref  是被 inline function 所定義的，會在更新的時候被呼叫兩次。render 一次，mount 一次。第一次用 null 然後再用 DOM element 呼叫一次。這是因為新的 function 的 instance 是在每次 render 的時候被產生，所以 React 需要將舊的 ref 清掉然後設定新的。
 
 可以定義 callback ref 為 class 上的一個 bound method (`method.bind`) 來避免這種情形，但在大多情況下他並沒有任何影響。
 
 > 簡單來說 function 不要隨 render 每次都產生新的，將其給記住。
 
-# ref 、 effect 與 layouteffect 
+## ref 、 effect 與 layouteffect 
 👉 [Box moving / multiple ref test with show null](https://codepen.io/shan473/pen/BarbEWJ?editors=0011) 我試做 `ref + useEffect` 、 `ref + uselayoutEffect`  ，來看看這三者的時間點。
 
 根據範例印出 `render` 、`mount`  以及 `unmout` 時間 : 
@@ -668,7 +667,7 @@ React.useEffect(() => {
 
 那 `layoutEffect` 可以直接在清除執行取消監聽嗎 ? 雖然 `ref.current` 依舊存在，但還是不安全的，最好是像 effect 一樣，利用 closure 的方式來取消監聽事件。
 
-# callback ref 的 clean up function
+## callback ref 的 clean up function
 >官方討論串 :  [React callback ref cleanup function · Issue #15176 · facebook/react · GitHub](https://github.com/facebook/react/issues/15176)
 
 在 React 18 釋出以前已經有探討 callback ref clean up 的問題，上面有提到當 callback ref 在 `unmount` 呼叫時是 null，因此註銷監聽事件是不容易的，因此有人提出一些解決方案，未來也可能出現新的 API 來解決此問題🤔，大概看完 RFC 目前應該是沒有打算建立新 API ，結尾都指出這樣的改變可能導致新舊會產生衝突。
@@ -681,7 +680,7 @@ React.useEffect(() => {
 
 以上都是處理邊際條件 (edge case) 的討論。
 
-# 總結
+## 總結
 1. ref 可以看做是一個普通 JavaScript 物件，帶有 `current` 屬性，React 確保改變它不會造成 re-render，也不會隨生命週期改變 。
 2. 不能使用 `useRef` 替代 `useState`。 `useRef` 不會觸發 re-render ，操作後不保證能同步 UI (資料改了但是 React 不會刷新畫面，參見 : [[#抓 Previous 的值]])。
 3. 最好在 effect 或是 event handler 裡面更新 ref ，因為 ref 的建立與更新的時間點。
