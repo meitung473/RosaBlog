@@ -47,5 +47,13 @@
       ],
       "key": "ArrowDown"
     }
+  ],
+  "editor:toggle-code": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "`"
+    }
   ]
 }
