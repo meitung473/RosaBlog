@@ -74,7 +74,7 @@ group : [[file#^group=elementID]]
  ![[Excalidraw/區域、群組與文字圖片的使用方式.md#^area=P94rSxUw]]
 ```
 
-markdown 文件標示的跟 [[#text 針對藍色區塊]] markdown 一樣，因為後面的 element id 跟 text 截取藍色區塊是一樣的，但是 area 很明顯連大區塊 (heading) 都包含了。後面也會凸顯了為什麼 area 是 `cutout`  (畫面截出來的區域)，並且跟 group 有非常不同的地方。
+markdown 文件標示的跟 [text 藍色區塊](https://blog.rosa.tw/2022/08/Obsidian-Excalidraw-image-url#more) markdown 一樣，因為後面的 element id 跟 text 截取藍色區塊是一樣的，但是 area 很明顯連大區塊 (heading) 都包含了。後面也會凸顯了為什麼 area 是 `cutout`  (畫面截出來的區域)，並且跟 group 有非常不同的地方。
 
 ### area : 橘色區塊
 一樣涵蓋了被覆蓋到的部分。  
