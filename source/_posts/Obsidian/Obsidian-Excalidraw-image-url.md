@@ -1,5 +1,5 @@
 ---
-title: 筆記 | Obsidian 區域、群組與文字圖片的使用方式
+title: 筆記 | Obsidian - Plugin-Excalidraw 區域、群組與文字圖片的使用方式
 tags: [Obsidian,Obsidian-Plugin-Excalidraw]
 categories: [Obsidian]
 author: Rosa Hong
