@@ -1,13 +1,15 @@
 ---
-date: 2022-09-02 04:40:43
----
----
 title: 筆記 | Web - 初探前端效能優化
-tags: [Web,Web-optimize]
-categories: Web
+tags:
+  - Web
+  - Web-optimize
+categories:
+  - W
+  - e
+  - b
 author: Rosa Hong
-description:
 date: 2022-09-02 04:40:43
+description:
 ---
 > 參考文章連結 : [今晚，我想來點 Web 前端效能優化大補帖！. 效能是工程師在維護專案時非常重視的要點，不論是 Web 還是…](https://medium.com/starbugs/%E4%BB%8A%E6%99%9A-%E6%88%91%E6%83%B3%E4%BE%86%E9%BB%9E-web-%E5%89%8D%E7%AB%AF%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96%E5%A4%A7%E8%A3%9C%E5%B8%96-e1a5805c1ca2)
 
