@@ -1,6 +1,6 @@
 ---
-title: 紀錄 | Obsidian 自製 callouts 快捷鍵
-tags:
+title: 紀錄 | Obsidian - callouts 快捷鍵
+tags: 
 categories: 
 author: Rosa Hong
 description:
@@ -42,6 +42,6 @@ templater 可以讓使用者在 obsidian 裡面寫 JS 或者加上 bash 等功�
 
 
 ## 延伸應用在 Hexo 中的套件
-Hexo 的 callouts 跟 Obsidian 完全長得不一樣，但核心上他們都只是一串字串，所以只要改寫掉模板種類與內容就好了，由於我是使用 Obsidian 撰寫 Hexo 的 markdown 內容，也是可以用 templater 幫助我減少打這些樣板字的時間。 ( 可以參考我怎麼使用 Obsidian + Hexo 打造舒適的寫作環境 )
+Hexo 的 callouts 跟 Obsidian 完全長得不一樣，但核心上他們都只是一串字串被東西包住，所以只要改寫掉模板種類與內容就好了，由於我是使用 Obsidian 撰寫 Hexo 的 markdown 內容，也是可以用 templater 幫助我減少打這些樣板字的時間。 
 
 ## 總結

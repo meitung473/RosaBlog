@@ -1,14 +1,10 @@
 ---
 title: 筆記 | JavaScript - 運算子 ?. 與 ??
-tags:
-  - JavaScript
-categories:
-  - '2022'
-  - '06'
-author: Rosa Hong
+tags: [JavaScript-operator]
+author: Rosa Hong 
+categories: [Front-end,JavaScript]
 date: 2022-06-15 14:31:13
 ---
-
 ## 前言
 對於 undefined 或是 null 的處理，我比較常使用 `||` (OR) 或是 `&&` (AND) 的寫法，找資料的時候很常看見 `??` 以及 `?.` 的寫法。實在是太好奇了，於是找了資料學習並且記錄下來 。  
 
