@@ -362,8 +362,7 @@ interface 也是可以，兩者的差別可以看 : [Typing Component Props | Re
 不過最終目的都是確保一致性，事實上並沒有限制一定要 type 還是 interface。
 
 ## optional 
-利用問號 `？` 來表示有沒有存在，跟 JavaScript 中的 optional chaining 一樣
-參考 : [[javascript - Optional chaining & Nullish coalescing operator]]
+利用問號 `？` 來表示有沒有存在，跟 JavaScript 中的 optional chaining 一樣，可以 [參考我之前的筆記](https://blog.rosa.tw/2022/06/JavaScript/JavaScript-null-undefined-operator)  
 
 - 檢查 middle 是否存在沒有就...
 ```js
